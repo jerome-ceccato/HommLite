@@ -12,12 +12,14 @@ func _ready():
 	set_position(origin)
 
 func _draw():
-	for cell in hexgrid.cells.values():
-		draw_polyline(cell.points, Color.beige, 1, true)
 	if _hovered_cell != null:
 		var color = Color.black
 		color.a = 0.5
 		draw_polygon(_hovered_cell.points, [color])
+	
+	for cell in hexgrid.cells.values():
+		draw_polyline(cell.points, Color.beige, 1, true)
+	
 
 func _process(delta):
 	var mouse_pos = get_local_mouse_position()

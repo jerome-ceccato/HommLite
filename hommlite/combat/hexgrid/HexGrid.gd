@@ -53,7 +53,7 @@ class HexCell:
 			Vector2(center.x - (size.x / 2), center.y - (size.y / 4))
 		]
 
-func _init():
+func _ready():
 	cell_width = cell_size * sqrt(3)
 	cell_height = cell_size * 2
 	cell_h_offset = cell_width
