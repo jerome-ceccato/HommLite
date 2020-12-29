@@ -1,0 +1,27 @@
+extends Node2D
+
+onready var hexgrid := $HexGrid
+
+var _hovered_cell
+
+func _ready():
+	var win_w = ProjectSettings.get_setting("display/window/size/width")
+	var win_h = ProjectSettings.get_setting("display/window/size/height")
+	var grid_size = hexgrid.get_grid_size()
+	var origin = Vector2((win_w - grid_size.x) / 2, (win_h - grid_size.y) / 2)
+	set_position(origin)
+
+func _draw():
+	for cell in hexgrid.cells.values():
+		draw_polyline(cell.points, Color.beige, 1, true)
+	if _hovered_cell != null:
+		var color = Color.black
+		color.a = 0.5
+		draw_polygon(_hovered_cell.points, [color])
+
+func _process(delta):
+	var mouse_pos = get_local_mouse_position()
+	var new_cell = hexgrid.get_cell_at_point(mouse_pos)
+	if _hovered_cell != new_cell:
+		_hovered_cell = new_cell
+		update()

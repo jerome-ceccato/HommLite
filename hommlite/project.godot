@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="hommlite"
-run/main_scene="res://CombatScene.tscn"
+run/main_scene="res://combat/CombatScene.tscn"
 config/icon="res://icon.png"
 
 [display]
