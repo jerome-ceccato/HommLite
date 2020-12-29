@@ -28,7 +28,10 @@ func _draw():
 			
 	# bounding box (debug)
 	#draw_bounding_box(overall_offset)
-	
+
+func _input(event):
+	if event is InputEventMouseMotion:
+		print(event.position)
 
 func draw_bounding_box(origin):
 	var visual_offset = 3
