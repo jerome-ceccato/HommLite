@@ -3,12 +3,14 @@ extends Reference
 # Represents a single cell in a hex grid
 class_name HexCell
 
+var coords: HexCoords
 var size: Vector2
 var center: Vector2
 
 var points: Array
 
-func _init(size1: Vector2, center1: Vector2):
+func _init(coords1: HexCoords, size1: Vector2, center1: Vector2):
+	coords = coords1
 	center = center1
 	size = size1
 	points = [

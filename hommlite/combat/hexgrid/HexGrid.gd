@@ -3,7 +3,7 @@ extends Node
 # editable
 export(int) var cell_size := 32
 export(int) var cells_row_count := 9
-export(int) var cells_col_count := 11
+export(int) var cells_col_count := 13
 
 # all the cells
 var cells: Dictionary # [str(HexCoords): HexCell]
@@ -15,9 +15,6 @@ var cell_h_offset: float
 var cell_v_offset: float
 var grid_w: float
 var grid_h: float
-
-# Hex pos (TODO: replace with Vector2i when available)
-
 
 func _ready():
 	cell_width = cell_size * sqrt(3)
@@ -41,7 +38,7 @@ func build_map():
 		for x in range(x_range):
 			var x_offset = base_x_offset + (x * cell_h_offset)
 			var pos = HexCoords.new(x, y)
-			var cell = HexCell.new(cell_size, Vector2(x_offset, y_offset))
+			var cell = HexCell.new(pos, cell_size, Vector2(x_offset, y_offset))
 			cells[pos.index] = cell
 
 func get_cell(pos: HexCoords) -> HexCell:
@@ -60,6 +57,9 @@ func get_cell_index_at_point(point: Vector2) -> HexCoords:
 func get_cell_at_point(point: Vector2) -> HexCell:
 	var pos = get_cell_index_at_point(point)
 	return get_cell(pos)
+
+func get_size() -> HexCoords:
+	return HexCoords.new(cells_col_count, cells_row_count)
 
 # Hex operations
 # Adapted from https://www.redblobgames.com/grids/hexagons
