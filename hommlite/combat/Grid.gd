@@ -14,7 +14,7 @@ func _ready():
 func _draw():
 	if _hovered_cell != null:
 		var color = Color.black
-		color.a = 0.5
+		color.a = 0.2
 		draw_polygon(_hovered_cell.points, [color])
 	
 	for cell in hexgrid.cells.values():

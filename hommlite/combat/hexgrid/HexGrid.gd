@@ -5,8 +5,8 @@ export(int) var cell_size := 32
 export(int) var cells_row_count := 9
 export(int) var cells_col_count := 11
 
-# All the cells
-var cells: Dictionary # [str(HexPos): HexCell]
+# all the cells
+var cells: Dictionary # [str(HexCoords): HexCell]
 
 # private internal
 var cell_width: float
@@ -17,41 +17,7 @@ var grid_w: float
 var grid_h: float
 
 # Hex pos (TODO: replace with Vector2i when available)
-class HexPos extends Object:
-	var x: int
-	var y: int
-	
-	var index: int
-	
-	func _init(x1: int, y1: int):
-		x = x1
-		y = y1
-		
-		index = y * 100 + x
-		
-	func _to_string():
-		return "x: %s, y: %s" % [x, y]
-	
 
-# Hex cell
-class HexCell:
-	var size: Vector2
-	var center: Vector2
-	
-	var points: Array
-	
-	func _init(size1: Vector2, center1: Vector2):
-		center = center1
-		size = size1
-		points = [
-			Vector2(center.x - (size.x / 2), center.y - (size.y / 4)),
-			Vector2(center.x, center.y - (size.y / 2)),
-			Vector2(center.x + (size.x / 2), center.y - (size.y / 4)),
-			Vector2(center.x + (size.x / 2), center.y + (size.y / 4)),
-			Vector2(center.x, center.y + (size.y / 2)),
-			Vector2(center.x - (size.x / 2), center.y + (size.y / 4)),
-			Vector2(center.x - (size.x / 2), center.y - (size.y / 4))
-		]
 
 func _ready():
 	cell_width = cell_size * sqrt(3)
@@ -74,21 +40,21 @@ func build_map():
 		
 		for x in range(x_range):
 			var x_offset = base_x_offset + (x * cell_h_offset)
-			var pos = HexPos.new(x, y)
+			var pos = HexCoords.new(x, y)
 			var cell = HexCell.new(cell_size, Vector2(x_offset, y_offset))
 			cells[pos.index] = cell
 
-func get_cell(pos: HexPos) -> HexCell:
+func get_cell(pos: HexCoords) -> HexCell:
 	var index = pos.index
 	return cells[index] if cells.has(index) else null
 	
 func get_cell_xy(x: int, y: int) -> HexCell:
-	return get_cell(HexPos.new(x, y))
+	return get_cell(HexCoords.new(x, y))
 
 func get_grid_size() -> Vector2:
 	return Vector2(grid_w, grid_h)
 
-func get_cell_index_at_point(point: Vector2) -> HexPos:
+func get_cell_index_at_point(point: Vector2) -> HexCoords:
 	return hex_find(point)
 
 func get_cell_at_point(point: Vector2) -> HexCell:
@@ -128,4 +94,4 @@ func cube_to_oddr(cube: Vector3):
 	var z = int(cube.z)
 	var col = x + (z - (z&1)) / 2
 	var row = z
-	return HexPos.new(col, row)
+	return HexCoords.new(col, row)

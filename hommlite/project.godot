@@ -8,9 +8,20 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Reference",
+"class": "HexCell",
+"language": "GDScript",
+"path": "res://combat/hexgrid/HexCell.gd"
+}, {
+"base": "Reference",
+"class": "HexCoords",
+"language": "GDScript",
+"path": "res://combat/hexgrid/HexCoords.gd"
+} ]
 _global_script_class_icons={
-
+"HexCell": "",
+"HexCoords": ""
 }
 
 [application]
