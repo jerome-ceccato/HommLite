@@ -1,14 +1,16 @@
-extends Node
+extends Reference
 
-# editable
-export(int) var cell_size := 32
-export(int) var cells_row_count := 9
-export(int) var cells_col_count := 13
+# Represents the hex battle grid and its coordinates
+class_name HexGrid
 
 # all the cells
-var cells: Dictionary # [str(HexCoords): HexCell]
+var cells: Dictionary # [BattleCoords.index: HexCell]
 
 # private internal
+var cell_size: int
+var cells_row_count: int
+var cells_col_count: int
+
 var cell_width: float
 var cell_height: float
 var cell_h_offset: float
@@ -16,7 +18,11 @@ var cell_v_offset: float
 var grid_w: float
 var grid_h: float
 
-func _ready():
+func _init(cell_size: int, battlefield_size: BattleCoords):
+	self.cell_size = cell_size
+	cells_col_count = battlefield_size.x
+	cells_row_count = battlefield_size.y
+
 	cell_width = cell_size * sqrt(3)
 	cell_height = cell_size * 2
 	cell_h_offset = cell_width
@@ -37,29 +43,26 @@ func build_map():
 		
 		for x in range(x_range):
 			var x_offset = base_x_offset + (x * cell_h_offset)
-			var pos = HexCoords.new(x, y)
+			var pos = BattleCoords.new(x, y)
 			var cell = HexCell.new(pos, cell_size, Vector2(x_offset, y_offset))
 			cells[pos.index] = cell
 
-func get_cell(pos: HexCoords) -> HexCell:
+func get_cell(pos: BattleCoords) -> HexCell:
 	var index = pos.index
 	return cells[index] if cells.has(index) else null
 	
 func get_cell_xy(x: int, y: int) -> HexCell:
-	return get_cell(HexCoords.new(x, y))
+	return get_cell(BattleCoords.new(x, y))
 
 func get_grid_size() -> Vector2:
 	return Vector2(grid_w, grid_h)
 
-func get_cell_index_at_point(point: Vector2) -> HexCoords:
+func get_cell_index_at_point(point: Vector2) -> BattleCoords:
 	return hex_find(point)
 
 func get_cell_at_point(point: Vector2) -> HexCell:
 	var pos = get_cell_index_at_point(point)
 	return get_cell(pos)
-
-func get_size() -> HexCoords:
-	return HexCoords.new(cells_col_count, cells_row_count)
 
 # Hex operations
 # Adapted from https://www.redblobgames.com/grids/hexagons
@@ -94,4 +97,4 @@ func cube_to_oddr(cube: Vector3):
 	var z = int(cube.z)
 	var col = x + (z - (z&1)) / 2
 	var row = z
-	return HexCoords.new(col, row)
+	return BattleCoords.new(col, row)

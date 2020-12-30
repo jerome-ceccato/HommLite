@@ -2,31 +2,28 @@ extends Node2D
 
 signal hex_grid_hovered
 
-onready var hexgrid := $HexGrid
+export(int) var hex_cell_size := 32
 onready var units := $Units
+
+var battlefield: BattleField
+var hexgrid: HexGrid
 
 var _hovered_cell
 
-func setup_battle(left: Army, right: Army):
-	units.setup_armies(left, right, hexgrid.get_size())
+func setup_battle(battlefield: BattleField):
+	self.battlefield = battlefield
+	hexgrid = HexGrid.new(hex_cell_size, battlefield.size())
 	
-	reposition_armies()
-	update()
+	units.setup_units(battlefield)
+	units.reposition(hexgrid)
 
-func reposition_armies():
-	reposition_army(units.left_army)
-	reposition_army(units.right_army)
-	
-func reposition_army(army: Army):
-	for stack in army.stacks:
-		stack.sprite.position = hexgrid.get_cell(stack.position).center
-
-func _ready():
 	var win_w = ProjectSettings.get_setting("display/window/size/width")
 	var win_h = ProjectSettings.get_setting("display/window/size/height")
 	var grid_size = hexgrid.get_grid_size()
 	var origin = Vector2((win_w - grid_size.x) / 2, (win_h - grid_size.y) / 2)
 	set_position(origin)
+	
+	update()
 	
 func _draw():
 	if _hovered_cell != null:

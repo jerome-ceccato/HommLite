@@ -1,6 +1,6 @@
 extends Node2D
 
-onready var grid := $Grid
+onready var battlefield := $BattleField
 onready var ui := $UI
 
 var left_army: Army
@@ -10,17 +10,14 @@ func _ready():
 	var gob_sprite = load("res://assets/combat/gob.png")
 	var skelly_sprite = load("res://assets/combat/skeleton.png")
 	
-	left_army = create_army(gob_sprite, 7)
-	right_army = create_army(skelly_sprite, 7)
+	left_army = create_army(Unit.Type.GOBLIN, 7)
+	right_army = create_army(Unit.Type.SKELETON, 5)
 	
-	grid.setup_battle(left_army, right_army)
-	setup_ui()
+	battlefield.setup_battle(left_army, right_army)
+	ui.setup_ui(battlefield)
 
-func setup_ui():
-	grid.connect("hex_grid_hovered", ui, "_on_Grid_hex_grid_hovered")
-
-func create_army(texture: Texture, units: int) -> Army:
+func create_army(type: int, n_units: int) -> Army:
 	var array = []
-	for i in units:
-		array.append(UnitStack.new(Unit.new(texture), 1))
+	for i in n_units:
+		array.append(UnitStack.new(Unit.new(type), 1))
 	return Army.new(array)

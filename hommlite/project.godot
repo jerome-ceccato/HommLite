@@ -12,7 +12,22 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "Army",
 "language": "GDScript",
-"path": "res://combat/armies/Army.gd"
+"path": "res://combat/data/Army.gd"
+}, {
+"base": "Reference",
+"class": "BattleCoords",
+"language": "GDScript",
+"path": "res://combat/battle/BattleCoords.gd"
+}, {
+"base": "Node",
+"class": "BattleField",
+"language": "GDScript",
+"path": "res://combat/battle/BattleField.gd"
+}, {
+"base": "Reference",
+"class": "BattleStack",
+"language": "GDScript",
+"path": "res://combat/battle/BattleStack.gd"
 }, {
 "base": "Reference",
 "class": "HexCell",
@@ -20,26 +35,35 @@ _global_script_classes=[ {
 "path": "res://combat/hexgrid/HexCell.gd"
 }, {
 "base": "Reference",
-"class": "HexCoords",
+"class": "HexGrid",
 "language": "GDScript",
-"path": "res://combat/hexgrid/HexCoords.gd"
+"path": "res://combat/hexgrid/HexGrid.gd"
 }, {
 "base": "Reference",
 "class": "Unit",
 "language": "GDScript",
-"path": "res://combat/armies/Unit.gd"
+"path": "res://combat/data/Unit.gd"
 }, {
 "base": "Reference",
 "class": "UnitStack",
 "language": "GDScript",
-"path": "res://combat/armies/UnitStack.gd"
+"path": "res://combat/data/UnitStack.gd"
+}, {
+"base": "Sprite",
+"class": "VisualStack",
+"language": "GDScript",
+"path": "res://combat/units/VisualStack.gd"
 } ]
 _global_script_class_icons={
 "Army": "",
+"BattleCoords": "",
+"BattleField": "",
+"BattleStack": "",
 "HexCell": "",
-"HexCoords": "",
+"HexGrid": "",
 "Unit": "",
-"UnitStack": ""
+"UnitStack": "",
+"VisualStack": ""
 }
 
 [application]
