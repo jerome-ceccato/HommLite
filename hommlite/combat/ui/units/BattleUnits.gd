@@ -28,9 +28,4 @@ func create_sprite(battle_stack: BattleStack) -> VisualStack:
 
 func texture_for_unit(unit: Unit):
 	# TODO: Add cache
-	match unit.type:
-		Unit.Type.GOBLIN:
-			return load("res://assets/combat/gob.png")
-		Unit.Type.SKELETON:
-			return load("res://assets/combat/skeleton.png")
-	return null
+	return load("res://assets/combat/%s.png" % unit.id)

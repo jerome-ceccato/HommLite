@@ -3,8 +3,9 @@ extends Reference
 # Represents a unit type
 class_name Unit
 
-enum Type {GOBLIN, SKELETON}
-var type: int
+var id: String
+var speed: int
 
-func _init(t: int):
-	type = t
+func _init(_id: String, _speed: int):
+	id = _id
+	speed = _speed

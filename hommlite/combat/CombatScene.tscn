@@ -3,7 +3,7 @@
 [ext_resource path="res://combat/ui/Battlefield.gd" type="Script" id=1]
 [ext_resource path="res://assets/combat/bg.png" type="Texture" id=2]
 [ext_resource path="res://combat/ui/grid/GridBackground.gd" type="Script" id=3]
-[ext_resource path="res://combat/ui/units/Units.gd" type="Script" id=4]
+[ext_resource path="res://combat/ui/units/BattleUnits.gd" type="Script" id=4]
 [ext_resource path="res://combat/ui/UI.gd" type="Script" id=5]
 [ext_resource path="res://combat/CombatScene.gd" type="Script" id=6]
 [ext_resource path="res://combat/battle/Battle.gd" type="Script" id=7]
@@ -48,7 +48,7 @@ hover_color = Color( 0, 0, 0, 0.392157 )
 z_index = 1
 script = ExtResource( 3 )
 
-[node name="Units" type="Node2D" parent="UI/Battlefield"]
+[node name="BattleUnits" type="Node2D" parent="UI/Battlefield"]
 z_index = 10
 script = ExtResource( 4 )
 

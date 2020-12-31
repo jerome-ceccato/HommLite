@@ -7,15 +7,17 @@ onready var hover := $GridHover
 onready var movement_overlay := $GridMovementOverlay
 
 var hexgrid: HexGrid
+var battle: Battle
 
 var last_hovered_cell_coords
 
-func setup(hexgrid: HexGrid):
-	self.hexgrid = hexgrid
+func setup(_hexgrid: HexGrid, _battle: Battle):
+	hexgrid = _hexgrid
+	battle = _battle
 	
 	background.setup(hexgrid)
 	hover.setup(hexgrid)
-	movement_overlay.setup(hexgrid)
+	movement_overlay.setup(hexgrid, battle)
 	
 	connect("hex_grid_hovered", hover, "_on_Grid_hex_grid_hovered")
 	connect("hex_grid_hovered", movement_overlay, "_on_Grid_hex_grid_hovered")

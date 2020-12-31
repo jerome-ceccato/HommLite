@@ -3,11 +3,13 @@ extends Node2D
 export(Color) var overlayed_color
 
 var hexgrid: HexGrid
+var battle: Battle
 
 var all_cells_overlayed: Array # [HexCell]
 
-func setup(hexgrid: HexGrid):
-	self.hexgrid = hexgrid
+func setup(_hexgrid: HexGrid, _battle: Battle):
+	hexgrid = _hexgrid
+	battle = _battle
 
 func update_overlay(cells: Array):
 	all_cells_overlayed = cells
@@ -19,12 +21,16 @@ func _draw():
 
 func _on_Grid_hex_grid_hovered(coords: BattleCoords, cell: HexCell):
 	if coords != null:
-		var nearby_coords = hexgrid.nearby_cells(coords, 3)
-		var nearby_cells = []
-		for coord in nearby_coords:
-			var maybe_cell = hexgrid.get_cell(coord)
-			if maybe_cell:
-				nearby_cells.append(maybe_cell)
-		update_overlay(nearby_cells)
+		var stack = battle.get_stack_at(coords)
+		if stack != null:
+			var nearby_coords = hexgrid.nearby_cells(coords, stack.stack.unit.speed)
+			var nearby_cells = []
+			for coord in nearby_coords:
+				var maybe_cell = hexgrid.get_cell(coord)
+				if maybe_cell:
+					nearby_cells.append(maybe_cell)
+			update_overlay(nearby_cells)
+		else:
+			update_overlay([])
 	else:
 		update_overlay([])

@@ -45,6 +45,11 @@ _global_script_classes=[ {
 "path": "res://combat/data/Unit.gd"
 }, {
 "base": "Reference",
+"class": "UnitFactory",
+"language": "GDScript",
+"path": "res://combat/data/UnitFactory.gd"
+}, {
+"base": "Reference",
 "class": "UnitStack",
 "language": "GDScript",
 "path": "res://combat/data/UnitStack.gd"
@@ -62,6 +67,7 @@ _global_script_class_icons={
 "HexCell": "",
 "HexGrid": "",
 "Unit": "",
+"UnitFactory": "",
 "UnitStack": "",
 "VisualStack": ""
 }
