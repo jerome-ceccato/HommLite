@@ -32,12 +32,12 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "HexCell",
 "language": "GDScript",
-"path": "res://combat/hexgrid/HexCell.gd"
+"path": "res://combat/ui/hexgrid/HexCell.gd"
 }, {
 "base": "Reference",
 "class": "HexGrid",
 "language": "GDScript",
-"path": "res://combat/hexgrid/HexGrid.gd"
+"path": "res://combat/ui/hexgrid/HexGrid.gd"
 }, {
 "base": "Reference",
 "class": "Unit",
@@ -52,7 +52,7 @@ _global_script_classes=[ {
 "base": "Sprite",
 "class": "VisualStack",
 "language": "GDScript",
-"path": "res://combat/units/VisualStack.gd"
+"path": "res://combat/ui/units/VisualStack.gd"
 } ]
 _global_script_class_icons={
 "Army": "",

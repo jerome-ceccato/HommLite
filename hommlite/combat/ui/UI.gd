@@ -12,7 +12,7 @@ func setup_ui(battle: Battle):
 	setup_bindings()
 
 func setup_bindings():
-	battlefield.connect("hex_grid_hovered", self, "_on_Grid_hex_grid_hovered")
+	battlefield.grid_hover.connect("hex_grid_hovered", self, "_on_Grid_hex_grid_hovered")
 
 func _on_Grid_hex_grid_hovered(cell: HexCell):
 	if cell != null:
