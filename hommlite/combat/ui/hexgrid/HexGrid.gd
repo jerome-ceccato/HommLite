@@ -58,14 +58,25 @@ func get_grid_size() -> Vector2:
 	return Vector2(grid_w, grid_h)
 
 func get_cell_index_at_point(point: Vector2) -> BattleCoords:
-	return hex_find(point)
+	var coords = hex_find(point)
+	return coords if cells.has(coords.index) else null
 
 func get_cell_at_point(point: Vector2) -> HexCell:
-	var pos = get_cell_index_at_point(point)
+	var pos = hex_find(point)
 	return get_cell(pos)
 
 # Hex operations
 # Adapted from https://www.redblobgames.com/grids/hexagons
+
+func nearby_cells(origin: BattleCoords, distance: int) -> Array:
+	var center = oddr_to_cube(origin)
+	var results = []
+	for x in range(-distance, distance + 1):
+		for y in range(max(-distance, -x - distance), min(distance, -x + distance) + 1):
+			var z = -x - y
+			var cube = center + Vector3(x, y, z)
+			results.append(cube_to_oddr(cube))
+	return results
 
 func hex_find(point: Vector2):
 	var x = point.x - cell_width / 2
@@ -98,3 +109,9 @@ func cube_to_oddr(cube: Vector3):
 	var col = x + (z - (z&1)) / 2
 	var row = z
 	return BattleCoords.new(col, row)
+
+func oddr_to_cube(hex: BattleCoords):
+	var x = hex.x - (hex.y - (hex.y&1)) / 2
+	var z = hex.y
+	var y = -x-z
+	return Vector3(x, y, z)

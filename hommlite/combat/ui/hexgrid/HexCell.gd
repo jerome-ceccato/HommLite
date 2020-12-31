@@ -22,3 +22,8 @@ func _init(coords1: BattleCoords, size1: Vector2, center1: Vector2):
 		Vector2(center.x - (size.x / 2), center.y + (size.y / 4)),
 		Vector2(center.x - (size.x / 2), center.y - (size.y / 4))
 	]
+
+class Test:
+	var a
+	func _init(a):
+		self.a = a

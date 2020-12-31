@@ -23,13 +23,17 @@ func setup_battle(left: Army, right: Army):
 	setup_stacks(right, true)
 
 func setup_stacks(army: Army, right: bool):
-	for i in range(army.stacks.size()):
+	var army_size = army.stacks.size()
+	for i in range(army_size):
 		var stack = army.stacks[i]
-		var y = i + 1
-		var x = 0 if !right else (cols - 1 if y % 2 else cols)
-		var coords = BattleCoords.new(x, y)
+		var coords = stack_coordinates(army_size, i, right)
 		
 		stacks[coords.index] = BattleStack.new(stack, coords, right)
+
+func stack_coordinates(army_size: int, position: int, right: bool) -> BattleCoords:
+	var y = position + (rows - army_size) / 2
+	var x = 0 if !right else (cols - 1 if y % 2 else cols)
+	return BattleCoords.new(x, y)
 
 func size() -> BattleCoords:
 	return BattleCoords.new(cols, rows)

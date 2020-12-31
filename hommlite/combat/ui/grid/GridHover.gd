@@ -1,24 +1,18 @@
 extends Node2D
 
-signal hex_grid_hovered
+export(Color) var hover_color
 
 var hexgrid: HexGrid
 
-var last_hovered_cell
+var hovered_cell
 
 func setup(hexgrid: HexGrid):
 	self.hexgrid = hexgrid
 	
 func _draw():
-	if last_hovered_cell != null:
-		var color = Color.black
-		color.a = 0.2
-		draw_polygon(last_hovered_cell.points, [color])
+	if hovered_cell != null:
+		draw_polygon(hovered_cell.points, [hover_color])
 
-func _process(delta):
-	var mouse_pos = get_local_mouse_position()
-	var new_cell = hexgrid.get_cell_at_point(mouse_pos)
-	if last_hovered_cell != new_cell:
-		last_hovered_cell = new_cell
-		emit_signal("hex_grid_hovered", new_cell)
-		update()
+func _on_Grid_hex_grid_hovered(coords: BattleCoords, cell: HexCell):
+	hovered_cell = cell
+	update()
