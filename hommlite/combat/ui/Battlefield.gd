@@ -12,14 +12,14 @@ func setup_battle(battle: Battle):
 	self.battle = battle
 	hexgrid = HexGrid.new(hex_cell_size, battle.size())
 	
-	center_self(hexgrid)
+	_center_self(hexgrid)
 	
 	grid.setup(hexgrid, battle)
 	units.setup_units(battle)
 	
 	units.reposition(hexgrid)
 
-func center_self(hexgrid: HexGrid):
+func _center_self(hexgrid: HexGrid):
 	var win_w = ProjectSettings.get_setting("display/window/size/width")
 	var win_h = ProjectSettings.get_setting("display/window/size/height")
 	var grid_size = hexgrid.get_grid_size()

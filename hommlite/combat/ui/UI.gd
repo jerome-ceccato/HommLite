@@ -9,9 +9,9 @@ func setup_ui(battle: Battle):
 	self.battle = battle
 	
 	battlefield.setup_battle(battle)
-	setup_bindings()
+	_setup_bindings()
 
-func setup_bindings():
+func _setup_bindings():
 	$Battlefield/Grid.connect("hex_grid_hovered", self, "_on_Grid_hex_grid_hovered")
 
 func _on_Grid_hex_grid_hovered(coords: BattleCoords, cell: HexCell):

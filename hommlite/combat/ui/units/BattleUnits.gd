@@ -8,24 +8,24 @@ func setup_units(battle: Battle):
 	
 	stacks = []
 	for battle_stack in battle.stacks.values():
-		stacks.append(create_sprite(battle_stack))
+		stacks.append(_create_sprite(battle_stack))
 
 func reposition(grid: HexGrid):
 	for sprite in stacks:
-		sprite.position = grid.get_cell(sprite.stack.coordinates).center
+		sprite.position = grid.get_cell_at_coords(sprite.stack.coordinates).center
 
 # internals
 
-func create_sprite(battle_stack: BattleStack) -> VisualStack:
+func _create_sprite(battle_stack: BattleStack) -> VisualStack:
 	var vstack := VisualStack.new()
 	vstack.stack = battle_stack
-	vstack.texture = texture_for_unit(battle_stack.stack.unit)
+	vstack.texture = _texture_for_unit(battle_stack.stack.unit)
 	vstack.flip_h = battle_stack.side
 	vstack.scale = Vector2(1.5, 1.5)
 	vstack.offset = Vector2(0, -8)
 	add_child(vstack)
 	return vstack
 
-func texture_for_unit(unit: Unit):
+func _texture_for_unit(unit: Unit):
 	# TODO: Add cache
 	return load("res://assets/combat/%s.png" % unit.id)
