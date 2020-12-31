@@ -1,6 +1,6 @@
 extends Node
 
-onready var grid := $Grid
+onready var battlefield := $Battlefield
 onready var cell_label := $CellLabel
 
 var battle: Battle
@@ -8,11 +8,11 @@ var battle: Battle
 func setup_ui(battle: Battle):
 	self.battle = battle
 	
-	grid.setup_battle(battle)
+	battlefield.setup_battle(battle)
 	setup_bindings()
 
 func setup_bindings():
-	grid.connect("hex_grid_hovered", self, "_on_Grid_hex_grid_hovered")
+	battlefield.connect("hex_grid_hovered", self, "_on_Grid_hex_grid_hovered")
 
 func _on_Grid_hex_grid_hovered(cell: HexCell):
 	if cell != null:

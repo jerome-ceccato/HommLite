@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://combat/Grid.gd" type="Script" id=1]
+[ext_resource path="res://combat/Battlefield.gd" type="Script" id=1]
 [ext_resource path="res://assets/combat/bg.png" type="Texture" id=2]
 [ext_resource path="res://combat/units/Units.gd" type="Script" id=4]
 [ext_resource path="res://combat/UI.gd" type="Script" id=5]
@@ -25,12 +25,12 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Grid" type="Node2D" parent="UI"]
+[node name="Battlefield" type="Node2D" parent="UI"]
 z_index = 1
 script = ExtResource( 1 )
 hex_cell_size = null
 
-[node name="Units" type="Node2D" parent="UI/Grid"]
+[node name="Units" type="Node2D" parent="UI/Battlefield"]
 script = ExtResource( 4 )
 
 [node name="CellLabel" type="Label" parent="UI"]
