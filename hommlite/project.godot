@@ -14,15 +14,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://combat/data/Army.gd"
 }, {
+"base": "Node",
+"class": "Battle",
+"language": "GDScript",
+"path": "res://combat/battle/Battle.gd"
+}, {
 "base": "Reference",
 "class": "BattleCoords",
 "language": "GDScript",
 "path": "res://combat/battle/BattleCoords.gd"
-}, {
-"base": "Node",
-"class": "BattleField",
-"language": "GDScript",
-"path": "res://combat/battle/BattleField.gd"
 }, {
 "base": "Reference",
 "class": "BattleStack",
@@ -56,8 +56,8 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Army": "",
+"Battle": "",
 "BattleCoords": "",
-"BattleField": "",
 "BattleStack": "",
 "HexCell": "",
 "HexGrid": "",

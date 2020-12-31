@@ -5,16 +5,16 @@ signal hex_grid_hovered
 export(int) var hex_cell_size := 32
 onready var units := $Units
 
-var battlefield: BattleField
+var battle: Battle
 var hexgrid: HexGrid
 
 var _hovered_cell
 
-func setup_battle(battlefield: BattleField):
-	self.battlefield = battlefield
-	hexgrid = HexGrid.new(hex_cell_size, battlefield.size())
+func setup_battle(battle: Battle):
+	self.battle = battle
+	hexgrid = HexGrid.new(hex_cell_size, battle.size())
 	
-	units.setup_units(battlefield)
+	units.setup_units(battle)
 	units.reposition(hexgrid)
 
 	var win_w = ProjectSettings.get_setting("display/window/size/width")

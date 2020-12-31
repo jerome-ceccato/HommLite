@@ -2,7 +2,7 @@ extends Node
 
 # Represents all the units in the battlefield
 # from a game perspective, not UI
-class_name BattleField
+class_name Battle
 
 # editable
 export(int) var rows := 9

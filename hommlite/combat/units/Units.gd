@@ -1,13 +1,13 @@
 extends Node2D
 
-var battlefield: BattleField
+var battle: Battle
 var stacks: Array # [VisualStack]
 
-func setup_units(battlefield: BattleField):
-	self.battlefield = battlefield
+func setup_units(battle: Battle):
+	self.battle = battle
 	
 	stacks = []
-	for battle_stack in battlefield.stacks.values():
+	for battle_stack in battle.stacks.values():
 		stacks.append(create_sprite(battle_stack))
 
 func reposition(grid: HexGrid):

@@ -3,12 +3,12 @@ extends Node
 onready var grid := $Grid
 onready var cell_label := $CellLabel
 
-var battlefield: BattleField
+var battle: Battle
 
-func setup_ui(battlefield: BattleField):
-	self.battlefield = battlefield
+func setup_ui(battle: Battle):
+	self.battle = battle
 	
-	grid.setup_battle(battlefield)
+	grid.setup_battle(battle)
 	setup_bindings()
 
 func setup_bindings():

@@ -1,6 +1,6 @@
 extends Node2D
 
-onready var battlefield := $BattleField
+onready var battle := $Battle
 onready var ui := $UI
 
 var left_army: Army
@@ -13,8 +13,8 @@ func _ready():
 	left_army = create_army(Unit.Type.GOBLIN, 7)
 	right_army = create_army(Unit.Type.SKELETON, 5)
 	
-	battlefield.setup_battle(left_army, right_army)
-	ui.setup_ui(battlefield)
+	battle.setup_battle(left_army, right_army)
+	ui.setup_ui(battle)
 
 func create_army(type: int, n_units: int) -> Army:
 	var array = []
