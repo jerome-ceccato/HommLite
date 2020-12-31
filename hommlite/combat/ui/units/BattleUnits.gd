@@ -13,6 +13,18 @@ func setup_units(battle: Battle):
 func reposition(grid: HexGrid):
 	for sprite in stacks:
 		sprite.position = grid.get_cell_at_coords(sprite.stack.coordinates).center
+	
+	var shader = ShaderMaterial.new()
+	shader.shader = load("res://assets/combat/aura.shader")
+	shader.set_shader_param("aura_width", 0.5)
+	shader.set_shader_param("aura_color", Color.yellow)
+	stacks[3].material = shader
+	
+	shader = ShaderMaterial.new()
+	shader.shader = load("res://assets/combat/aura.shader")
+	shader.set_shader_param("aura_width", 0.5)
+	shader.set_shader_param("aura_color", Color.blue)
+	stacks[9].material = shader
 
 # internals
 
