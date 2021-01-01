@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://combat/ui/CombatArea.gd" type="Script" id=1]
 [ext_resource path="res://assets/combat/bg.png" type="Texture" id=2]
@@ -8,12 +8,13 @@
 [ext_resource path="res://combat/CombatScene.gd" type="Script" id=6]
 [ext_resource path="res://combat/logic/Battle.gd" type="Script" id=7]
 [ext_resource path="res://combat/ui/grid/GridHover.gd" type="Script" id=8]
-[ext_resource path="res://combat/ui/grid/GridMovementOverlay.gd" type="Script" id=9]
+[ext_resource path="res://combat/ui/grid/UnitHoverMovementOverlay.gd" type="Script" id=9]
 [ext_resource path="res://combat/ui/grid/Grid.gd" type="Script" id=10]
 [ext_resource path="res://combat/logic/BattleQueue.gd" type="Script" id=11]
-[ext_resource path="res://combat/ui/grid/GridActiveStackOverlay.gd" type="Script" id=12]
+[ext_resource path="res://combat/ui/grid/ActiveStackMovementOverlay.gd" type="Script" id=12]
 [ext_resource path="res://combat/logic/BattleGrid.gd" type="Script" id=13]
 [ext_resource path="res://combat/ui/grid/HexGrid.gd" type="Script" id=14]
+[ext_resource path="res://combat/logic/BattleState.gd" type="Script" id=15]
 
 [node name="CombatScene" type="Node2D"]
 script = ExtResource( 6 )
@@ -26,6 +27,9 @@ script = ExtResource( 13 )
 
 [node name="BattleQueue" type="Node" parent="Battle"]
 script = ExtResource( 11 )
+
+[node name="BattleState" type="Node" parent="Battle"]
+script = ExtResource( 15 )
 
 [node name="UI" type="Node" parent="."]
 script = ExtResource( 5 )
@@ -49,12 +53,12 @@ script = ExtResource( 14 )
 [node name="Grid" type="Node2D" parent="UI/CombatArea"]
 script = ExtResource( 10 )
 
-[node name="GridActiveStackOverlay" type="Node2D" parent="UI/CombatArea/Grid"]
+[node name="ActiveStackMovementOverlay" type="Node2D" parent="UI/CombatArea/Grid"]
 z_index = 1
 script = ExtResource( 12 )
 overlayed_color = Color( 0, 0, 0, 0.196078 )
 
-[node name="GridMovementOverlay" type="Node2D" parent="UI/CombatArea/Grid"]
+[node name="UnitHoverMovementOverlay" type="Node2D" parent="UI/CombatArea/Grid"]
 z_index = 2
 script = ExtResource( 9 )
 overlayed_color = Color( 0, 0, 0, 0.235294 )

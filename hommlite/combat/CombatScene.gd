@@ -16,7 +16,7 @@ func _ready():
 	battle.setup_battle(left_army, right_army)
 	ui.setup(battle)
 	
-	battle.battle_queue.run()
+	battle.queue.run()
 
 func _create_army(unit: UnitData, n_units: int) -> ArmyData:
 	var array = []

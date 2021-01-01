@@ -17,7 +17,7 @@ func setup_units(battle: Battle):
 	self.battle = battle
 	
 	stacks = []
-	for battle_stack in battle.all_stacks():
+	for battle_stack in battle.state.all_stacks():
 		stacks.append(_create_sprite(battle_stack))
 
 func reposition(grid: HexGrid):

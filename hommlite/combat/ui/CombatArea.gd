@@ -9,7 +9,7 @@ var battle: Battle
 func setup_battle(battle: Battle):
 	self.battle = battle
 	
-	hexgrid.setup(battle.battle_grid)
+	hexgrid.setup(battle.grid)
 	grid.setup(hexgrid, battle)
 	units.setup_units(battle)
 	

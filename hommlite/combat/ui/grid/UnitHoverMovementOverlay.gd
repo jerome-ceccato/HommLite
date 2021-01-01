@@ -7,7 +7,9 @@ func draw_cell(cell: HexCell):
 
 func _on_Grid_hex_grid_hovered(coords: BattleCoords, cell: HexCell):
 	if coords != null:
-		var stack = battle.get_stack_at(coords)
-		update_overlay(stack)
-	else:
-		update_overlay(null)
+		var stack = battle.state.get_stack_at(coords)
+		if stack != null:
+			if !battle.queue.stack_is_active(stack):
+				update_overlay(stack)
+				return
+	update_overlay(null)

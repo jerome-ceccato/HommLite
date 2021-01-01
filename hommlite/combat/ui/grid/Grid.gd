@@ -5,8 +5,8 @@ signal hex_cell_clicked(coords)
 
 onready var background := $GridBackground
 onready var hover := $GridHover
-onready var movement_overlay := $GridMovementOverlay
-onready var active_stack_overlay := $GridActiveStackOverlay
+onready var movement_overlay := $UnitHoverMovementOverlay
+onready var active_stack_overlay := $ActiveStackMovementOverlay
 
 var hexgrid: HexGrid
 var battle: Battle

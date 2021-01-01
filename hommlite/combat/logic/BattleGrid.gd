@@ -22,6 +22,9 @@ func get_cell_xy(x: int, y: int) -> HexCell:
 func all_valid_coords() -> Array:
 	return _valid_coords.values()
 
+func size() -> BattleCoords:
+	return BattleCoords.new(cols, rows)
+
 func _build_map():
 	_valid_coords = {}
 	for y in range(rows):
