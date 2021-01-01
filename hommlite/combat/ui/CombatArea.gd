@@ -1,25 +1,22 @@
 extends Node2D
 
-export(int) var hex_cell_size := 32
-
-onready var units := $BattleUnits
+onready var hexgrid := $HexGrid
+onready var units := $VisibleUnits
 onready var grid := $Grid
 
 var battle: Battle
-var hexgrid: HexGrid
 
 func setup_battle(battle: Battle):
 	self.battle = battle
-	hexgrid = HexGrid.new(hex_cell_size, battle.size())
 	
-	_center_self(hexgrid)
-	
+	hexgrid.setup(battle.battle_grid)
 	grid.setup(hexgrid, battle)
 	units.setup_units(battle)
 	
+	_center_self()
 	units.reposition(hexgrid)
 
-func _center_self(hexgrid: HexGrid):
+func _center_self():
 	var win_w = ProjectSettings.get_setting("display/window/size/width")
 	var win_h = ProjectSettings.get_setting("display/window/size/height")
 	var grid_size = hexgrid.get_grid_size()

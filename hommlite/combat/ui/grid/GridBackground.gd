@@ -6,6 +6,6 @@ func setup(hexgrid: HexGrid):
 	self.hexgrid = hexgrid
 	
 func _draw():
-	for cell in hexgrid.cells.values():
+	for cell in hexgrid.all_cells():
 		draw_polyline(cell.points, Color.beige, 1, true)
 	

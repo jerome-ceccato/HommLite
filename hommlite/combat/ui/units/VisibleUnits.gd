@@ -47,7 +47,7 @@ func _create_sprite(battle_stack: BattleStack) -> VisualStack:
 	add_child(vstack)
 	return vstack
 
-func _texture_for_unit(unit: Unit):
+func _texture_for_unit(unit: UnitData):
 	# TODO: Add cache
 	return load("res://assets/combat/%s.png" % unit.id)
 

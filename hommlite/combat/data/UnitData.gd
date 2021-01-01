@@ -1,7 +1,7 @@
 extends Reference
 
 # Represents a unit type
-class_name Unit
+class_name UnitData
 
 var id: String
 var speed: int

@@ -13,4 +13,4 @@ func _init(x1: int, y1: int):
 	x = x1
 	y = y1
 	
-	index = y * 100 + x
+	index = (y * 100) + x

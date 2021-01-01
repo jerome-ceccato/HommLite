@@ -8,14 +8,17 @@ class_name Battle
 export(int) var rows := 9
 export(int) var cols := 13
 
+# grid
+onready var battle_grid := $BattleGrid
+
 # original army (data)
-var _left_army: Army
-var _right_army: Army
+var _left_army: ArmyData
+var _right_army: ArmyData
 
 # current battle field stacks
 var _stacks: Dictionary # [BattleCoords.index: BattleStack]
 
-func setup_battle(left: Army, right: Army):
+func setup_battle(left: ArmyData, right: ArmyData):
 	_left_army = left
 	_right_army = right
 	
@@ -23,7 +26,7 @@ func setup_battle(left: Army, right: Army):
 	stack_id = _setup_stacks(left, false, stack_id)
 	stack_id = _setup_stacks(right, true, stack_id)
 
-func _setup_stacks(army: Army, right: bool, stack_id: int) -> int:
+func _setup_stacks(army: ArmyData, right: bool, stack_id: int) -> int:
 	var army_size = army.stacks.size()
 	for i in range(army_size):
 		var stack = army.stacks[i]
@@ -46,3 +49,10 @@ func all_stacks() -> Array:
 
 func get_stack_at(coords: BattleCoords) -> BattleStack:
 	return _stacks.get(coords.index)
+
+func move_stack(stack: BattleStack, new_coords: BattleCoords):
+	var previous_coords = stack.coordinates
+	stack.coordinates = new_coords
+	print(_stacks.erase(previous_coords.index))
+	_stacks[new_coords.index] = stack
+	

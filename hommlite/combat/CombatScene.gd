@@ -4,8 +4,8 @@ onready var battle := $Battle
 onready var battle_queue := $BattleQueue
 onready var ui := $UI
 
-var left_army: Army
-var right_army: Army
+var left_army: ArmyData
+var right_army: ArmyData
 
 func _ready():
 	var gob_sprite = load("res://assets/combat/gob.png")
@@ -20,8 +20,8 @@ func _ready():
 	
 	battle_queue.run()
 
-func _create_army(unit: Unit, n_units: int) -> Army:
+func _create_army(unit: UnitData, n_units: int) -> ArmyData:
 	var array = []
 	for i in n_units:
-		array.append(UnitStack.new(unit, 1))
-	return Army.new(array)
+		array.append(StackData.new(unit, 1))
+	return ArmyData.new(array)
