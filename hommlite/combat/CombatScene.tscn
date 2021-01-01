@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://combat/ui/Battlefield.gd" type="Script" id=1]
 [ext_resource path="res://assets/combat/bg.png" type="Texture" id=2]
@@ -10,12 +10,17 @@
 [ext_resource path="res://combat/ui/grid/GridHover.gd" type="Script" id=8]
 [ext_resource path="res://combat/ui/grid/GridMovementOverlay.gd" type="Script" id=9]
 [ext_resource path="res://combat/ui/grid/Grid.gd" type="Script" id=10]
+[ext_resource path="res://combat/battle/BattleQueue.gd" type="Script" id=11]
+[ext_resource path="res://combat/ui/grid/GridActiveStackOverlay.gd" type="Script" id=12]
 
 [node name="CombatScene" type="Node2D"]
 script = ExtResource( 6 )
 
 [node name="Battle" type="Node" parent="."]
 script = ExtResource( 7 )
+
+[node name="BattleQueue" type="Node" parent="."]
+script = ExtResource( 11 )
 
 [node name="UI" type="Node" parent="."]
 script = ExtResource( 5 )
@@ -36,20 +41,26 @@ script = ExtResource( 1 )
 [node name="Grid" type="Node2D" parent="UI/Battlefield"]
 script = ExtResource( 10 )
 
+[node name="GridActiveStackOverlay" type="Node2D" parent="UI/Battlefield/Grid"]
+z_index = 1
+script = ExtResource( 12 )
+overlayed_color = Color( 0, 0, 0, 0.196078 )
+
 [node name="GridMovementOverlay" type="Node2D" parent="UI/Battlefield/Grid"]
+z_index = 2
 script = ExtResource( 9 )
-overlayed_color = Color( 0, 0, 0, 0.156863 )
+overlayed_color = Color( 0, 0, 0, 0.235294 )
 
 [node name="GridHover" type="Node2D" parent="UI/Battlefield/Grid"]
 script = ExtResource( 8 )
 hover_color = Color( 0, 0, 0, 0.392157 )
 
 [node name="GridBackground" type="Node2D" parent="UI/Battlefield/Grid"]
-z_index = 1
+z_index = 5
 script = ExtResource( 3 )
 
 [node name="BattleUnits" type="Node2D" parent="UI/Battlefield"]
-z_index = 10
+z_index = 50
 script = ExtResource( 4 )
 
 [node name="CellLabel" type="Label" parent="UI"]

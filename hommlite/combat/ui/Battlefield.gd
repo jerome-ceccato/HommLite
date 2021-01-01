@@ -27,3 +27,6 @@ func _center_self(hexgrid: HexGrid):
 	set_position(origin)
 	
 	update()
+
+func _on_BattleQueue_stack_moved(stack: BattleStack):
+	units.reposition(hexgrid)

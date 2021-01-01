@@ -9,26 +9,29 @@ export(int) var rows := 9
 export(int) var cols := 13
 
 # original army (data)
-var left_army: Army
-var right_army: Army
+var _left_army: Army
+var _right_army: Army
 
 # current battle field stacks
-var stacks: Dictionary # [BattleCoords.index: BattleStack]
+var _stacks: Dictionary # [BattleCoords.index: BattleStack]
 
 func setup_battle(left: Army, right: Army):
-	left_army = left
-	right_army = right
+	_left_army = left
+	_right_army = right
 	
-	_setup_stacks(left, false)
-	_setup_stacks(right, true)
+	var stack_id = 1
+	stack_id = _setup_stacks(left, false, stack_id)
+	stack_id = _setup_stacks(right, true, stack_id)
 
-func _setup_stacks(army: Army, right: bool):
+func _setup_stacks(army: Army, right: bool, stack_id: int) -> int:
 	var army_size = army.stacks.size()
 	for i in range(army_size):
 		var stack = army.stacks[i]
 		var coords = _stack_coordinates(army_size, i, right)
 		
-		stacks[coords.index] = BattleStack.new(stack, coords, right)
+		_stacks[coords.index] = BattleStack.new(stack_id, stack, coords, right)
+		stack_id += 1
+	return stack_id
 
 func _stack_coordinates(army_size: int, position: int, right: bool) -> BattleCoords:
 	var y = position + (rows - army_size) / 2
@@ -37,6 +40,9 @@ func _stack_coordinates(army_size: int, position: int, right: bool) -> BattleCoo
 
 func size() -> BattleCoords:
 	return BattleCoords.new(cols, rows)
+	
+func all_stacks() -> Array:
+	return _stacks.values()
 
 func get_stack_at(coords: BattleCoords) -> BattleStack:
-	return stacks.get(coords.index)
+	return _stacks.get(coords.index)
