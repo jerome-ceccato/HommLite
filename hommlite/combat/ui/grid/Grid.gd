@@ -42,5 +42,4 @@ func _input(event):
 			if clicked_cell_coords != null:
 				var clicked_cell = hexgrid.get_cell_at_coords(clicked_cell_coords)
 				
-				print("clicked: ", clicked_cell)
 				emit_signal("hex_cell_clicked", clicked_cell_coords)

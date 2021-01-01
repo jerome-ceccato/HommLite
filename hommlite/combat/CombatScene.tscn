@@ -24,7 +24,7 @@ script = ExtResource( 7 )
 [node name="BattleGrid" type="Node" parent="Battle"]
 script = ExtResource( 13 )
 
-[node name="BattleQueue" type="Node" parent="."]
+[node name="BattleQueue" type="Node" parent="Battle"]
 script = ExtResource( 11 )
 
 [node name="UI" type="Node" parent="."]

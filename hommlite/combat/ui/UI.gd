@@ -7,16 +7,15 @@ onready var battle_units := $CombatArea/VisibleUnits
 onready var active_stack_overlay := $CombatArea/Grid/GridActiveStackOverlay
 
 var battle: Battle
-var queue: BattleQueue
 
-func setup(_battle: Battle, _queue: BattleQueue):
+func setup(_battle: Battle):
 	battle = _battle
-	queue = _queue
 	
 	combat_area.setup_battle(battle)
 	_setup_bindings()
 
 func _setup_bindings():
+	var queue = battle.battle_queue
 	grid.connect("hex_grid_hovered", self, "_on_Grid_hex_grid_hovered")
 	queue.connect("active_stack_changed", active_stack_overlay, "_on_BattleQueue_active_stack_changed")
 	queue.connect("active_stack_changed", battle_units, "_on_BattleQueue_active_stack_changed")

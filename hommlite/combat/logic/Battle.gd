@@ -10,6 +10,7 @@ export(int) var cols := 13
 
 # grid
 onready var battle_grid := $BattleGrid
+onready var battle_queue := $BattleQueue
 
 # original army (data)
 var _left_army: ArmyData
@@ -25,6 +26,22 @@ func setup_battle(left: ArmyData, right: ArmyData):
 	var stack_id = 1
 	stack_id = _setup_stacks(left, false, stack_id)
 	stack_id = _setup_stacks(right, true, stack_id)
+	
+	battle_queue.setup(self)
+
+func size() -> BattleCoords:
+	return BattleCoords.new(cols, rows)
+	
+func all_stacks() -> Array:
+	return _stacks.values()
+
+func get_stack_at(coords: BattleCoords) -> BattleStack:
+	return _stacks.get(coords.index)
+
+func move_stack(stack: BattleStack, new_coords: BattleCoords):
+	_stacks.erase(stack.coordinates.index)
+	_stacks[new_coords.index] = stack
+	stack.coordinates = new_coords
 
 func _setup_stacks(army: ArmyData, right: bool, stack_id: int) -> int:
 	var army_size = army.stacks.size()
@@ -41,18 +58,3 @@ func _stack_coordinates(army_size: int, position: int, right: bool) -> BattleCoo
 	var x = 0 if !right else (cols - 1 if y % 2 else cols)
 	return BattleCoords.new(x, y)
 
-func size() -> BattleCoords:
-	return BattleCoords.new(cols, rows)
-	
-func all_stacks() -> Array:
-	return _stacks.values()
-
-func get_stack_at(coords: BattleCoords) -> BattleStack:
-	return _stacks.get(coords.index)
-
-func move_stack(stack: BattleStack, new_coords: BattleCoords):
-	var previous_coords = stack.coordinates
-	stack.coordinates = new_coords
-	print(_stacks.erase(previous_coords.index))
-	_stacks[new_coords.index] = stack
-	

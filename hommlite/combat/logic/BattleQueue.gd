@@ -16,6 +16,9 @@ func setup(_battle: Battle):
 func run():
 	emit_signal("active_stack_changed", queue[0])
 
+func stack_is_active(stack: BattleStack) -> bool:
+	return stack.id == queue[0].id
+
 func _on_Grid_hex_cell_clicked(coords: BattleCoords):
 	var stack = battle.get_stack_at(coords)
 	if stack == null:
