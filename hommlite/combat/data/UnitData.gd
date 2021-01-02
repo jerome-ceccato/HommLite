@@ -4,8 +4,11 @@ extends Reference
 class_name UnitData
 
 var id: String
-var speed: int
 
-func _init(_id: String, _speed: int):
+var speed: int
+var initiative: int
+
+func _init(_id: String, _speed: int, _initiative: int):
 	id = _id
 	speed = _speed
+	initiative = _initiative
