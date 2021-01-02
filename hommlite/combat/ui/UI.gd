@@ -10,3 +10,4 @@ func setup(_battle: Battle):
 	battle = _battle
 	
 	combat_area.setup_battle(battle, events)
+	$CellLabel.setup($CombatArea/HexGrid)
