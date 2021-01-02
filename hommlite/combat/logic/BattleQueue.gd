@@ -1,27 +1,27 @@
 class_name BattleQueue
 extends Node
 
-signal active_stack_changed(stack) # BattleStack
-signal stack_moved(stack)
-
 # Represents the turn order during the battle
 
 var _battle_state: BattleState
 var _grid: BattleGrid
+var _events: BattleEvents
 
 var _queue: Array
 var _q_index := 0
 
 
-func setup(battle_state: BattleState, grid: BattleGrid):
+func setup(battle_state: BattleState, grid: BattleGrid, events: BattleEvents):
 	_battle_state = battle_state
 	_grid = grid
+	_events = events
+	
 	_queue = _battle_state.all_stacks()
 	_queue.sort_custom(self, "sort_stacks")
 
 
 func run():
-	emit_signal("active_stack_changed", _queue[_q_index])
+	_events.emit_signal("active_stack_changed", _queue[_q_index])
 
 
 func stack_is_active(stack: BattleStack) -> bool:
@@ -30,16 +30,17 @@ func stack_is_active(stack: BattleStack) -> bool:
 
 func _queue_next():
 	_q_index = _q_index + 1 if _q_index + 1 < _queue.size() else 0
-	emit_signal("active_stack_changed", _queue[_q_index])
+	_events.emit_signal("active_stack_changed", _queue[_q_index])
 
 
-func _on_Grid_hex_cell_clicked(coords: BattleCoords):
+func _on_UI_hex_cell_clicked(coords: BattleCoords):
 	var stack = _battle_state.get_stack_at(coords)
 	if stack == null:
 		var active_stack = _queue[_q_index]
 		if _can_reach(active_stack, coords):
+			var previous_pos = active_stack.coordinates
 			_battle_state.move_stack(active_stack, coords)
-			emit_signal("stack_moved", active_stack)
+			_events.emit_signal("stack_moved", active_stack, previous_pos)
 			_queue_next()
 
 

@@ -28,7 +28,7 @@ func reposition(grid: HexGrid):
 		sprite.position = grid.get_cell_at_coords(sprite.stack.coordinates).center
 
 
-func _on_BattleQueue_active_stack_changed(stack: BattleStack):
+func _on_Battle_active_stack_changed(stack: BattleStack):
 	_update_active_stack(stack)
 
 

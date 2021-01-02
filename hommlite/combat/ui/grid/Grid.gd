@@ -10,21 +10,20 @@ onready var active_stack_overlay = $ActiveStackMovementOverlay
 
 var hexgrid: HexGrid
 var battle: Battle
+var events: UIEvents
 
 var _last_hovered_cell_coords
 
 
-func setup(_hexgrid: HexGrid, _battle: Battle):
+func setup(_hexgrid: HexGrid, _battle: Battle, _events: UIEvents):
 	hexgrid = _hexgrid
 	battle = _battle
+	events = _events
 	
 	background.setup(hexgrid)
 	hover.setup(hexgrid)
 	movement_overlay.setup(hexgrid, battle)
 	active_stack_overlay.setup(hexgrid, battle)
-	
-	connect("hex_grid_hovered", hover, "_on_Grid_hex_grid_hovered")
-	connect("hex_grid_hovered", movement_overlay, "_on_Grid_hex_grid_hovered")
 
 
 func _process(_delta):
@@ -33,9 +32,8 @@ func _process(_delta):
 	
 	if _last_hovered_cell_coords != hovered_cell_coords:
 		_last_hovered_cell_coords = hovered_cell_coords
-		var hovered_cell = hexgrid.get_cell_at_coords(hovered_cell_coords) if hovered_cell_coords != null else null
 		
-		emit_signal("hex_grid_hovered", hovered_cell_coords, hovered_cell)
+		events.emit_signal("hex_cell_hovered", hovered_cell_coords)
 
 
 func _input(event):
@@ -43,6 +41,4 @@ func _input(event):
 		if event.pressed and event.button_index == BUTTON_LEFT:
 			var clicked_cell_coords = hexgrid.get_cell_coords_at_point(get_local_mouse_position())
 			if clicked_cell_coords != null:
-				var clicked_cell = hexgrid.get_cell_at_coords(clicked_cell_coords)
-				
-				emit_signal("hex_cell_clicked", clicked_cell_coords)
+				events.emit_signal("hex_cell_clicked", clicked_cell_coords)

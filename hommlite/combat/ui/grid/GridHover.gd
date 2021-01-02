@@ -16,6 +16,7 @@ func _draw():
 		draw_polygon(_hovered_cell.points, [hover_color])
 
 
-func _on_Grid_hex_grid_hovered(coords: BattleCoords, cell: HexCell):
+func _on_UI_hex_grid_hovered(coords: BattleCoords):
+	var cell = hexgrid.get_cell_at_coords(coords) if coords != null else null
 	_hovered_cell = cell
 	update()

@@ -16,7 +16,7 @@ func _input(event):
 		_update(_last_hovered_coords)
 
 
-func _on_Grid_hex_grid_hovered(coords: BattleCoords, cell: HexCell):
+func _on_UI_hex_grid_hovered(coords: BattleCoords, cell: HexCell):
 	_last_hovered_coords = coords
 	_update(coords)
 

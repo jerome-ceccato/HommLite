@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://combat/ui/CombatArea.gd" type="Script" id=1]
 [ext_resource path="res://assets/combat/bg.png" type="Texture" id=2]
@@ -15,12 +15,18 @@
 [ext_resource path="res://combat/logic/BattleGrid.gd" type="Script" id=13]
 [ext_resource path="res://combat/ui/grid/HexGrid.gd" type="Script" id=14]
 [ext_resource path="res://combat/logic/BattleState.gd" type="Script" id=15]
+[ext_resource path="res://combat/logic/BattleEvents.gd" type="Script" id=16]
+[ext_resource path="res://combat/ui/UIEvents.gd" type="Script" id=17]
+[ext_resource path="res://combat/ui/CellLabel.gd" type="Script" id=18]
 
 [node name="CombatScene" type="Node2D"]
 script = ExtResource( 6 )
 
 [node name="Battle" type="Node" parent="."]
 script = ExtResource( 7 )
+
+[node name="BattleEvents" type="Node" parent="Battle"]
+script = ExtResource( 16 )
 
 [node name="BattleGrid" type="Node" parent="Battle"]
 script = ExtResource( 13 )
@@ -33,6 +39,9 @@ script = ExtResource( 15 )
 
 [node name="UI" type="Node" parent="."]
 script = ExtResource( 5 )
+
+[node name="UIEvents" type="Node" parent="UI"]
+script = ExtResource( 17 )
 
 [node name="Background" type="Sprite" parent="UI"]
 position = Vector2( 0, -0.420441 )
@@ -80,6 +89,7 @@ margin_left = 6.93509
 margin_top = 639.524
 margin_right = 114.935
 margin_bottom = 675.524
+script = ExtResource( 18 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

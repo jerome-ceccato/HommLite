@@ -6,12 +6,11 @@ onready var grid = $Grid
 
 var battle: Battle
 
-
-func setup_battle(battle: Battle):
+func setup_battle(battle: Battle, events: UIEvents):
 	self.battle = battle
 	
 	hexgrid.setup(battle.grid)
-	grid.setup(hexgrid, battle)
+	grid.setup(hexgrid, battle, events)
 	units.setup_units(battle)
 	
 	_center_self()
@@ -28,5 +27,5 @@ func _center_self():
 	update()
 
 
-func _on_BattleQueue_stack_moved(stack: BattleStack):
+func _on_Battle_stack_moved(stack: BattleStack, previous_position: BattleCoords):
 	units.reposition(hexgrid)
