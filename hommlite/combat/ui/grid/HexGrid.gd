@@ -1,7 +1,7 @@
+class_name HexGrid
 extends Node
 
 # Represents the hex battle grid and its coordinates
-class_name HexGrid
 
 export(int) var cell_size := 32 
 
@@ -18,6 +18,7 @@ var _cell_v_offset: float
 var _grid_w: float
 var _grid_h: float
 
+
 func setup(_battle_grid: BattleGrid):
 	battle_grid = _battle_grid
 	
@@ -31,21 +32,27 @@ func setup(_battle_grid: BattleGrid):
 	
 	_build_map()
 
+
 func get_cell_at_coords(pos: BattleCoords) -> HexCell:
 	return _cells.get(pos.index)
-	
+
+
 func get_cell_xy(x: int, y: int) -> HexCell:
 	return get_cell_at_coords(BattleCoords.new(x, y))
 
+
 func get_grid_size() -> Vector2:
 	return Vector2(_grid_w, _grid_h)
+
 
 func get_cell_coords_at_point(point: Vector2) -> BattleCoords:
 	var coords = _hex_find(point)
 	return coords if _cells.has(coords.index) else null
 
+
 func all_cells() -> Array:
 	return _cells.values()
+
 
 func _build_map():
 	_cells = {}
@@ -56,6 +63,7 @@ func _build_map():
 		var x_offset = base_x_offset + (coord.x * _cell_h_offset)
 		var cell = HexCell.new(coord, effectivecell_size, Vector2(x_offset, y_offset))
 		_cells[coord.index] = cell
+
 
 func _hex_find(point: Vector2):
 	var x = point.x - _cell_width / 2

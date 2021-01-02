@@ -13,6 +13,7 @@ static func nearby_coords(origin: BattleCoords, distance: int) -> Array:
 			results.append(cube_to_oddr(cube))
 	return results
 
+
 static func cube_round(cube: Vector3):
 	var rx = round(cube.x)
 	var ry = round(cube.y)
@@ -31,12 +32,14 @@ static func cube_round(cube: Vector3):
 
 	return Vector3(rx, ry, rz)
 
+
 static func cube_to_oddr(cube: Vector3):
 	var x = int(cube.x)
 	var z = int(cube.z)
 	var col = x + (z - (z & 1)) / 2
 	var row = z
 	return BattleCoords.new(col, row)
+
 
 static func oddr_to_cube(hex: BattleCoords):
 	var x = hex.x - (hex.y - (hex.y & 1)) / 2

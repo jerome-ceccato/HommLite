@@ -1,18 +1,20 @@
 extends Node
 
-onready var combat_area := $CombatArea
-onready var cell_label := $CellLabel
-onready var grid := $CombatArea/Grid
-onready var battle_units := $CombatArea/VisibleUnits
-onready var active_stack_overlay := $CombatArea/Grid/ActiveStackMovementOverlay
+onready var combat_area = $CombatArea
+onready var cell_label = $CellLabel
+onready var grid = $CombatArea/Grid
+onready var battle_units = $CombatArea/VisibleUnits
+onready var active_stack_overlay = $CombatArea/Grid/ActiveStackMovementOverlay
 
 var battle: Battle
+
 
 func setup(_battle: Battle):
 	battle = _battle
 	
 	combat_area.setup_battle(battle)
 	_setup_bindings()
+
 
 func _setup_bindings():
 	var queue = battle.queue
@@ -22,6 +24,7 @@ func _setup_bindings():
 	queue.connect("stack_moved", combat_area, "_on_BattleQueue_stack_moved")
 	queue.connect("stack_moved", active_stack_overlay, "_on_BattleQueue_stack_moved")
 	grid.connect("hex_cell_clicked", queue, "_on_Grid_hex_cell_clicked")
+
 
 func _on_Grid_hex_grid_hovered(coords: BattleCoords, cell: HexCell):
 	if cell != null:

@@ -1,26 +1,30 @@
-extends Node2D
-
 class_name GridOverlayBase
+extends Node2D
 
 var hexgrid: HexGrid
 var battle: Battle
 
 var all_cells_overlayed: Array # [HexCell]
 
+
 func setup(_hexgrid: HexGrid, _battle: Battle):
 	hexgrid = _hexgrid
 	battle = _battle
+
 
 func _draw():
 	for cell in all_cells_overlayed:
 		draw_cell(cell)
 
+
 func draw_cell(cell: HexCell):
 	assert(false)
+
 
 func update_overlay(stack: BattleStack):
 	all_cells_overlayed = _cells_for_stack(stack)
 	update()
+
 
 func _cells_for_stack(stack: BattleStack) -> Array:
 	if stack != null:
@@ -33,4 +37,3 @@ func _cells_for_stack(stack: BattleStack) -> Array:
 		return nearby_cells
 	else:
 		return []
-

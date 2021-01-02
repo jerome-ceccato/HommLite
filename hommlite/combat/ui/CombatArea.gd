@@ -1,10 +1,11 @@
 extends Node2D
 
-onready var hexgrid := $HexGrid
-onready var units := $VisibleUnits
-onready var grid := $Grid
+onready var hexgrid: HexGrid = $HexGrid
+onready var units = $VisibleUnits
+onready var grid = $Grid
 
 var battle: Battle
+
 
 func setup_battle(battle: Battle):
 	self.battle = battle
@@ -16,6 +17,7 @@ func setup_battle(battle: Battle):
 	_center_self()
 	units.reposition(hexgrid)
 
+
 func _center_self():
 	var win_w = ProjectSettings.get_setting("display/window/size/width")
 	var win_h = ProjectSettings.get_setting("display/window/size/height")
@@ -24,6 +26,7 @@ func _center_self():
 	set_position(origin)
 	
 	update()
+
 
 func _on_BattleQueue_stack_moved(stack: BattleStack):
 	units.reposition(hexgrid)

@@ -6,12 +6,14 @@ var stacks: Array # [VisualStack]
 var active_stack: VisualStack
 var active_unit_shader: ShaderMaterial
 
+
 func _ready():
 	var shader = ShaderMaterial.new()
 	shader.shader = load("res://assets/combat/aura.shader")
 	shader.set_shader_param("aura_width", 0.5)
 	shader.set_shader_param("aura_color", Color.yellow)
 	active_unit_shader = shader
+
 
 func setup_units(battle: Battle):
 	self.battle = battle
@@ -20,14 +22,15 @@ func setup_units(battle: Battle):
 	for battle_stack in battle.state.all_stacks():
 		stacks.append(_create_sprite(battle_stack))
 
+
 func reposition(grid: HexGrid):
 	for sprite in stacks:
 		sprite.position = grid.get_cell_at_coords(sprite.stack.coordinates).center
 
+
 func _on_BattleQueue_active_stack_changed(stack: BattleStack):
 	_update_active_stack(stack)
 
-# internals
 
 func _update_active_stack(battle_stack: BattleStack):
 	if active_stack != null:
@@ -36,6 +39,7 @@ func _update_active_stack(battle_stack: BattleStack):
 	active_stack = _vstack_for_bstack(battle_stack)
 	if active_stack != null:
 		active_stack.material = active_unit_shader
+
 
 func _create_sprite(battle_stack: BattleStack) -> VisualStack:
 	var vstack := VisualStack.new()
@@ -47,9 +51,11 @@ func _create_sprite(battle_stack: BattleStack) -> VisualStack:
 	add_child(vstack)
 	return vstack
 
+
 func _texture_for_unit(unit: UnitData):
 	# TODO: Add cache
 	return load("res://assets/combat/%s.png" % unit.id)
+
 
 func _vstack_for_bstack(bstack: BattleStack) -> VisualStack:
 	for item in stacks:
