@@ -45,7 +45,7 @@ script = ExtResource( 17 )
 
 [node name="Background" type="Sprite" parent="UI"]
 position = Vector2( 0, -0.420441 )
-scale = Vector2( 8, 8 )
+scale = Vector2( 4, 4 )
 texture = ExtResource( 2 )
 centered = false
 __meta__ = {
@@ -55,6 +55,7 @@ __meta__ = {
 [node name="CombatArea" type="Node2D" parent="UI"]
 z_index = 1
 script = ExtResource( 1 )
+overall_offset = Vector2( 0, -12 )
 
 [node name="HexGrid" type="Node" parent="UI/CombatArea"]
 script = ExtResource( 14 )

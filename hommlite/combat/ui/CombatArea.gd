@@ -1,5 +1,7 @@
 extends Node2D
 
+export(Vector2) var overall_offset = Vector2.ZERO
+
 onready var hexgrid: HexGrid = $HexGrid
 onready var units = $VisibleUnits
 onready var grid = $Grid
@@ -21,9 +23,10 @@ func _center_self():
 	var win_w = ProjectSettings.get_setting("display/window/size/width")
 	var win_h = ProjectSettings.get_setting("display/window/size/height")
 	var grid_size = hexgrid.get_grid_size()
-	var origin = Vector2((win_w - grid_size.x) / 2, (win_h - grid_size.y) / 2)
-	set_position(origin)
-	
+	var x = ((win_w - grid_size.x) / 2) + overall_offset.x
+	var y = ((win_h - grid_size.y) / 2) + overall_offset.y
+
+	set_position(Vector2(x, y))
 	update()
 
 
