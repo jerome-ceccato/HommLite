@@ -3,8 +3,8 @@ extends Node
 
 # Represents the hex battle grid and its coordinates
 
-export(int) var rows := 11
-export(int) var cols := 15
+export(int, 7, 11) var rows := 9
+export(int, 7, 15) var cols := 15
 
 # All the hex valid coords
 var _valid_coords: Dictionary # [BattleCoords.index: BattleCoords]
