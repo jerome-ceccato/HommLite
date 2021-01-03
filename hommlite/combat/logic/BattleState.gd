@@ -39,7 +39,15 @@ func move_stack(stack: BattleStack, new_coords: BattleCoords):
 
 
 func can_reach(stack: BattleStack, target: BattleCoords) -> bool:
-	var stack_movement_coords = _grid.nearby_valid_coords(stack.coordinates, stack.stack.unit.speed)
+	return _target_is_reachable(stack.coordinates, stack.stack.unit.speed, target)
+
+
+func can_attack(source: BattleStack, target: BattleStack) -> bool:
+	return _target_is_reachable(source.coordinates, source.stack.unit.speed + 1, target.coordinates)
+
+
+func _target_is_reachable(origin: BattleCoords, distance: int, target: BattleCoords) -> bool:
+	var stack_movement_coords = _grid.nearby_valid_coords(origin, distance)
 	for coord in stack_movement_coords:
 		if coord.index == target.index:
 			return true
