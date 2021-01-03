@@ -22,8 +22,8 @@ func size() -> BattleCoords:
 	return BattleCoords.new(cols, rows)
 
 
-func nearby_valid_coords(origin: BattleCoords, distance: int) -> Array:
-	var all_coords = HexUtils.nearby_coords(origin, distance)
+func reachable_valid_coords(origin: BattleCoords, distance: int, blocked: Array) -> Array:
+	var all_coords = HexUtils.reachable_coords(origin, distance, blocked)
 	var valid_coords = []
 	for coord in all_coords:
 		if _valid_coords.has(coord.index):

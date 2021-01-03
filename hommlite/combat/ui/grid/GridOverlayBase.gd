@@ -28,12 +28,12 @@ func update_overlay(stack: BattleStack):
 
 func _cells_for_stack(stack: BattleStack) -> Array:
 	if stack != null:
-		var nearby_coords = battle.grid.nearby_valid_coords(stack.coordinates, stack.stack.unit.speed)
-		var nearby_cells = []
-		for coord in nearby_coords:
+		var coords = battle.state.reachable_coords(stack)
+		var cells = []
+		for coord in coords:
 			var maybe_cell = hexgrid.get_cell_at_coords(coord)
 			if maybe_cell:
-				nearby_cells.append(maybe_cell)
-		return nearby_cells
+				cells.append(maybe_cell)
+		return cells
 	else:
 		return []

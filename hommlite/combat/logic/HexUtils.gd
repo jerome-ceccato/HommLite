@@ -3,6 +3,7 @@ class_name HexUtils
 # Hex operations
 # Adapted from https://www.redblobgames.com/grids/hexagons
 
+
 static func nearby_coords(origin: BattleCoords, distance: int) -> Array:
 	var center = oddr_to_cube(origin)
 	var results = []
@@ -12,6 +13,27 @@ static func nearby_coords(origin: BattleCoords, distance: int) -> Array:
 			var cube = center + Vector3(x, y, z)
 			results.append(cube_to_oddr(cube))
 	return results
+
+
+static func reachable_coords(origin: BattleCoords, distance: int, blocked: Array) -> Array:
+	var visited = {}
+	var blocked_lookup = {}
+	var fringes = []
+	visited[origin.index] = origin
+	fringes.append([origin])
+	
+	for coords in blocked:
+		blocked_lookup[coords.index] = coords
+	
+	for k in range(1, distance + 1):
+		fringes.append([])
+		for hex in fringes[k - 1]:
+			for dir in range(6):
+				var neighbor = oddr_offset_neighbor(hex, dir)
+				if !visited.has(neighbor.index) and !blocked_lookup.has(neighbor.index):
+					visited[neighbor.index] = neighbor
+					fringes[k].append(neighbor)
+	return visited.values()
 
 
 static func cube_round(cube: Vector3):
@@ -46,3 +68,15 @@ static func oddr_to_cube(hex: BattleCoords):
 	var z = hex.y
 	var y = -x - z
 	return Vector3(x, y, z)
+
+
+static func oddr_offset_neighbor(hex: BattleCoords, direction: int):
+	var oddr_directions = [
+		[[+1,  0], [ 0, -1], [-1, -1], 
+		[-1,  0], [-1, +1], [ 0, +1]],
+		[[+1,  0], [+1, -1], [ 0, -1], 
+		[-1,  0], [ 0, +1], [+1, +1]],
+	]
+	var parity = hex.y & 1
+	var dir = oddr_directions[parity][direction]
+	return BattleCoords.new(hex.x + dir[0], hex.y + dir[1])

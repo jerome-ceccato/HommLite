@@ -39,17 +39,38 @@ func move_stack(stack: BattleStack, new_coords: BattleCoords):
 
 
 func can_reach(stack: BattleStack, target: BattleCoords) -> bool:
-	return _target_is_reachable(stack.coordinates, stack.stack.unit.speed, target)
+	return _array_contains_coords(reachable_coords(stack), target)
 
 
 func can_attack(source: BattleStack, target: BattleStack) -> bool:
-	return _target_is_reachable(source.coordinates, source.stack.unit.speed + 1, target.coordinates)
+	var blocked_coords = []
+	for stack in _stacks.values():
+		if stack.id != target.id:
+			blocked_coords.append(stack.coordinates)
+	
+	var all_coords = _grid.reachable_valid_coords(source.coordinates, source.stack.unit.speed + 1, blocked_coords)
+	return _array_contains_coords(all_coords, target.coordinates)
+
+
+func reachable_coords(stack: BattleStack) -> Array: # [BattleCoords]
+	var blocked_coords = []
+	for stack in _stacks.values():
+		blocked_coords.append(stack.coordinates)
+	
+	return _grid.reachable_valid_coords(stack.coordinates, stack.stack.unit.speed, blocked_coords)
 
 
 func _target_is_reachable(origin: BattleCoords, distance: int, target: BattleCoords) -> bool:
 	var stack_movement_coords = _grid.nearby_valid_coords(origin, distance)
 	for coord in stack_movement_coords:
 		if coord.index == target.index:
+			return true
+	return false
+
+
+func _array_contains_coords(array: Array, coords: BattleCoords) -> bool:
+	for coord in array:
+		if coord.index == coords.index:
 			return true
 	return false
 

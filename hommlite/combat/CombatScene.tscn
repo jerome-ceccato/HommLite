@@ -31,8 +31,6 @@ script = ExtResource( 16 )
 
 [node name="BattleGrid" type="Node" parent="Battle"]
 script = ExtResource( 13 )
-rows = 7
-cols = 7
 
 [node name="BattleQueue" type="Node" parent="Battle"]
 script = ExtResource( 11 )
