@@ -7,8 +7,8 @@ var hexgrid: HexGrid
 var _hovered_cell
 
 
-func setup(hexgrid: HexGrid):
-	self.hexgrid = hexgrid
+func setup(_hexgrid: HexGrid):
+	hexgrid = _hexgrid
 
 
 func _draw():

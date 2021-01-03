@@ -7,7 +7,7 @@ var _battle_state: BattleState
 var _grid: BattleGrid
 var _events: BattleEvents
 
-var _queue: Array
+var _queue: Array # [BattleStack]
 var _q_index := 0
 
 
@@ -24,6 +24,9 @@ func run():
 	_events.emit_signal("active_stack_changed", _queue[_q_index])
 
 
+func get_active_stack() -> BattleStack:
+	return _queue[_q_index]
+
 func stack_is_active(stack: BattleStack) -> bool:
 	return stack.id == _queue[_q_index].id
 
@@ -37,19 +40,11 @@ func _on_UI_hex_cell_clicked(coords: BattleCoords):
 	var stack = _battle_state.get_stack_at(coords)
 	if stack == null:
 		var active_stack = _queue[_q_index]
-		if _can_reach(active_stack, coords):
+		if _battle_state.can_reach(active_stack, coords):
 			var previous_pos = active_stack.coordinates
 			_battle_state.move_stack(active_stack, coords)
 			_events.emit_signal("stack_moved", active_stack, previous_pos)
 			_queue_next()
-
-
-func _can_reach(stack: BattleStack, target: BattleCoords) -> bool:
-	var stack_movement_coords = _grid.nearby_valid_coords(stack.coordinates, stack.stack.unit.speed)
-	for coord in stack_movement_coords:
-		if coord.index == target.index:
-			return true
-	return false
 
 
 func sort_stacks(a: BattleStack, b: BattleStack) -> bool:

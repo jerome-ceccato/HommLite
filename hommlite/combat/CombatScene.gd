@@ -36,6 +36,7 @@ func _setup_bindings():
 		$UI/CombatArea/Grid/GridHover, 
 		$UI/CombatArea/Grid/UnitHoverMovementOverlay,
 		$UI/CellLabel,
+		$UI/Cursor
 		]:
 		ui_events.connect("hex_cell_hovered", hover_listener, "_on_UI_hex_grid_hovered")
 	

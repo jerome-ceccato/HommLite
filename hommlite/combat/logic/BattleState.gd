@@ -38,6 +38,14 @@ func move_stack(stack: BattleStack, new_coords: BattleCoords):
 	stack.coordinates = new_coords
 
 
+func can_reach(stack: BattleStack, target: BattleCoords) -> bool:
+	var stack_movement_coords = _grid.nearby_valid_coords(stack.coordinates, stack.stack.unit.speed)
+	for coord in stack_movement_coords:
+		if coord.index == target.index:
+			return true
+	return false
+
+
 func _setup_stacks(army: ArmyData, right: bool, stack_id: int) -> int:
 	var army_size = army.stacks.size()
 	for i in range(army_size):

@@ -14,14 +14,6 @@ func _ready():
 	_build_map()
 
 
-func get_cell_at_coords(pos: BattleCoords) -> HexCell:
-	return _valid_coords.get(pos.index)
-
-
-func get_cell_xy(x: int, y: int) -> HexCell:
-	return get_cell_at_coords(BattleCoords.new(x, y))
-
-
 func all_valid_coords() -> Array:
 	return _valid_coords.values()
 
