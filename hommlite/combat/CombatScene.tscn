@@ -7,7 +7,7 @@
 [ext_resource path="res://combat/ui/UI.gd" type="Script" id=5]
 [ext_resource path="res://combat/CombatScene.gd" type="Script" id=6]
 [ext_resource path="res://combat/logic/Battle.gd" type="Script" id=7]
-[ext_resource path="res://combat/ui/grid/GridHover.gd" type="Script" id=8]
+[ext_resource path="res://combat/ui/grid/ActionGridHover.gd" type="Script" id=8]
 [ext_resource path="res://combat/ui/grid/UnitHoverMovementOverlay.gd" type="Script" id=9]
 [ext_resource path="res://combat/ui/grid/Grid.gd" type="Script" id=10]
 [ext_resource path="res://combat/logic/BattleQueue.gd" type="Script" id=11]
@@ -31,6 +31,8 @@ script = ExtResource( 16 )
 
 [node name="BattleGrid" type="Node" parent="Battle"]
 script = ExtResource( 13 )
+rows = 7
+cols = 7
 
 [node name="BattleQueue" type="Node" parent="Battle"]
 script = ExtResource( 11 )
@@ -74,7 +76,7 @@ z_index = 2
 script = ExtResource( 9 )
 overlayed_color = Color( 0, 0, 0, 0.235294 )
 
-[node name="GridHover" type="Node2D" parent="UI/CombatArea/Grid"]
+[node name="ActionGridHover" type="Node2D" parent="UI/CombatArea/Grid"]
 script = ExtResource( 8 )
 hover_color = Color( 0, 0, 0, 0.392157 )
 

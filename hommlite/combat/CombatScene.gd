@@ -33,7 +33,7 @@ func _ready():
 
 func _setup_bindings():
 	for hover_listener in [
-		$UI/CombatArea/Grid/GridHover, 
+		$UI/CombatArea/Grid/ActionGridHover, 
 		$UI/CombatArea/Grid/UnitHoverMovementOverlay,
 		$UI/CellLabel,
 		$UI/Cursor
