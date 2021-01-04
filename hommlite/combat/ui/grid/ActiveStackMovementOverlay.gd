@@ -9,7 +9,3 @@ func draw_cell(cell: HexCell):
 
 func _on_Battle_active_stack_changed(stack: BattleStack):
 	update_overlay(stack)
-
-
-func _on_Battle_stack_moved(stack: BattleStack):
-	update_overlay(stack)
