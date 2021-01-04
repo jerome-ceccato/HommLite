@@ -38,6 +38,11 @@ func move_stack(stack: BattleStack, new_coords: BattleCoords):
 	stack.coordinates = new_coords
 
 
+func attack_stack(source: BattleStack, target: BattleStack):
+	# TODO: actual dmg instead of one shot
+	_stacks.erase(target.coordinates.index)
+
+
 func can_reach(stack: BattleStack, target: BattleCoords) -> bool:
 	return _array_contains_coords(reachable_coords(stack), target)
 

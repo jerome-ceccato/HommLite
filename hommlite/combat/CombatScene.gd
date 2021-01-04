@@ -53,6 +53,11 @@ func _setup_bindings():
 		$UI/CombatArea,
 		]:
 		battle_events.connect("stack_moved", stack_moved_listener, "_on_Battle_stack_moved")
+	
+	for stack_destroyed_listener in [
+		$UI/CombatArea,
+		]:
+		battle_events.connect("stack_destroyed", stack_destroyed_listener, "_on_Battle_stack_destroyed")
 
 
 func _run():

@@ -27,6 +27,7 @@ func run():
 func get_active_stack() -> BattleStack:
 	return _queue[_q_index]
 
+
 func stack_is_active(stack: BattleStack) -> bool:
 	return stack.id == _queue[_q_index].id
 
@@ -36,16 +37,44 @@ func _queue_next():
 	_events.emit_signal("active_stack_changed", _queue[_q_index])
 
 
+func _action_move(coords: BattleCoords):
+	var active_stack = _queue[_q_index]
+	var previous_pos = active_stack.coordinates
+	_battle_state.move_stack(active_stack, coords)
+	_events.emit_signal("stack_moved", active_stack, previous_pos)
+	_queue_next()
+
+
+func _action_attack(target: BattleStack, from: BattleCoords):
+	var active_stack = _queue[_q_index]
+	var previous_pos = active_stack.coordinates
+	
+	if previous_pos.index != from.index:
+		_battle_state.move_stack(active_stack, from)
+		_events.emit_signal("stack_moved", active_stack, previous_pos)
+	
+	# TODO: handle dmg
+	_battle_state.attack_stack(active_stack, target)
+	_remove_stack_from_queue(target)
+	_events.emit_signal("stack_destroyed", target)
+	
+	_queue_next()
+
+
+func _remove_stack_from_queue(stack: BattleStack):
+	var index = _queue.find(stack)
+	if index >= 0:
+		_queue.remove(index)
+		if index <= _q_index:
+			_q_index -= 1
+
+
 func _on_UI_mouse_clicked(state: CursorState):
-	if state.hovered_cell_coords == null:
-		return
-	if state.target_stack == null:
-		var active_stack = _queue[_q_index]
-		if _battle_state.can_reach(active_stack, state.hovered_cell_coords):
-			var previous_pos = active_stack.coordinates
-			_battle_state.move_stack(active_stack, state.hovered_cell_coords)
-			_events.emit_signal("stack_moved", active_stack, previous_pos)
-			_queue_next()
+	match state.action:
+		CursorState.Action.REACHABLE_CELL:
+			_action_move(state.hovered_cell_coords)
+		CursorState.Action.REACHABLE_STACK:
+			_action_attack(state.target_stack, state.hover_hex_cell.coords)
 
 
 func sort_stacks(a: BattleStack, b: BattleStack) -> bool:

@@ -28,6 +28,18 @@ func reposition(grid: HexGrid):
 		sprite.position = grid.get_cell_at_coords(sprite.stack.coordinates).center
 
 
+func move_stack(grid: HexGrid, stack: BattleStack):
+	for sprite in stacks:
+		if sprite.stack.id == stack.id:
+			sprite.position = grid.get_cell_at_coords(stack.coordinates).center
+
+
+func remove_stack(grid: HexGrid, stack: BattleStack):
+	for sprite in stacks:
+		if sprite.stack.id == stack.id:
+			sprite.visible = false
+
+
 func _on_Battle_active_stack_changed(stack: BattleStack):
 	_update_active_stack(stack)
 

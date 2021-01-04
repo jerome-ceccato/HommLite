@@ -33,4 +33,8 @@ func _center_self():
 
 
 func _on_Battle_stack_moved(stack: BattleStack, previous_position: BattleCoords):
-	units.reposition(hexgrid)
+	units.move_stack(hexgrid, stack)
+
+
+func _on_Battle_stack_destroyed(stack: BattleStack):
+	units.remove_stack(hexgrid, stack)

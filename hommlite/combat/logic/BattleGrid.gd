@@ -21,6 +21,7 @@ func all_valid_coords() -> Array:
 func size() -> BattleCoords:
 	return BattleCoords.new(cols, rows)
 
+
 func valid_neighbors(origin: BattleCoords) -> Array:
 	var all_coords = HexUtils.nearby_coords(origin, 1)
 	var valid_coords = []
@@ -28,6 +29,7 @@ func valid_neighbors(origin: BattleCoords) -> Array:
 		if _valid_coords.has(coord.index):
 			valid_coords.append(coord)
 	return valid_coords
+
 
 func reachable_valid_coords(origin: BattleCoords, distance: int, blocked: Array) -> Array:
 	var all_coords = HexUtils.reachable_coords(origin, distance, blocked)
