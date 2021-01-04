@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://combat/ui/CombatArea.gd" type="Script" id=1]
 [ext_resource path="res://assets/combat/bg.png" type="Texture" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://combat/ui/UIEvents.gd" type="Script" id=17]
 [ext_resource path="res://combat/ui/CellLabel.gd" type="Script" id=18]
 [ext_resource path="res://combat/ui/Cursor.gd" type="Script" id=19]
+[ext_resource path="res://combat/ui/actions/CursorActionResolver.gd" type="Script" id=20]
 
 [node name="CombatScene" type="Node2D"]
 script = ExtResource( 6 )
@@ -59,6 +60,9 @@ __meta__ = {
 z_index = 1
 script = ExtResource( 1 )
 overall_offset = Vector2( 0, -12 )
+
+[node name="CursorActionResolver" type="Node" parent="UI/CombatArea"]
+script = ExtResource( 20 )
 
 [node name="HexGrid" type="Node" parent="UI/CombatArea"]
 script = ExtResource( 14 )

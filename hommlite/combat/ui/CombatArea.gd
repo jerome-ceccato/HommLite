@@ -5,14 +5,16 @@ export(Vector2) var overall_offset = Vector2.ZERO
 onready var hexgrid: HexGrid = $HexGrid
 onready var units = $VisibleUnits
 onready var grid = $Grid
+onready var action_resolver: CursorActionResolver = $CursorActionResolver
 
 var battle: Battle
 
 func setup_battle(battle: Battle, events: UIEvents):
 	self.battle = battle
 	
+	action_resolver.setup(battle, hexgrid)
 	hexgrid.setup(battle.grid)
-	grid.setup(hexgrid, battle, events)
+	grid.setup(hexgrid, battle, events, action_resolver)
 	units.setup_units(battle)
 	
 	_center_self()

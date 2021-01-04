@@ -38,10 +38,10 @@ func _setup_bindings():
 		$UI/CellLabel,
 		$UI/Cursor
 		]:
-		ui_events.connect("hex_cell_hovered", hover_listener, "_on_UI_hex_grid_hovered")
+		ui_events.connect("mouse_moved", hover_listener, "_on_UI_mouse_moved")
 	
 	for click_listener in [$Battle/BattleQueue]:
-		ui_events.connect("hex_cell_clicked", click_listener, "_on_UI_hex_cell_clicked")
+		ui_events.connect("mouse_clicked", click_listener, "_on_UI_mouse_clicked")
 	
 	for active_stack_listener in [
 		$UI/CombatArea/Grid/ActiveStackMovementOverlay,

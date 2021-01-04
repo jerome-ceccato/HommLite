@@ -11,15 +11,15 @@ onready var active_stack_overlay = $ActiveStackMovementOverlay
 var hexgrid: HexGrid
 var battle: Battle
 var events: UIEvents
-var _cursor_state: CursorState
+var action_resolver: CursorActionResolver
 
 
-func setup(_hexgrid: HexGrid, _battle: Battle, _events: UIEvents):
+func setup(_hexgrid: HexGrid, _battle: Battle, _events: UIEvents, _action_resolver: CursorActionResolver):
 	hexgrid = _hexgrid
 	battle = _battle
 	events = _events
+	action_resolver = _action_resolver
 	
-	_cursor_state = CursorState.new(battle, hexgrid)
 	background.setup(hexgrid)
 	hover.setup(battle, hexgrid)
 	movement_overlay.setup(hexgrid, battle)
@@ -37,6 +37,4 @@ func _input(event):
 		events.emit_signal("mouse_moved", _get_current_state())
 
 func _get_current_state() -> CursorState:
-	_cursor_state.update(get_local_mouse_position())
-	return _cursor_state
-	
+	return action_resolver.get_state(get_local_mouse_position())

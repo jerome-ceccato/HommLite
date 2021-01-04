@@ -11,23 +11,13 @@ func setup(_battle: Battle):
 	battle = _battle
 
 
-func _on_UI_hex_grid_hovered(coords: BattleCoords):
-	if coords != null:
-		var active_stack = battle.queue.get_active_stack()
-		var targetted_stack = battle.state.get_stack_at(coords)
-		
-		if targetted_stack != null:
-			if targetted_stack.side != active_stack.side:
-				if battle.state.can_attack(active_stack, targetted_stack):
-					Input.set_custom_mouse_cursor(_attack)
-				else:
-					Input.set_custom_mouse_cursor(_forbidden)
-			else:
-				Input.set_custom_mouse_cursor(_forbidden)
-		else:
-			if battle.state.can_reach(active_stack, coords):
-				Input.set_custom_mouse_cursor(_move)
-			else:
-				Input.set_custom_mouse_cursor(_forbidden)
-	else:
-		Input.set_custom_mouse_cursor(null)
+func _on_UI_mouse_moved(state: CursorState):
+	match state.action:
+		CursorState.Action.NONE:
+			Input.set_custom_mouse_cursor(null)
+		CursorState.Action.UNREACHABLE_CELL, CursorState.Action.UNREACHABLE_STACK:
+			Input.set_custom_mouse_cursor(_forbidden)
+		CursorState.Action.REACHABLE_CELL:
+			Input.set_custom_mouse_cursor(_move)
+		CursorState.Action.REACHABLE_STACK:
+			Input.set_custom_mouse_cursor(_attack)
