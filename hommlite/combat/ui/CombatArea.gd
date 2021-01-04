@@ -7,10 +7,12 @@ onready var units = $VisibleUnits
 onready var grid = $Grid
 onready var action_resolver: CursorActionResolver = $CursorActionResolver
 
-var battle: Battle
+var _battle: Battle
+var _events: UIEvents
 
 func setup_battle(battle: Battle, events: UIEvents):
-	self.battle = battle
+	_battle = battle
+	_events = events
 	
 	action_resolver.setup(battle, hexgrid)
 	hexgrid.setup(battle.grid)
@@ -33,8 +35,11 @@ func _center_self():
 
 
 func _on_Battle_stack_moved(stack: BattleStack, previous_position: BattleCoords):
-	units.move_stack(hexgrid, stack)
-
+	_wait(units.move_stack(hexgrid, stack))
 
 func _on_Battle_stack_destroyed(stack: BattleStack):
-	units.remove_stack(hexgrid, stack)
+	_wait(units.remove_stack(hexgrid, stack))
+
+func _wait(animation_time: float):
+	yield(get_tree().create_timer(animation_time), "timeout")
+	_events.emit_signal("animation_finished")

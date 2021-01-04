@@ -28,17 +28,40 @@ func reposition(grid: HexGrid):
 		sprite.position = grid.get_cell_at_coords(sprite.stack.coordinates).center
 
 
-func move_stack(grid: HexGrid, stack: BattleStack):
+func move_stack(grid: HexGrid, stack: BattleStack) -> float:
 	for sprite in stacks:
 		if sprite.stack.id == stack.id:
-			sprite.position = grid.get_cell_at_coords(stack.coordinates).center
+			_move_animated(sprite, grid.get_cell_at_coords(stack.coordinates).center)
+	return 0.5
 
 
-func remove_stack(grid: HexGrid, stack: BattleStack):
+func remove_stack(grid: HexGrid, stack: BattleStack) -> float:
 	for sprite in stacks:
 		if sprite.stack.id == stack.id:
 			sprite.visible = false
+	return 0.001
 
+
+func _move_animated(sprite: VisualStack, destination: Vector2):
+	var tween = Tween.new()
+	add_child(tween)
+	
+	var _property = "position"
+	var _initial_value = sprite.position
+	var _final_value = destination
+	var _duration = 0.5 # in seconds
+	var _transition_type = Tween.TRANS_SINE
+	var _ease_type = Tween.EASE_IN_OUT
+	tween.interpolate_property(
+		sprite,
+		_property,
+		_initial_value,
+		_final_value,
+		_duration,
+		_transition_type,
+		_ease_type
+	)
+	tween.start()
 
 func _on_Battle_active_stack_changed(stack: BattleStack):
 	_update_active_stack(stack)

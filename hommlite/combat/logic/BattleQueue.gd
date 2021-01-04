@@ -42,6 +42,7 @@ func _action_move(coords: BattleCoords):
 	var previous_pos = active_stack.coordinates
 	_battle_state.move_stack(active_stack, coords)
 	_events.emit_signal("stack_moved", active_stack, previous_pos)
+	yield(_events, "resume")
 	_queue_next()
 
 
@@ -52,6 +53,7 @@ func _action_attack(target: BattleStack, from: BattleCoords):
 	if previous_pos.index != from.index:
 		_battle_state.move_stack(active_stack, from)
 		_events.emit_signal("stack_moved", active_stack, previous_pos)
+		yield(_events, "resume")
 	
 	# TODO: handle dmg
 	_battle_state.attack_stack(active_stack, target)

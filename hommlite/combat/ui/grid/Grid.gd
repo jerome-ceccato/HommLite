@@ -36,5 +36,6 @@ func _input(event):
 		
 		events.emit_signal("mouse_moved", _get_current_state())
 
+
 func _get_current_state() -> CursorState:
 	return action_resolver.get_state(get_local_mouse_position())

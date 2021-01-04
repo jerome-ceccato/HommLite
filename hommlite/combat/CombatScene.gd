@@ -58,7 +58,8 @@ func _setup_bindings():
 		$UI/CombatArea,
 		]:
 		battle_events.connect("stack_destroyed", stack_destroyed_listener, "_on_Battle_stack_destroyed")
-
+	
+	ui_events.connect("animation_finished", self, "_on_animation_finished")
 
 func _run():
 	battle.queue.run()
@@ -69,3 +70,6 @@ func _create_army(units: Array) -> ArmyData:
 	for unit in units:
 		array.append(StackData.new(unit, 1))
 	return ArmyData.new(array)
+
+func _on_animation_finished():
+	$Battle/BattleEvents.emit_signal("resume")
