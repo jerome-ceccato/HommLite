@@ -11,17 +11,13 @@ var right_army: ArmyData
 
 func _ready():
 	left_army = _create_army([
-		UnitFactory.goblin(),
-		UnitFactory.skeleton(),
-		UnitFactory.skeleton(),
-		UnitFactory.skeleton(),
-		UnitFactory.goblin(),
+		UnitFactory.chicken(),
 	])
 	
 	right_army = _create_army([
-		UnitFactory.skeleton(),
-		UnitFactory.goblin(),
-		UnitFactory.skeleton(),
+		UnitFactory.blob(),
+		UnitFactory.chicken(),
+		UnitFactory.blob(),
 	])
 	
 	battle.setup_battle(left_army, right_army)

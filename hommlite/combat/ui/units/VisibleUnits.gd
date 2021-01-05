@@ -9,9 +9,9 @@ var active_unit_shader: ShaderMaterial
 
 func _ready():
 	var shader = ShaderMaterial.new()
-	shader.shader = load("res://assets/combat/aura.shader")
-	shader.set_shader_param("aura_width", 0.5)
-	shader.set_shader_param("aura_color", Color.yellow)
+	shader.shader = load("res://assets/combat/active_outline.shader")
+	shader.set_shader_param("width", 2.0)
+	shader.set_shader_param("outline_color", Color.yellow)
 	active_unit_shader = shader
 
 
@@ -81,8 +81,8 @@ func _create_sprite(battle_stack: BattleStack) -> VisualStack:
 	vstack.stack = battle_stack
 	vstack.texture = _texture_for_unit(battle_stack.stack.unit)
 	vstack.flip_h = battle_stack.side
-	vstack.scale = Vector2(1.5, 1.5)
-	vstack.offset = Vector2(0, -8)
+	vstack.scale = Vector2(3,3)
+	vstack.offset = Vector2(0,0)
 	add_child(vstack)
 	return vstack
 
