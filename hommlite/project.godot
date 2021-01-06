@@ -79,6 +79,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://combat/logic/HexUtils.gd"
 }, {
+"base": "Node2D",
+"class": "StackContainer",
+"language": "GDScript",
+"path": "res://combat/ui/stacks/StackContainer.gd"
+}, {
 "base": "Reference",
 "class": "StackData",
 "language": "GDScript",
@@ -98,11 +103,6 @@ _global_script_classes=[ {
 "class": "UnitFactory",
 "language": "GDScript",
 "path": "res://combat/data/UnitFactory.gd"
-}, {
-"base": "Sprite",
-"class": "VisualStack",
-"language": "GDScript",
-"path": "res://combat/ui/units/VisualStack.gd"
 } ]
 _global_script_class_icons={
 "ArmyData": "",
@@ -119,11 +119,11 @@ _global_script_class_icons={
 "HexCell": "",
 "HexGrid": "",
 "HexUtils": "",
+"StackContainer": "",
 "StackData": "",
 "UIEvents": "",
 "UnitData": "",
-"UnitFactory": "",
-"VisualStack": ""
+"UnitFactory": ""
 }
 
 [application]

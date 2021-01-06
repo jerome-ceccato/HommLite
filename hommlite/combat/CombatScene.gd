@@ -12,12 +12,14 @@ var right_army: ArmyData
 func _ready():
 	left_army = _create_army([
 		UnitFactory.chicken(),
+		UnitFactory.bee(),
+		UnitFactory.chicken(),
 	])
 	
 	right_army = _create_army([
-		UnitFactory.blob(),
+		UnitFactory.bee(),
 		UnitFactory.chicken(),
-		UnitFactory.blob(),
+		UnitFactory.bee(),
 	])
 	
 	battle.setup_battle(left_army, right_army)
@@ -32,7 +34,7 @@ func _setup_bindings():
 		$UI/CombatArea/Grid/ActionGridHover, 
 		$UI/CombatArea/Grid/UnitHoverMovementOverlay,
 		$UI/CellLabel,
-		$UI/Cursor
+		$UI/Cursor,
 		]:
 		ui_events.connect("mouse_moved", hover_listener, "_on_UI_mouse_moved")
 	
@@ -42,6 +44,7 @@ func _setup_bindings():
 	for active_stack_listener in [
 		$UI/CombatArea/Grid/ActiveStackMovementOverlay,
 		$UI/CombatArea/VisibleUnits,
+		$UI/CombatArea/Grid, 
 		]:
 		battle_events.connect("active_stack_changed", active_stack_listener, "_on_Battle_active_stack_changed")
 	
