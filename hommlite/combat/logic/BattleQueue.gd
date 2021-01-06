@@ -65,11 +65,13 @@ func _action_attack(target: BattleStack, from: BattleCoords):
 		_events.emit_signal("stack_moved", active_stack, previous_pos)
 		yield(_events, "resume")
 	
-	# TODO: handle dmg
-	_battle_state.attack_stack(active_stack, target)
-	_remove_stack_from_queue(target)
-	_events.emit_signal("stack_destroyed", target)
-	yield(_events, "resume")
+	if _battle_state.attack_stack(active_stack, target):
+		_remove_stack_from_queue(target)
+		_events.emit_signal("stack_destroyed", target)
+		yield(_events, "resume")
+	else:
+		_events.emit_signal("stack_damaged", target)
+		yield(_events, "resume")
 	
 	_queue_next()
 

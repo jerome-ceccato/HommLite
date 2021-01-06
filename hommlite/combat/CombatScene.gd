@@ -11,15 +11,12 @@ var right_army: ArmyData
 
 func _ready():
 	left_army = _create_army([
-		UnitFactory.chicken(),
-		UnitFactory.bee(),
-		UnitFactory.chicken(),
+		StackData.new(UnitFactory.chicken(), 50),
+		StackData.new(UnitFactory.bee(), 8),
 	])
 	
 	right_army = _create_army([
-		UnitFactory.bee(),
-		UnitFactory.chicken(),
-		UnitFactory.bee(),
+		StackData.new(UnitFactory.chicken(), 100),
 	])
 	
 	battle.setup_battle(left_army, right_army)
@@ -48,15 +45,13 @@ func _setup_bindings():
 		]:
 		battle_events.connect("active_stack_changed", active_stack_listener, "_on_Battle_active_stack_changed")
 	
-	for stack_moved_listener in [
+	for combat_events_listener in [
 		$UI/CombatArea,
 		]:
-		battle_events.connect("stack_moved", stack_moved_listener, "_on_Battle_stack_moved")
-	
-	for stack_destroyed_listener in [
-		$UI/CombatArea,
-		]:
-		battle_events.connect("stack_destroyed", stack_destroyed_listener, "_on_Battle_stack_destroyed")
+		battle_events.connect("stack_moved", combat_events_listener, "_on_Battle_stack_moved")
+		battle_events.connect("stack_damaged", combat_events_listener, "_on_Battle_stack_damaged")
+		battle_events.connect("stack_destroyed", combat_events_listener, "_on_Battle_stack_destroyed")
+		
 	
 	ui_events.connect("animation_finished", self, "_on_animation_finished")
 
@@ -65,10 +60,7 @@ func _run():
 
 
 func _create_army(units: Array) -> ArmyData:
-	var array = []
-	for unit in units:
-		array.append(StackData.new(unit, randi() % 32 + 1))
-	return ArmyData.new(array)
+	return ArmyData.new(units)
 
 func _on_animation_finished():
 	$Battle/BattleEvents.emit_signal("resume")

@@ -33,6 +33,13 @@ func remove_stack(grid: HexGrid, stack: BattleStack) -> float:
 	return 0.0
 
 
+func refresh_stack(grid: HexGrid, stack: BattleStack) -> float:
+	var container = _container_for_bstack(stack)
+	if container != null:
+		return container.animate_refresh()
+	return 0.0
+
+
 func _on_Battle_active_stack_changed(stack: BattleStack):
 	_update_active_stack(stack)
 

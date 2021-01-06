@@ -3,7 +3,7 @@ extends Node
 
 # Represents the hex battle grid and its coordinates
 
-export(int) var cell_size := 32 
+export(int) var cell_size := 36 
 
 var battle_grid: BattleGrid
 

@@ -38,9 +38,13 @@ func move_stack(stack: BattleStack, new_coords: BattleCoords):
 	stack.coordinates = new_coords
 
 
-func attack_stack(source: BattleStack, target: BattleStack):
-	# TODO: actual dmg instead of one shot
-	_stacks.erase(target.coordinates.index)
+func attack_stack(source: BattleStack, target: BattleStack) -> bool:
+	target.apply_damage(source.damage_roll())
+	if target.amount > 0:
+		return false
+	else:
+		_stacks.erase(target.coordinates.index)
+		return true
 
 
 func can_reach(stack: BattleStack, target: BattleCoords) -> bool:

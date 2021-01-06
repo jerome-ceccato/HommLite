@@ -13,7 +13,7 @@ func setup_with_stack(_stack: BattleStack):
 	stack = _stack
 	
 	_sprite.texture = load("res://assets/combat/units/%s.png" % stack.stack.unit.id)
-	_stack_count_label.text = str(stack.stack.amount)
+	_stack_count_label.text = str(stack.amount)
 	if stack.side == stack.Side.RIGHT:
 		_sprite.flip_h = true
 		_stack_count_container.position.x = -(32 + _stack_count_container.position.x)
@@ -40,4 +40,9 @@ func animate_to_position(pos: Vector2) -> float:
 
 func animate_death() -> float:
 	visible = false
+	return 0.0
+
+
+func animate_refresh() -> float:
+	_stack_count_label.text = str(stack.amount)
 	return 0.0

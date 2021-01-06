@@ -32,6 +32,8 @@ script = ExtResource( 16 )
 
 [node name="BattleGrid" type="Node" parent="Battle"]
 script = ExtResource( 13 )
+rows = 7
+cols = 7
 
 [node name="BattleQueue" type="Node" parent="Battle"]
 script = ExtResource( 11 )
@@ -90,11 +92,11 @@ script = ExtResource( 3 )
 z_index = 50
 script = ExtResource( 4 )
 
-[node name="CellLabel" type="Label" parent="UI"]
-margin_left = 6.93509
-margin_top = 639.524
-margin_right = 114.935
-margin_bottom = 675.524
+[node name="CellLabel" type="RichTextLabel" parent="UI"]
+margin_left = 5.0
+margin_top = 633.0
+margin_right = 354.0
+margin_bottom = 719.0
 script = ExtResource( 18 )
 __meta__ = {
 "_edit_use_anchors_": false
