@@ -49,14 +49,11 @@ func _update_active_stack(battle_stack: BattleStack):
 
 
 func _load_sprite(battle_stack: BattleStack) -> StackContainer:
-	var container: StackContainer = _scene_for_unit(battle_stack.stack.unit).instance()
+	var scene = load("res://combat/ui/stacks/units/stack.tscn")
+	var container: StackContainer = scene.instance()
 	add_child(container)
 	container.setup_with_stack(battle_stack)
 	return container
-
-
-func _scene_for_unit(unit: UnitData):
-	return load("res://combat/ui/stacks/units/%s.tscn" % unit.id)
 
 
 func _container_for_bstack(bstack: BattleStack) -> StackContainer:

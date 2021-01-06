@@ -67,7 +67,7 @@ func _run():
 func _create_army(units: Array) -> ArmyData:
 	var array = []
 	for unit in units:
-		array.append(StackData.new(unit, 1))
+		array.append(StackData.new(unit, randi() % 32 + 1))
 	return ArmyData.new(array)
 
 func _on_animation_finished():

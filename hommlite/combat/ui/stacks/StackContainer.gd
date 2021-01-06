@@ -3,14 +3,20 @@ extends Node2D
 
 onready var _sprite: Sprite = $Sprite
 onready var _tween: Tween = $Tween
+onready var _stack_count_container: Sprite = $StackCount
+onready var _stack_count_label: Label = $StackCount/Label
 
 var stack: BattleStack
 
 
 func setup_with_stack(_stack: BattleStack):
 	stack = _stack
+	
+	_sprite.texture = load("res://assets/combat/units/%s.png" % stack.stack.unit.id)
+	_stack_count_label.text = str(stack.stack.amount)
 	if stack.side == stack.Side.RIGHT:
 		_sprite.flip_h = true
+		_stack_count_container.position.x = -(32 + _stack_count_container.position.x)
 
 
 func set_active(active: bool):
