@@ -17,6 +17,7 @@ func _ready():
 	
 	right_army = _create_army([
 		StackData.new(UnitFactory.chicken(), 100),
+		StackData.new(UnitFactory.bee(), 1),
 	])
 	
 	battle.setup_battle(left_army, right_army)

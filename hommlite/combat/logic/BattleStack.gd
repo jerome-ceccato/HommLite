@@ -30,10 +30,12 @@ func damage_roll() -> int:
 	var dmin = stack.unit.attack_low * amount
 	var dmax = stack.unit.attack_high * amount
 	
-	if dmin == dmax:
+	if amount == 0:
+		return 0
+	elif dmin == dmax:
 		return dmin
 	else:
-		var roll = dmin + (randi() % (dmax - dmin)) if amount > 0 else 0
+		var roll = dmin + (randi() % (dmax - dmin + 1))
 		return roll
 
 
