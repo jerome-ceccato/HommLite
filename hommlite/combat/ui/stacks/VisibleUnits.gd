@@ -16,7 +16,7 @@ func setup_units(battle: Battle):
 
 func reposition(grid: HexGrid):
 	for container in containers:
-		container.sprite.position = grid.get_cell_at_coords(container.stack.coordinates).center
+		container.position = grid.get_cell_at_coords(container.stack.coordinates).center
 
 
 func move_stack(grid: HexGrid, stack: BattleStack) -> float:
