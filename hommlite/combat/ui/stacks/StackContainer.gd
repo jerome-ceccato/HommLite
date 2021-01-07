@@ -23,19 +23,37 @@ func set_active(active: bool):
 	_sprite.material.set_shader_param("enabled", active)
 
 
-func animate_to_position(pos: Vector2) -> float:
-	var duration = 0.5
-	_tween.interpolate_property(
-		self,
-		"position",
-		position,
-		pos,
-		duration,
-		Tween.TRANS_SINE,
-		Tween.EASE_IN_OUT
-	)
-	_tween.start()
-	return duration
+func animate_through_points(points: Array, flying: bool):
+	if flying:
+		_tween.interpolate_property(
+			self,
+			"position",
+			position,
+			points[-1],
+			animation_time(points),
+			Tween.TRANS_SINE,
+			Tween.EASE_IN_OUT
+		)
+		_tween.start()
+	else:
+		var single_point_duration = 0.1
+		for point in points:
+			_tween.interpolate_property(
+				self,
+				"position",
+				position,
+				point,
+				single_point_duration,
+				Tween.TRANS_SINE,
+				Tween.EASE_IN_OUT
+			)
+			_tween.start()
+			yield(_tween, "tween_completed")
+
+
+func animation_time(points: Array):
+	var single_point_duration = 0.1
+	return single_point_duration * points.size()
 
 
 func animate_death() -> float:

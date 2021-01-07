@@ -19,10 +19,12 @@ func reposition(grid: HexGrid):
 		container.position = grid.get_cell_at_coords(container.stack.coordinates).center
 
 
-func move_stack(grid: HexGrid, stack: BattleStack) -> float:
+func move_stack(grid: HexGrid, stack: BattleStack, movement: BattleMovement) -> float:
 	var container = _container_for_bstack(stack)
 	if container != null:
-		return container.animate_to_position(grid.get_cell_at_coords(stack.coordinates).center)
+		var path_coords = _hex_centers_for_coords(movement.path, grid)
+		container.animate_through_points(path_coords, movement.flying)
+		return container.animation_time(path_coords)
 	return 0.0
 
 
@@ -68,3 +70,10 @@ func _container_for_bstack(bstack: BattleStack) -> StackContainer:
 		if item.stack.id == bstack.id:
 			return item
 	return null
+
+
+func _hex_centers_for_coords(coords: Array, grid: HexGrid) -> Array:
+	var items = []
+	for c in coords:
+		items.append(grid.get_cell_at_coords(c).center)
+	return items

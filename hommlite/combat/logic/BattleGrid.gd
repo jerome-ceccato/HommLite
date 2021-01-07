@@ -50,7 +50,7 @@ func path_find(origin: BattleCoords, target: BattleCoords, blocked: Array) -> Ar
 	var path_indexes = _pathfinder.get_id_path(origin.index, target.index)
 	for index in path_indexes:
 		path.append(_valid_coords[index])
-		
+	
 	for coords in blocked:
 		_pathfinder.set_point_disabled(coords.index, false)
 	

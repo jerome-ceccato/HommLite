@@ -34,8 +34,8 @@ func _center_self():
 	update()
 
 
-func _on_Battle_stack_moved(stack: BattleStack, previous_position: BattleCoords):
-	_wait(units.move_stack(hexgrid, stack))
+func _on_Battle_stack_moved(stack: BattleStack, movement: BattleMovement):
+	_wait(units.move_stack(hexgrid, stack, movement))
 
 func _on_Battle_stack_destroyed(stack: BattleStack):
 	_wait(units.remove_stack(hexgrid, stack))
