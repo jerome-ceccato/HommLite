@@ -3,18 +3,20 @@ class_name HexUtils
 # Hex operations
 # Adapted from https://www.redblobgames.com/grids/hexagons
 
-static func nearby_coords(origin: BattleCoords, distance: int) -> Array:
+static func nearby_coords(origin: BattleCoords, valid_coords: Dictionary, distance: int) -> Array:
 	var center = oddr_to_cube(origin)
 	var results = []
 	for x in range(-distance, distance + 1):
 		for y in range(max(-distance, -x - distance), min(distance, -x + distance) + 1):
 			var z = -x - y
 			var cube = center + Vector3(x, y, z)
-			results.append(cube_to_oddr(cube))
+			var coord = cube_to_oddr(cube)
+			if valid_coords.has(coord.index):
+				results.append(coord)
 	return results
 
 
-static func reachable_coords(origin: BattleCoords, distance: int, blocked: Array) -> Array:
+static func reachable_coords(origin: BattleCoords, valid_coords: Dictionary, distance: int, blocked: Array) -> Array:
 	var visited = {}
 	var blocked_lookup = {}
 	var fringes = []
@@ -29,7 +31,7 @@ static func reachable_coords(origin: BattleCoords, distance: int, blocked: Array
 		for hex in fringes[k - 1]:
 			for dir in range(6):
 				var neighbor = oddr_offset_neighbor(hex, dir)
-				if !visited.has(neighbor.index) and !blocked_lookup.has(neighbor.index):
+				if !visited.has(neighbor.index) and !blocked_lookup.has(neighbor.index) and valid_coords.has(neighbor.index):
 					visited[neighbor.index] = neighbor
 					fringes[k].append(neighbor)
 	return visited.values()

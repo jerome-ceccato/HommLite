@@ -25,7 +25,7 @@ func size() -> BattleCoords:
 
 
 func valid_neighbors(origin: BattleCoords) -> Array:
-	var all_coords = HexUtils.nearby_coords(origin, 1)
+	var all_coords = HexUtils.nearby_coords(origin, _valid_coords, 1)
 	var valid_coords = []
 	for coord in all_coords:
 		if _valid_coords.has(coord.index):
@@ -34,25 +34,27 @@ func valid_neighbors(origin: BattleCoords) -> Array:
 
 
 func reachable_valid_coords(origin: BattleCoords, distance: int, blocked: Array) -> Array:
-	var all_coords = HexUtils.reachable_coords(origin, distance, blocked)
-	var valid_coords = []
+	var all_coords = HexUtils.reachable_coords(origin, _valid_coords, distance, blocked)
+	var reachable_coords = []
 	for coord in all_coords:
 		if _valid_coords.has(coord.index):
-			valid_coords.append(coord)
-	return valid_coords
+			reachable_coords.append(coord)
+	return reachable_coords
 
 
-func path_find(origin: BattleCoords, target: BattleCoords, blocked: Array) -> Array:
-	for coords in blocked:
-		_pathfinder.set_point_disabled(coords.index, true)
+func path_find(origin: BattleStack, target: BattleCoords, allowed_points: Array) -> Array:
+	var lookup = {}
+	for point in allowed_points:
+		lookup[point.index] = point
+	
+	for coords in _valid_coords.values():
+		var enabled = lookup.has(coords.index) or origin.stack.unit.flying
+		_pathfinder.set_point_disabled(coords.index, !enabled)
 	
 	var path = []
-	var path_indexes = _pathfinder.get_id_path(origin.index, target.index)
+	var path_indexes = _pathfinder.get_id_path(origin.coordinates.index, target.index)
 	for index in path_indexes:
 		path.append(_valid_coords[index])
-	
-	for coords in blocked:
-		_pathfinder.set_point_disabled(coords.index, false)
 	
 	return path
 

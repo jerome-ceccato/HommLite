@@ -52,30 +52,39 @@ func can_reach(stack: BattleStack, target: BattleCoords) -> bool:
 
 
 func can_attack(source: BattleStack, target: BattleStack) -> bool:
-	var blocked_coords = []
-	for stack in _stacks.values():
-		if stack.id != target.id:
-			blocked_coords.append(stack.coordinates)
-	
-	var all_coords = _grid.reachable_valid_coords(source.coordinates, source.stack.unit.speed + 1, blocked_coords)
+	var all_coords = _reachability(source, source.stack.unit.speed + 1, target.coordinates)
 	return _array_contains_coords(all_coords, target.coordinates)
 
 
 func reachable_coords(stack: BattleStack) -> Array: # [BattleCoords]
+	return _reachability(stack, stack.stack.unit.speed, null)
+
+
+func _reachability(source: BattleStack, distance: int, excluded: BattleCoords) -> Array:
+	var flying = source.stack.unit.flying
 	var blocked_coords = []
-	for stack in _stacks.values():
-		blocked_coords.append(stack.coordinates)
+	var excluded_index = excluded.index if excluded else -1
 	
-	return _grid.reachable_valid_coords(stack.coordinates, stack.stack.unit.speed, blocked_coords)
+	if !flying:
+		for stack in _stacks.values():
+			if stack.coordinates.index != excluded_index:
+				blocked_coords.append(stack.coordinates)
+	
+	var coords = _grid.reachable_valid_coords(source.coordinates, distance, blocked_coords)
+	
+	if flying:
+		var fixed_coords = []
+		for coord in coords:
+			if !_stacks.has(coord.index) or coord.index == excluded_index:
+				fixed_coords.append(coord)
+		return fixed_coords
+	else:
+		return coords
 
 
 func path_find(source: BattleStack, target: BattleCoords) -> Array: # [BattleCoords]
-	var blocked_coords = []
-	for stack in _stacks.values():
-		if stack.id != source.id:
-			blocked_coords.append(stack.coordinates)
-	
-	return _grid.path_find(source.coordinates, target, blocked_coords)
+	var all_coords = _reachability(source, source.stack.unit.speed + 1, target)
+	return _grid.path_find(source, target, all_coords)
 
 
 func _array_contains_coords(array: Array, coords: BattleCoords) -> bool:

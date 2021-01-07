@@ -13,6 +13,9 @@ func _ready():
 	left_army = _create_army([
 		StackData.new(UnitFactory.chicken(), 50),
 		StackData.new(UnitFactory.bee(), 8),
+		StackData.new(UnitFactory.chicken(), 10),
+		StackData.new(UnitFactory.chicken(), 20),
+		StackData.new(UnitFactory.chicken(), 30),
 	])
 	
 	right_army = _create_army([
