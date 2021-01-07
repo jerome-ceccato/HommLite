@@ -83,6 +83,7 @@ overlayed_color = Color( 0, 0, 0, 0.235294 )
 [node name="ActionGridHover" type="Node2D" parent="UI/CombatArea/Grid"]
 script = ExtResource( 8 )
 hover_color = Color( 0, 0, 0, 0.392157 )
+path_color = Color( 0, 0, 0, 0.12549 )
 
 [node name="GridBackground" type="Node2D" parent="UI/CombatArea/Grid"]
 z_index = 5

@@ -69,12 +69,13 @@ func reachable_coords(stack: BattleStack) -> Array: # [BattleCoords]
 	return _grid.reachable_valid_coords(stack.coordinates, stack.stack.unit.speed, blocked_coords)
 
 
-func _target_is_reachable(origin: BattleCoords, distance: int, target: BattleCoords) -> bool:
-	var stack_movement_coords = _grid.nearby_valid_coords(origin, distance)
-	for coord in stack_movement_coords:
-		if coord.index == target.index:
-			return true
-	return false
+func path_find(source: BattleStack, target: BattleCoords) -> Array: # [BattleCoords]
+	var blocked_coords = []
+	for stack in _stacks.values():
+		if stack.id != source.id:
+			blocked_coords.append(stack.coordinates)
+	
+	return _grid.path_find(source.coordinates, target, blocked_coords)
 
 
 func _array_contains_coords(array: Array, coords: BattleCoords) -> bool:

@@ -3,7 +3,6 @@ class_name HexUtils
 # Hex operations
 # Adapted from https://www.redblobgames.com/grids/hexagons
 
-
 static func nearby_coords(origin: BattleCoords, distance: int) -> Array:
 	var center = oddr_to_cube(origin)
 	var results = []
