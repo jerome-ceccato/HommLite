@@ -1,10 +1,12 @@
 class_name StackContainer
 extends Node2D
 
-onready var _sprite: Sprite = $Sprite
+onready var _sprite: AnimatedSprite = $Sprite
 onready var _tween: Tween = $Tween
 onready var _stack_count_container: Sprite = $StackCount
 onready var _stack_count_label: Label = $StackCount/Label
+
+const MOVE_ANIMATION_BASE_TIME = 0.5
 
 var stack: BattleStack
 
@@ -23,6 +25,7 @@ func set_active(active: bool):
 
 
 func animate_through_points(points: Array, flying: bool):
+	_sprite.play()
 	if flying:
 		_tween.interpolate_property(
 			self,
@@ -30,29 +33,32 @@ func animate_through_points(points: Array, flying: bool):
 			position,
 			points[-1],
 			animation_time(points),
-			Tween.TRANS_SINE,
+			Tween.TRANS_LINEAR,
 			Tween.EASE_IN_OUT
 		)
 		_tween.start()
+		yield(_tween, "tween_completed")
+		_sprite.stop()
+		_sprite.frame = 0
 	else:
-		var single_point_duration = 0.1
 		for point in points:
 			_tween.interpolate_property(
 				self,
 				"position",
 				position,
 				point,
-				single_point_duration,
-				Tween.TRANS_SINE,
+				MOVE_ANIMATION_BASE_TIME,
+				Tween.TRANS_LINEAR,
 				Tween.EASE_IN_OUT
 			)
 			_tween.start()
 			yield(_tween, "tween_completed")
+		_sprite.stop()
+		_sprite.frame = 0
 
 
 func animation_time(points: Array):
-	var single_point_duration = 0.1
-	return single_point_duration * points.size()
+	return MOVE_ANIMATION_BASE_TIME * points.size()
 
 
 func animate_death() -> float:

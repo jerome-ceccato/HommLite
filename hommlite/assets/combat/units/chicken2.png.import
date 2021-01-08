@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/chicken.png-f70c415569356733b5c72db04634767d.stex"
+path="res://.import/chicken2.png-869737f28c290c1e350059320223322c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/combat/units/chicken.png"
-dest_files=[ "res://.import/chicken.png-f70c415569356733b5c72db04634767d.stex" ]
+source_file="res://assets/combat/units/chicken2.png"
+dest_files=[ "res://.import/chicken2.png-869737f28c290c1e350059320223322c.stex" ]
 
 [params]
 

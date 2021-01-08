@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/combat/active_outline.shader" type="Shader" id=1]
 [ext_resource path="res://combat/ui/stacks/units/_stack.tscn" type="PackedScene" id=2]
@@ -13,12 +13,20 @@ shader_param/width = 2.0
 shader_param/outline_color = Color( 1, 1, 0, 1 )
 shader_param/pixel_size = 4
 
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
 [node name="Bee" type="Node"]
 
 [node name="Container" parent="." instance=ExtResource( 2 )]
 
 [node name="Sprite" parent="Container" index="0"]
 material = SubResource( 1 )
-texture = ExtResource( 3 )
+frames = SubResource( 2 )
 
 [editable path="Container"]
