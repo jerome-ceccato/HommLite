@@ -37,13 +37,6 @@ func _setup_bindings():
 	for listener in [$Battle/BattleQueue]:
 		ui_events.connect("mouse_clicked", listener, "_on_UI_mouse_clicked")
 	
-	for listener in [
-		$UI/CombatArea/Grid/ActiveStackMovementOverlay,
-		$UI/CombatArea/VisibleUnits,
-		$UI/CombatArea/Grid, 
-		]:
-		battle_events.connect("active_stack_changed", listener, "_on_Battle_active_stack_changed")
-	
 	for listener in [$UI/CombatArea]:
 		battle_events.connect("stack_moved", listener, "_on_Battle_stack_moved")
 		battle_events.connect("stack_damaged", listener, "_on_Battle_stack_damaged")
@@ -51,10 +44,13 @@ func _setup_bindings():
 	
 	for listener in [
 		$UI/Dialogs,
+		$UI/Cursor,
 		$UI/CombatArea/Grid,
 		$UI/CombatArea/VisibleUnits,
+		$UI/CombatArea/Grid/ActionGridHover,
+		$UI/CombatArea/Grid/ActiveStackMovementOverlay,
 		]:
-		battle_events.connect("game_ended", listener, "_on_Battle_game_ended")
+		battle_events.connect("game_state_changed", listener, "_on_Battle_game_state_changed")
 	
 	ui_events.connect("animation_finished", self, "_on_animation_finished")
 

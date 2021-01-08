@@ -12,12 +12,20 @@ func setup(_battle: Battle):
 
 
 func _on_UI_mouse_moved(state: CursorState):
-	match state.action:
-		CursorState.Action.NONE:
-			Input.set_custom_mouse_cursor(null)
-		CursorState.Action.UNREACHABLE_CELL, CursorState.Action.UNREACHABLE_STACK:
-			Input.set_custom_mouse_cursor(_forbidden)
-		CursorState.Action.REACHABLE_CELL:
-			Input.set_custom_mouse_cursor(_move)
-		CursorState.Action.REACHABLE_STACK:
-			Input.set_custom_mouse_cursor(_attack)
+	if battle.data.get_state() == BattleData.State.IN_PROGRESS:
+		match state.action:
+			CursorState.Action.NONE:
+				Input.set_custom_mouse_cursor(null)
+			CursorState.Action.UNREACHABLE_CELL, CursorState.Action.UNREACHABLE_STACK:
+				Input.set_custom_mouse_cursor(_forbidden)
+			CursorState.Action.REACHABLE_CELL:
+				Input.set_custom_mouse_cursor(_move)
+			CursorState.Action.REACHABLE_STACK:
+				Input.set_custom_mouse_cursor(_attack)
+	else:
+		Input.set_custom_mouse_cursor(null)
+
+
+func _on_Battle_game_state_changed(battle: Battle):
+	if battle.data.get_state() != BattleData.State.IN_PROGRESS:
+		Input.set_custom_mouse_cursor(null)

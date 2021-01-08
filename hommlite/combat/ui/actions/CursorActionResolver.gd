@@ -20,19 +20,19 @@ func get_state(mouse_pos: Vector2) -> CursorState:
 	
 	if coords != null:
 		_state.active_stack = battle.queue.get_active_stack()
-		_state.target_stack = battle.state.get_stack_at(coords)
+		_state.target_stack = battle.data.get_stack_at(coords)
 		_state.hover_hex_cell = hexgrid.get_cell_at_coords(coords)
 		
 		if _state.target_stack != null:
 			var is_enemy = _state.target_stack.side != _state.active_stack.side
-			var can_attack = battle.state.can_attack(_state.active_stack, _state.target_stack)
+			var can_attack = battle.data.can_attack(_state.active_stack, _state.target_stack)
 			if is_enemy and can_attack:
 				_state.hover_hex_cell = _closest_reachable_cell(_state.target_stack)
 				_state.action = CursorState.Action.REACHABLE_STACK
 			else:
 				_state.action = CursorState.Action.UNREACHABLE_STACK
 		else:
-			if battle.state.can_reach(_state.active_stack, coords):
+			if battle.data.can_reach(_state.active_stack, coords):
 				_state.action = CursorState.Action.REACHABLE_CELL
 			else:
 				_state.action = CursorState.Action.UNREACHABLE_CELL
@@ -53,7 +53,7 @@ func _closest_reachable_cell(target: BattleStack) -> HexCell:
 	# TODO: this is wasteful
 	neighbors.sort_custom(self, "_sort_closest")
 	for coords in neighbors:
-		if coords.index == active_stack.coordinates.index or battle.state.can_reach(active_stack, coords):
+		if coords.index == active_stack.coordinates.index or battle.data.can_reach(active_stack, coords):
 			return hexgrid.get_cell_at_coords(coords)
 	
 	return null

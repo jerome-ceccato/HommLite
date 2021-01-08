@@ -6,7 +6,7 @@ onready var _tween: Tween = $Tween
 onready var _stack_count_container: Sprite = $StackCount
 onready var _stack_count_label: Label = $StackCount/Label
 
-const MOVE_ANIMATION_BASE_TIME = 0.5
+const MOVE_ANIMATION_BASE_TIME = 0.3
 
 var stack: BattleStack
 

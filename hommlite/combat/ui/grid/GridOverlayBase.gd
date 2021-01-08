@@ -28,7 +28,7 @@ func update_overlay(stack: BattleStack):
 
 func _cells_for_stack(stack: BattleStack) -> Array:
 	if stack != null:
-		var coords = battle.state.reachable_coords(stack)
+		var coords = battle.data.reachable_coords(stack)
 		var cells = []
 		for coord in coords:
 			var maybe_cell = hexgrid.get_cell_at_coords(coord)

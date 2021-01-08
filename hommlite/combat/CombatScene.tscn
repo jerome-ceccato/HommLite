@@ -14,7 +14,7 @@
 [ext_resource path="res://combat/ui/grid/ActiveStackMovementOverlay.gd" type="Script" id=12]
 [ext_resource path="res://combat/logic/BattleGrid.gd" type="Script" id=13]
 [ext_resource path="res://combat/ui/grid/HexGrid.gd" type="Script" id=14]
-[ext_resource path="res://combat/logic/BattleState.gd" type="Script" id=15]
+[ext_resource path="res://combat/logic/BattleData.gd" type="Script" id=15]
 [ext_resource path="res://combat/logic/BattleEvents.gd" type="Script" id=16]
 [ext_resource path="res://combat/ui/UIEvents.gd" type="Script" id=17]
 [ext_resource path="res://combat/ui/CellLabel.gd" type="Script" id=18]
@@ -45,7 +45,7 @@ cols = 7
 [node name="BattleQueue" type="Node" parent="Battle"]
 script = ExtResource( 11 )
 
-[node name="BattleState" type="Node" parent="Battle"]
+[node name="BattleData" type="Node" parent="Battle"]
 script = ExtResource( 15 )
 
 [node name="UI" type="Node" parent="."]

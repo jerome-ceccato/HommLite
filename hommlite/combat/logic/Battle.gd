@@ -5,11 +5,17 @@ extends Node
 # from a game perspective, not UI
 
 onready var events: BattleEvents = $BattleEvents
-onready var state: BattleState = $BattleState
+onready var data: BattleData = $BattleData
 onready var grid: BattleGrid = $BattleGrid
 onready var queue: BattleQueue = $BattleQueue
 
 
 func setup_battle(left: ArmyData, right: ArmyData):
-	state.setup(grid, left, right)
-	queue.setup(state, grid, events)
+	data.setup(grid, left, right)
+	queue.setup(data, grid, events)
+	
+	data.connect("_battle_data_state_changed", self, "on_battle_data_state_changed")
+
+
+func on_battle_data_state_changed():
+	events.emit_signal("game_state_changed", self)

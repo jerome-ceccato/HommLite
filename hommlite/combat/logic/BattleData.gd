@@ -1,10 +1,13 @@
-class_name BattleState
+class_name BattleData
 extends Node
+
+signal _battle_data_state_changed
 
 # Represents all the units in the battlefield
 # from a game perspective, not UI
 
 var _grid: BattleGrid
+var _events: BattleEvents
 
 # original army (data)
 var _left_army: ArmyData
@@ -13,8 +16,13 @@ var _right_army: ArmyData
 # current battle field stacks
 var _stacks: Dictionary # [BattleCoords.index: BattleStack]
 
-var combat_in_progress: bool
-var winner: bool
+enum State {
+	IN_PROGRESS,
+	WAITING_FOR_UI,
+	COMBAT_ENDED
+}
+var _state: int = State.IN_PROGRESS setget update_state, get_state
+
 
 func setup(grid: BattleGrid, left: ArmyData, right: ArmyData):
 	_grid = grid
@@ -24,7 +32,6 @@ func setup(grid: BattleGrid, left: ArmyData, right: ArmyData):
 	var stack_id = 1
 	stack_id = _setup_stacks(left, false, stack_id)
 	stack_id = _setup_stacks(right, true, stack_id)
-	_check_winner()
 
 
 func all_stacks() -> Array:
@@ -61,6 +68,15 @@ func can_attack(source: BattleStack, target: BattleStack) -> bool:
 
 func reachable_coords(stack: BattleStack) -> Array: # [BattleCoords]
 	return _reachability(stack, stack.stack.unit.speed, null)
+
+
+func get_state():
+	return _state
+
+func update_state(new_value):
+	if _state != new_value:
+		_state = new_value
+		emit_signal("_battle_data_state_changed")
 
 
 func _reachability(source: BattleStack, distance: int, excluded: BattleCoords) -> Array:
@@ -112,16 +128,3 @@ func _stack_coordinates(army_size: int, position: int, right: bool) -> BattleCoo
 	var y = position + (_grid.rows - army_size) / 2
 	var x = 0 if !right else (_grid.cols - 1 if y % 2 else _grid.cols)
 	return BattleCoords.new(x, y)
-
-
-func _check_winner():
-	var stacks_count = {
-		BattleStack.Side.LEFT: 0,
-		BattleStack.Side.RIGHT: 0,
-	}
-	
-	for stack in _stacks.values():
-		stacks_count[stack.side] += 1
-	
-	combat_in_progress = stacks_count[BattleStack.Side.LEFT] > 0 and stacks_count[BattleStack.Side.RIGHT] > 0
-	winner = BattleStack.Side.LEFT if stacks_count[BattleStack.Side.LEFT] > 0 else BattleStack.Side.RIGHT

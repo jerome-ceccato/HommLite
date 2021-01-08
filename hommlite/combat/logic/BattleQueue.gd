@@ -3,27 +3,25 @@ extends Node
 
 # Represents the turn order during the battle
 
-var _battle_state: BattleState
+var _data: BattleData
 var _grid: BattleGrid
 var _events: BattleEvents
 
 var _queue: Array # [BattleStack]
 var _q_index := 0
 
-var _event_locked = false
 
-
-func setup(battle_state: BattleState, grid: BattleGrid, events: BattleEvents):
-	_battle_state = battle_state
+func setup(battle_state: BattleData, grid: BattleGrid, events: BattleEvents):
+	_data = battle_state
 	_grid = grid
 	_events = events
 	
-	_queue = _battle_state.all_stacks()
+	_queue = _data.all_stacks()
 	_queue.sort_custom(self, "sort_stacks")
 
 
 func run():
-	_events.emit_signal("active_stack_changed", _queue[_q_index])
+	_data.emit_signal("_battle_data_state_changed")
 
 
 func get_active_stack() -> BattleStack:
@@ -34,33 +32,30 @@ func stack_is_active(stack: BattleStack) -> bool:
 	return stack.id == _queue[_q_index].id
 
 
-func _queue_lock() -> bool:
-	if _event_locked:
-		return false
-	_event_locked = true
-	return true
+func get_winner() -> bool:
+	# only relevant if the state is COMBAT_ENDED
+	return _data.all_stacks()[0].side
 
-
-func _queue_next():
-	_battle_state._check_winner()
-	if !_battle_state.combat_in_progress:
-		_events.emit_signal("game_ended", _battle_state.winner)
+func _update_state():
+	if _game_should_end():
+		_data.update_state(_data.State.COMBAT_ENDED)
 	else:
 		_q_index = _q_index + 1 if _q_index + 1 < _queue.size() else 0
-		_events.emit_signal("active_stack_changed", _queue[_q_index])
-		_event_locked = false
+		_data.update_state(_data.State.IN_PROGRESS)
 
 
 func _action_move(coords: BattleCoords):
 	var active_stack = _queue[_q_index]
-	var path = _battle_state.path_find(active_stack, coords)
+	var path = _data.path_find(active_stack, coords)
 	var movement = BattleMovement.new(path, active_stack.stack.unit.flying)
 	
-	_battle_state.move_stack(active_stack, coords)
+	_data.move_stack(active_stack, coords)
+	
+	_data.update_state(_data.State.WAITING_FOR_UI)
 	_events.emit_signal("stack_moved", active_stack, movement)
 	yield(_events, "resume")
 
-	_queue_next()
+	_update_state()
 
 
 func _action_attack(target: BattleStack, from: BattleCoords):
@@ -68,22 +63,27 @@ func _action_attack(target: BattleStack, from: BattleCoords):
 	var previous_pos = active_stack.coordinates
 	
 	if previous_pos.index != from.index:
-		var path = _battle_state.path_find(active_stack, from)
+		var path = _data.path_find(active_stack, from)
 		var movement = BattleMovement.new(path, active_stack.stack.unit.flying)
 		
-		_battle_state.move_stack(active_stack, from)
+		_data.move_stack(active_stack, from)
+		
+		_data.update_state(_data.State.WAITING_FOR_UI)
 		_events.emit_signal("stack_moved", active_stack, movement)
 		yield(_events, "resume")
 	
-	if _battle_state.attack_stack(active_stack, target):
+	if _data.attack_stack(active_stack, target):
 		_remove_stack_from_queue(target)
+		
+		_data.update_state(_data.State.WAITING_FOR_UI)
 		_events.emit_signal("stack_destroyed", target)
 		yield(_events, "resume")
 	else:
+		_data.update_state(_data.State.WAITING_FOR_UI)
 		_events.emit_signal("stack_damaged", target)
 		yield(_events, "resume")
 	
-	_queue_next()
+	_update_state()
 
 
 func _remove_stack_from_queue(stack: BattleStack):
@@ -95,7 +95,7 @@ func _remove_stack_from_queue(stack: BattleStack):
 
 
 func _on_UI_mouse_clicked(state: CursorState):
-	if !_battle_state.combat_in_progress or !_queue_lock():
+	if _data.get_state() != _data.State.IN_PROGRESS:
 		return
 	
 	match state.action:
@@ -103,11 +103,22 @@ func _on_UI_mouse_clicked(state: CursorState):
 			_action_move(state.hovered_cell_coords)
 		CursorState.Action.REACHABLE_STACK:
 			_action_attack(state.target_stack, state.hover_hex_cell.coords)
-		_:
-			_event_locked = false
 
 
 func sort_stacks(a: BattleStack, b: BattleStack) -> bool:
 	if a.stack.unit.initiative != b.stack.unit.initiative:
 		return a.stack.unit.initiative > b.stack.unit.initiative
 	return a.id < b.id
+
+
+func _game_should_end():
+	var stacks_count = {
+		BattleStack.Side.LEFT: 0,
+		BattleStack.Side.RIGHT: 0,
+	}
+	
+	for stack in _data.all_stacks():
+		stacks_count[stack.side] += 1
+	
+	var in_progress = stacks_count[BattleStack.Side.LEFT] > 0 and stacks_count[BattleStack.Side.RIGHT] > 0
+	return !in_progress

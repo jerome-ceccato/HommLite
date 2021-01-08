@@ -25,6 +25,11 @@ _global_script_classes=[ {
 "path": "res://combat/logic/BattleCoords.gd"
 }, {
 "base": "Node",
+"class": "BattleData",
+"language": "GDScript",
+"path": "res://combat/logic/BattleData.gd"
+}, {
+"base": "Node",
 "class": "BattleEvents",
 "language": "GDScript",
 "path": "res://combat/logic/BattleEvents.gd"
@@ -48,11 +53,6 @@ _global_script_classes=[ {
 "class": "BattleStack",
 "language": "GDScript",
 "path": "res://combat/logic/BattleStack.gd"
-}, {
-"base": "Node",
-"class": "BattleState",
-"language": "GDScript",
-"path": "res://combat/logic/BattleState.gd"
 }, {
 "base": "Node",
 "class": "CursorActionResolver",
@@ -113,12 +113,12 @@ _global_script_class_icons={
 "ArmyData": "",
 "Battle": "",
 "BattleCoords": "",
+"BattleData": "",
 "BattleEvents": "",
 "BattleGrid": "",
 "BattleMovement": "",
 "BattleQueue": "",
 "BattleStack": "",
-"BattleState": "",
 "CursorActionResolver": "",
 "CursorState": "",
 "GridOverlayBase": "",

@@ -26,19 +26,17 @@ func setup(_hexgrid: HexGrid, _battle: Battle, _events: UIEvents, _action_resolv
 	active_stack_overlay.setup(hexgrid, battle)
 
 
-func _on_Battle_active_stack_changed(stack: BattleStack):
-	events.emit_signal("mouse_moved", _get_current_state())
-
-func _on_Battle_game_ended(winner_side: bool):
-	hover.visible = false
-	active_stack_overlay.visible = false
-	movement_overlay.visible = false
+func _on_Battle_game_state_changed(battle: Battle):
+	match battle.data.get_state():
+		BattleData.State.IN_PROGRESS:
+			events.emit_signal("mouse_moved", _get_current_state())
+		BattleData.State.COMBAT_ENDED:
+			hover.visible = false
+			active_stack_overlay.visible = false
+			movement_overlay.visible = false
 
 
 func _input(event):
-	if !battle.state.combat_in_progress:
-		return
-	
 	if event is InputEventMouseButton:
 		if event.pressed and event.button_index == BUTTON_LEFT:
 			events.emit_signal("mouse_clicked", _get_current_state())
