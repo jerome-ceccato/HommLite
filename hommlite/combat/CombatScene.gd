@@ -10,13 +10,13 @@ var left_army: ArmyData
 var right_army: ArmyData
 
 func _ready():
-	left_army = _create_army([
+	left_army = ArmyData.new([
 		StackData.new(UnitFactory.chicken(), 50),
 		StackData.new(UnitFactory.bee(), 8),
 		StackData.new(UnitFactory.uchicken(), 3),
 	])
 	
-	right_army = _create_army([
+	right_army = ArmyData.new([
 		StackData.new(UnitFactory.chicken(), 100),
 		StackData.new(UnitFactory.bee(), 4),
 	])
@@ -29,40 +29,38 @@ func _ready():
 
 
 func _setup_bindings():
-	for hover_listener in [
+	for listener in [
 		$UI/CombatArea/Grid/ActionGridHover, 
 		$UI/CombatArea/Grid/UnitHoverMovementOverlay,
 		$UI/CellLabel,
 		$UI/Cursor,
 		]:
-		ui_events.connect("mouse_moved", hover_listener, "_on_UI_mouse_moved")
+		ui_events.connect("mouse_moved", listener, "_on_UI_mouse_moved")
 	
-	for click_listener in [$Battle/BattleQueue]:
-		ui_events.connect("mouse_clicked", click_listener, "_on_UI_mouse_clicked")
+	for listener in [$Battle/BattleQueue]:
+		ui_events.connect("mouse_clicked", listener, "_on_UI_mouse_clicked")
 	
-	for active_stack_listener in [
+	for listener in [
 		$UI/CombatArea/Grid/ActiveStackMovementOverlay,
 		$UI/CombatArea/VisibleUnits,
 		$UI/CombatArea/Grid, 
 		]:
-		battle_events.connect("active_stack_changed", active_stack_listener, "_on_Battle_active_stack_changed")
+		battle_events.connect("active_stack_changed", listener, "_on_Battle_active_stack_changed")
 	
-	for combat_events_listener in [
-		$UI/CombatArea,
-		]:
-		battle_events.connect("stack_moved", combat_events_listener, "_on_Battle_stack_moved")
-		battle_events.connect("stack_damaged", combat_events_listener, "_on_Battle_stack_damaged")
-		battle_events.connect("stack_destroyed", combat_events_listener, "_on_Battle_stack_destroyed")
-		
+	for listener in [$UI/CombatArea]:
+		battle_events.connect("stack_moved", listener, "_on_Battle_stack_moved")
+		battle_events.connect("stack_damaged", listener, "_on_Battle_stack_damaged")
+		battle_events.connect("stack_destroyed", listener, "_on_Battle_stack_destroyed")
+	
+	for listener in [$UI/Dialogs]:
+		battle_events.connect("game_ended", listener, "_on_Battle_game_ended")
 	
 	ui_events.connect("animation_finished", self, "_on_animation_finished")
+
 
 func _run():
 	battle.queue.run()
 
 
-func _create_army(units: Array) -> ArmyData:
-	return ArmyData.new(units)
-
 func _on_animation_finished():
-	$Battle/BattleEvents.emit_signal("resume")
+	battle_events.emit_signal("resume")

@@ -12,6 +12,7 @@ var _q_index := 0
 
 var _event_locked = false
 
+
 func setup(battle_state: BattleState, grid: BattleGrid, events: BattleEvents):
 	_battle_state = battle_state
 	_grid = grid
@@ -44,6 +45,13 @@ func _queue_next():
 	_q_index = _q_index + 1 if _q_index + 1 < _queue.size() else 0
 	_events.emit_signal("active_stack_changed", _queue[_q_index])
 	_event_locked = false
+	_check_status()
+
+
+func _check_status():
+	_battle_state._check_winner()
+	if !_battle_state.combat_in_progress:
+		_events.emit_signal("game_ended", _battle_state.winner)
 
 
 func _action_move(coords: BattleCoords):
@@ -90,7 +98,7 @@ func _remove_stack_from_queue(stack: BattleStack):
 
 
 func _on_UI_mouse_clicked(state: CursorState):
-	if !_queue_lock():
+	if !_battle_state.combat_in_progress or !_queue_lock():
 		return
 	
 	match state.action:

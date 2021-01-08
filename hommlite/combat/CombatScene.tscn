@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://combat/ui/CombatArea.gd" type="Script" id=1]
 [ext_resource path="res://assets/combat/bg.png" type="Texture" id=2]
@@ -20,6 +20,13 @@
 [ext_resource path="res://combat/ui/CellLabel.gd" type="Script" id=18]
 [ext_resource path="res://combat/ui/Cursor.gd" type="Script" id=19]
 [ext_resource path="res://combat/ui/actions/CursorActionResolver.gd" type="Script" id=20]
+[ext_resource path="res://assets/ui/dialog_bg.png" type="Texture" id=21]
+[ext_resource path="res://assets/fonts/m6x11.ttf" type="DynamicFontData" id=22]
+[ext_resource path="res://combat/ui/dialogs/Dialogs.gd" type="Script" id=23]
+
+[sub_resource type="DynamicFont" id=1]
+size = 128
+font_data = ExtResource( 22 )
 
 [node name="CombatScene" type="Node2D"]
 script = ExtResource( 6 )
@@ -46,6 +53,9 @@ script = ExtResource( 5 )
 
 [node name="UIEvents" type="Node" parent="UI"]
 script = ExtResource( 17 )
+
+[node name="Cursor" type="Node" parent="UI"]
+script = ExtResource( 19 )
 
 [node name="Background" type="Sprite" parent="UI"]
 position = Vector2( 0, -0.420441 )
@@ -103,5 +113,33 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Cursor" type="Node" parent="UI"]
-script = ExtResource( 19 )
+[node name="Dialogs" type="Node2D" parent="UI"]
+z_index = 1000
+script = ExtResource( 23 )
+
+[node name="EndScreen" type="NinePatchRect" parent="UI/Dialogs"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 340.0
+margin_top = 60.0
+margin_right = 940.0
+margin_bottom = 220.0
+texture = ExtResource( 21 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/Dialogs/EndScreen"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 1 )
+text = "Victory!"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
