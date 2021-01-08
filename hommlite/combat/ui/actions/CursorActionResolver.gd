@@ -53,7 +53,7 @@ func _closest_reachable_cell(target: BattleStack) -> HexCell:
 	# TODO: this is wasteful
 	neighbors.sort_custom(self, "_sort_closest")
 	for coords in neighbors:
-		if battle.state.can_reach(active_stack, coords):
+		if coords.index == active_stack.coordinates.index or battle.state.can_reach(active_stack, coords):
 			return hexgrid.get_cell_at_coords(coords)
 	
 	return null
