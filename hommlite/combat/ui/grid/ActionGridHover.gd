@@ -21,8 +21,8 @@ func _draw():
 				var cell = hexgrid.get_cell_at_coords(coords)
 				draw_polygon(cell.make_points_size(12), [path_color])
 		
-	if _hovered_cell != null:
-		draw_polygon(_hovered_cell.points, [hover_color])
+		if _hovered_cell != null:
+			draw_polygon(_hovered_cell.points, [hover_color])
 
 
 func _on_UI_mouse_moved(state: CursorState):
