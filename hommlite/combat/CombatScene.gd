@@ -11,14 +11,11 @@ var right_army: ArmyData
 
 func _ready():
 	left_army = ArmyData.new([
-		StackData.new(UnitFactory.chicken(), 50),
-		StackData.new(UnitFactory.bee(), 8),
-		StackData.new(UnitFactory.uchicken(), 3),
+		StackData.new(UnitFactory.bee(), 1),
 	])
 	
 	right_army = ArmyData.new([
-		StackData.new(UnitFactory.chicken(), 100),
-		StackData.new(UnitFactory.bee(), 4),
+		StackData.new(UnitFactory.chicken(), 1),
 	])
 	
 	battle.setup_battle(left_army, right_army)
@@ -52,7 +49,11 @@ func _setup_bindings():
 		battle_events.connect("stack_damaged", listener, "_on_Battle_stack_damaged")
 		battle_events.connect("stack_destroyed", listener, "_on_Battle_stack_destroyed")
 	
-	for listener in [$UI/Dialogs]:
+	for listener in [
+		$UI/Dialogs,
+		$UI/CombatArea/Grid,
+		$UI/CombatArea/VisibleUnits,
+		]:
 		battle_events.connect("game_ended", listener, "_on_Battle_game_ended")
 	
 	ui_events.connect("animation_finished", self, "_on_animation_finished")
