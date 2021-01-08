@@ -64,9 +64,13 @@ func _update_active_stack(battle_stack: BattleStack):
 
 
 func _load_sprite(battle_stack: BattleStack) -> StackContainer:
-	var scene = load("res://combat/ui/stacks/units/stack.tscn")
-	var container: StackContainer = scene.instance()
+	var scene = _scene_for_unit(battle_stack.stack.unit)
+	var main_node = scene.instance()
+	
+	var container: StackContainer = main_node.get_child(0)
+	main_node.remove_child(container)
 	add_child(container)
+	
 	container.setup_with_stack(battle_stack)
 	return container
 
@@ -83,3 +87,8 @@ func _hex_centers_for_coords(coords: Array, grid: HexGrid) -> Array:
 	for c in coords:
 		items.append(grid.get_cell_at_coords(c).center)
 	return items
+
+
+func _scene_for_unit(unit: UnitData) -> PackedScene:
+	var scene_id = "res://combat/ui/stacks/units/%s.tscn" % unit.id
+	return load(scene_id) as PackedScene
