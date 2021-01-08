@@ -9,6 +9,8 @@ func _ready():
 
 func _on_Battle_game_ended(winner_side: bool):
 	_end_screen.visible = true
+	Input.set_custom_mouse_cursor(null)
+	
 	if winner_side == BattleStack.Side.LEFT:
 		_end_screen_label.text = "Victory!"
 	else:

@@ -42,6 +42,12 @@ func refresh_stack(grid: HexGrid, stack: BattleStack) -> float:
 	return 0.0
 
 
+func _on_Battle_game_ended(winner_side: bool):
+	if active_container != null:
+		active_container.set_active(false)
+		active_container = null
+
+
 func _on_Battle_active_stack_changed(stack: BattleStack):
 	_update_active_stack(stack)
 

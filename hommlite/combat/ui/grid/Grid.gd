@@ -29,8 +29,16 @@ func setup(_hexgrid: HexGrid, _battle: Battle, _events: UIEvents, _action_resolv
 func _on_Battle_active_stack_changed(stack: BattleStack):
 	events.emit_signal("mouse_moved", _get_current_state())
 
+func _on_Battle_game_ended(winner_side: bool):
+	hover.visible = false
+	active_stack_overlay.visible = false
+	movement_overlay.visible = false
+
 
 func _input(event):
+	if !battle.state.combat_in_progress:
+		return
+	
 	if event is InputEventMouseButton:
 		if event.pressed and event.button_index == BUTTON_LEFT:
 			events.emit_signal("mouse_clicked", _get_current_state())

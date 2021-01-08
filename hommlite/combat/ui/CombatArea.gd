@@ -43,6 +43,7 @@ func _on_Battle_stack_destroyed(stack: BattleStack):
 func _on_Battle_stack_damaged(stack: BattleStack):
 	_wait(units.refresh_stack(hexgrid, stack))
 
+
 func _wait(animation_time: float):
 	yield(get_tree().create_timer(animation_time), "timeout")
 	_events.emit_signal("animation_finished")

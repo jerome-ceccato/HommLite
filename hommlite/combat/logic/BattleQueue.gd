@@ -42,16 +42,13 @@ func _queue_lock() -> bool:
 
 
 func _queue_next():
-	_q_index = _q_index + 1 if _q_index + 1 < _queue.size() else 0
-	_events.emit_signal("active_stack_changed", _queue[_q_index])
-	_event_locked = false
-	_check_status()
-
-
-func _check_status():
 	_battle_state._check_winner()
 	if !_battle_state.combat_in_progress:
 		_events.emit_signal("game_ended", _battle_state.winner)
+	else:
+		_q_index = _q_index + 1 if _q_index + 1 < _queue.size() else 0
+		_events.emit_signal("active_stack_changed", _queue[_q_index])
+		_event_locked = false
 
 
 func _action_move(coords: BattleCoords):
