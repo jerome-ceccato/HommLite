@@ -157,7 +157,7 @@ __meta__ = {
 margin_left = 216.0
 margin_top = 16.0
 margin_right = 1062.0
-margin_bottom = 90.0
+margin_bottom = 89.0
 custom_fonts/normal_font = SubResource( 3 )
 scroll_active = false
 scroll_following = true
@@ -165,6 +165,7 @@ script = ExtResource( 29 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+death_color = Color( 0.85, 0.5015, 0.53635, 1 )
 
 [node name="Dialogs" type="Node2D" parent="UI"]
 z_index = 1000
