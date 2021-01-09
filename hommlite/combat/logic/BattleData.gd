@@ -30,8 +30,8 @@ func setup(grid: BattleGrid, left: ArmyData, right: ArmyData):
 	_right_army = right
 	
 	var stack_id = 1
-	stack_id = _setup_stacks(left, false, stack_id)
-	stack_id = _setup_stacks(right, true, stack_id)
+	stack_id = _setup_stacks(left, BattleStack.Side.LEFT, stack_id)
+	stack_id = _setup_stacks(right, BattleStack.Side.RIGHT, stack_id)
 
 
 func all_stacks() -> Array:
@@ -113,18 +113,19 @@ func _array_contains_coords(array: Array, coords: BattleCoords) -> bool:
 	return false
 
 
-func _setup_stacks(army: ArmyData, right: bool, stack_id: int) -> int:
+func _setup_stacks(army: ArmyData, side: int, stack_id: int) -> int:
 	var army_size = army.stacks.size()
 	for i in range(army_size):
 		var stack = army.stacks[i]
-		var coords = _stack_coordinates(army_size, i, right)
+		var coords = _stack_coordinates(army_size, i, side)
 		
-		_stacks[coords.index] = BattleStack.new(stack_id, stack, coords, right)
+		_stacks[coords.index] = BattleStack.new(stack_id, stack, coords, side)
 		stack_id += 1
 	return stack_id
 
 
-func _stack_coordinates(army_size: int, position: int, right: bool) -> BattleCoords:
+func _stack_coordinates(army_size: int, position: int, side: int) -> BattleCoords:
+	var right = side == BattleStack.Side.RIGHT
 	var y = position + (_grid.rows - army_size) / 2
 	var x = 0 if !right else (_grid.cols - 1 if y % 2 else _grid.cols)
 	return BattleCoords.new(x, y)

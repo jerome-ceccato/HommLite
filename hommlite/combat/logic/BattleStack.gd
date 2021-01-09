@@ -6,9 +6,9 @@ extends Reference
 var id: int # unique id to track the stack throughout the battle
 var stack: StackData
 var coordinates: BattleCoords
-var side: bool
+var side: int
 
-const Side = {LEFT = false, RIGHT = true}
+const Side = {UNKNOWN = 0, LEFT = 1, RIGHT = 2}
 
 # in battle stats
 
@@ -16,7 +16,7 @@ var amount: int
 var top_unit_hp: int
 
 
-func _init(_id: int, s: StackData, c: BattleCoords, si: bool):
+func _init(_id: int, s: StackData, c: BattleCoords, si: int):
 	id = _id
 	stack = s
 	coordinates = c

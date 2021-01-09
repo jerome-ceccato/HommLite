@@ -32,6 +32,9 @@ func get_grid() -> BattleGrid:
 func get_state() -> int: # BattleData.State
 	return _data.get_state()
 
+func get_winner() -> int: # BattleStack.Side
+	return _manager.get_winner()
+
 
 func all_stacks() -> Array: #[BattleStack]
 	return _data.all_stacks()

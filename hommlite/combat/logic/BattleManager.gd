@@ -32,9 +32,11 @@ func stack_is_active(stack: BattleStack) -> bool:
 	return stack.id == _queue[_q_index].id
 
 
-func get_winner() -> bool:
-	# only relevant if the state is COMBAT_ENDED
-	return _data.all_stacks()[0].side
+func get_winner() -> int:
+	if _data.get_state() == BattleData.State.COMBAT_ENDED:
+		return _data.all_stacks()[0].side
+	else:
+		return BattleStack.Side.UNKNOWN
 
 func _update_state():
 	if _game_should_end():

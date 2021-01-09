@@ -16,7 +16,7 @@ func setup_with_stack(_stack: BattleStack):
 	stack = _stack
 	
 	_stack_count_label.text = str(stack.amount)
-	if stack.side == stack.Side.RIGHT:
+	if stack.side == BattleStack.Side.RIGHT:
 		_sprite.flip_h = true
 		_stack_count_container.position.x = -(32 + _stack_count_container.position.x)
 
@@ -57,7 +57,7 @@ func animate_refresh() -> float:
 
 
 func _reset_flip():
-	_sprite.flip_h = stack.side == stack.Side.RIGHT
+	_sprite.flip_h = stack.side == BattleStack.Side.RIGHT
 
 
 func _flip_towards(destination: Vector2):
