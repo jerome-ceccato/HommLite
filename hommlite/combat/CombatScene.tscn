@@ -131,9 +131,9 @@ texture = ExtResource( 26 )
 centered = false
 
 [node name="CombatLogs" type="RichTextLabel" parent="UI/BottomPanel"]
-margin_left = 216.0
+margin_left = 218.0
 margin_top = 16.0
-margin_right = 1062.0
+margin_right = 1060.0
 margin_bottom = 89.0
 custom_fonts/normal_font = SubResource( 2 )
 scroll_following = true

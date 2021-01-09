@@ -17,7 +17,7 @@ func _on_UI_mouse_moved(state: CursorState):
 			CursorState.Action.NONE:
 				Input.set_custom_mouse_cursor(null)
 			CursorState.Action.UNREACHABLE_CELL, CursorState.Action.UNREACHABLE_STACK:
-				Input.set_custom_mouse_cursor(_forbidden)
+				Input.set_custom_mouse_cursor(_forbidden, Input.CURSOR_ARROW, Vector2(16,16))
 			CursorState.Action.REACHABLE_CELL:
 				Input.set_custom_mouse_cursor(_move)
 			CursorState.Action.REACHABLE_STACK:
