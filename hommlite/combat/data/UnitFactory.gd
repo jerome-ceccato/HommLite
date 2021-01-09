@@ -1,7 +1,7 @@
 class_name UnitFactory
 
 static func chicken() -> UnitData:
-	return UnitData.new("chicken", 3, 3, false, 1, 1, 1)
+	return UnitData.new("chicken", 5, 5, false, 1, 1, 1)
 
 static func uchicken() -> UnitData:
 	return UnitData.new("uchicken", 6, 8, false, 5, 5, 5)
