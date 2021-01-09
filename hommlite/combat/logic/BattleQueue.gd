@@ -8,7 +8,8 @@ var _data: BattleData
 var _queue: Array # [BattleStack]
 var _q_index := 0
 var _first_pass_length: int
-var _turn_count := 0
+
+var turn_count := 1
 
 func setup(data: BattleData):
 	_data = data
@@ -24,13 +25,15 @@ func stack_is_active(stack: BattleStack) -> bool:
 	return stack.id == _queue[_q_index].id
 
 
-func next():
+func next() -> bool:
 	if _q_index + 1 < _queue.size():
 		_q_index += 1
+		return false
 	else:
 		_q_index = 0
-		_turn_count += 1
+		turn_count += 1
 		_rebuild_queue()
+		return true
 
 
 func active_stack_can_wait() -> bool:

@@ -7,16 +7,19 @@ var _data: BattleData
 var _grid: BattleGrid
 var _events: BattleEvents
 var _queue: BattleQueue
+var _logger: BattleLogger
 
-func setup(data: BattleData, grid: BattleGrid, events: BattleEvents, queue: BattleQueue):
+func setup(data: BattleData, grid: BattleGrid, events: BattleEvents, queue: BattleQueue, logger: BattleLogger):
 	_data = data
 	_grid = grid
 	_events = events
 	_queue = queue
+	_logger = logger
 
 
 func run():
 	_data.emit_signal("_battle_data_state_changed")
+	_logger.log_round_started(_queue.turn_count)
 
 
 func get_winner() -> int:
@@ -29,8 +32,13 @@ func _update_state():
 	if _game_should_end():
 		_data.update_state(_data.State.COMBAT_ENDED)
 	else:
-		_queue.next()
+		_queue_next()
 		_data.update_state(_data.State.IN_PROGRESS)
+
+
+func _queue_next():
+	if _queue.next():
+		_logger.log_round_started(_queue.turn_count)
 
 
 func _action_move(coords: BattleCoords):
@@ -101,7 +109,9 @@ func _on_UI_mouse_clicked(state: CursorState):
 func _on_UI_action_skip():
 	if _data.get_state() != _data.State.IN_PROGRESS:
 		return
-	_queue.next()
+	
+	_logger.log_skip(_queue.get_active_stack())
+	_queue_next()
 	_data.force_state_update()
 
 
@@ -110,7 +120,8 @@ func _on_UI_action_wait():
 		return
 		
 	if _queue.active_stack_can_wait():
-		_queue.move_stack_to_second_pass(_queue.get_active_stack())
-		_queue.next()
+		var current_stack = _queue.get_active_stack()
+		_queue.move_stack_to_second_pass(current_stack)
+		_logger.log_wait(current_stack)
+		_queue_next()
 		_data.force_state_update()
-

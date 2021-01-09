@@ -4,14 +4,49 @@ export(Color) var left_color: Color
 export(Color) var right_color: Color
 
 func _on_Battle_new_combat_log(entry: BattleLogger.Entry):
-	append_bbcode(_entry_representation(entry))
+	var content = _entry_representation(entry)
+	if content:
+		if get_total_character_count() > 0:
+			content = "\n" + content
+		append_bbcode(content)
 
 
 func _entry_representation(entry: BattleLogger.Entry) -> String:
-	return "%s%s%s" % [
-		"\n" if get_total_character_count() > 0 else "",
+	match entry.type:
+		BattleLogger.Entry.Type.ROUND_STARTED:
+			return _round_representation(entry)
+		BattleLogger.Entry.Type.ATTACK:
+			return _attack_representation(entry)
+		BattleLogger.Entry.Type.WAIT:
+			return _wait_representation(entry)
+		BattleLogger.Entry.Type.SKIP:
+			return _skip_representation(entry)
+		_:
+			return ""
+
+
+func _wait_representation(entry: BattleLogger.Entry) -> String:
+	return "The %s %s." % [
+		_side_color(_puralized_name(entry.source.stack.unit, entry.source.amount), entry.source.side),
+		_pluralize(entry.source.amount, "waits", "wait"),
+	]
+
+
+func _skip_representation(entry: BattleLogger.Entry) -> String:
+	return "The %s %s their turn." % [
+		_side_color(_puralized_name(entry.source.stack.unit, entry.source.amount), entry.source.side),
+		_pluralize(entry.source.amount, "skips", "skip"),
+	]
+
+
+func _round_representation(entry: BattleLogger.Entry) -> String:
+	return "Round %s begins." % entry.round_number
+
+
+func _attack_representation(entry: BattleLogger.Entry) -> String:
+	return "%s%s" % [
 		_damage_text(entry),
-		_death_text(entry)
+		_death_text(entry),
 	]
 
 func _damage_text(entry: BattleLogger.Entry) -> String:

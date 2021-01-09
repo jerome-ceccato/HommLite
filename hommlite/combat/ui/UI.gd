@@ -10,4 +10,3 @@ func setup(_battle: Battle):
 	
 	$CombatArea.setup_battle(battle, events)
 	$Cursor.setup(battle)
-	$BottomPanel.setup(battle)

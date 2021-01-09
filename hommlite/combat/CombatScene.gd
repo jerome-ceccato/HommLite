@@ -34,7 +34,6 @@ func _setup_bindings():
 	for listener in [
 		$UI/CombatArea/Grid/ActionGridHover, 
 		$UI/CombatArea/Grid/UnitHoverMovementOverlay,
-		$UI/BottomPanel,
 		$UI/Cursor,
 		]:
 		ui_events.connect("mouse_moved", listener, "_on_UI_mouse_moved")
