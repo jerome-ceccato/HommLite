@@ -12,10 +12,12 @@ var right_army: ArmyData
 func _ready():
 	left_army = ArmyData.new([
 		StackData.new(UnitFactory.bee(), 1),
+		StackData.new(UnitFactory.chicken(), 1),
 	])
 	
 	right_army = ArmyData.new([
 		StackData.new(UnitFactory.chicken(), 1),
+		StackData.new(UnitFactory.bee(), 1),
 	])
 	
 	battle.setup_battle(left_army, right_army)
@@ -36,6 +38,12 @@ func _setup_bindings():
 	
 	for listener in [$Battle/BattleManager]:
 		ui_events.connect("mouse_clicked", listener, "_on_UI_mouse_clicked")
+	
+	for listener in [$Battle/BattleManager]:
+		ui_events.connect("action_skip", listener, "_on_UI_action_skip")
+	
+	for listener in [$Battle/BattleManager]:
+		ui_events.connect("action_wait", listener, "_on_UI_action_wait")
 	
 	for listener in [$UI/CombatArea]:
 		battle_events.connect("stack_moved", listener, "_on_Battle_stack_moved")

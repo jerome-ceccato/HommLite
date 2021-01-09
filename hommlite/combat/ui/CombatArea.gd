@@ -6,6 +6,7 @@ onready var hexgrid: HexGrid = $HexGrid
 onready var units = $VisibleUnits
 onready var grid = $Grid
 onready var action_resolver: CursorActionResolver = $CursorActionResolver
+onready var keyboard = $Keyboard
 
 var _battle: Battle
 var _events: UIEvents
@@ -18,6 +19,7 @@ func setup_battle(battle: Battle, events: UIEvents):
 	hexgrid.setup(battle.get_grid())
 	grid.setup(hexgrid, battle, events, action_resolver)
 	units.setup_units(battle)
+	keyboard.setup(events)
 	
 	_center_self()
 	units.reposition(hexgrid)

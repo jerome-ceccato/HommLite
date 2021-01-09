@@ -63,7 +63,6 @@ func _action_attack(target: BattleStack, from: BattleCoords):
 	
 	if _data.attack_stack(active_stack, target):
 		_queue.remove_stack_from_queue(target)
-		
 		_data.update_state(_data.State.WAITING_FOR_UI)
 		_events.emit_signal("stack_destroyed", target)
 		yield(_events, "resume")
@@ -73,23 +72,6 @@ func _action_attack(target: BattleStack, from: BattleCoords):
 		yield(_events, "resume")
 	
 	_update_state()
-
-
-func _on_UI_mouse_clicked(state: CursorState):
-	if _data.get_state() != _data.State.IN_PROGRESS:
-		return
-	
-	match state.action:
-		CursorState.Action.REACHABLE_CELL:
-			_action_move(state.hovered_cell_coords)
-		CursorState.Action.REACHABLE_STACK:
-			_action_attack(state.target_stack, state.hover_hex_cell.coords)
-
-
-func sort_stacks(a: BattleStack, b: BattleStack) -> bool:
-	if a.stack.unit.initiative != b.stack.unit.initiative:
-		return a.stack.unit.initiative > b.stack.unit.initiative
-	return a.id < b.id
 
 
 func _game_should_end():
@@ -103,3 +85,32 @@ func _game_should_end():
 	
 	var in_progress = stacks_count[BattleStack.Side.LEFT] > 0 and stacks_count[BattleStack.Side.RIGHT] > 0
 	return !in_progress
+
+
+func _on_UI_mouse_clicked(state: CursorState):
+	if _data.get_state() != _data.State.IN_PROGRESS:
+		return
+	
+	match state.action:
+		CursorState.Action.REACHABLE_CELL:
+			_action_move(state.hovered_cell_coords)
+		CursorState.Action.REACHABLE_STACK:
+			_action_attack(state.target_stack, state.hover_hex_cell.coords)
+
+
+func _on_UI_action_skip():
+	if _data.get_state() != _data.State.IN_PROGRESS:
+		return
+	_queue.next()
+	_data.force_state_update()
+
+
+func _on_UI_action_wait():
+	if _data.get_state() != _data.State.IN_PROGRESS:
+		return
+		
+	if _queue.active_stack_can_wait():
+		_queue.move_stack_to_second_pass(_queue.get_active_stack())
+		_queue.next()
+		_data.force_state_update()
+

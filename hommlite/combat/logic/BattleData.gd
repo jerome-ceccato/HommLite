@@ -79,6 +79,10 @@ func update_state(new_value):
 		emit_signal("_battle_data_state_changed")
 
 
+func force_state_update():
+	emit_signal("_battle_data_state_changed")
+
+
 func _reachability(source: BattleStack, distance: int, excluded: BattleCoords) -> Array:
 	var flying = source.stack.unit.flying
 	var blocked_coords = []
