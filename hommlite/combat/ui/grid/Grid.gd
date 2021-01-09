@@ -27,7 +27,7 @@ func setup(_hexgrid: HexGrid, _battle: Battle, _events: UIEvents, _action_resolv
 
 
 func _on_Battle_game_state_changed(battle: Battle):
-	match battle.data.get_state():
+	match battle.get_state():
 		BattleData.State.IN_PROGRESS:
 			events.emit_signal("mouse_moved", _get_current_state())
 		BattleData.State.COMBAT_ENDED:

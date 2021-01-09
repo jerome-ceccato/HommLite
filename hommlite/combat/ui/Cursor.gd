@@ -12,7 +12,7 @@ func setup(_battle: Battle):
 
 
 func _on_UI_mouse_moved(state: CursorState):
-	if battle.data.get_state() == BattleData.State.IN_PROGRESS:
+	if battle.get_state() == BattleData.State.IN_PROGRESS:
 		match state.action:
 			CursorState.Action.NONE:
 				Input.set_custom_mouse_cursor(null)
@@ -27,5 +27,5 @@ func _on_UI_mouse_moved(state: CursorState):
 
 
 func _on_Battle_game_state_changed(battle: Battle):
-	if battle.data.get_state() != BattleData.State.IN_PROGRESS:
+	if battle.get_state() != BattleData.State.IN_PROGRESS:
 		Input.set_custom_mouse_cursor(null)

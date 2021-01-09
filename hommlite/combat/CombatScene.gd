@@ -34,7 +34,7 @@ func _setup_bindings():
 		]:
 		ui_events.connect("mouse_moved", listener, "_on_UI_mouse_moved")
 	
-	for listener in [$Battle/BattleQueue]:
+	for listener in [$Battle/BattleManager]:
 		ui_events.connect("mouse_clicked", listener, "_on_UI_mouse_clicked")
 	
 	for listener in [$UI/CombatArea]:
@@ -56,7 +56,7 @@ func _setup_bindings():
 
 
 func _run():
-	battle.queue.run()
+	battle.run()
 
 
 func _on_animation_finished():

@@ -10,7 +10,7 @@
 [ext_resource path="res://combat/ui/grid/ActionGridHover.gd" type="Script" id=8]
 [ext_resource path="res://combat/ui/grid/UnitHoverMovementOverlay.gd" type="Script" id=9]
 [ext_resource path="res://combat/ui/grid/Grid.gd" type="Script" id=10]
-[ext_resource path="res://combat/logic/BattleQueue.gd" type="Script" id=11]
+[ext_resource path="res://combat/logic/BattleManager.gd" type="Script" id=11]
 [ext_resource path="res://combat/ui/grid/ActiveStackMovementOverlay.gd" type="Script" id=12]
 [ext_resource path="res://combat/logic/BattleGrid.gd" type="Script" id=13]
 [ext_resource path="res://combat/ui/grid/HexGrid.gd" type="Script" id=14]
@@ -42,7 +42,7 @@ script = ExtResource( 13 )
 rows = 7
 cols = 7
 
-[node name="BattleQueue" type="Node" parent="Battle"]
+[node name="BattleManager" type="Node" parent="Battle"]
 script = ExtResource( 11 )
 
 [node name="BattleData" type="Node" parent="Battle"]

@@ -8,8 +8,8 @@ func draw_cell(cell: HexCell):
 
 
 func _on_Battle_game_state_changed(battle: Battle):
-	match battle.data.get_state():
+	match battle.get_state():
 		BattleData.State.IN_PROGRESS:
-			update_overlay(battle.queue.get_active_stack())
+			update_overlay(battle.get_active_stack())
 		_:
 			update_overlay(null)

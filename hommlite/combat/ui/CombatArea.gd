@@ -15,7 +15,7 @@ func setup_battle(battle: Battle, events: UIEvents):
 	_events = events
 	
 	action_resolver.setup(battle, hexgrid)
-	hexgrid.setup(battle.grid)
+	hexgrid.setup(battle.get_grid())
 	grid.setup(hexgrid, battle, events, action_resolver)
 	units.setup_units(battle)
 	

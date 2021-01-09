@@ -10,7 +10,7 @@ func setup_units(battle: Battle):
 	self.battle = battle
 	
 	containers = []
-	for battle_stack in battle.data.all_stacks():
+	for battle_stack in battle.all_stacks():
 		containers.append(_load_sprite(battle_stack))
 
 
@@ -43,9 +43,9 @@ func refresh_stack(grid: HexGrid, stack: BattleStack) -> float:
 
 
 func _on_Battle_game_state_changed(battle: Battle):
-	match battle.data.get_state():
+	match battle.get_state():
 		BattleData.State.IN_PROGRESS:
-			_update_active_stack(battle.queue.get_active_stack())
+			_update_active_stack(battle.get_active_stack())
 		BattleData.State.WAITING_FOR_UI:
 			_update_active_stack(null)
 		BattleData.State.COMBAT_ENDED:

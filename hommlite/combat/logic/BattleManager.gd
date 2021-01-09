@@ -1,4 +1,4 @@
-class_name BattleQueue
+class_name BattleManager
 extends Node
 
 # Represents the turn order during the battle
