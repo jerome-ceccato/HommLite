@@ -40,6 +40,11 @@ _global_script_classes=[ {
 "path": "res://combat/logic/BattleGrid.gd"
 }, {
 "base": "Node",
+"class": "BattleLogger",
+"language": "GDScript",
+"path": "res://combat/logic/BattleLogger.gd"
+}, {
+"base": "Node",
 "class": "BattleManager",
 "language": "GDScript",
 "path": "res://combat/logic/BattleManager.gd"
@@ -121,6 +126,7 @@ _global_script_class_icons={
 "BattleData": "",
 "BattleEvents": "",
 "BattleGrid": "",
+"BattleLogger": "",
 "BattleManager": "",
 "BattleMovement": "",
 "BattleQueue": "",

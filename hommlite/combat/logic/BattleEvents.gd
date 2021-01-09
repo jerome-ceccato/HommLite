@@ -9,5 +9,8 @@ signal stack_moved(stack, movement) # BattleStack, BattleMovement
 signal stack_damaged(stack) # BattleStack
 signal stack_destroyed(stack) # BattleStack
 
+# Logs
+signal new_combat_log(entry) # BattleLogger.Entry
+
 # General signal to resume logic when the UI is done with changes
 signal resume()

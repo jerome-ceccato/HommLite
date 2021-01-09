@@ -9,12 +9,15 @@ onready var _data: BattleData = $BattleData
 onready var _grid: BattleGrid = $BattleGrid setget ,get_grid
 onready var _queue: BattleQueue = $BattleQueue
 onready var _manager: BattleManager = $BattleManager
+onready var _logger: BattleLogger = $BattleLogger
 
 
 func setup_battle(left: ArmyData, right: ArmyData):
-	_data.setup(_grid, left, right)
+	_logger.setup(_events)
+	_data.setup(_grid, _logger, left, right)
 	_queue.setup(_data)
 	_manager.setup(_data, _grid, _events, _queue)
+	
 	
 	_data.connect("_battle_data_state_changed", self, "on_battle_data_state_changed")
 

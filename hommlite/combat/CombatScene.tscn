@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://combat/ui/CombatArea.gd" type="Script" id=1]
 [ext_resource path="res://assets/combat/bg.png" type="Texture" id=2]
@@ -17,7 +17,7 @@
 [ext_resource path="res://combat/logic/BattleData.gd" type="Script" id=15]
 [ext_resource path="res://combat/logic/BattleEvents.gd" type="Script" id=16]
 [ext_resource path="res://combat/ui/UIEvents.gd" type="Script" id=17]
-[ext_resource path="res://combat/ui/CellLabel.gd" type="Script" id=18]
+[ext_resource path="res://assets/fonts/m5x7.ttf" type="DynamicFontData" id=18]
 [ext_resource path="res://combat/ui/Cursor.gd" type="Script" id=19]
 [ext_resource path="res://combat/ui/actions/CursorActionResolver.gd" type="Script" id=20]
 [ext_resource path="res://assets/ui/dialog_bg.png" type="Texture" id=21]
@@ -25,6 +25,21 @@
 [ext_resource path="res://combat/ui/dialogs/Dialogs.gd" type="Script" id=23]
 [ext_resource path="res://combat/logic/BattleQueue.gd" type="Script" id=24]
 [ext_resource path="res://combat/ui/Keyboard.gd" type="Script" id=25]
+[ext_resource path="res://assets/ui/bottom_bg.png" type="Texture" id=26]
+[ext_resource path="res://combat/ui/BottomPanel.gd" type="Script" id=27]
+[ext_resource path="res://combat/logic/BattleLogger.gd" type="Script" id=28]
+[ext_resource path="res://combat/ui/CombatLogs.gd" type="Script" id=29]
+
+[sub_resource type="DynamicFont" id=2]
+size = 32
+extra_spacing_top = -3
+extra_spacing_bottom = -3
+font_data = ExtResource( 18 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 32
+extra_spacing_top = -3
+font_data = ExtResource( 18 )
 
 [sub_resource type="DynamicFont" id=1]
 size = 128
@@ -41,8 +56,6 @@ script = ExtResource( 16 )
 
 [node name="BattleGrid" type="Node" parent="Battle"]
 script = ExtResource( 13 )
-rows = 7
-cols = 7
 
 [node name="BattleManager" type="Node" parent="Battle"]
 script = ExtResource( 11 )
@@ -52,6 +65,9 @@ script = ExtResource( 15 )
 
 [node name="BattleQueue" type="Node" parent="Battle"]
 script = ExtResource( 24 )
+
+[node name="BattleLogger" type="Node" parent="Battle"]
+script = ExtResource( 28 )
 
 [node name="UI" type="Node" parent="."]
 script = ExtResource( 5 )
@@ -99,6 +115,7 @@ script = ExtResource( 9 )
 overlayed_color = Color( 0, 0, 0, 0.235294 )
 
 [node name="ActionGridHover" type="Node2D" parent="UI/CombatArea/Grid"]
+z_index = 3
 script = ExtResource( 8 )
 hover_color = Color( 0, 0, 0, 0.392157 )
 path_color = Color( 0, 0, 0, 0.12549 )
@@ -108,15 +125,43 @@ z_index = 5
 script = ExtResource( 3 )
 
 [node name="VisibleUnits" type="Node2D" parent="UI/CombatArea"]
-z_index = 50
+z_index = 10
 script = ExtResource( 4 )
 
-[node name="CellLabel" type="RichTextLabel" parent="UI"]
-margin_left = 5.0
-margin_top = 633.0
-margin_right = 354.0
-margin_bottom = 719.0
-script = ExtResource( 18 )
+[node name="BottomPanel" type="Node2D" parent="UI"]
+position = Vector2( 0, 624 )
+z_index = 100
+script = ExtResource( 27 )
+
+[node name="Background" type="Sprite" parent="UI/BottomPanel"]
+scale = Vector2( 4, 4 )
+texture = ExtResource( 26 )
+centered = false
+
+[node name="CellLabel" type="Label" parent="UI/BottomPanel"]
+margin_left = 28.0
+margin_top = 16.0
+margin_right = 197.0
+margin_bottom = 89.0
+rect_clip_content = true
+custom_fonts/font = SubResource( 2 )
+text = "test
+abcd"
+clip_text = true
+max_lines_visible = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CombatLogs" type="RichTextLabel" parent="UI/BottomPanel"]
+margin_left = 216.0
+margin_top = 16.0
+margin_right = 1062.0
+margin_bottom = 90.0
+custom_fonts/normal_font = SubResource( 3 )
+scroll_active = false
+scroll_following = true
+script = ExtResource( 29 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -133,10 +178,10 @@ margin_top = 60.0
 margin_right = 940.0
 margin_bottom = 220.0
 texture = ExtResource( 21 )
-patch_margin_left = 4
-patch_margin_top = 4
-patch_margin_right = 4
-patch_margin_bottom = 4
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
 __meta__ = {
 "_edit_use_anchors_": false
 }

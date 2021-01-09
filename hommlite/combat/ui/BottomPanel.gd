@@ -1,10 +1,10 @@
-extends RichTextLabel
+extends Node2D
 
-var hexgrid: HexGrid
+var battle: Battle
 
 
-func setup(hexgrid: HexGrid):
-	self.hexgrid = hexgrid
+func setup(_battle: Battle):
+	battle = _battle
 
 
 func _on_UI_mouse_moved(state: CursorState):
@@ -18,4 +18,4 @@ func _on_UI_mouse_moved(state: CursorState):
 			content += "\n%s: %s-%s (%s)" % [unit.id, unit.attack_low, unit.attack_high, unit.hp]
 			content += "\n%s units, %s hp" % [stack.amount, stack.top_unit_hp]
 	
-	text = content
+	$CellLabel.text = content

@@ -7,7 +7,7 @@ signal _battle_data_state_changed
 # from a game perspective, not UI
 
 var _grid: BattleGrid
-var _events: BattleEvents
+var _logger: BattleLogger
 
 # original army (data)
 var _left_army: ArmyData
@@ -24,8 +24,9 @@ enum State {
 var _state: int = State.IN_PROGRESS setget update_state, get_state
 
 
-func setup(grid: BattleGrid, left: ArmyData, right: ArmyData):
+func setup(grid: BattleGrid, logger: BattleLogger, left: ArmyData, right: ArmyData):
 	_grid = grid
+	_logger = logger
 	_left_army = left
 	_right_army = right
 	
@@ -49,7 +50,11 @@ func move_stack(stack: BattleStack, new_coords: BattleCoords):
 
 
 func attack_stack(source: BattleStack, target: BattleStack) -> bool:
-	target.apply_damage(source.damage_roll())
+	var dmg = source.damage_roll()
+	var initial_size = target.amount
+	
+	target.apply_damage(dmg)
+	_logger.log_attack(source, target, dmg, initial_size - target.amount)
 	if target.amount > 0:
 		return false
 	else:
