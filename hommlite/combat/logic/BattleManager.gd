@@ -1,35 +1,22 @@
 class_name BattleManager
 extends Node
 
-# Represents the turn order during the battle
+# Coordinates the battle
 
 var _data: BattleData
 var _grid: BattleGrid
 var _events: BattleEvents
+var _queue: BattleQueue
 
-var _queue: Array # [BattleStack]
-var _q_index := 0
-
-
-func setup(battle_state: BattleData, grid: BattleGrid, events: BattleEvents):
-	_data = battle_state
+func setup(data: BattleData, grid: BattleGrid, events: BattleEvents, queue: BattleQueue):
+	_data = data
 	_grid = grid
 	_events = events
-	
-	_queue = _data.all_stacks()
-	_queue.sort_custom(self, "sort_stacks")
+	_queue = queue
 
 
 func run():
 	_data.emit_signal("_battle_data_state_changed")
-
-
-func get_active_stack() -> BattleStack:
-	return _queue[_q_index]
-
-
-func stack_is_active(stack: BattleStack) -> bool:
-	return stack.id == _queue[_q_index].id
 
 
 func get_winner() -> int:
@@ -42,12 +29,12 @@ func _update_state():
 	if _game_should_end():
 		_data.update_state(_data.State.COMBAT_ENDED)
 	else:
-		_q_index = _q_index + 1 if _q_index + 1 < _queue.size() else 0
+		_queue.next()
 		_data.update_state(_data.State.IN_PROGRESS)
 
 
 func _action_move(coords: BattleCoords):
-	var active_stack = _queue[_q_index]
+	var active_stack = _queue.get_active_stack()
 	var path = _data.path_find(active_stack, coords)
 	var movement = BattleMovement.new(path, active_stack.stack.unit.flying)
 	
@@ -61,7 +48,7 @@ func _action_move(coords: BattleCoords):
 
 
 func _action_attack(target: BattleStack, from: BattleCoords):
-	var active_stack = _queue[_q_index]
+	var active_stack = _queue.get_active_stack()
 	var previous_pos = active_stack.coordinates
 	
 	if previous_pos.index != from.index:
@@ -75,7 +62,7 @@ func _action_attack(target: BattleStack, from: BattleCoords):
 		yield(_events, "resume")
 	
 	if _data.attack_stack(active_stack, target):
-		_remove_stack_from_queue(target)
+		_queue.remove_stack_from_queue(target)
 		
 		_data.update_state(_data.State.WAITING_FOR_UI)
 		_events.emit_signal("stack_destroyed", target)
@@ -86,14 +73,6 @@ func _action_attack(target: BattleStack, from: BattleCoords):
 		yield(_events, "resume")
 	
 	_update_state()
-
-
-func _remove_stack_from_queue(stack: BattleStack):
-	var index = _queue.find(stack)
-	if index >= 0:
-		_queue.remove(index)
-		if index <= _q_index:
-			_q_index -= 1
 
 
 func _on_UI_mouse_clicked(state: CursorState):

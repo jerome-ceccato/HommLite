@@ -7,12 +7,14 @@ extends Node
 onready var _events: BattleEvents = $BattleEvents
 onready var _data: BattleData = $BattleData
 onready var _grid: BattleGrid = $BattleGrid setget ,get_grid
+onready var _queue: BattleQueue = $BattleQueue
 onready var _manager: BattleManager = $BattleManager
 
 
 func setup_battle(left: ArmyData, right: ArmyData):
 	_data.setup(_grid, left, right)
-	_manager.setup(_data, _grid, _events)
+	_queue.setup(_data)
+	_manager.setup(_data, _grid, _events, _queue)
 	
 	_data.connect("_battle_data_state_changed", self, "on_battle_data_state_changed")
 
@@ -40,7 +42,7 @@ func all_stacks() -> Array: #[BattleStack]
 	return _data.all_stacks()
 
 func get_active_stack() -> BattleStack:
-	return _manager.get_active_stack()
+	return _queue.get_active_stack()
 
 func get_stack_at_coords(coords: BattleCoords) -> BattleStack:
 	return _data.get_stack_at(coords)

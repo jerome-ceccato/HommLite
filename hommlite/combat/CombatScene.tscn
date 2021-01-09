@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://combat/ui/CombatArea.gd" type="Script" id=1]
 [ext_resource path="res://assets/combat/bg.png" type="Texture" id=2]
@@ -23,6 +23,7 @@
 [ext_resource path="res://assets/ui/dialog_bg.png" type="Texture" id=21]
 [ext_resource path="res://assets/fonts/m6x11.ttf" type="DynamicFontData" id=22]
 [ext_resource path="res://combat/ui/dialogs/Dialogs.gd" type="Script" id=23]
+[ext_resource path="res://combat/logic/BattleQueue.gd" type="Script" id=24]
 
 [sub_resource type="DynamicFont" id=1]
 size = 128
@@ -47,6 +48,9 @@ script = ExtResource( 11 )
 
 [node name="BattleData" type="Node" parent="Battle"]
 script = ExtResource( 15 )
+
+[node name="BattleQueue" type="Node" parent="Battle"]
+script = ExtResource( 24 )
 
 [node name="UI" type="Node" parent="."]
 script = ExtResource( 5 )
