@@ -1,29 +1,16 @@
 class_name UnitData
-extends Reference
+extends Resource
 
 # Represents a unit type
 
-var id: String
-var display_name: String
-var display_name_plural: String
+export(String) var id: String
+export(String) var display_name: String
+export(String) var display_name_plural: String
 
-var speed: int
-var initiative: int
+export(int, 30) var speed: int = 1
+export(int, 100) var initiative: int = 1
+export(bool) var flying: bool = false
 
-var flying: bool
-
-var attack_low: int
-var attack_high: int
-var hp: int
-
-
-func _init(_id: String, _display_name: String, _display_name_plural: String, _speed: int, _initiative: int, _flying: bool, _attackl: int, _attackh: int, _hp: int):
-	id = _id
-	display_name = _display_name
-	display_name_plural = _display_name_plural
-	speed = _speed
-	initiative = _initiative
-	flying = _flying
-	attack_low = _attackl
-	attack_high = _attackh
-	hp = _hp
+export(int, 100) var attack_low: int = 1
+export(int, 100) var attack_high: int = 1
+export(int, 1, 1000) var hp: int = 1

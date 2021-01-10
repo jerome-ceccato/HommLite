@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://combat/data/UnitData.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+id = "bee"
+display_name = "bee"
+display_name_plural = "bees"
+speed = 7
+initiative = 7
+flying = true
+attack_low = 3
+attack_high = 4
+hp = 15

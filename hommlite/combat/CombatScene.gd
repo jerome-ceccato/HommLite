@@ -6,28 +6,34 @@ onready var ui = $UI
 onready var battle_events: BattleEvents = $Battle/BattleEvents
 onready var ui_events: UIEvents = $UI/UIEvents
 
-var left_army: ArmyData
-var right_army: ArmyData
-
-func _ready():
-	left_army = ArmyData.new([
-		StackData.new(UnitFactory.bee(), 1),
-		StackData.new(UnitFactory.bee(), 26),
-		StackData.new(UnitFactory.uchicken(), 8),
-	])
-	
-	right_army = ArmyData.new([
-		StackData.new(UnitFactory.chicken(), 1),
-		StackData.new(UnitFactory.bee(), 4),
-		StackData.new(UnitFactory.chicken(), 422),
-	])
-	
-	battle.setup_battle(left_army, right_army)
+func _ready():	
+	var armies = _make_armies()
+	battle.setup_battle(armies[0], armies[1])
 	ui.setup(battle)
 	
 	
 	_setup_bindings()
 	_run()
+
+
+func _make_armies() -> Array:
+	var bee = load("res://assets/data/bee.tres")
+	var chicken = load("res://assets/data/chicken.tres")
+	var uchicken = load("res://assets/data/uchicken.tres")
+	
+	var left_army = ArmyData.new([
+		StackData.new(bee, 1),
+		StackData.new(bee, 26),
+		StackData.new(uchicken, 8),
+	])
+	
+	var right_army = ArmyData.new([
+		StackData.new(chicken, 1),
+		StackData.new(bee, 4),
+		StackData.new(chicken, 422),
+	])
+	
+	return [left_army, right_army]
 
 
 func _setup_bindings():

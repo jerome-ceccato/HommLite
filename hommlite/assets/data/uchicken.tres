@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://combat/data/UnitData.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+id = "uchicken"
+display_name = "blue chicken"
+display_name_plural = "blue chickens"
+speed = 15
+initiative = 8
+flying = false
+attack_low = 5
+attack_high = 5
+hp = 5

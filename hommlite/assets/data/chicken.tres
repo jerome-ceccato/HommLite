@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://combat/data/UnitData.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+id = "chicken"
+display_name = "chicken"
+display_name_plural = "chickens"
+speed = 5
+initiative = 5
+flying = false
+attack_low = 1
+attack_high = 1
+hp = 1

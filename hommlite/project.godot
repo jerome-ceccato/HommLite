@@ -109,15 +109,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://combat/ui/UIEvents.gd"
 }, {
-"base": "Reference",
+"base": "Resource",
 "class": "UnitData",
 "language": "GDScript",
 "path": "res://combat/data/UnitData.gd"
-}, {
-"base": "Reference",
-"class": "UnitFactory",
-"language": "GDScript",
-"path": "res://combat/data/UnitFactory.gd"
 } ]
 _global_script_class_icons={
 "ArmyData": "",
@@ -140,8 +135,7 @@ _global_script_class_icons={
 "StackContainer": "",
 "StackData": "",
 "UIEvents": "",
-"UnitData": "",
-"UnitFactory": ""
+"UnitData": ""
 }
 
 [application]
