@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://assets/combat/units/chicken1.png" type="Texture" id=1]
 [ext_resource path="res://assets/combat/stack_n_bg.png" type="Texture" id=2]
@@ -22,7 +22,49 @@ tracks/0/keys = {
 "values": [ 0.0, 2.0, 2.0, 0.0 ]
 }
 
+[sub_resource type="Animation" id=7]
+resource_name = "DamageLeft"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.15, 0.2, 0.3 ),
+"transitions": PoolRealArray( 0.366022, 1, 1.7411, 1, 3.4822 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -4, -1 ), Vector2( -6, 0 ), Vector2( -6, 0 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05, 0.15 ),
+"transitions": PoolRealArray( 1, 0.420448, 2.37841 ),
+"update": 0,
+"values": [ Vector2( 3, 3 ), Vector2( 2.6, 3.4 ), Vector2( 3, 3 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:material:shader_param/white_progress")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.05, 0.15 ),
+"transitions": PoolRealArray( 1, 1.8025, 0.5 ),
+"update": 0,
+"values": [ 0.0, 1.0, 0.0 ]
+}
+
 [sub_resource type="Animation" id=2]
+resource_name = "DamageRight"
 length = 0.3
 step = 0.05
 tracks/0/type = "value"
@@ -62,8 +104,73 @@ tracks/2/keys = {
 "values": [ 0.0, 1.0, 0.0 ]
 }
 
+[sub_resource type="Animation" id=8]
+resource_name = "DeathLeft"
+length = 0.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.15, 0.2, 0.4 ),
+"transitions": PoolRealArray( 0.366022, 1, 1.7411, 1, 0.594604 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -4, -1 ), Vector2( -6, 0 ), Vector2( -6, 0 ), Vector2( -6, 16 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05, 0.15, 0.4 ),
+"transitions": PoolRealArray( 1, 0.420448, 2.37841, 4 ),
+"update": 0,
+"values": [ Vector2( 3, 3 ), Vector2( 2.6, 3.4 ), Vector2( 3, 3 ), Vector2( 3.2, 0.3 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("StackCount:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("StackCount:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 2.21914 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite:material:shader_param/white_progress")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.05, 0.15 ),
+"transitions": PoolRealArray( 1, 1.8025, 0.5 ),
+"update": 0,
+"values": [ 0.0, 1.0, 0.0 ]
+}
+
 [sub_resource type="Animation" id=3]
-resource_name = "Death"
+resource_name = "DeathRight"
 length = 0.4
 step = 0.05
 tracks/0/type = "value"
@@ -153,8 +260,10 @@ script = ExtResource( 5 )
 
 [node name="SpriteAnimation" type="AnimationPlayer" parent="."]
 anims/ActiveOutline = SubResource( 1 )
-anims/Damage = SubResource( 2 )
-anims/Death = SubResource( 3 )
+anims/DamageLeft = SubResource( 7 )
+anims/DamageRight = SubResource( 2 )
+anims/DeathLeft = SubResource( 8 )
+anims/DeathRight = SubResource( 3 )
 
 [node name="WorldAnimation" type="Tween" parent="."]
 

@@ -30,13 +30,14 @@ func move_stack(grid: HexGrid, stack: BattleStack, movement: BattleMovement) -> 
 
 func handle_attack(grid: HexGrid, source: BattleStack, target: BattleStack) -> float:
 	# TODO: attack animation
+	var source_container = _container_for_bstack(source)
 	var target_container = _container_for_bstack(target)
 	if target_container != null:
 		if target.amount > 0:
-			target_container.animate_damaged()
+			target_container.animate_damaged(source_container)
 			return target_container.animation_time_for_damage()
 		else:
-			target_container.animate_death()
+			target_container.animate_death(source_container)
 			return target_container.animation_time_for_death()
 	return 0.0
 

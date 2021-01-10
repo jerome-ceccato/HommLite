@@ -51,14 +51,14 @@ func animate_through_points(points: Array, flying: bool):
 	_reset_flip()
 
 
-func animate_death():
-	_sprite_anim.play("Death")
+func animate_death(source: StackContainer):
+	_play_sided_animation("Death", source)
 	yield(get_tree().create_timer(animation_time_for_death()), "timeout")
 	z_index = 0
 
 
-func animate_damaged():
-	_sprite_anim.play("Damage")
+func animate_damaged(source: StackContainer):
+	_play_sided_animation("Damage", source)
 	_stack_count_label.text = str(stack.amount)
 
 
@@ -104,3 +104,8 @@ func _animate_sprite(to: Vector2, duration: float):
 		Tween.EASE_IN_OUT
 	)
 	_world_anim.start()
+
+
+func _play_sided_animation(animation: String, source: StackContainer):
+	var side = "Left" if source.position.x > position.x else "Right"
+	_sprite_anim.play(animation + side)
