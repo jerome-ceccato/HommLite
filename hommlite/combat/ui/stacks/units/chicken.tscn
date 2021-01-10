@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/combat/units/chicken4.png" type="Texture" id=1]
-[ext_resource path="res://assets/combat/active_outline.shader" type="Shader" id=2]
+[ext_resource path="res://assets/combat/unit.shader" type="Shader" id=2]
 [ext_resource path="res://combat/ui/stacks/units/_stack.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/combat/units/chicken3.png" type="Texture" id=4]
 [ext_resource path="res://assets/combat/units/chicken2.png" type="Texture" id=5]
@@ -10,11 +10,9 @@
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
 shader = ExtResource( 2 )
-shader_param/enabled = false
-shader_param/is_smooth = false
-shader_param/width = 2.0
+shader_param/outline_width = 0.0
 shader_param/outline_color = Color( 1, 1, 0, 1 )
-shader_param/pixel_size = 4
+shader_param/white_progress = 0.0
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
@@ -28,7 +26,7 @@ animations = [ {
 
 [node name="Container" parent="." instance=ExtResource( 3 )]
 
-[node name="Sprite" parent="Container" index="0"]
+[node name="Sprite" parent="Container" index="2"]
 material = SubResource( 1 )
 frames = SubResource( 2 )
 

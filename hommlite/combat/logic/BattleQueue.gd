@@ -11,6 +11,7 @@ var _first_pass_length: int
 
 var turn_count := 1
 
+
 func setup(data: BattleData):
 	_data = data
 	

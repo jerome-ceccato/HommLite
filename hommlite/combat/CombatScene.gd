@@ -49,8 +49,7 @@ func _setup_bindings():
 	
 	for listener in [$UI/CombatArea]:
 		battle_events.connect("stack_moved", listener, "_on_Battle_stack_moved")
-		battle_events.connect("stack_damaged", listener, "_on_Battle_stack_damaged")
-		battle_events.connect("stack_destroyed", listener, "_on_Battle_stack_destroyed")
+		battle_events.connect("stack_attacked", listener, "_on_Battle_stack_attacked")
 	
 	for listener in [
 		$UI/Dialogs,

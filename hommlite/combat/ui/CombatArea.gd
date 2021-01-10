@@ -39,11 +39,8 @@ func _center_self():
 func _on_Battle_stack_moved(stack: BattleStack, movement: BattleMovement):
 	_wait(units.move_stack(hexgrid, stack, movement))
 
-func _on_Battle_stack_destroyed(stack: BattleStack):
-	_wait(units.remove_stack(hexgrid, stack))
-
-func _on_Battle_stack_damaged(stack: BattleStack):
-	_wait(units.refresh_stack(hexgrid, stack))
+func _on_Battle_stack_attacked(source: BattleStack, target: BattleStack):
+	_wait(units.handle_attack(hexgrid, source, target))
 
 
 func _wait(animation_time: float):

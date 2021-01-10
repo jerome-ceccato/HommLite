@@ -2,12 +2,16 @@ class_name StackContainer
 extends Node2D
 
 onready var _sprite: AnimatedSprite = $Sprite
-onready var _tween: Tween = $Tween
-onready var _stack_count_container: Sprite = $StackCount
+onready var _sprite_anim: AnimationPlayer = $SpriteAnimation
+onready var _world_anim: Tween = $WorldAnimation
+
+onready var _stack_count_container: Node2D = $StackCount
 onready var _stack_count_label: Label = $StackCount/Label
 
 const TURN_ANIMATION_DURATION = 0.3
 const MOVE_ANIMATION_DURATION = 0.3
+const ATTACK_ANIMATION_DURATION = 0.3
+const DEATH_ANIMATION_DURATION = 0.4
 
 var stack: BattleStack
 
@@ -18,11 +22,16 @@ func setup_with_stack(_stack: BattleStack):
 	_stack_count_label.text = str(stack.amount)
 	if stack.side == BattleStack.Side.RIGHT:
 		_sprite.flip_h = true
-		_stack_count_container.position.x = -(32 + _stack_count_container.position.x)
+		_stack_count_container.position.x = -_stack_count_container.position.x
+	set_active(false)
 
 
 func set_active(active: bool):
-	_sprite.material.set_shader_param("enabled", active)
+	if active:
+		_sprite_anim.play("ActiveOutline")
+	else:
+		_sprite_anim.stop(true)
+		_sprite.material.set_shader_param("outline_width", 0.0)
 
 
 func animate_through_points(points: Array, flying: bool):
@@ -30,30 +39,37 @@ func animate_through_points(points: Array, flying: bool):
 	if flying:
 		var destination = points[-1]
 		_flip_towards(destination)
-		_animate_sprite(destination, animation_time(points))
-		yield(_tween, "tween_completed")
+		_animate_sprite(destination, animation_time_for_movement(points))
+		yield(_world_anim, "tween_completed")
 	else:
 		for point in points:
 			_flip_towards(point)
 			_animate_sprite(point, MOVE_ANIMATION_DURATION)
-			yield(_tween, "tween_completed")
+			yield(_world_anim, "tween_completed")
 	_sprite.stop()
 	_sprite.frame = 0
 	_reset_flip()
 
 
-func animation_time(points: Array):
+func animate_death():
+	_sprite_anim.play("Death")
+	yield(get_tree().create_timer(animation_time_for_death()), "timeout")
+	z_index = 0
+
+
+func animate_damaged():
+	_sprite_anim.play("Damage")
+	_stack_count_label.text = str(stack.amount)
+
+
+func animation_time_for_movement(points: Array) -> float:
 	return MOVE_ANIMATION_DURATION * points.size()
 
+func animation_time_for_damage():
+	return ATTACK_ANIMATION_DURATION
 
-func animate_death() -> float:
-	visible = false
-	return 0.0
-
-
-func animate_refresh() -> float:
-	_stack_count_label.text = str(stack.amount)
-	return 0.0
+func animation_time_for_death():
+	return DEATH_ANIMATION_DURATION
 
 
 func _reset_flip():
@@ -66,7 +82,7 @@ func _flip_towards(destination: Vector2):
 
 
 func _animate_turn(duration: float):
-	_tween.interpolate_property(
+	_world_anim.interpolate_property(
 		_sprite,
 		"flip_h",
 		_sprite.flip_h,
@@ -75,10 +91,10 @@ func _animate_turn(duration: float):
 		Tween.TRANS_LINEAR,
 		Tween.EASE_IN_OUT
 	)
-	_tween.start()
+	_world_anim.start()
 
 func _animate_sprite(to: Vector2, duration: float):
-	_tween.interpolate_property(
+	_world_anim.interpolate_property(
 		self,
 		"position",
 		position,
@@ -87,4 +103,4 @@ func _animate_sprite(to: Vector2, duration: float):
 		Tween.TRANS_LINEAR,
 		Tween.EASE_IN_OUT
 	)
-	_tween.start()
+	_world_anim.start()

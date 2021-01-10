@@ -9,6 +9,7 @@ var _events: BattleEvents
 var _queue: BattleQueue
 var _logger: BattleLogger
 
+
 func setup(data: BattleData, grid: BattleGrid, events: BattleEvents, queue: BattleQueue, logger: BattleLogger):
 	_data = data
 	_grid = grid
@@ -71,13 +72,9 @@ func _action_attack(target: BattleStack, from: BattleCoords):
 	
 	if _data.attack_stack(active_stack, target):
 		_queue.remove_stack_from_queue(target)
-		_data.update_state(_data.State.WAITING_FOR_UI)
-		_events.emit_signal("stack_destroyed", target)
-		yield(_events, "resume")
-	else:
-		_data.update_state(_data.State.WAITING_FOR_UI)
-		_events.emit_signal("stack_damaged", target)
-		yield(_events, "resume")
+	_data.update_state(_data.State.WAITING_FOR_UI)
+	_events.emit_signal("stack_attacked", active_stack, target)
+	yield(_events, "resume")
 	
 	_update_state()
 

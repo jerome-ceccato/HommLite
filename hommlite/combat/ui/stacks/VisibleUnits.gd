@@ -24,21 +24,20 @@ func move_stack(grid: HexGrid, stack: BattleStack, movement: BattleMovement) -> 
 	if container != null:
 		var path_coords = _points_for_path(movement.path, grid)
 		container.animate_through_points(path_coords, movement.flying)
-		return container.animation_time(path_coords)
+		return container.animation_time_for_movement(path_coords)
 	return 0.0
 
 
-func remove_stack(grid: HexGrid, stack: BattleStack) -> float:
-	var container = _container_for_bstack(stack)
-	if container != null:
-		return container.animate_death()
-	return 0.0
-
-
-func refresh_stack(grid: HexGrid, stack: BattleStack) -> float:
-	var container = _container_for_bstack(stack)
-	if container != null:
-		return container.animate_refresh()
+func handle_attack(grid: HexGrid, source: BattleStack, target: BattleStack) -> float:
+	# TODO: attack animation
+	var target_container = _container_for_bstack(target)
+	if target_container != null:
+		if target.amount > 0:
+			target_container.animate_damaged()
+			return target_container.animation_time_for_damage()
+		else:
+			target_container.animate_death()
+			return target_container.animation_time_for_death()
 	return 0.0
 
 
