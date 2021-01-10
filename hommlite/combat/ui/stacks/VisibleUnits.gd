@@ -19,28 +19,26 @@ func reposition(grid: HexGrid):
 		container.position = grid.get_cell_at_coords(container.stack.coordinates).center
 
 
-func move_stack(grid: HexGrid, stack: BattleStack, movement: BattleMovement) -> float:
+func animate_move_stack(grid: HexGrid, stack: BattleStack, movement: BattleMovement, events: UIEvents):
 	var container = _container_for_bstack(stack)
 	if container != null:
 		var path_coords = _points_for_path(movement.path, grid)
-		container.animate_through_points(path_coords, movement.flying)
-		return container.animation_time_for_movement(path_coords)
-	return 0.0
+		container.animate_through_points(path_coords, movement.flying, events)
+	else:
+		events.emit_signal("animation_finished")
 
 
-func handle_attack(_grid: HexGrid, source: BattleStack, target: BattleStack) -> float:
+func animate_handle_attack(_grid: HexGrid, source: BattleStack, target: BattleStack, events: UIEvents):
 	# TODO: attack animation
 	var source_container = _container_for_bstack(source)
 	var target_container = _container_for_bstack(target)
 	if target_container != null:
-		source_container.animate_attack(target_container)
 		if target.amount > 0:
-			target_container.animate_damaged(source_container)
-			return target_container.animation_time_for_damage()
+			target_container.animate_damaged(source_container, events)
 		else:
-			target_container.animate_death(source_container)
-			return target_container.animation_time_for_death()
-	return 0.0
+			target_container.animate_death(source_container, events)
+	else:
+		events.emit_signal("animation_finished")
 
 
 func _on_Battle_game_state_changed(_unused: Battle):

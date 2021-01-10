@@ -37,12 +37,7 @@ func _center_self():
 
 
 func _on_Battle_stack_moved(stack: BattleStack, movement: BattleMovement):
-	_wait(units.move_stack(hexgrid, stack, movement))
+	units.animate_move_stack(hexgrid, stack, movement, _events)
 
 func _on_Battle_stack_attacked(source: BattleStack, target: BattleStack):
-	_wait(units.handle_attack(hexgrid, source, target))
-
-
-func _wait(animation_time: float):
-	yield(get_tree().create_timer(animation_time), "timeout")
-	_events.emit_signal("animation_finished")
+	units.animate_handle_attack(hexgrid, source, target, _events)

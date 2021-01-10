@@ -33,7 +33,7 @@ func set_active(active: bool):
 		_sprite.material.set_shader_param("outline_width", 0.0)
 
 
-func animate_through_points(points: Array, flying: bool):
+func animate_through_points(points: Array, flying: bool, events: UIEvents):
 	_stack_count_container.visible = false
 	_sprite.play()
 	if flying:
@@ -51,35 +51,35 @@ func animate_through_points(points: Array, flying: bool):
 	_sprite.stop()
 	_sprite.frame = 0
 	_stack_count_container.visible = true
+	events.emit_signal("animation_finished")
 
-func animate_death(source: StackContainer):
+
+func animate_death(source: StackContainer, events: UIEvents):
+	var source_original_side = source._animate_attack(self)
 	_play_sided_animation("Death", source)
-	yield(get_tree().create_timer(animation_time_for_death()), "timeout")
+	yield(get_tree().create_timer(DEATH_ANIMATION_DURATION), "timeout")
 	z_index = 0
+	source._sprite.flip_h = source_original_side
+	events.emit_signal("animation_finished")
 
 
-func animate_damaged(source: StackContainer):
+func animate_damaged(source: StackContainer, events: UIEvents):
+	var source_original_side = source._animate_attack(self)
 	_play_sided_animation("Damage", source)
+	yield(get_tree().create_timer(ATTACK_ANIMATION_DURATION), "timeout")
 	_stack_count_label.text = str(stack.amount)
+	source._sprite.flip_h = source_original_side
+	events.emit_signal("animation_finished")
 
 
-func animate_attack(target: StackContainer):
-	var should_be_flipped = position.x > target.position.x
-	if should_be_flipped != _sprite.flip_h:
-		_sprite.flip_h = should_be_flipped
-		yield(get_tree().create_timer(animation_time_for_damage()), "timeout")
-		_sprite.flip_h = !should_be_flipped
-		
+func _animate_attack(target: StackContainer) -> bool:
+	var og_fliph = _sprite.flip_h
+	_sprite.flip_h = position.x > target.position.x
+	return og_fliph
 
 
 func animation_time_for_movement(points: Array) -> float:
-	return MOVE_ANIMATION_DURATION * points.size() + 0.1
-
-func animation_time_for_damage():
-	return ATTACK_ANIMATION_DURATION
-
-func animation_time_for_death():
-	return DEATH_ANIMATION_DURATION
+	return MOVE_ANIMATION_DURATION * points.size()
 
 
 func _reset_flip():
