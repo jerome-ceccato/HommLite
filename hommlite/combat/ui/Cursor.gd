@@ -36,7 +36,7 @@ func _on_UI_mouse_moved(state: CursorState):
 		Input.set_custom_mouse_cursor(null)
 
 
-func _on_Battle_game_state_changed(battle: Battle):
+func _on_Battle_game_state_changed(_unused: Battle):
 	if battle.get_state() != BattleData.State.IN_PROGRESS:
 		Input.set_custom_mouse_cursor(null)
 

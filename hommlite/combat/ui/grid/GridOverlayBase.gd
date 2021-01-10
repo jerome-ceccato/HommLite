@@ -17,7 +17,7 @@ func _draw():
 		draw_cell(cell)
 
 
-func draw_cell(cell: HexCell):
+func draw_cell(_cell: HexCell):
 	assert(false)
 
 

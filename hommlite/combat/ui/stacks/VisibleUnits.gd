@@ -6,8 +6,8 @@ var containers: Array # [StackContainer]
 var active_container: StackContainer
 
 
-func setup_units(battle: Battle):
-	self.battle = battle
+func setup_units(_battle: Battle):
+	battle = _battle
 	
 	containers = []
 	for battle_stack in battle.all_stacks():
@@ -28,7 +28,7 @@ func move_stack(grid: HexGrid, stack: BattleStack, movement: BattleMovement) -> 
 	return 0.0
 
 
-func handle_attack(grid: HexGrid, source: BattleStack, target: BattleStack) -> float:
+func handle_attack(_grid: HexGrid, source: BattleStack, target: BattleStack) -> float:
 	# TODO: attack animation
 	var source_container = _container_for_bstack(source)
 	var target_container = _container_for_bstack(target)
@@ -43,7 +43,7 @@ func handle_attack(grid: HexGrid, source: BattleStack, target: BattleStack) -> f
 	return 0.0
 
 
-func _on_Battle_game_state_changed(battle: Battle):
+func _on_Battle_game_state_changed(_unused: Battle):
 	match battle.get_state():
 		BattleData.State.IN_PROGRESS:
 			_update_active_stack(battle.get_active_stack())

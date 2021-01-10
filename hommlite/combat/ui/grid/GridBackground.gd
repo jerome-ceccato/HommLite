@@ -3,8 +3,8 @@ extends Node2D
 var hexgrid: HexGrid
 
 
-func setup(hexgrid: HexGrid):
-	self.hexgrid = hexgrid
+func setup(_hexgrid: HexGrid):
+	hexgrid = _hexgrid
 
 
 func _draw():

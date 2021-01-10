@@ -26,7 +26,7 @@ func setup(_hexgrid: HexGrid, _battle: Battle, _events: UIEvents, _action_resolv
 	active_stack_overlay.setup(hexgrid, battle)
 
 
-func _on_Battle_game_state_changed(battle: Battle):
+func _on_Battle_game_state_changed(_unused: Battle):
 	match battle.get_state():
 		BattleData.State.IN_PROGRESS:
 			events.emit_signal("mouse_moved", _get_current_state())
@@ -41,9 +41,6 @@ func _input(event):
 		if event.pressed and event.button_index == BUTTON_LEFT:
 			events.emit_signal("mouse_clicked", _get_current_state())
 	elif event is InputEventMouseMotion:
-		var mouse_pos = get_local_mouse_position()
-		var hovered_cell_coords = hexgrid.get_cell_coords_at_point(mouse_pos)
-		
 		events.emit_signal("mouse_moved", _get_current_state())
 
 

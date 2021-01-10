@@ -28,5 +28,5 @@ func _on_UI_mouse_moved(state: CursorState):
 	update()
 
 
-func _on_Battle_game_state_changed(battle: Battle):
+func _on_Battle_game_state_changed(_unused: Battle):
 	update()

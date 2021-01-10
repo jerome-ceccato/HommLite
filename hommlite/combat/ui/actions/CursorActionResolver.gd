@@ -47,7 +47,6 @@ func get_state(mouse_pos: Vector2) -> CursorState:
 
 func _closest_reachable_cell(target: BattleStack) -> HexCell:
 	var active_stack = battle.get_active_stack()
-	var target_pos = hexgrid.get_cell_at_coords(target.coordinates).center
 	var neighbors = battle.get_grid().valid_neighbors(target.coordinates)
 	
 	# TODO: this is wasteful
