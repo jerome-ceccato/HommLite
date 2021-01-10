@@ -13,4 +13,4 @@ flying = true
 attack_low = 3
 attack_high = 4
 ranged = false
-hp = 15
+hp = 30

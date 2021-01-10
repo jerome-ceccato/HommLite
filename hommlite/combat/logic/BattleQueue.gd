@@ -56,6 +56,12 @@ func _rebuild_queue():
 	_queue = _data.all_stacks()
 	_queue.sort_custom(self, "sort_stacks")
 	_first_pass_length = _queue.size()
+	_reset_stacks()
+
+
+func _reset_stacks():
+	for stack in _queue:
+		stack.can_retaliate = true
 
 
 func sort_stacks(a: BattleStack, b: BattleStack) -> bool:

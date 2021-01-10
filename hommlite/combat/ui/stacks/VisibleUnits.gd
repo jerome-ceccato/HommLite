@@ -28,11 +28,12 @@ func animate_move_stack(grid: HexGrid, stack: BattleStack, movement: BattleMovem
 		events.emit_signal("animation_finished")
 
 
-func animate_handle_attack(_grid: HexGrid, source: BattleStack, target: BattleStack, events: UIEvents):
-	# TODO: attack animation
+func animate_handle_attack(_grid: HexGrid, source: BattleStack, target: BattleStack, retaliation: bool, events: UIEvents):
 	var source_container = _container_for_bstack(source)
 	var target_container = _container_for_bstack(target)
 	if target_container != null:
+		if retaliation:
+			yield(get_tree().create_timer(0.2), "timeout")
 		if target.amount > 0:
 			target_container.animate_damaged(source_container, events)
 		else:

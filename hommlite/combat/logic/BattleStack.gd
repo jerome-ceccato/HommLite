@@ -14,6 +14,7 @@ const Side = {UNKNOWN = 0, LEFT = 1, RIGHT = 2}
 
 var amount: int
 var top_unit_hp: int
+var can_retaliate: bool = true
 
 
 func _init(_id: int, s: StackData, c: BattleCoords, si: int):

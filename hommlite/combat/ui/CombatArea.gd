@@ -39,5 +39,5 @@ func _center_self():
 func _on_Battle_stack_moved(stack: BattleStack, movement: BattleMovement):
 	units.animate_move_stack(hexgrid, stack, movement, _events)
 
-func _on_Battle_stack_attacked(source: BattleStack, target: BattleStack):
-	units.animate_handle_attack(hexgrid, source, target, _events)
+func _on_Battle_stack_attacked(source: BattleStack, target: BattleStack, retaliation: bool):
+	units.animate_handle_attack(hexgrid, source, target, retaliation, _events)
