@@ -73,7 +73,7 @@ func animate_attack(target: StackContainer):
 
 
 func animation_time_for_movement(points: Array) -> float:
-	return MOVE_ANIMATION_DURATION * points.size()
+	return MOVE_ANIMATION_DURATION * points.size() + 0.1
 
 func animation_time_for_damage():
 	return ATTACK_ANIMATION_DURATION
