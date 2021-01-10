@@ -29,6 +29,7 @@ func get_winner() -> int:
 	else:
 		return BattleStack.Side.UNKNOWN
 
+
 func _update_state():
 	if _game_should_end():
 		_data.update_state(_data.State.COMBAT_ENDED)
@@ -79,6 +80,18 @@ func _action_attack(target: BattleStack, from: BattleCoords):
 	_update_state()
 
 
+func _action_ranged_attack(target: BattleStack):
+	var active_stack = _queue.get_active_stack()
+	
+	if _data.attack_stack(active_stack, target):
+		_queue.remove_stack_from_queue(target)
+	_data.update_state(_data.State.WAITING_FOR_UI)
+	_events.emit_signal("stack_attacked", active_stack, target)
+	yield(_events, "resume")
+	
+	_update_state()
+
+
 func _game_should_end():
 	var stacks_count = {
 		BattleStack.Side.LEFT: 0,
@@ -101,6 +114,8 @@ func _on_UI_mouse_clicked(state: CursorState):
 			_action_move(state.hovered_cell_coords)
 		CursorState.Action.REACHABLE_STACK:
 			_action_attack(state.target_stack, state.hover_hex_cell.coords)
+		CursorState.Action.RANGED_REACHABLE_STACK:
+			_action_ranged_attack(state.target_stack)
 
 
 func _on_UI_action_skip():

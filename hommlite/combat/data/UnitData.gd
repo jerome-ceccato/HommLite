@@ -13,4 +13,6 @@ export(bool) var flying: bool = false
 
 export(int, 100) var attack_low: int = 1
 export(int, 100) var attack_high: int = 1
+export(bool) var ranged: bool = false
+
 export(int, 1, 1000) var hp: int = 1

@@ -25,12 +25,17 @@ func get_state(mouse_pos: Vector2) -> CursorState:
 		
 		if _state.target_stack != null:
 			var is_enemy = _state.target_stack.side != _state.active_stack.side
-			var can_attack = battle.can_attack(_state.active_stack, _state.target_stack)
-			if is_enemy and can_attack:
-				_state.hover_hex_cell = _closest_reachable_cell(_state.target_stack)
-				_state.action = CursorState.Action.REACHABLE_STACK
+			
+			if is_enemy and _state.active_stack.stack.unit.ranged:
+				_state.hover_hex_cell = hexgrid.get_cell_at_coords(_state.target_stack.coordinates)
+				_state.action = CursorState.Action.RANGED_REACHABLE_STACK
 			else:
-				_state.action = CursorState.Action.UNREACHABLE_STACK
+				var can_attack = battle.can_attack(_state.active_stack, _state.target_stack)
+				if is_enemy and can_attack:
+					_state.hover_hex_cell = _closest_reachable_cell(_state.target_stack)
+					_state.action = CursorState.Action.REACHABLE_STACK
+				else:
+					_state.action = CursorState.Action.UNREACHABLE_STACK
 		else:
 			if battle.can_reach(_state.active_stack, coords):
 				_state.action = CursorState.Action.REACHABLE_CELL

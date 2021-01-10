@@ -10,7 +10,8 @@ enum Action {
 	UNREACHABLE_CELL, # an empty cell that is unreacheable for the active stack
 	REACHABLE_CELL, # an empty cell that is reacheable for the active stack
 	UNREACHABLE_STACK, # a stack that the active stack cannot attack (ally or unreachable)
-	REACHABLE_STACK # an enemy stack that can be attacked
+	REACHABLE_STACK, # an enemy stack that can be attacked
+	RANGED_REACHABLE_STACK, # an enemy stack that can be attacked by ranged attack, without moving
 }
 
 var action: int

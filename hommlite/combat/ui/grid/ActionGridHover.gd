@@ -23,7 +23,7 @@ func _on_UI_mouse_moved(state: CursorState):
 	match state.action:
 		CursorState.Action.NONE, CursorState.Action.UNREACHABLE_CELL, CursorState.Action.UNREACHABLE_STACK:
 			_hovered_cell = null
-		CursorState.Action.REACHABLE_CELL, CursorState.Action.REACHABLE_STACK:
+		CursorState.Action.REACHABLE_CELL, CursorState.Action.REACHABLE_STACK, CursorState.Action.RANGED_REACHABLE_STACK:
 			_hovered_cell = state.hover_hex_cell
 	update()
 
