@@ -9,4 +9,4 @@ func setup(_battle: Battle):
 	battle = _battle
 	
 	$CombatArea.setup_battle(battle, events)
-	$Cursor.setup(battle)
+	$Cursor.setup(battle, $CombatArea/HexGrid)

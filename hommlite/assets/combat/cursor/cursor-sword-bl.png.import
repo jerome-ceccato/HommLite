@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/cursor-move.png-539a7e2fbf66c087ed4cc924d6e3efa1.stex"
+path="res://.import/cursor-sword-bl.png-c00bc81cfdb7290e91fc67bbeedd78c9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/combat/cursor/cursor-move.png"
-dest_files=[ "res://.import/cursor-move.png-539a7e2fbf66c087ed4cc924d6e3efa1.stex" ]
+source_file="res://assets/combat/cursor/cursor-sword-bl.png"
+dest_files=[ "res://.import/cursor-sword-bl.png-c00bc81cfdb7290e91fc67bbeedd78c9.stex" ]
 
 [params]
 
