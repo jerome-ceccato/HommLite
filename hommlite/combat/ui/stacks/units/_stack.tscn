@@ -22,7 +22,7 @@ tracks/0/keys = {
 "values": [ 0.0, 2.0, 2.0, 0.0 ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=2]
 resource_name = "DamageLeft"
 length = 0.3
 step = 0.05
@@ -63,8 +63,7 @@ tracks/2/keys = {
 "values": [ 0.0, 1.0, 0.0 ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "DamageRight"
+[sub_resource type="Animation" id=3]
 length = 0.3
 step = 0.05
 tracks/0/type = "value"
@@ -104,7 +103,7 @@ tracks/2/keys = {
 "values": [ 0.0, 1.0, 0.0 ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=4]
 resource_name = "DeathLeft"
 length = 0.4
 step = 0.05
@@ -169,8 +168,7 @@ tracks/4/keys = {
 "values": [ 0.0, 1.0, 0.0 ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "DeathRight"
+[sub_resource type="Animation" id=5]
 length = 0.4
 step = 0.05
 tracks/0/type = "value"
@@ -234,14 +232,14 @@ tracks/4/keys = {
 "values": [ 0.0, 1.0, 0.0 ]
 }
 
-[sub_resource type="ShaderMaterial" id=4]
+[sub_resource type="ShaderMaterial" id=6]
 resource_local_to_scene = true
 shader = ExtResource( 4 )
 shader_param/outline_width = 0.0
 shader_param/outline_color = Color( 1, 1, 0, 1 )
 shader_param/white_progress = 0.0
 
-[sub_resource type="SpriteFrames" id=5]
+[sub_resource type="SpriteFrames" id=7]
 animations = [ {
 "frames": [ ExtResource( 1 ) ],
 "loop": true,
@@ -249,7 +247,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="DynamicFont" id=8]
 size = 32
 extra_spacing_top = -8
 font_data = ExtResource( 3 )
@@ -260,17 +258,17 @@ script = ExtResource( 5 )
 
 [node name="SpriteAnimation" type="AnimationPlayer" parent="."]
 anims/ActiveOutline = SubResource( 1 )
-anims/DamageLeft = SubResource( 7 )
-anims/DamageRight = SubResource( 2 )
-anims/DeathLeft = SubResource( 8 )
-anims/DeathRight = SubResource( 3 )
+anims/DamageLeft = SubResource( 2 )
+anims/DamageRight = SubResource( 3 )
+anims/DeathLeft = SubResource( 4 )
+anims/DeathRight = SubResource( 5 )
 
 [node name="WorldAnimation" type="Tween" parent="."]
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
-material = SubResource( 4 )
+material = SubResource( 6 )
 scale = Vector2( 3, 3 )
-frames = SubResource( 5 )
+frames = SubResource( 7 )
 
 [node name="StackCount" type="Node2D" parent="."]
 position = Vector2( 26, 20 )
@@ -284,7 +282,7 @@ margin_left = -12.0
 margin_top = -8.0
 margin_right = 14.0
 margin_bottom = 10.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 8 )
 text = "000"
 align = 1
 valign = 1

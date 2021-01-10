@@ -62,6 +62,15 @@ func animate_damaged(source: StackContainer):
 	_stack_count_label.text = str(stack.amount)
 
 
+func animate_attack(target: StackContainer):
+	var should_be_flipped = position.x > target.position.x
+	if should_be_flipped != _sprite.flip_h:
+		_sprite.flip_h = should_be_flipped
+		yield(get_tree().create_timer(animation_time_for_damage()), "timeout")
+		_sprite.flip_h = !should_be_flipped
+		
+
+
 func animation_time_for_movement(points: Array) -> float:
 	return MOVE_ANIMATION_DURATION * points.size()
 
