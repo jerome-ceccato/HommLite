@@ -22,7 +22,6 @@ func setup_with_stack(_stack: BattleStack):
 	_stack_count_label.text = str(stack.amount)
 	if stack.side == BattleStack.Side.RIGHT:
 		_sprite.flip_h = true
-		_stack_count_container.position.x = -_stack_count_container.position.x
 	set_active(false)
 
 
@@ -35,6 +34,7 @@ func set_active(active: bool):
 
 
 func animate_through_points(points: Array, flying: bool):
+	_stack_count_container.visible = false
 	_sprite.play()
 	if flying:
 		var destination = points[-1]
@@ -46,10 +46,11 @@ func animate_through_points(points: Array, flying: bool):
 			_flip_towards(point)
 			_animate_sprite(point, MOVE_ANIMATION_DURATION)
 			yield(_world_anim, "tween_completed")
+	
+	_reset_flip()
 	_sprite.stop()
 	_sprite.frame = 0
-	_reset_flip()
-
+	_stack_count_container.visible = true
 
 func animate_death(source: StackContainer):
 	_play_sided_animation("Death", source)

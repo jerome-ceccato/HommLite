@@ -271,7 +271,7 @@ scale = Vector2( 3, 3 )
 frames = SubResource( 7 )
 
 [node name="StackCount" type="Node2D" parent="."]
-position = Vector2( 26, 20 )
+position = Vector2( 0, 22 )
 
 [node name="Background" type="Sprite" parent="StackCount"]
 scale = Vector2( 2, 2 )
