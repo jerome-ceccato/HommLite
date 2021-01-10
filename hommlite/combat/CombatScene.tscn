@@ -20,12 +20,12 @@
 [ext_resource path="res://assets/fonts/m5x7.ttf" type="DynamicFontData" id=18]
 [ext_resource path="res://combat/ui/Cursor.gd" type="Script" id=19]
 [ext_resource path="res://combat/ui/actions/CursorActionResolver.gd" type="Script" id=20]
-[ext_resource path="res://assets/ui/dialog_bg.png" type="Texture" id=21]
+[ext_resource path="res://assets/ui/dialog-bg.png" type="Texture" id=21]
 [ext_resource path="res://assets/fonts/m6x11.ttf" type="DynamicFontData" id=22]
 [ext_resource path="res://combat/ui/dialogs/Dialogs.gd" type="Script" id=23]
 [ext_resource path="res://combat/logic/BattleQueue.gd" type="Script" id=24]
 [ext_resource path="res://combat/ui/Keyboard.gd" type="Script" id=25]
-[ext_resource path="res://assets/ui/bottom_bg.png" type="Texture" id=26]
+[ext_resource path="res://assets/ui/bottom-bg.png" type="Texture" id=26]
 [ext_resource path="res://combat/logic/BattleLogger.gd" type="Script" id=28]
 [ext_resource path="res://combat/ui/CombatLogs.gd" type="Script" id=29]
 
@@ -141,7 +141,7 @@ script = ExtResource( 29 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-left_color = Color( 0.45, 1, 0.4, 1 )
+left_color = Color( 0.45098, 1, 0.4, 1 )
 right_color = Color( 1, 0.4, 0.4, 1 )
 
 [node name="Dialogs" type="Node2D" parent="UI"]

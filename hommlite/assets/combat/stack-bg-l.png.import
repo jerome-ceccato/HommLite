@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/dialog_bg.png-a9292e87e51dbe6ce775b866a575712c.stex"
+path="res://.import/stack-bg-l.png-066115b919d4e49d3afb7ee6b56f56b2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/dialog_bg.png"
-dest_files=[ "res://.import/dialog_bg.png-a9292e87e51dbe6ce775b866a575712c.stex" ]
+source_file="res://assets/combat/stack-bg-l.png"
+dest_files=[ "res://.import/stack-bg-l.png-066115b919d4e49d3afb7ee6b56f56b2.stex" ]
 
 [params]
 

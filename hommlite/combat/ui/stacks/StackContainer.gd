@@ -22,6 +22,8 @@ func setup_with_stack(_stack: BattleStack):
 	_stack_count_label.text = str(stack.amount)
 	if stack.side == BattleStack.Side.RIGHT:
 		_sprite.flip_h = true
+		$StackCount/Background.texture = load("res://assets/combat/stack-bg-r.png")
+	
 	set_active(false)
 
 
