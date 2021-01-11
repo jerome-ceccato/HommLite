@@ -58,3 +58,6 @@ func can_reach(stack: BattleStack, target: BattleCoords) -> bool:
 
 func can_attack(source: BattleStack, target: BattleStack) -> bool:
 	return _data.can_attack(source, target)
+
+func can_attack_ranged(stack: BattleStack) -> bool:
+	return _data.can_attack_ranged(stack)

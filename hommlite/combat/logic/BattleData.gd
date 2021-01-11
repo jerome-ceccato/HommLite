@@ -71,6 +71,17 @@ func can_attack(source: BattleStack, target: BattleStack) -> bool:
 	return _array_contains_coords(all_coords, target.coordinates)
 
 
+func can_attack_ranged(stack: BattleStack) -> bool:
+	if stack.stack.unit.ranged:
+		var neighbors = _grid.valid_neighbors(stack.coordinates)
+		for coords in neighbors:
+			if _stacks.has(coords.index) and _stacks[coords.index].side != stack.side:
+				return false
+		return true
+	else:
+		return false
+
+
 func reachable_coords(stack: BattleStack) -> Array: # [BattleCoords]
 	return _reachability(stack, stack.stack.unit.speed, null)
 
