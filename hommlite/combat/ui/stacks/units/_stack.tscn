@@ -269,6 +269,7 @@ anims/DeathRight = SubResource( 5 )
 material = SubResource( 6 )
 scale = Vector2( 3, 3 )
 frames = SubResource( 7 )
+speed_scale = 2.0
 
 [node name="StackCount" type="Node2D" parent="."]
 position = Vector2( 0, 22 )

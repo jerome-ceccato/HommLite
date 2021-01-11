@@ -9,7 +9,7 @@ onready var _stack_count_container: Node2D = $StackCount
 onready var _stack_count_label: Label = $StackCount/Label
 
 const TURN_ANIMATION_DURATION = 0.3
-const MOVE_ANIMATION_DURATION = 0.3
+const MOVE_ANIMATION_DURATION = 0.15
 const ATTACK_ANIMATION_DURATION = 0.3
 const DEATH_ANIMATION_DURATION = 0.4
 
