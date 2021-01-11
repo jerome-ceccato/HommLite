@@ -71,7 +71,7 @@ func _action_attack(target: BattleStack, from: BattleCoords):
 		_events.emit_signal("stack_moved", active_stack, movement)
 		yield(_events, "resume")
 	
-	var died = _data.attack_stack(active_stack, target)
+	var died = _data.attack_stack(active_stack, target, false)
 	if died:
 		_queue.remove_stack_from_queue(target)
 	_data.update_state(_data.State.WAITING_FOR_UI)
@@ -79,7 +79,7 @@ func _action_attack(target: BattleStack, from: BattleCoords):
 	yield(_events, "resume")
 	
 	if !died and target.can_retaliate:
-		_data.attack_stack(target, active_stack)
+		_data.attack_stack(target, active_stack, false)
 		target.can_retaliate = false
 		_data.update_state(_data.State.WAITING_FOR_UI)
 		_events.emit_signal("stack_attacked", target, active_stack, true)
@@ -91,7 +91,7 @@ func _action_attack(target: BattleStack, from: BattleCoords):
 func _action_ranged_attack(target: BattleStack):
 	var active_stack = _queue.get_active_stack()
 	
-	if _data.attack_stack(active_stack, target):
+	if _data.attack_stack(active_stack, target, true):
 		_queue.remove_stack_from_queue(target)
 	_data.update_state(_data.State.WAITING_FOR_UI)
 	_events.emit_signal("stack_attacked", active_stack, target, false)

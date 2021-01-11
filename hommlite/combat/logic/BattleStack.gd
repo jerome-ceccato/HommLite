@@ -27,17 +27,21 @@ func _init(_id: int, s: StackData, c: BattleCoords, si: int):
 	top_unit_hp = s.unit.hp
 
 
-func damage_roll() -> int:
+func damage_roll(ranged: bool) -> int:
 	var dmin = stack.unit.attack_low * amount
 	var dmax = stack.unit.attack_high * amount
 	
+	var roll: int
 	if amount == 0:
-		return 0
+		roll = 0
 	elif dmin == dmax:
-		return dmin
+		roll = dmin
 	else:
-		var roll = dmin + (randi() % (dmax - dmin + 1))
-		return roll
+		roll = dmin + (randi() % (dmax - dmin + 1))
+	
+	if !ranged and stack.unit.ranged:
+		roll /= 2 # melee penalty
+	return roll
 
 
 func apply_damage(dmg: int):

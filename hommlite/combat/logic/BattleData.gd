@@ -49,8 +49,8 @@ func move_stack(stack: BattleStack, new_coords: BattleCoords):
 	stack.coordinates = new_coords
 
 
-func attack_stack(source: BattleStack, target: BattleStack) -> bool:
-	var dmg = source.damage_roll()
+func attack_stack(source: BattleStack, target: BattleStack, ranged: bool) -> bool:
+	var dmg = source.damage_roll(ranged)
 	var initial_size = target.amount
 	
 	target.apply_damage(dmg)
