@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://combat/ui/CombatArea.gd" type="Script" id=1]
 [ext_resource path="res://assets/combat/bg.png" type="Texture" id=2]
@@ -26,6 +26,7 @@
 [ext_resource path="res://combat/logic/BattleQueue.gd" type="Script" id=24]
 [ext_resource path="res://combat/ui/Keyboard.gd" type="Script" id=25]
 [ext_resource path="res://assets/ui/bottom-bg.png" type="Texture" id=26]
+[ext_resource path="res://combat/ui/BottomButton.tscn" type="PackedScene" id=27]
 [ext_resource path="res://combat/logic/BattleLogger.gd" type="Script" id=28]
 [ext_resource path="res://combat/ui/CombatLogs.gd" type="Script" id=29]
 
@@ -143,6 +144,20 @@ __meta__ = {
 }
 left_color = Color( 0.45098, 1, 0.4, 1 )
 right_color = Color( 1, 0.4, 0.4, 1 )
+
+[node name="LeftButton1" parent="UI/BottomPanel" instance=ExtResource( 27 )]
+margin_left = 20.0
+margin_top = 12.0
+margin_right = 108.0
+margin_bottom = 92.0
+expand = true
+
+[node name="LeftButton2" parent="UI/BottomPanel" instance=ExtResource( 27 )]
+margin_left = 112.0
+margin_top = 12.0
+margin_right = 200.0
+margin_bottom = 92.0
+expand = true
 
 [node name="Dialogs" type="Node2D" parent="UI"]
 z_index = 1000
