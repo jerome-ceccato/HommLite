@@ -12,9 +12,9 @@ onready var _manager: BattleManager = $BattleManager
 onready var _logger: BattleLogger = $BattleLogger
 
 
-func setup_battle(left: ArmyData, right: ArmyData):
+func setup_battle(setup_data: BattleSetup):
 	_logger.setup(_events)
-	_data.setup(_grid, _logger, left, right)
+	_data.setup(_grid, _logger, setup_data)
 	_queue.setup(_data)
 	_manager.setup(_data, _grid, _events, _queue, _logger)
 	

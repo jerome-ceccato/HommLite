@@ -6,11 +6,11 @@ onready var ui = $UI
 onready var battle_events: BattleEvents = $Battle/BattleEvents
 onready var ui_events: UIEvents = $UI/UIEvents
 
-func _ready():	
-	var armies = _make_armies()
-	battle.setup_battle(armies[0], armies[1])
-	ui.setup(battle)
+func _ready():
+	var setup_data = BattleSetup.new(_make_armies(), _make_obstacles())
 	
+	battle.setup_battle(setup_data)
+	ui.setup(battle)
 	
 	_setup_bindings()
 	_run()
@@ -34,6 +34,10 @@ func _make_armies() -> Array:
 	])
 	
 	return [left_army, right_army]
+
+
+func _make_obstacles() -> Array:
+	return []
 
 
 func _setup_bindings():

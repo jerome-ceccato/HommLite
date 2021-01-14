@@ -10,8 +10,7 @@ var _grid: BattleGrid
 var _logger: BattleLogger
 
 # original army (data)
-var _left_army: ArmyData
-var _right_army: ArmyData
+var _battle_data: BattleSetup
 
 # current battle field stacks
 var _stacks: Dictionary # [BattleCoords.index: BattleStack]
@@ -24,15 +23,14 @@ enum State {
 var _state: int = State.IN_PROGRESS setget update_state, get_state
 
 
-func setup(grid: BattleGrid, logger: BattleLogger, left: ArmyData, right: ArmyData):
+func setup(grid: BattleGrid, logger: BattleLogger, setup_data: BattleSetup):
 	_grid = grid
 	_logger = logger
-	_left_army = left
-	_right_army = right
+	_battle_data = setup_data
 	
 	var stack_id = 1
-	stack_id = _setup_stacks(left, BattleStack.Side.LEFT, stack_id)
-	stack_id = _setup_stacks(right, BattleStack.Side.RIGHT, stack_id)
+	stack_id = _setup_stacks(setup_data.left_army, BattleStack.Side.LEFT, stack_id)
+	stack_id = _setup_stacks(setup_data.right_army, BattleStack.Side.RIGHT, stack_id)
 
 
 func all_stacks() -> Array:

@@ -95,7 +95,10 @@ script = ExtResource( 20 )
 [node name="HexGrid" type="Node" parent="UI/CombatArea"]
 script = ExtResource( 14 )
 
+[node name="Obstacles" type="Node2D" parent="UI/CombatArea"]
+
 [node name="Grid" type="Node2D" parent="UI/CombatArea"]
+z_index = 1
 script = ExtResource( 10 )
 
 [node name="ActiveStackMovementOverlay" type="Node2D" parent="UI/CombatArea/Grid"]
