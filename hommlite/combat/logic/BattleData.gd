@@ -118,16 +118,31 @@ func _reachability(source: BattleStack, distance: int, excluded: Array) -> Array
 	var blocked_index = _blocked_coords_indexed(source)
 	for excluded_coord in excluded:
 		blocked_index.erase(excluded_coord.index)
+	if !flying and source.stack.unit.large:
+		blocked_index = _add_single_spaces_to_blocked(blocked_index)
 	var blocked_coords = blocked_index.values() if !flying else []
 	
 	var coords = _grid.reachable_valid_coords(source.coordinates, distance, blocked_coords)
 	
 	if flying:
 		coords = _remove_blocked_coords(coords, blocked_index)
-	if source.stack.unit.large:
-		coords = _remove_single_spaces(coords)
+		if source.stack.unit.large:
+			coords = _remove_single_spaces(coords)
 	return coords
 
+
+func _add_single_spaces_to_blocked(blocked_index: Dictionary) -> Dictionary:
+	var available_coords = {}
+	for coord in _grid.all_valid_coords():
+		available_coords[coord.index] = coord
+	for coord in available_coords.values():
+		if !blocked_index.has(coord.index):
+			var previous_coord_blocked = !available_coords.has(coord.index - 1) or blocked_index.has(coord.index - 1)
+			var next_coord_blocked = !available_coords.has(coord.index + 1) or blocked_index.has(coord.index + 1)
+			if previous_coord_blocked and next_coord_blocked:
+				print("a")
+				blocked_index[coord.index] = coord
+	return blocked_index
 
 func _blocked_coords_indexed(source: BattleStack) -> Dictionary:
 	var blocked_coords = {}

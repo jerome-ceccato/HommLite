@@ -35,12 +35,7 @@ func valid_neighbors(origin: BattleCoords) -> Array:
 
 
 func reachable_valid_coords(origin: BattleCoords, distance: int, blocked: Array) -> Array:
-	var all_coords = HexUtils.reachable_coords(origin, _valid_coords, distance, blocked)
-	var reachable_coords = []
-	for coord in all_coords:
-		if _valid_coords.has(coord.index):
-			reachable_coords.append(coord)
-	return reachable_coords
+	return HexUtils.reachable_coords(origin, _valid_coords, distance, blocked)
 
 
 func path_find(origin: BattleStack, target: BattleCoords, allowed_points: Array) -> Array:
