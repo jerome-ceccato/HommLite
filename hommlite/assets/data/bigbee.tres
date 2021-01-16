@@ -4,16 +4,16 @@
 
 [resource]
 script = ExtResource( 1 )
-id = "bee"
-display_name = "bee"
-display_name_plural = "bees"
-large = false
-speed = 7
-initiative = 7
+id = "bigbee"
+display_name = "Big bee"
+display_name_plural = "Big bees"
+large = true
+speed = 6
+initiative = 6
 flying = true
-dmg_low = 3
-dmg_high = 4
+dmg_low = 10
+dmg_high = 15
 ranged = false
 hp = 20
 def = 4
-atk = 2
+atk = 5

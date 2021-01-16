@@ -27,6 +27,13 @@ func _init(_id: int, s: StackData, c: BattleCoords, si: int):
 	top_unit_hp = s.unit.hp
 
 
+func all_taken_coordinates() -> Array:
+	if stack.unit.large:
+		return [coordinates, BattleCoords.new(coordinates.x + 1, coordinates.y)]
+	else:
+		return [coordinates]
+
+
 func damage_roll(target: BattleStack, ranged: bool) -> int:
 	if amount == 0:
 		return 0

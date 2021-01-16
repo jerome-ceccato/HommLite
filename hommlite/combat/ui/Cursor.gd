@@ -30,7 +30,7 @@ func _on_UI_mouse_moved(state: CursorState):
 				Input.set_custom_mouse_cursor(_move, Input.CURSOR_ARROW, Vector2(16,16))
 			CursorState.Action.REACHABLE_STACK:
 				var target_cell = hexgrid.get_cell_at_coords(state.target_stack.coordinates)
-				_set_attack_cursor(target_cell, state.hover_hex_cell)
+				_set_attack_cursor(target_cell, state.hover_hex_cells[0])
 			CursorState.Action.RANGED_REACHABLE_STACK:
 				Input.set_custom_mouse_cursor(_range_attack, Input.CURSOR_ARROW, Vector2(16,16))
 	else:

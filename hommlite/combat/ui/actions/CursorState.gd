@@ -19,4 +19,4 @@ var mouse_pos: Vector2
 var hovered_cell_coords: BattleCoords
 var active_stack: BattleStack
 var target_stack: BattleStack
-var hover_hex_cell: HexCell
+var hover_hex_cells: Array #[HexCell]
