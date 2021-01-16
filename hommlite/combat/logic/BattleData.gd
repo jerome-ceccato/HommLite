@@ -109,8 +109,27 @@ func force_state_update():
 
 
 func path_find(source: BattleStack, target: BattleCoords) -> Array: # [BattleCoords]
-	var all_coords = _reachability(source, source.stack.unit.speed + 1, [target])
+	var excluded = source.all_taken_coordinates()
+	excluded.append(target)
+	var all_coords = _reachability(source, source.stack.unit.speed + 1, excluded)
+	if source.stack.unit.large:
+		all_coords = _large_adjusted_path_finding(all_coords)
 	return _grid.path_find(source, target, all_coords)
+
+
+func _large_adjusted_path_finding(reachable: Array) -> Array:
+	var reachable_index = {}
+	for coord in reachable:
+		reachable_index[coord.index] = coord
+	
+	var blocked = []
+	for coord in reachable:
+		if !reachable_index.has(coord.index + 1):
+			blocked.append(coord)
+	for coord in blocked:
+		reachable_index.erase(coord.index)
+	
+	return reachable_index.values()
 
 
 func _reachability(source: BattleStack, distance: int, excluded: Array) -> Array:
@@ -122,13 +141,24 @@ func _reachability(source: BattleStack, distance: int, excluded: Array) -> Array
 		blocked_index = _add_single_spaces_to_blocked(blocked_index)
 	var blocked_coords = blocked_index.values() if !flying else []
 	
-	var coords = _grid.reachable_valid_coords(source.coordinates, distance, blocked_coords)
+	var coords = _merged_reachable_valid_coords(source, distance, blocked_coords)
 	
 	if flying:
 		coords = _remove_blocked_coords(coords, blocked_index)
-		if source.stack.unit.large:
-			coords = _remove_single_spaces(coords)
+	if source.stack.unit.large:
+		coords = _remove_single_spaces(coords)
 	return coords
+
+
+func _merged_reachable_valid_coords(source: BattleStack, distance: int, blocked_coords: Array) -> Array:
+	if source.all_taken_coordinates().size() == 1:
+		return _grid.reachable_valid_coords(source.coordinates, distance, blocked_coords)
+	else:
+		var index_coords = {}
+		for stack_coord in source.all_taken_coordinates():
+			for coord in _grid.reachable_valid_coords(stack_coord, distance, blocked_coords):
+				index_coords[coord.index] = coord
+		return index_coords.values()
 
 
 func _add_single_spaces_to_blocked(blocked_index: Dictionary) -> Dictionary:
@@ -140,7 +170,6 @@ func _add_single_spaces_to_blocked(blocked_index: Dictionary) -> Dictionary:
 			var previous_coord_blocked = !available_coords.has(coord.index - 1) or blocked_index.has(coord.index - 1)
 			var next_coord_blocked = !available_coords.has(coord.index + 1) or blocked_index.has(coord.index + 1)
 			if previous_coord_blocked and next_coord_blocked:
-				print("a")
 				blocked_index[coord.index] = coord
 	return blocked_index
 
@@ -148,10 +177,8 @@ func _blocked_coords_indexed(source: BattleStack) -> Dictionary:
 	var blocked_coords = {}
 	
 	for stack in _stacks.values():
-		blocked_coords[stack.coordinates.index] = stack.coordinates
-		if stack.stack.unit.large:
-			var second_coords = BattleCoords.new(stack.coordinates.x + 1, stack.coordinates.y)
-			blocked_coords[second_coords.index] = second_coords
+		for coord in stack.all_taken_coordinates():
+			blocked_coords[coord.index] = coord
 	for obstacle in _obstacles.values():
 		blocked_coords[obstacle.coordinates.index] = obstacle.coordinates
 	

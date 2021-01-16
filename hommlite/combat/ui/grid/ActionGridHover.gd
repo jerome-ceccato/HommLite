@@ -7,6 +7,8 @@ var battle: Battle
 var hexgrid: HexGrid
 
 var _hovered_cells := []
+var _hovered_path
+
 
 func setup(_battle: Battle, _hexgrid: HexGrid):
 	battle = _battle
@@ -15,6 +17,10 @@ func setup(_battle: Battle, _hexgrid: HexGrid):
 
 func _draw():
 	if battle.get_state() == BattleData.State.IN_PROGRESS:
+		if _hovered_path != null:
+			for coords in _hovered_path:
+				var cell = hexgrid.get_cell_at_coords(coords)
+				draw_polygon(cell.make_points_size(12), [path_color])
 		for cell in _hovered_cells:
 			draw_polygon(cell.points, [hover_color])
 
@@ -25,6 +31,7 @@ func _on_UI_mouse_moved(state: CursorState):
 			_hovered_cells = []
 		CursorState.Action.REACHABLE_CELL, CursorState.Action.REACHABLE_STACK, CursorState.Action.RANGED_REACHABLE_STACK:
 			_hovered_cells = state.hover_hex_cells
+			_hovered_path = battle._data.path_find(state.active_stack, _hovered_cells[0].coords)
 	update()
 
 
