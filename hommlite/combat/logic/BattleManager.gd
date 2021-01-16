@@ -120,7 +120,7 @@ func _on_UI_mouse_clicked(state: CursorState):
 	
 	match state.action:
 		CursorState.Action.REACHABLE_CELL:
-			_action_move(state.hovered_cell_coords)
+			_action_move(state.hover_hex_cells[0].coords)
 		CursorState.Action.REACHABLE_STACK:
 			_action_attack(state.target_stack, state.hover_hex_cells[0].coords)
 		CursorState.Action.RANGED_REACHABLE_STACK:

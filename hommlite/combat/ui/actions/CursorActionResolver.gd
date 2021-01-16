@@ -12,12 +12,19 @@ func setup(_battle: Battle, _hexgrid: HexGrid):
 	hexgrid = _hexgrid
 	_state = CursorState.new()
 
-func _hover_cells(active: BattleStack, cursor_coords: BattleCoords) -> Array:
+func _hover_cells(active: BattleStack, cursor_coords: BattleCoords, available_coords: Array) -> Array:
 	if active.stack.unit.large:
 		var coords = [hexgrid.get_cell_at_coords(cursor_coords)]
-		var next = hexgrid.get_cell_at_coords(BattleCoords.new(cursor_coords.x + 1, cursor_coords.y))
-		if next:
-			coords.append(next)
+		var available_index = {}
+		for coord in available_coords:
+			available_index[coord.index] = coord
+		var next = BattleCoords.new(cursor_coords.x + 1, cursor_coords.y)
+		var previous = BattleCoords.new(cursor_coords.x - 1, cursor_coords.y)
+		
+		if available_index.has(next.index):
+			coords.append(hexgrid.get_cell_at_coords(next))
+		elif available_index.has(previous.index):
+			coords.insert(0, hexgrid.get_cell_at_coords(previous))
 		return coords
 	else:
 		return [hexgrid.get_cell_at_coords(cursor_coords)]
@@ -30,7 +37,6 @@ func get_state(mouse_pos: Vector2) -> CursorState:
 	if coords != null:
 		_state.active_stack = battle.get_active_stack()
 		_state.target_stack = battle.get_stack_at_coords(coords)
-		_state.hover_hex_cells = _hover_cells(_state.active_stack, coords)
 		
 		if _state.target_stack != null:
 			var is_enemy = _state.target_stack.side != _state.active_stack.side
@@ -46,6 +52,7 @@ func get_state(mouse_pos: Vector2) -> CursorState:
 					_state.action = CursorState.Action.UNREACHABLE_STACK
 		else:
 			if battle.can_reach(_state.active_stack, coords):
+				_state.hover_hex_cells = _hover_cells(_state.active_stack, coords, battle.reachable_coords(_state.active_stack))
 				_state.action = CursorState.Action.REACHABLE_CELL
 			else:
 				_state.action = CursorState.Action.UNREACHABLE_CELL
