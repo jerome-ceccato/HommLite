@@ -43,6 +43,9 @@ func get_winner() -> int: # BattleStack.Side
 func all_stacks() -> Array: #[BattleStack]
 	return _data.all_stacks()
 
+func all_obstacles() -> Array:
+	return _data.all_obstacles()
+
 func get_active_stack() -> BattleStack:
 	return _queue.get_active_stack()
 

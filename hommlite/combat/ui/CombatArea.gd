@@ -18,11 +18,10 @@ func setup_battle(battle: Battle, events: UIEvents):
 	action_resolver.setup(battle, hexgrid)
 	hexgrid.setup(battle.get_grid())
 	grid.setup(hexgrid, battle, events, action_resolver)
-	units.setup_units(battle)
+	units.setup(hexgrid, battle)
 	keyboard.setup(events)
 	
 	_center_self()
-	units.reposition(hexgrid)
 
 
 func _center_self():

@@ -1,22 +1,25 @@
 extends Node2D
 
 var battle: Battle
+var hexgrid: HexGrid
+
 var containers: Array # [StackContainer]
+var obstacles: Array # [Sprite]
 
 var active_container: StackContainer
 
 
-func setup_units(_battle: Battle):
+func setup(_hexgrid: HexGrid, _battle: Battle):
 	battle = _battle
+	hexgrid = _hexgrid
 	
 	containers = []
 	for battle_stack in battle.all_stacks():
 		containers.append(_load_sprite(battle_stack))
-
-
-func reposition(grid: HexGrid):
-	for container in containers:
-		container.position = grid.get_cell_at_coords(container.stack.coordinates).center
+	
+	obstacles = []
+	for obstacle in battle.all_obstacles():
+		obstacles.append(_load_obstacle(obstacle))
 
 
 func animate_move_stack(grid: HexGrid, stack: BattleStack, movement: BattleMovement, events: UIEvents):
@@ -74,6 +77,7 @@ func _load_sprite(battle_stack: BattleStack) -> StackContainer:
 	add_child(container)
 	
 	container.setup_with_stack(battle_stack)
+	container.position = hexgrid.get_cell_at_coords(battle_stack.coordinates).center
 	return container
 
 
@@ -95,3 +99,13 @@ func _points_for_path(coords: Array, grid: HexGrid) -> Array:
 func _scene_for_unit(unit: UnitData) -> PackedScene:
 	var scene_id = "res://combat/ui/stacks/units/%s.tscn" % unit.id
 	return load(scene_id) as PackedScene
+
+
+func _load_obstacle(obstacle: ObstacleData) -> Sprite:
+	var sprite = Sprite.new()
+	sprite.texture = load(obstacle.texture_reference)
+	sprite.scale = Vector2(3, 3)
+	sprite.position = hexgrid.get_cell_at_coords(obstacle.coordinates).center
+	
+	add_child(sprite)
+	return sprite

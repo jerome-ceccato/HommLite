@@ -14,6 +14,7 @@ var _battle_data: BattleSetup
 
 # current battle field stacks
 var _stacks: Dictionary # [BattleCoords.index: BattleStack]
+var _obstacles: Dictionary # [BattleCoords.index: ObstacleData]
 
 enum State {
 	IN_PROGRESS,
@@ -31,10 +32,14 @@ func setup(grid: BattleGrid, logger: BattleLogger, setup_data: BattleSetup):
 	var stack_id = 1
 	stack_id = _setup_stacks(setup_data.left_army, BattleStack.Side.LEFT, stack_id)
 	stack_id = _setup_stacks(setup_data.right_army, BattleStack.Side.RIGHT, stack_id)
+	_setup_obstacles(setup_data.obstacles)
 
 
 func all_stacks() -> Array:
 	return _stacks.values()
+
+func all_obstacles() -> Array:
+	return _obstacles.values()
 
 
 func get_stack_at(coords: BattleCoords) -> BattleStack:
@@ -106,13 +111,15 @@ func _reachability(source: BattleStack, distance: int, excluded: BattleCoords) -
 		for stack in _stacks.values():
 			if stack.coordinates.index != excluded_index:
 				blocked_coords.append(stack.coordinates)
+		for obstacle in _obstacles.values():
+			blocked_coords.append(obstacle.coordinates)
 	
 	var coords = _grid.reachable_valid_coords(source.coordinates, distance, blocked_coords)
 	
 	if flying:
 		var fixed_coords = []
 		for coord in coords:
-			if !_stacks.has(coord.index) or coord.index == excluded_index:
+			if (!_stacks.has(coord.index) and !_obstacles.has(coord.index)) or coord.index == excluded_index:
 				fixed_coords.append(coord)
 		return fixed_coords
 	else:
@@ -147,3 +154,9 @@ func _stack_coordinates(army_size: int, position: int, side: int) -> BattleCoord
 	var y = position + (_grid.rows - army_size) / 2
 	var x = 0 if !right else (_grid.cols - 1 if y % 2 else _grid.cols)
 	return BattleCoords.new(x, y)
+
+
+func _setup_obstacles(obstacles: Array):
+	_obstacles = {}
+	for o in obstacles:
+		_obstacles[o.coordinates.index] = o

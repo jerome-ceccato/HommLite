@@ -37,7 +37,14 @@ func _make_armies() -> Array:
 
 
 func _make_obstacles() -> Array:
-	return []
+	var rock_reference = "res://assets/combat/rock.png"
+	return [
+		ObstacleData.new(BattleCoords.new(3, 3), rock_reference),
+		ObstacleData.new(BattleCoords.new(3, 4), rock_reference),
+		ObstacleData.new(BattleCoords.new(3, 5), rock_reference),
+		ObstacleData.new(BattleCoords.new(3, 6), rock_reference),
+		ObstacleData.new(BattleCoords.new(4, 3), rock_reference),
+	]
 
 
 func _setup_bindings():
