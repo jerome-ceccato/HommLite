@@ -33,6 +33,7 @@ func get_winner() -> int:
 func _update_state():
 	if _game_should_end():
 		_data.update_state(_data.State.COMBAT_ENDED)
+		_logger.log_game_ended(get_winner())
 	else:
 		_queue_next()
 		_data.update_state(_data.State.IN_PROGRESS)

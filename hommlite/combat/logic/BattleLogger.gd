@@ -13,12 +13,14 @@ class Entry:
 	var target: BattleStack
 	var damage: int
 	var death: int
+	var winner: int
 	
 	enum Type {
 		ROUND_STARTED, 
 		ATTACK,
 		SKIP,
-		WAIT
+		WAIT,
+		GAME_ENDED
 	}
 	
 	func _init(_type: int):
@@ -59,6 +61,14 @@ func log_skip(source: BattleStack):
 func log_wait(source: BattleStack):
 	var entry = Entry.new(Entry.Type.WAIT)
 	entry.source = source
+	
+	_logs.append(entry)
+	_events.emit_signal("new_combat_log", entry)
+
+
+func log_game_ended(winner: int):
+	var entry = Entry.new(Entry.Type.GAME_ENDED)
+	entry.winner = winner
 	
 	_logs.append(entry)
 	_events.emit_signal("new_combat_log", entry)

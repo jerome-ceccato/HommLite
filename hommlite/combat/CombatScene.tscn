@@ -96,8 +96,6 @@ script = ExtResource( 20 )
 [node name="HexGrid" type="Node" parent="UI/CombatArea"]
 script = ExtResource( 14 )
 
-[node name="Obstacles" type="Node2D" parent="UI/CombatArea"]
-
 [node name="Grid" type="Node2D" parent="UI/CombatArea"]
 z_index = 1
 script = ExtResource( 10 )
@@ -121,6 +119,8 @@ path_color = Color( 0, 0, 0, 0.12549 )
 [node name="GridBackground" type="Node2D" parent="UI/CombatArea/Grid"]
 z_index = 5
 script = ExtResource( 3 )
+
+[node name="Obstacles" type="Node2D" parent="UI/CombatArea"]
 
 [node name="VisibleUnits" type="Node2D" parent="UI/CombatArea"]
 z_index = 10

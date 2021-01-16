@@ -21,8 +21,16 @@ func _entry_representation(entry: BattleLogger.Entry) -> String:
 			return _wait_representation(entry)
 		BattleLogger.Entry.Type.SKIP:
 			return _skip_representation(entry)
+		BattleLogger.Entry.Type.GAME_ENDED:
+			return _game_ended_representation(entry)
 		_:
 			return ""
+
+
+func _game_ended_representation(entry: BattleLogger.Entry) -> String:
+	return "The combat has ended. %s won." % [
+		"Left" if entry.winner == BattleStack.Side.LEFT else "Right"
+	]
 
 
 func _wait_representation(entry: BattleLogger.Entry) -> String:
