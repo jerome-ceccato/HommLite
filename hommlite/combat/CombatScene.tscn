@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://combat/ui/CombatArea.gd" type="Script" id=1]
 [ext_resource path="res://assets/combat/bg.png" type="Texture" id=2]
@@ -29,6 +29,11 @@
 [ext_resource path="res://combat/ui/BottomButton.tscn" type="PackedScene" id=27]
 [ext_resource path="res://combat/logic/BattleLogger.gd" type="Script" id=28]
 [ext_resource path="res://combat/ui/CombatLogs.gd" type="Script" id=29]
+[ext_resource path="res://assets/ui/button-wait-pressed.png" type="Texture" id=30]
+[ext_resource path="res://assets/ui/button-wait-normal.png" type="Texture" id=31]
+[ext_resource path="res://assets/ui/button-skip-normal.png" type="Texture" id=32]
+[ext_resource path="res://assets/ui/button-skip-pressed.png" type="Texture" id=33]
+[ext_resource path="res://combat/ui/BottomPanel.gd" type="Script" id=34]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -129,6 +134,7 @@ script = ExtResource( 4 )
 [node name="BottomPanel" type="Node2D" parent="UI"]
 position = Vector2( 0, 624 )
 z_index = 100
+script = ExtResource( 34 )
 
 [node name="Background" type="Sprite" parent="UI/BottomPanel"]
 scale = Vector2( 4, 4 )
@@ -149,18 +155,22 @@ __meta__ = {
 left_color = Color( 0.45098, 1, 0.4, 1 )
 right_color = Color( 1, 0.4, 0.4, 1 )
 
-[node name="LeftButton1" parent="UI/BottomPanel" instance=ExtResource( 27 )]
+[node name="WaitButton" parent="UI/BottomPanel" instance=ExtResource( 27 )]
 margin_left = 20.0
 margin_top = 12.0
 margin_right = 108.0
 margin_bottom = 92.0
+texture_normal = ExtResource( 31 )
+texture_pressed = ExtResource( 30 )
 expand = true
 
-[node name="LeftButton2" parent="UI/BottomPanel" instance=ExtResource( 27 )]
+[node name="SkipButton" parent="UI/BottomPanel" instance=ExtResource( 27 )]
 margin_left = 112.0
 margin_top = 12.0
 margin_right = 200.0
 margin_bottom = 92.0
+texture_normal = ExtResource( 32 )
+texture_pressed = ExtResource( 33 )
 expand = true
 
 [node name="Dialogs" type="Node2D" parent="UI"]
