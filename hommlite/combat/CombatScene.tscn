@@ -82,6 +82,7 @@ __meta__ = {
 }
 
 [node name="CombatArea" type="Node2D" parent="UI"]
+position = Vector2( 203.523, 96 )
 z_index = 1
 script = ExtResource( 1 )
 overall_offset = Vector2( 0, -12 )
@@ -167,6 +168,7 @@ z_index = 1000
 script = ExtResource( 23 )
 
 [node name="EndScreen" type="NinePatchRect" parent="UI/Dialogs"]
+visible = false
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = 340.0

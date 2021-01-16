@@ -1,3 +1,4 @@
+tool
 extends Node2D
 
 onready var battle: Battle = $Battle
@@ -7,6 +8,10 @@ onready var battle_events: BattleEvents = $Battle/BattleEvents
 onready var ui_events: UIEvents = $UI/UIEvents
 
 func _ready():
+	if Engine.editor_hint:
+		_editor_specific_features()
+		return
+	
 	var setup_data = BattleSetup.new(_make_armies(), _make_obstacles())
 	
 	battle.setup_battle(setup_data)
@@ -90,3 +95,10 @@ func _run():
 
 func _on_animation_finished():
 	battle_events.emit_signal("resume")
+
+
+func _editor_specific_features():
+	get_node("UI/CombatArea/HexGrid").setup(get_node("Battle/BattleGrid"))
+	get_node("UI/CombatArea/Grid/GridBackground").setup(get_node("UI/CombatArea/HexGrid"))
+	get_node("UI/CombatArea/Grid/GridBackground").update()
+	get_node("UI/CombatArea")._center_self()

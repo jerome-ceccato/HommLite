@@ -1,3 +1,4 @@
+tool
 extends Node2D
 
 export(Vector2) var overall_offset = Vector2.ZERO
