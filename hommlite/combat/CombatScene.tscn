@@ -183,7 +183,6 @@ z_index = 1000
 script = ExtResource( 23 )
 
 [node name="EndScreen" type="NinePatchRect" parent="UI/Dialogs"]
-visible = false
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = 340.0
@@ -191,10 +190,10 @@ margin_top = 60.0
 margin_right = 940.0
 margin_bottom = 220.0
 texture = ExtResource( 21 )
-patch_margin_left = 12
-patch_margin_top = 12
-patch_margin_right = 12
-patch_margin_bottom = 12
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
 __meta__ = {
 "_edit_use_anchors_": false
 }

@@ -26,7 +26,10 @@ animations = [ {
 
 [node name="Container" parent="." instance=ExtResource( 1 )]
 
-[node name="Sprite" parent="Container" index="2"]
+[node name="SpriteContainer" parent="Container" index="2"]
+position = Vector2( 0, -2 )
+
+[node name="Sprite" parent="Container/SpriteContainer" index="0"]
 material = SubResource( 1 )
 frames = SubResource( 2 )
 

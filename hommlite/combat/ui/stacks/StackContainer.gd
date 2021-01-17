@@ -1,7 +1,7 @@
 class_name StackContainer
 extends Node2D
 
-onready var _sprite: AnimatedSprite = $Sprite
+onready var _sprite: AnimatedSprite = $SpriteContainer/Sprite
 onready var _sprite_anim: AnimationPlayer = $SpriteAnimation
 onready var _world_anim: Tween = $WorldAnimation
 

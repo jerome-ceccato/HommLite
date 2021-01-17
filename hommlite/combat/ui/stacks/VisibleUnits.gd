@@ -104,7 +104,7 @@ func _scene_for_unit(unit: UnitData) -> PackedScene:
 func _load_obstacle(obstacle: ObstacleData) -> Sprite:
 	var sprite = Sprite.new()
 	sprite.texture = load(obstacle.texture_reference)
-	sprite.scale = Vector2(3, 3)
+	sprite.scale = Vector2(4, 4)
 	sprite.position = hexgrid.get_cell_at_coords(obstacle.coordinates).center
 	
 	add_child(sprite)
