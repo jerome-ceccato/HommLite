@@ -7,6 +7,7 @@ onready var background = $GridBackground
 onready var hover = $ActionGridHover
 onready var movement_overlay = $UnitHoverMovementOverlay
 onready var active_stack_overlay = $ActiveStackMovementOverlay
+onready var pathfinding_overlay = $PathfindingOverlay
 
 var hexgrid: HexGrid
 var battle: Battle
@@ -24,6 +25,7 @@ func setup(_hexgrid: HexGrid, _battle: Battle, _events: UIEvents, _action_resolv
 	hover.setup(battle, hexgrid)
 	movement_overlay.setup(hexgrid, battle)
 	active_stack_overlay.setup(hexgrid, battle)
+	pathfinding_overlay.setup(battle, hexgrid)
 
 
 func _on_Battle_game_state_changed(_unused: Battle):

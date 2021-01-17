@@ -61,7 +61,8 @@ func _make_obstacles() -> Array:
 
 func _setup_bindings():
 	for listener in [
-		$UI/CombatArea/Grid/ActionGridHover, 
+		$UI/CombatArea/Grid/ActionGridHover,
+		$UI/CombatArea/Grid/PathfindingOverlay,
 		$UI/CombatArea/Grid/UnitHoverMovementOverlay,
 		$UI/Cursor,
 		]:
@@ -87,6 +88,7 @@ func _setup_bindings():
 		$UI/CombatArea/VisibleUnits,
 		$UI/CombatArea/Grid/ActionGridHover,
 		$UI/CombatArea/Grid/ActiveStackMovementOverlay,
+		$UI/CombatArea/Grid/PathfindingOverlay,
 		]:
 		battle_events.connect("game_state_changed", listener, "_on_Battle_game_state_changed")
 	

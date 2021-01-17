@@ -43,17 +43,20 @@ func _on_Battle_game_state_changed(_unused: Battle):
 
 
 func _set_attack_cursor(target: HexCell, cells: Array):
-	var items = _get_attack_cursor(target.center, _nearest(target.center, cells).center)
+	var items = _get_attack_cursor(target.center, _nearest(target, cells).center)
 	Input.set_custom_mouse_cursor(items[0], Input.CURSOR_ARROW, items[1])
 
 
-func _nearest(target: Vector2, cells: Array) -> HexCell:
+func _nearest(target: HexCell, cells: Array) -> HexCell:
+	if cells.empty():
+		return target
+	
 	var nearest = null
 	for cell in cells:
 		if nearest == null:
 			nearest = cell
 		else:
-			if target.distance_to(nearest.center) > target.distance_to(cell.center):
+			if target.center.distance_to(nearest.center) > target.center.distance_to(cell.center):
 				nearest = cell
 	return nearest
 
