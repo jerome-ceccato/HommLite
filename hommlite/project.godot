@@ -153,8 +153,7 @@ _global_script_class_icons={
 [application]
 
 config/name="hommlite"
-run/main_scene="res://combat/CombatScene.tscn"
-config/icon="res://icon.png"
+run/main_scene="res://start/StartScreen.tscn"
 
 [debug]
 

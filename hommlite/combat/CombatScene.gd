@@ -82,7 +82,7 @@ func _setup_bindings():
 		battle_events.connect("stack_attacked", listener, "_on_Battle_stack_attacked")
 	
 	for listener in [
-		$UI/Dialogs,
+		$UI/Dialogs/EndScreen,
 		$UI/Cursor,
 		$UI/CombatArea/Grid,
 		$UI/CombatArea/VisibleUnits,
