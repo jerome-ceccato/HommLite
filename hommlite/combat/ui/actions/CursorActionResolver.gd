@@ -12,6 +12,67 @@ func setup(_battle: Battle, _hexgrid: HexGrid):
 	hexgrid = _hexgrid
 	_state = CursorState.new()
 
+
+func get_state(mouse_pos: Vector2) -> CursorState:
+	_state.mouse_pos = mouse_pos
+	var coords = hexgrid.get_cell_coords_at_point(mouse_pos)
+	_state.hovered_cell_coords = coords
+	
+	if coords != null:
+		_state.active_stack = battle.get_active_stack()
+		_state.target_stack = battle.get_stack_at_coords(coords)
+		
+		if _state.target_stack != null and !_target_is_large_self(_state.active_stack, _state.target_stack, coords):
+			var is_enemy = _state.target_stack.side != _state.active_stack.side
+			
+			if is_enemy and battle.can_attack_ranged(_state.active_stack):
+				_state.action = CursorState.Action.RANGED_REACHABLE_STACK
+			else:
+				var can_attack = battle.can_attack(_state.active_stack, _state.target_stack)
+				if is_enemy and can_attack:
+					_state.hover_hex_cells = [_closest_reachable_cell(_state.target_stack)]
+					_state.action = CursorState.Action.REACHABLE_STACK
+				else:
+					_state.action = CursorState.Action.UNREACHABLE_STACK
+		else:
+			if battle.can_reach(_state.active_stack, coords):
+				_state.hover_hex_cells = _hover_cells(_state.active_stack, coords, battle.reachable_coords(_state.active_stack))
+				if !_move_is_identity(_state.active_stack, _state.hover_hex_cells):
+					_state.action = CursorState.Action.REACHABLE_CELL
+				else:
+					_state.action = CursorState.Action.UNREACHABLE_CELL
+			else:
+				_state.action = CursorState.Action.UNREACHABLE_CELL
+	else:
+		_state.active_stack = null
+		_state.target_stack = null
+		_state.hover_hex_cells = []
+		_state.action = CursorState.Action.NONE
+	
+	return _state
+
+
+func _move_is_identity(stack: BattleStack, hover_cells: Array) -> bool:
+	var coords = stack.all_taken_coordinates()
+	if coords.size() != hover_cells.size():
+		return false
+	
+	var coords_index = {}
+	for coord in coords:
+		coords_index[coord.index] = coord
+	
+	for cell in hover_cells:
+		if !coords_index.has(cell.coords.index):
+			return false
+	return true
+
+
+func _target_is_large_self(active: BattleStack, target: BattleStack, cursor: BattleCoords) -> bool:
+	if active.id == target.id:
+		return active.stack.unit.large and cursor.index != active.coordinates.index
+	return false
+
+
 func _hover_cells(active: BattleStack, cursor_coords: BattleCoords, available_coords: Array) -> Array:
 	if active.stack.unit.large:
 		var coords = [hexgrid.get_cell_at_coords(cursor_coords)]
@@ -28,41 +89,6 @@ func _hover_cells(active: BattleStack, cursor_coords: BattleCoords, available_co
 		return coords
 	else:
 		return [hexgrid.get_cell_at_coords(cursor_coords)]
-
-func get_state(mouse_pos: Vector2) -> CursorState:
-	_state.mouse_pos = mouse_pos
-	var coords = hexgrid.get_cell_coords_at_point(mouse_pos)
-	_state.hovered_cell_coords = coords
-	
-	if coords != null:
-		_state.active_stack = battle.get_active_stack()
-		_state.target_stack = battle.get_stack_at_coords(coords)
-		
-		if _state.target_stack != null:
-			var is_enemy = _state.target_stack.side != _state.active_stack.side
-			
-			if is_enemy and battle.can_attack_ranged(_state.active_stack):
-				_state.action = CursorState.Action.RANGED_REACHABLE_STACK
-			else:
-				var can_attack = battle.can_attack(_state.active_stack, _state.target_stack)
-				if is_enemy and can_attack:
-					_state.hover_hex_cells = [_closest_reachable_cell(_state.target_stack)]
-					_state.action = CursorState.Action.REACHABLE_STACK
-				else:
-					_state.action = CursorState.Action.UNREACHABLE_STACK
-		else:
-			if battle.can_reach(_state.active_stack, coords):
-				_state.hover_hex_cells = _hover_cells(_state.active_stack, coords, battle.reachable_coords(_state.active_stack))
-				_state.action = CursorState.Action.REACHABLE_CELL
-			else:
-				_state.action = CursorState.Action.UNREACHABLE_CELL
-	else:
-		_state.active_stack = null
-		_state.target_stack = null
-		_state.hover_hex_cells = []
-		_state.action = CursorState.Action.NONE
-	
-	return _state
 
 
 func _closest_reachable_cell(target: BattleStack) -> HexCell:
