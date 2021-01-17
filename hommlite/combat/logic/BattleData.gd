@@ -158,11 +158,11 @@ func _reachability(source: BattleStack, distance: int, excluded: Array) -> Array
 
 func _merged_reachable_valid_coords(source: BattleStack, distance: int, blocked_coords: Array) -> Array:
 	if source.all_taken_coordinates().size() == 1:
-		return _grid.reachable_valid_coords(source.coordinates, distance, blocked_coords)
+		return _grid.reachable_valid_coords(source.coordinates, distance, blocked_coords, source.stack.unit.large)
 	else:
 		var index_coords = {}
 		for stack_coord in source.all_taken_coordinates():
-			for coord in _grid.reachable_valid_coords(stack_coord, distance, blocked_coords):
+			for coord in _grid.reachable_valid_coords(stack_coord, distance, blocked_coords, source.stack.unit.large):
 				index_coords[coord.index] = coord
 		return index_coords.values()
 

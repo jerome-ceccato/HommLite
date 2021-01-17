@@ -53,6 +53,9 @@ func _make_obstacles() -> Array:
 		ObstacleData.new(BattleCoords.new(6, 4), rock_reference),
 		ObstacleData.new(BattleCoords.new(3, 5), rock_reference),
 		ObstacleData.new(BattleCoords.new(5, 5), rock_reference),
+		ObstacleData.new(BattleCoords.new(7, 6), rock_reference),
+		ObstacleData.new(BattleCoords.new(7, 7), rock_reference),
+		ObstacleData.new(BattleCoords.new(7, 8), rock_reference),
 	]
 
 

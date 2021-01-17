@@ -17,7 +17,7 @@ static func nearby_coords(origin: BattleCoords, valid_coords: Dictionary, distan
 	return results
 
 
-static func reachable_coords(origin: BattleCoords, valid_coords: Dictionary, distance: int, blocked: Array) -> Array:
+static func reachable_coords(origin: BattleCoords, valid_coords: Dictionary, distance: int, blocked: Array, large: bool) -> Array:
 	var visited = {}
 	var blocked_lookup = {}
 	var fringes = []
@@ -32,10 +32,21 @@ static func reachable_coords(origin: BattleCoords, valid_coords: Dictionary, dis
 		for hex in fringes[k - 1]:
 			for dir in range(6):
 				var neighbor = oddr_offset_neighbor(hex, dir)
-				if !visited.has(neighbor.index) and !blocked_lookup.has(neighbor.index) and valid_coords.has(neighbor.index):
+				if _can_visit_neighbor(neighbor, hex, visited, blocked_lookup, valid_coords, large):
 					visited[neighbor.index] = neighbor
 					fringes[k].append(neighbor)
 	return visited.values()
+
+
+static func _can_visit_neighbor(neighbor: BattleCoords, from: BattleCoords, visited: Dictionary, blocked: Dictionary, valid: Dictionary, large: bool) -> bool:
+	if large:
+		if visited.has(neighbor.index) or blocked.has(neighbor.index) or !valid.has(neighbor.index):
+			return false
+		if from.y != neighbor.y:
+			pass #todo fix y movement
+		return true
+	else:
+		return !visited.has(neighbor.index) and !blocked.has(neighbor.index) and valid.has(neighbor.index)
 
 
 static func cube_round(cube: Vector3):
