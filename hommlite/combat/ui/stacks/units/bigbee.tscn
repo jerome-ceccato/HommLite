@@ -1,9 +1,7 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://assets/combat/unit.shader" type="Shader" id=1]
-[ext_resource path="res://combat/ui/stacks/units/_stack.tscn" type="PackedScene" id=2]
-[ext_resource path="res://assets/combat/units/bigbee1.png" type="Texture" id=3]
-[ext_resource path="res://assets/combat/units/bigbee2.png" type="Texture" id=4]
+[ext_resource path="res://combat/ui/stacks/units/_stack_large.tscn" type="PackedScene" id=2]
 
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
@@ -12,24 +10,11 @@ shader_param/outline_width = 0.0
 shader_param/outline_color = Color( 1, 1, 0, 1 )
 shader_param/white_progress = 0.0
 
-[sub_resource type="SpriteFrames" id=2]
-animations = [ {
-"frames": [ ExtResource( 3 ), ExtResource( 4 ) ],
-"loop": true,
-"name": "default",
-"speed": 5.0
-} ]
-
 [node name="Bee" type="Node"]
 
 [node name="Container" parent="." instance=ExtResource( 2 )]
 
 [node name="Sprite" parent="Container" index="2"]
 material = SubResource( 1 )
-position = Vector2( 28, 0 )
-frames = SubResource( 2 )
-
-[node name="StackCount" parent="Container" index="3"]
-position = Vector2( 28, 22 )
 
 [editable path="Container"]

@@ -88,7 +88,7 @@ func can_attack(source: BattleStack, target: BattleStack) -> bool:
 
 func can_attack_ranged(stack: BattleStack) -> bool:
 	if stack.stack.unit.ranged:
-		var neighbors = _grid.valid_neighbors(stack.coordinates)
+		var neighbors = stack.all_neighbors(_grid)
 		for coords in neighbors:
 			if _stacks.has(coords.index) and _stacks[coords.index].side != stack.side:
 				return false

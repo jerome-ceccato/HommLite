@@ -17,6 +17,7 @@ func get_state(mouse_pos: Vector2) -> CursorState:
 	_state.mouse_pos = mouse_pos
 	var coords = hexgrid.get_cell_coords_at_point(mouse_pos)
 	_state.hovered_cell_coords = coords
+	_state.hover_hex_cells = []
 	
 	if coords != null:
 		_state.active_stack = battle.get_active_stack()
