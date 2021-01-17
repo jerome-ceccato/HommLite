@@ -88,10 +88,10 @@ __meta__ = {
 }
 
 [node name="CombatArea" type="Node2D" parent="UI"]
-position = Vector2( 203.523, 96 )
+position = Vector2( 155.026, 68 )
 z_index = 1
 script = ExtResource( 1 )
-overall_offset = Vector2( 0, -12 )
+overall_offset = Vector2( 0, -16 )
 
 [node name="Keyboard" type="Node" parent="UI/CombatArea"]
 script = ExtResource( 25 )
@@ -101,6 +101,7 @@ script = ExtResource( 20 )
 
 [node name="HexGrid" type="Node" parent="UI/CombatArea"]
 script = ExtResource( 14 )
+cell_size = 40
 
 [node name="Grid" type="Node2D" parent="UI/CombatArea"]
 z_index = 1
