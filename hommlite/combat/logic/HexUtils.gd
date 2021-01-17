@@ -43,7 +43,22 @@ static func _can_visit_neighbor(neighbor: BattleCoords, from: BattleCoords, visi
 		if visited.has(neighbor.index) or blocked.has(neighbor.index) or !valid.has(neighbor.index):
 			return false
 		if from.y != neighbor.y:
-			pass #todo fix y movement
+			var xoffset = neighbor.x - from.x
+			if from.y & 1:
+				xoffset -= 1
+			
+			if xoffset < 0:
+				var left_row = BattleCoords.new(from.x - 1, from.y)
+				var y_row = BattleCoords.new(neighbor.x + 1, neighbor.y)
+				var left_blocked = blocked.has(left_row.index) or !valid.has(left_row.index)
+				var y_blocked = blocked.has(y_row.index) or !valid.has(y_row.index)
+				return !left_blocked or !y_blocked
+			else:
+				var right_row = BattleCoords.new(from.x + 1, from.y)
+				var y_row = BattleCoords.new(neighbor.x - 1, neighbor.y)
+				var right_blocked = blocked.has(right_row.index) or !valid.has(right_row.index)
+				var y_blocked = blocked.has(y_row.index) or !valid.has(y_row.index)
+				return !right_blocked or !y_blocked
 		return true
 	else:
 		return !visited.has(neighbor.index) and !blocked.has(neighbor.index) and valid.has(neighbor.index)
