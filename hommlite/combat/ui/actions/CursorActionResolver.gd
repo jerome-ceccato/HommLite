@@ -31,7 +31,7 @@ func get_state(mouse_pos: Vector2) -> CursorState:
 			else:
 				var can_attack = battle.can_attack(_state.active_stack, _state.target_stack)
 				if is_enemy and can_attack:
-					_state.hover_hex_cells = _closest_reachable_cells(_state.target_stack)
+					_state.hover_hex_cells = _closest_reachable_cells(_state.target_stack, coords, mouse_pos)
 					_state.action = CursorState.Action.REACHABLE_STACK
 				else:
 					_state.action = CursorState.Action.UNREACHABLE_STACK
@@ -92,9 +92,9 @@ func _hover_cells(active: BattleStack, cursor_coords: BattleCoords, available_co
 		return [hexgrid.get_cell_at_coords(cursor_coords)]
 
 
-func _closest_reachable_cells(target: BattleStack) -> Array:
+func _closest_reachable_cells(target: BattleStack, target_coords: BattleCoords, mouse: Vector2) -> Array:
 	var active_stack = battle.get_active_stack()
-	var neighbors = target.all_neighbors(battle.get_grid())
+	var neighbors = battle.get_grid().valid_neighbors(target_coords)
 	
 	# TODO: this is wasteful
 	neighbors.sort_custom(self, "_sort_closest")
@@ -102,13 +102,18 @@ func _closest_reachable_cells(target: BattleStack) -> Array:
 		if _coords_in_stack(coords, active_stack) or battle.can_reach(active_stack, coords):
 			var cells = [hexgrid.get_cell_at_coords(coords)]
 			if active_stack.stack.unit.large:
-				var next_coords = BattleCoords.new(coords.x + 1, coords.y)
+				var distance = hexgrid.get_cell_at_coords(target_coords).center.x - mouse.x
+				var offset = -1
+				if coords.y != target_coords.y:
+					if distance < -10:
+						offset = 1
+				var next_coords = BattleCoords.new(coords.x + offset, coords.y)
 				if battle.can_reach(active_stack, next_coords):
-					cells.append(hexgrid.get_cell_at_coords(next_coords))
+					cells.insert(0 if offset < 0 else 1, hexgrid.get_cell_at_coords(next_coords))
 				else:
-					var previous_coords = BattleCoords.new(coords.x - 1, coords.y)
+					var previous_coords = BattleCoords.new(coords.x - offset, coords.y)
 					if battle.can_reach(active_stack, previous_coords):
-						cells.insert(0, hexgrid.get_cell_at_coords(previous_coords))
+						cells.insert(0 if offset > 0 else 1, hexgrid.get_cell_at_coords(previous_coords))
 			return cells
 	
 	return []
