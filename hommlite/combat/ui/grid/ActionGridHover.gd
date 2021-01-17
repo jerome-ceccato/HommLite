@@ -31,7 +31,10 @@ func _on_UI_mouse_moved(state: CursorState):
 			_hovered_cells = []
 		CursorState.Action.REACHABLE_CELL, CursorState.Action.REACHABLE_STACK, CursorState.Action.RANGED_REACHABLE_STACK:
 			_hovered_cells = state.hover_hex_cells
-			_hovered_path = battle._data.path_find(state.active_stack, _hovered_cells[0].coords)
+			if _hovered_cells.size() > 0:
+				_hovered_path = battle._data.path_find(state.active_stack, _hovered_cells[0].coords)
+			else:
+				_hovered_path = []
 	update()
 
 

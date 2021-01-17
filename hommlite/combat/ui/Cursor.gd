@@ -30,7 +30,7 @@ func _on_UI_mouse_moved(state: CursorState):
 				Input.set_custom_mouse_cursor(_move, Input.CURSOR_ARROW, Vector2(16,16))
 			CursorState.Action.REACHABLE_STACK:
 				var target_cell = hexgrid.get_cell_at_coords(state.target_stack.coordinates)
-				_set_attack_cursor(target_cell, state.hover_hex_cells[0])
+				_set_attack_cursor(target_cell, state.hover_hex_cells)
 			CursorState.Action.RANGED_REACHABLE_STACK:
 				Input.set_custom_mouse_cursor(_range_attack, Input.CURSOR_ARROW, Vector2(16,16))
 	else:
@@ -42,13 +42,24 @@ func _on_Battle_game_state_changed(_unused: Battle):
 		Input.set_custom_mouse_cursor(null)
 
 
-func _set_attack_cursor(target: HexCell, nearest: HexCell):
-	var items = _get_attack_cursor(target, nearest)
+func _set_attack_cursor(target: HexCell, cells: Array):
+	var items = _get_attack_cursor(target.center, _nearest(target.center, cells).center)
 	Input.set_custom_mouse_cursor(items[0], Input.CURSOR_ARROW, items[1])
 
 
-func _get_attack_cursor(target: HexCell, nearest: HexCell) -> Array:
-	var direction = nearest.center - target.center
+func _nearest(target: Vector2, cells: Array) -> HexCell:
+	var nearest = null
+	for cell in cells:
+		if nearest == null:
+			nearest = cell
+		else:
+			if target.distance_to(nearest.center) > target.distance_to(cell.center):
+				nearest = cell
+	return nearest
+
+
+func _get_attack_cursor(target: Vector2, nearest: Vector2) -> Array:
+	var direction = nearest - target
 	
 	if abs(direction.y) < 0.001:
 		if direction.x > 0:

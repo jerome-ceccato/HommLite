@@ -30,7 +30,7 @@ func get_state(mouse_pos: Vector2) -> CursorState:
 			else:
 				var can_attack = battle.can_attack(_state.active_stack, _state.target_stack)
 				if is_enemy and can_attack:
-					_state.hover_hex_cells = [_closest_reachable_cell(_state.target_stack)]
+					_state.hover_hex_cells = _closest_reachable_cells(_state.target_stack)
 					_state.action = CursorState.Action.REACHABLE_STACK
 				else:
 					_state.action = CursorState.Action.UNREACHABLE_STACK
@@ -91,22 +91,33 @@ func _hover_cells(active: BattleStack, cursor_coords: BattleCoords, available_co
 		return [hexgrid.get_cell_at_coords(cursor_coords)]
 
 
-func _closest_reachable_cell(target: BattleStack) -> HexCell:
+func _closest_reachable_cells(target: BattleStack) -> Array:
 	var active_stack = battle.get_active_stack()
-	var neighbors = battle.get_grid().valid_neighbors(target.coordinates)
-	if active_stack.stack.unit.large:
-		var other_coords = BattleCoords.new(target.coordinates.x + 1, target.coordinates.y)
-		var other_neighbors = battle.get_grid().valid_neighbors(other_coords)
-		for o_n in other_neighbors:
-			neighbors.append(o_n)
+	var neighbors = target.all_neighbors(battle.get_grid())
 	
 	# TODO: this is wasteful
 	neighbors.sort_custom(self, "_sort_closest")
 	for coords in neighbors:
-		if coords.index == active_stack.coordinates.index or battle.can_reach(active_stack, coords):
-			return hexgrid.get_cell_at_coords(coords)
+		if _coords_in_stack(coords, active_stack) or battle.can_reach(active_stack, coords):
+			var cells = [hexgrid.get_cell_at_coords(coords)]
+			if active_stack.stack.unit.large:
+				var next_coords = BattleCoords.new(coords.x + 1, coords.y)
+				if battle.can_reach(active_stack, next_coords):
+					cells.append(hexgrid.get_cell_at_coords(next_coords))
+				else:
+					var previous_coords = BattleCoords.new(coords.x - 1, coords.y)
+					if battle.can_reach(active_stack, previous_coords):
+						cells.insert(0, hexgrid.get_cell_at_coords(previous_coords))
+			return cells
 	
-	return null
+	return []
+
+
+func _coords_in_stack(coords: BattleCoords, stack: BattleStack) -> bool:
+	for c in stack.all_taken_coordinates():
+		if coords.index == c.index:
+			return true
+	return false
 
 
 func _sort_closest(a: BattleCoords, b: BattleCoords) -> bool:
