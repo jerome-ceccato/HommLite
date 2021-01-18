@@ -125,6 +125,7 @@ hover_color = Color( 0, 0, 0, 0.392157 )
 [node name="GridBackground" type="Node2D" parent="UI/CombatArea/Grid"]
 z_index = 5
 script = ExtResource( 3 )
+color = Color( 0.823529, 0.788235, 0.647059, 0.784314 )
 
 [node name="PathfindingOverlay" type="Node2D" parent="UI/CombatArea/Grid"]
 visible = false
