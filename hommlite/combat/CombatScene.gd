@@ -36,8 +36,7 @@ func _make_armies() -> Array:
 	var right_army = ArmyData.new([
 		StackData.new(chicken, 1),
 		StackData.new(bbee, 5),
-		#StackData.new(bee, 23),
-		#StackData.new(chicken, 165),
+		StackData.new(chicken, 165),
 	])
 	
 	return [left_army, right_army]
@@ -46,16 +45,14 @@ func _make_armies() -> Array:
 func _make_obstacles() -> Array:
 	var rock_reference = "res://assets/combat/rock.png"
 	return [
-		ObstacleData.new(BattleCoords.new(3, 3), rock_reference),
-		ObstacleData.new(BattleCoords.new(3, 4), rock_reference),
-		ObstacleData.new(BattleCoords.new(4, 3), rock_reference),
-		ObstacleData.new(BattleCoords.new(5, 3), rock_reference),
-		ObstacleData.new(BattleCoords.new(6, 4), rock_reference),
 		ObstacleData.new(BattleCoords.new(3, 5), rock_reference),
-		ObstacleData.new(BattleCoords.new(5, 5), rock_reference),
-		ObstacleData.new(BattleCoords.new(7, 6), rock_reference),
-		ObstacleData.new(BattleCoords.new(7, 7), rock_reference),
-		ObstacleData.new(BattleCoords.new(7, 8), rock_reference),
+		ObstacleData.new(BattleCoords.new(4, 4), rock_reference),
+		ObstacleData.new(BattleCoords.new(5, 4), rock_reference),
+		ObstacleData.new(BattleCoords.new(5, 3), rock_reference),
+		ObstacleData.new(BattleCoords.new(6, 3), rock_reference),
+		ObstacleData.new(BattleCoords.new(7, 3), rock_reference),
+		ObstacleData.new(BattleCoords.new(8, 4), rock_reference),
+		ObstacleData.new(BattleCoords.new(8, 5), rock_reference),
 	]
 
 
@@ -107,7 +104,10 @@ func _on_animation_finished():
 
 
 func _editor_specific_features():
-	get_node("UI/CombatArea/HexGrid").setup(get_node("Battle/BattleGrid"))
-	get_node("UI/CombatArea/Grid/GridBackground").setup(get_node("UI/CombatArea/HexGrid"))
+	var hexgrid = get_node("UI/CombatArea/HexGrid")
+	hexgrid.setup(get_node("Battle/BattleGrid"))
+	get_node("UI/CombatArea/Grid/GridBackground").setup(hexgrid)
 	get_node("UI/CombatArea/Grid/GridBackground").update()
+	get_node("UI/CombatArea/Grid/GridCoords").setup(hexgrid)
+	get_node("UI/CombatArea/Grid/GridCoords").update()
 	get_node("UI/CombatArea")._center_self()
