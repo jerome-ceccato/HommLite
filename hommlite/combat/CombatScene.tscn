@@ -114,7 +114,7 @@ script = ExtResource( 10 )
 [node name="ActiveStackMovementOverlay" type="Node2D" parent="UI/CombatArea/Grid"]
 z_index = 1
 script = ExtResource( 12 )
-overlayed_color = Color( 0, 0, 0, 0.196078 )
+overlayed_color = Color( 0, 0, 0, 0.137255 )
 
 [node name="UnitHoverMovementOverlay" type="Node2D" parent="UI/CombatArea/Grid"]
 z_index = 2

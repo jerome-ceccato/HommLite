@@ -31,4 +31,4 @@ func _update(stack: BattleStack):
 func _should_show_overlay_for_stack(stack: BattleStack) -> bool:
 	if stack == null or !_shift_pressed:
 		return false
-	return !battle.queue.stack_is_active(stack)
+	return battle.get_active_stack().id != stack.id
