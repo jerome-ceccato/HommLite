@@ -26,9 +26,10 @@ func _make_armies() -> Array:
 	var chicken = load("res://assets/data/chicken.tres")
 	var uchicken = load("res://assets/data/uchicken.tres")
 	var bbee = load("res://assets/data/bigbee.tres")
+	var cloud = load("res://assets/data/cloud.tres")
 	
 	var left_army = ArmyData.new([
-		StackData.new(bbee, 1),
+		StackData.new(cloud, 1),
 		StackData.new(bee, 26),
 		StackData.new(uchicken, 68),
 	])

@@ -140,7 +140,7 @@ func _large_adjusted_path_finding(reachable: Array) -> Array:
 
 func _reachability(source: BattleStack, distance: int, excluded: Array) -> Array:
 	var flying = source.stack.unit.flying
-	var blocked_index = _blocked_coords_indexed(source)
+	var blocked_index = _blocked_coords_indexed()
 	for excluded_coord in excluded:
 		blocked_index.erase(excluded_coord.index)
 	if !flying and source.stack.unit.large:
@@ -179,7 +179,7 @@ func _add_single_spaces_to_blocked(blocked_index: Dictionary) -> Dictionary:
 				blocked_index[coord.index] = coord
 	return blocked_index
 
-func _blocked_coords_indexed(source: BattleStack) -> Dictionary:
+func _blocked_coords_indexed() -> Dictionary:
 	var blocked_coords = {}
 	
 	for stack in _stacks.values():

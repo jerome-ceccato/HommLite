@@ -92,7 +92,7 @@ func _hover_cells(active: BattleStack, cursor_coords: BattleCoords, available_co
 		return [hexgrid.get_cell_at_coords(cursor_coords)]
 
 
-func _closest_reachable_cells(target: BattleStack, target_coords: BattleCoords, mouse: Vector2) -> Array:
+func _closest_reachable_cells(_target: BattleStack, target_coords: BattleCoords, mouse: Vector2) -> Array:
 	var active_stack = battle.get_active_stack()
 	var neighbors = battle.get_grid().valid_neighbors(target_coords)
 	
