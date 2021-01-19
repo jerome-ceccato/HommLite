@@ -29,8 +29,10 @@ func setup_with_stack(_stack: BattleStack):
 
 func set_active(active: bool):
 	if active:
+		_stack_count_container.z_index = 1
 		_sprite_anim.play("ActiveOutline")
 	else:
+		_stack_count_container.z_index = 0
 		_sprite_anim.stop(true)
 		_sprite.material.set_shader_param("outline_width", 0.0)
 
@@ -60,7 +62,7 @@ func animate_death(source: StackContainer, events: UIEvents):
 	var source_original_side = source._animate_attack(self)
 	_play_sided_animation("Death", source)
 	yield(get_tree().create_timer(DEATH_ANIMATION_DURATION), "timeout")
-	z_index = 0
+	z_index = -1
 	source._sprite.flip_h = source_original_side
 	events.emit_signal("animation_finished")
 

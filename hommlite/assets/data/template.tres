@@ -4,13 +4,13 @@
 
 [resource]
 script = ExtResource( 1 )
-id = "cloud"
-display_name = "Cloud"
-display_name_plural = "Clouds"
-large = true
+id = "template"
+display_name = "??"
+display_name_plural = "??s"
+large = false
 speed = 8
 initiative = 8
-flying = true
+flying = false
 dmg_low = 10
 dmg_high = 12
 ranged = false
