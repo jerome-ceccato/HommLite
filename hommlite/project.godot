@@ -10,6 +10,11 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Reference",
+"class": "AIController",
+"language": "GDScript",
+"path": "res://combat/logic/AIController.gd"
+}, {
+"base": "Reference",
 "class": "ArmyData",
 "language": "GDScript",
 "path": "res://combat/data/ArmyData.gd"
@@ -125,6 +130,7 @@ _global_script_classes=[ {
 "path": "res://combat/data/UnitData.gd"
 } ]
 _global_script_class_icons={
+"AIController": "",
 "ArmyData": "",
 "Battle": "",
 "BattleCoords": "",

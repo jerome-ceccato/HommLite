@@ -14,7 +14,7 @@ func setup(_battle: Battle, _hexgrid: HexGrid):
 
 
 func _draw():
-	if battle.get_state() == BattleData.State.IN_PROGRESS:
+	if battle.get_state() == BattleData.State.PLAYER_TURN:
 		for cell in _hovered_cells:
 			draw_polygon(cell.points, [hover_color])
 

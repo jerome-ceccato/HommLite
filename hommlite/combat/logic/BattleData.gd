@@ -17,11 +17,12 @@ var _stacks: Dictionary # [BattleCoords.index: BattleStack]
 var _obstacles: Dictionary # [BattleCoords.index: ObstacleData]
 
 enum State {
-	IN_PROGRESS,
+	PLAYER_TURN,
+	AI_TURN,
 	WAITING_FOR_UI,
 	COMBAT_ENDED
 }
-var _state: int = State.IN_PROGRESS setget update_state, get_state
+var _state: int = State.PLAYER_TURN setget update_state, get_state
 
 
 func setup(grid: BattleGrid, logger: BattleLogger, setup_data: BattleSetup):

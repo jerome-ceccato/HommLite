@@ -47,7 +47,7 @@ func animate_handle_attack(_grid: HexGrid, source: BattleStack, target: BattleSt
 
 func _on_Battle_game_state_changed(_unused: Battle):
 	match battle.get_state():
-		BattleData.State.IN_PROGRESS:
+		BattleData.State.PLAYER_TURN:
 			_update_active_stack(battle.get_active_stack())
 		BattleData.State.WAITING_FOR_UI:
 			_update_active_stack(null)

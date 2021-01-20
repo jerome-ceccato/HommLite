@@ -14,7 +14,7 @@ func setup(_battle: Battle, _hexgrid: HexGrid):
 
 
 func _draw():
-	if battle.get_state() == BattleData.State.IN_PROGRESS:
+	if battle.get_state() == BattleData.State.PLAYER_TURN:
 		if _hovered_path != null:
 			for coords in _hovered_path:
 				var cell = hexgrid.get_cell_at_coords(coords)

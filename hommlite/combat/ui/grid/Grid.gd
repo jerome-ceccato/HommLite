@@ -32,7 +32,7 @@ func setup(_hexgrid: HexGrid, _battle: Battle, _events: UIEvents, _action_resolv
 
 func _on_Battle_game_state_changed(_unused: Battle):
 	match battle.get_state():
-		BattleData.State.IN_PROGRESS:
+		BattleData.State.PLAYER_TURN:
 			events.emit_signal("mouse_moved", _get_current_state())
 		BattleData.State.COMBAT_ENDED:
 			hover.visible = false

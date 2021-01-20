@@ -20,7 +20,7 @@ func setup(_battle: Battle, _hexgrid: HexGrid):
 
 
 func _on_UI_mouse_moved(state: CursorState):
-	if battle.get_state() == BattleData.State.IN_PROGRESS:
+	if battle.get_state() == BattleData.State.PLAYER_TURN:
 		match state.action:
 			CursorState.Action.NONE:
 				Input.set_custom_mouse_cursor(null)
@@ -38,7 +38,7 @@ func _on_UI_mouse_moved(state: CursorState):
 
 
 func _on_Battle_game_state_changed(_unused: Battle):
-	if battle.get_state() != BattleData.State.IN_PROGRESS:
+	if battle.get_state() != BattleData.State.PLAYER_TURN:
 		Input.set_custom_mouse_cursor(null)
 
 

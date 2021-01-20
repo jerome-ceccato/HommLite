@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://combat/ui/CombatArea.gd" type="Script" id=1]
 [ext_resource path="res://assets/combat/bg.png" type="Texture" id=2]
@@ -37,6 +37,7 @@
 [ext_resource path="res://combat/ui/grid/PathfindingOverlay.gd" type="Script" id=35]
 [ext_resource path="res://assets/ui/return-to-title-button.png" type="Texture" id=36]
 [ext_resource path="res://combat/ui/dialogs/EndScreen.gd" type="Script" id=37]
+[ext_resource path="res://combat/logic/AIController.gd" type="Script" id=38]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 22 )
@@ -73,6 +74,9 @@ script = ExtResource( 24 )
 
 [node name="BattleLogger" type="Node" parent="Battle"]
 script = ExtResource( 28 )
+
+[node name="AIController" type="Node" parent="Battle"]
+script = ExtResource( 38 )
 
 [node name="UI" type="Node" parent="."]
 script = ExtResource( 5 )

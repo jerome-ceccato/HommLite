@@ -36,12 +36,15 @@ func _update_state():
 		_logger.log_game_ended(get_winner())
 	else:
 		_queue_next()
-		_data.update_state(_data.State.IN_PROGRESS)
 
 
 func _queue_next():
 	if _queue.next():
 		_logger.log_round_started(_queue.turn_count)
+	if _queue.get_active_stack().side == BattleStack.Side.LEFT:
+		_data.update_state(_data.State.PLAYER_TURN)
+	else:
+		_data.update_state(_data.State.AI_TURN)
 
 
 func _action_move(coords: BattleCoords):
@@ -110,12 +113,12 @@ func _game_should_end():
 	for stack in _data.all_stacks():
 		stacks_count[stack.side] += 1
 	
-	var in_progress = stacks_count[BattleStack.Side.LEFT] > 0 and stacks_count[BattleStack.Side.RIGHT] > 0
-	return !in_progress
+	var PLAYER_TURN = stacks_count[BattleStack.Side.LEFT] > 0 and stacks_count[BattleStack.Side.RIGHT] > 0
+	return !PLAYER_TURN
 
 
 func _on_UI_mouse_clicked(state: CursorState):
-	if _data.get_state() != _data.State.IN_PROGRESS:
+	if _data.get_state() != _data.State.PLAYER_TURN:
 		return
 	
 	match state.action:
@@ -128,16 +131,19 @@ func _on_UI_mouse_clicked(state: CursorState):
 
 
 func _on_UI_action_skip():
-	if _data.get_state() != _data.State.IN_PROGRESS:
+	if _data.get_state() != _data.State.PLAYER_TURN:
 		return
-	
+	perform_skip()
+
+
+func perform_skip():
 	_logger.log_skip(_queue.get_active_stack())
 	_queue_next()
 	_data.force_state_update()
 
 
 func _on_UI_action_wait():
-	if _data.get_state() != _data.State.IN_PROGRESS:
+	if _data.get_state() != _data.State.PLAYER_TURN:
 		return
 		
 	if _queue.active_stack_can_wait():
