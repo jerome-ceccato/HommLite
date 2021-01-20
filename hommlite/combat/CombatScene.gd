@@ -29,15 +29,14 @@ func _make_armies() -> Array:
 	var template = load("res://assets/data/template.tres")
 	
 	var left_army = ArmyData.new([
-		StackData.new(template, 1),
-		StackData.new(bee, 26),
-		StackData.new(uchicken, 68),
+		StackData.new(bee, 14),
+		StackData.new(uchicken, 9),
 	])
 	
 	var right_army = ArmyData.new([
-		StackData.new(uchicken, 1),
-		StackData.new(bbee, 5),
-		StackData.new(chicken, 165),
+		StackData.new(chicken, 27),
+		StackData.new(chicken, 28),
+		StackData.new(chicken, 27),
 	])
 	
 	return [left_army, right_army]

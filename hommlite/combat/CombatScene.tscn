@@ -141,6 +141,7 @@ script = ExtResource( 35 )
 path_color = Color( 0, 0, 0, 0.12549 )
 
 [node name="GridCoords" type="Node2D" parent="UI/CombatArea/Grid"]
+visible = false
 z_index = 7
 script = ExtResource( 23 )
 font = SubResource( 1 )
