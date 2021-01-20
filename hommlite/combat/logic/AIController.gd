@@ -35,8 +35,10 @@ func _play(active: BattleStack):
 
 func _try_ranged_attack(active: BattleStack) -> bool:
 	if active.stack.unit.ranged and _data.can_attack_ranged(active):
-		_manager.perform_ranged_attack(_best_ranged_target(active))
-		return true
+		var targets = _best_targets(active)
+		if !targets.empty():
+			_manager.perform_ranged_attack(targets[0])
+			return true
 	return false
 
 
@@ -61,16 +63,29 @@ func _try_move_attack(active: BattleStack) -> bool:
 
 
 func _try_move(active: BattleStack) -> bool:
+	var reachable = _data.reachable_coords(active)
+	var reachable_index = {}
+	for coords in reachable:
+		reachable_index[coords.index] = coords
+	
+	for target in _best_targets(active):
+		var path = _data.path_find_ignoring_speed(active, target.coordinates)
+		for i in range(path.size(), 0, -1):
+			var coords = path[i - 1]
+			if reachable_index.has(coords.index):
+				_manager.perform_move(coords)
+				return true
 	return false
 
 # Utils
 
-func _best_ranged_target(active: BattleStack) -> BattleStack:
+func _best_targets(active: BattleStack) -> Array:
 	# TODO: sort by score
+	var targets = []
 	for stack in _data.all_stacks():
 		if stack.side == BattleStack.Side.LEFT:
-			return stack
-	return null
+			targets.append(stack)
+	return targets
 
 
 func _best_enemy_in_range(all_coords: Array) -> BattleStack:

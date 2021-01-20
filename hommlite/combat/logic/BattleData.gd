@@ -140,6 +140,16 @@ func path_find(source: BattleStack, target: BattleCoords) -> Array: # [BattleCoo
 		all_coords = _large_adjusted_path_finding(all_coords)
 	return _grid.path_find(source, target, all_coords)
 
+func path_find_ignoring_speed(source: BattleStack, target: BattleCoords) -> Array: # [BattleCoords]
+	var excluded = source.all_taken_coordinates()
+	excluded.append(target)
+	# TODO: this is horrible
+	var all_coords = _reachability(source, 100, excluded)
+	if source.stack.unit.large:
+		all_coords = _large_adjusted_path_finding(all_coords)
+	return _grid.path_find(source, target, all_coords)
+
+
 
 func _large_adjusted_path_finding(reachable: Array) -> Array:
 	var reachable_index = {}
