@@ -52,6 +52,22 @@ func get_stack_at(coords: BattleCoords) -> BattleStack:
 	return null
 
 
+func stack_valid_neighbors(stack: BattleStack) -> Array:
+	var neighbors_index = {}
+	for coords in stack.all_taken_coordinates():
+		for n in _grid.valid_neighbors(coords):
+			neighbors_index[n.index] = n
+	for coords in stack.all_taken_coordinates():
+		neighbors_index.erase(coords.index)
+	return neighbors_index.values()
+
+func stack_empty_neighbors(stack: BattleStack) -> Array:
+	var empty_neighbors = []
+	for neighbor in stack_valid_neighbors(stack):
+		if !get_stack_at(neighbor) and !_obstacles.has(neighbor.index):
+			empty_neighbors.append(neighbor)
+	return empty_neighbors
+
 
 func move_stack(stack: BattleStack, new_coords: BattleCoords):
 	_stacks.erase(stack.coordinates.index)
@@ -81,7 +97,7 @@ func can_attack(source: BattleStack, target: BattleStack) -> bool:
 	for coords in reachable_coords(source):
 		reachable_index[coords.index] = coords
 	
-	for coords in target.all_neighbors(_grid):
+	for coords in stack_valid_neighbors(target):
 		if reachable_index.has(coords.index):
 			return true
 	return false
@@ -89,9 +105,10 @@ func can_attack(source: BattleStack, target: BattleStack) -> bool:
 
 func can_attack_ranged(stack: BattleStack) -> bool:
 	if stack.stack.unit.ranged:
-		var neighbors = stack.all_neighbors(_grid)
+		var neighbors = stack_valid_neighbors(stack)
 		for coords in neighbors:
-			if _stacks.has(coords.index) and _stacks[coords.index].side != stack.side:
+			var target = get_stack_at(coords)
+			if target and target.side != stack.side:
 				return false
 		return true
 	else:

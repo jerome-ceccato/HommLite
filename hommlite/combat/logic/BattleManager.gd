@@ -47,7 +47,7 @@ func _queue_next():
 		_data.update_state(_data.State.AI_TURN)
 
 
-func _action_move(coords: BattleCoords):
+func perform_move(coords: BattleCoords):
 	var active_stack = _queue.get_active_stack()
 	var path = _data.path_find(active_stack, coords)
 	var movement = BattleMovement.new(path, active_stack.stack.unit.flying)
@@ -61,7 +61,7 @@ func _action_move(coords: BattleCoords):
 	_update_state()
 
 
-func _action_attack(target: BattleStack, from: BattleCoords):
+func perform_attack(target: BattleStack, from: BattleCoords):
 	var active_stack = _queue.get_active_stack()
 	var previous_pos = active_stack.coordinates
 	
@@ -92,7 +92,7 @@ func _action_attack(target: BattleStack, from: BattleCoords):
 	_update_state()
 
 
-func _action_ranged_attack(target: BattleStack):
+func perform_ranged_attack(target: BattleStack):
 	var active_stack = _queue.get_active_stack()
 	
 	if _data.attack_stack(active_stack, target, true):
@@ -123,11 +123,11 @@ func _on_UI_mouse_clicked(state: CursorState):
 	
 	match state.action:
 		CursorState.Action.REACHABLE_CELL:
-			_action_move(state.hover_hex_cells[0].coords)
+			perform_move(state.hover_hex_cells[0].coords)
 		CursorState.Action.REACHABLE_STACK:
-			_action_attack(state.target_stack, state.hover_hex_cells[0].coords)
+			perform_attack(state.target_stack, state.hover_hex_cells[0].coords)
 		CursorState.Action.RANGED_REACHABLE_STACK:
-			_action_ranged_attack(state.target_stack)
+			perform_ranged_attack(state.target_stack)
 
 
 func _on_UI_action_skip():

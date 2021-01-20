@@ -34,16 +34,6 @@ func all_taken_coordinates() -> Array:
 		return [coordinates]
 
 
-func all_neighbors(grid) -> Array:
-	var neighbors_index = {}
-	for coords in all_taken_coordinates():
-		for n in grid.valid_neighbors(coords):
-			neighbors_index[n.index] = n
-	for coords in all_taken_coordinates():
-		neighbors_index.erase(coords.index)
-	return neighbors_index.values()
-
-
 func damage_roll(target: BattleStack, ranged: bool) -> int:
 	if amount == 0:
 		return 0
