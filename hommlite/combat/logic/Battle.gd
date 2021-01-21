@@ -14,6 +14,7 @@ onready var _ai: AIController = $AIController
 
 
 func setup_battle(setup_data: BattleSetup):
+	_grid.setup(setup_data.map.map_size)
 	_logger.setup(_events)
 	_data.setup(_grid, _logger, setup_data)
 	_queue.setup(_data)

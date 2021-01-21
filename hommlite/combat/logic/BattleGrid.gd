@@ -4,6 +4,7 @@ extends Node
 
 # Represents the hex battle grid and its coordinates
 
+# Editor only
 export(int, 7, 11) var rows := 9
 export(int, 7, 15) var cols := 13
 
@@ -13,6 +14,13 @@ var _valid_coords: Dictionary # [BattleCoords.index: BattleCoords]
 var _pathfinder: AStar2D
 
 func _ready():
+	if Engine.editor_hint:
+		setup(BattleCoords.new(cols, rows))
+
+
+func setup(map_size: BattleCoords):
+	rows = map_size.y
+	cols = map_size.x
 	_build_map()
 	_build_pathfinder()
 

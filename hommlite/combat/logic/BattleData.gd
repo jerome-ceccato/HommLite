@@ -33,7 +33,7 @@ func setup(grid: BattleGrid, logger: BattleLogger, setup_data: BattleSetup):
 	var stack_id = 1
 	stack_id = _setup_stacks(setup_data.left_army, BattleStack.Side.LEFT, stack_id)
 	stack_id = _setup_stacks(setup_data.right_army, BattleStack.Side.RIGHT, stack_id)
-	_setup_obstacles(setup_data.obstacles)
+	_setup_obstacles(setup_data.map.obstacles)
 
 
 func all_stacks() -> Array:

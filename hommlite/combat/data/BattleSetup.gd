@@ -4,9 +4,9 @@ extends Reference
 var left_army: ArmyData
 var right_army: ArmyData
 
-var obstacles: Array # [ObstacleData]
+var map: MapData
 
-func _init(armies: Array, _obstacles: Array):
+func _init(armies: Array, _map: MapData):
 	left_army = armies[0]
 	right_army = armies[1]
-	obstacles = _obstacles
+	map = _map
