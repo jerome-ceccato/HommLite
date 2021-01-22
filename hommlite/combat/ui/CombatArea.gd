@@ -37,7 +37,14 @@ func _center_self():
 
 
 func _on_Battle_stack_moved(stack: BattleStack, movement: BattleMovement):
-	units.animate_move_stack(hexgrid, stack, movement, _events)
+	var await = units.animate_move_stack(hexgrid, stack, movement)
+	if await is GDScriptFunctionState:
+		await = yield(await, "completed")
+	_events.emit_signal("animation_finished")
 
-func _on_Battle_stack_attacked(source: BattleStack, target: BattleStack, retaliation: bool):
-	units.animate_handle_attack(hexgrid, source, target, retaliation, _events)
+
+func _on_Battle_stack_attacked(source: BattleStack, target: BattleStack, retaliation: bool, ranged: bool):
+	var await = units.animate_handle_attack(hexgrid, source, target, retaliation, ranged)
+	if await is GDScriptFunctionState:
+		await = yield(await, "completed")
+	_events.emit_signal("animation_finished")

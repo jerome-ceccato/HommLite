@@ -115,6 +115,11 @@ _global_script_classes=[ {
 "path": "res://combat/data/ObstacleData.gd"
 }, {
 "base": "Node2D",
+"class": "Projectile",
+"language": "GDScript",
+"path": "res://combat/ui/projectiles/Projectile.gd"
+}, {
+"base": "Node2D",
 "class": "StackContainer",
 "language": "GDScript",
 "path": "res://combat/ui/stacks/StackContainer.gd"
@@ -156,6 +161,7 @@ _global_script_class_icons={
 "HexUtils": "",
 "MapData": "",
 "ObstacleData": "",
+"Projectile": "",
 "StackContainer": "",
 "StackData": "",
 "UIEvents": "",

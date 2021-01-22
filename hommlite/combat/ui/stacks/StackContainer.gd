@@ -37,7 +37,7 @@ func set_active(active: bool):
 		_sprite.material.set_shader_param("outline_width", 0.0)
 
 
-func animate_through_points(points: Array, flying: bool, events: UIEvents):
+func animate_through_points(points: Array, flying: bool):
 	_stack_count_container.visible = false
 	_sprite.play()
 	if flying:
@@ -55,25 +55,22 @@ func animate_through_points(points: Array, flying: bool, events: UIEvents):
 	_sprite.stop()
 	_sprite.frame = 0
 	_stack_count_container.visible = true
-	events.emit_signal("animation_finished")
 
 
-func animate_death(source: StackContainer, events: UIEvents):
+func animate_death(source: StackContainer):
 	var source_original_side = source._animate_attack(self)
 	_play_sided_animation("Death", source)
 	yield(get_tree().create_timer(DEATH_ANIMATION_DURATION), "timeout")
 	z_index = -1
 	source._sprite.flip_h = source_original_side
-	events.emit_signal("animation_finished")
 
 
-func animate_damaged(source: StackContainer, events: UIEvents):
+func animate_damaged(source: StackContainer):
 	var source_original_side = source._animate_attack(self)
 	_play_sided_animation("Damage", source)
 	yield(get_tree().create_timer(ATTACK_ANIMATION_DURATION), "timeout")
 	_stack_count_label.text = str(stack.amount)
 	source._sprite.flip_h = source_original_side
-	events.emit_signal("animation_finished")
 
 
 func _animate_attack(target: StackContainer) -> bool:

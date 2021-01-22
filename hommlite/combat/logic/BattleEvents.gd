@@ -6,7 +6,7 @@ signal game_state_changed(battle) # Battle
 
 # UI feedback for combat loop
 signal stack_moved(stack, movement) # BattleStack, BattleMovement
-signal stack_attacked(source, target, retaliation) # BattleStack, BattleStack, bool
+signal stack_attacked(source, target, retaliation, ranged) # BattleStack, BattleStack, bool, bool
 
 # Logs
 signal new_combat_log(entry) # BattleLogger.Entry

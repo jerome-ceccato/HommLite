@@ -22,27 +22,46 @@ func setup(_hexgrid: HexGrid, _battle: Battle):
 		obstacles.append(_load_obstacle(obstacle))
 
 
-func animate_move_stack(grid: HexGrid, stack: BattleStack, movement: BattleMovement, events: UIEvents):
+func animate_move_stack(grid: HexGrid, stack: BattleStack, movement: BattleMovement):
 	var container = _container_for_bstack(stack)
 	if container != null:
 		var path_coords = _points_for_path(movement.path, grid)
-		container.animate_through_points(path_coords, movement.flying, events)
-	else:
-		events.emit_signal("animation_finished")
+		var await = container.animate_through_points(path_coords, movement.flying)
+		if await is GDScriptFunctionState:
+			await = yield(await, "completed")
 
 
-func animate_handle_attack(_grid: HexGrid, source: BattleStack, target: BattleStack, retaliation: bool, events: UIEvents):
+func animate_handle_attack(_grid: HexGrid, source: BattleStack, target: BattleStack, retaliation: bool, ranged: bool):
 	var source_container = _container_for_bstack(source)
 	var target_container = _container_for_bstack(target)
-	if target_container != null:
+	if source_container != null and target_container != null:
 		if retaliation:
 			yield(get_tree().create_timer(0.2), "timeout")
+			
+		var await = null
+		if ranged:
+			await = _animate_projectile(source_container, target_container)
+		if await is GDScriptFunctionState:
+			await = yield(await, "completed")
+		
+		await = null
 		if target.amount > 0:
-			target_container.animate_damaged(source_container, events)
+			await = target_container.animate_damaged(source_container)
 		else:
-			target_container.animate_death(source_container, events)
-	else:
-		events.emit_signal("animation_finished")
+			await = target_container.animate_death(source_container)
+		if await is GDScriptFunctionState:
+			await = yield(await, "completed")
+
+
+func _animate_projectile(source: StackContainer, target: StackContainer):
+	var projectile: Projectile = load("res://combat/ui/projectiles/Projectile.tscn").instance()
+	add_child(projectile)
+	
+	var from = hexgrid.get_cell_at_coords(source.stack.coordinates).center
+	var to = hexgrid.get_cell_at_coords(target.stack.coordinates).center
+	var await = projectile.animate(from, to)
+	if await is GDScriptFunctionState:
+			await = yield(await, "completed")
 
 
 func _on_Battle_game_state_changed(_unused: Battle):
