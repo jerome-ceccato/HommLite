@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/uchicken2.png-c2f2c0bf8d899163fa19c086128dd302.stex"
+path="res://.import/bee.png-e1f83bc9f3b230128cc91e7be6d22439.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/combat/units/uchicken2.png"
-dest_files=[ "res://.import/uchicken2.png-c2f2c0bf8d899163fa19c086128dd302.stex" ]
+source_file="res://assets/combat/units/bee.png"
+dest_files=[ "res://.import/bee.png-e1f83bc9f3b230128cc91e7be6d22439.stex" ]
 
 [params]
 

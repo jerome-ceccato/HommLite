@@ -39,7 +39,8 @@ func set_active(active: bool):
 
 func animate_through_points(points: Array, flying: bool):
 	_stack_count_container.visible = false
-	_sprite.play()
+	#_sprite.play()
+	_sprite_anim.play("Move", -1, 1.3)
 	if flying:
 		var destination = points[-1]
 		_flip_towards(destination)
@@ -52,8 +53,11 @@ func animate_through_points(points: Array, flying: bool):
 			yield(_world_anim, "tween_completed")
 	
 	_reset_flip()
-	_sprite.stop()
-	_sprite.frame = 0
+	_sprite_anim.stop(true)
+	_sprite.position = Vector2(0, 0)
+	_sprite.rotation_degrees = 0
+	#_sprite.stop()
+	#_sprite.frame = 0
 	_stack_count_container.visible = true
 
 
