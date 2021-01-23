@@ -23,7 +23,7 @@ func _make_armies() -> Array:
 		#StackData.new(bee, 14),
 		#StackData.new(template, 1),
 		#StackData.new(cow, 9),
-		StackData.new(chicken, 1),
+		StackData.new(uchicken, 999),
 	])
 	
 	var right_army = ArmyData.new([

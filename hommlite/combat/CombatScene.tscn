@@ -169,15 +169,17 @@ margin_top = 16.0
 margin_right = 1060.0
 margin_bottom = 89.0
 custom_fonts/normal_font = SubResource( 2 )
+custom_colors/default_color = Color( 0.752941, 0.796078, 0.862745, 1 )
 scroll_following = true
 script = ExtResource( 29 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-left_color = Color( 0.45098, 1, 0.4, 1 )
-right_color = Color( 1, 0.4, 0.4, 1 )
+left_color = Color( 0.633333, 1, 0.6, 1 )
+right_color = Color( 1, 0.6, 0.6, 1 )
 
 [node name="WaitButton" parent="UI/BottomPanel" instance=ExtResource( 27 )]
+visible = false
 margin_left = 20.0
 margin_top = 12.0
 margin_right = 108.0
@@ -187,6 +189,7 @@ texture_pressed = ExtResource( 30 )
 expand = true
 
 [node name="SkipButton" parent="UI/BottomPanel" instance=ExtResource( 27 )]
+visible = false
 margin_left = 112.0
 margin_top = 12.0
 margin_right = 200.0
