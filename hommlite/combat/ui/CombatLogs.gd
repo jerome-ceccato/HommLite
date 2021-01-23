@@ -28,8 +28,8 @@ func _entry_representation(entry: BattleLogger.Entry) -> String:
 
 
 func _game_ended_representation(entry: BattleLogger.Entry) -> String:
-	return "The combat has ended. %s won." % [
-		"Left" if entry.winner == BattleStack.Side.LEFT else "Right"
+	return "The combat has ended. %s." % [
+		"You won" if entry.winner == BattleStack.Side.LEFT else "You lost"
 	]
 
 
