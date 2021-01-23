@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/light.png-847dc0c687296182fe10d02a601de009.stex"
+path="res://.import/turtle.png-3faebb559d51bcc9ba8d5b1897912f83.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/combat/light.png"
-dest_files=[ "res://.import/light.png-847dc0c687296182fe10d02a601de009.stex" ]
+source_file="res://assets/combat/units/turtle.png"
+dest_files=[ "res://.import/turtle.png-3faebb559d51bcc9ba8d5b1897912f83.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

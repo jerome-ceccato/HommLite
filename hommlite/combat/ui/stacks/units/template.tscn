@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/combat/unit.shader" type="Shader" id=1]
-[ext_resource path="res://assets/combat/units/skelly.png" type="Texture" id=2]
+[ext_resource path="res://assets/combat/units/turtle.png" type="Texture" id=2]
 [ext_resource path="res://combat/ui/stacks/units/_stack.tscn" type="PackedScene" id=3]
 
 [sub_resource type="ShaderMaterial" id=1]
@@ -24,7 +24,7 @@ animations = [ {
 [node name="Container" parent="." instance=ExtResource( 3 )]
 
 [node name="SpriteContainer" parent="Container" index="2"]
-position = Vector2( -2, -32 )
+position = Vector2( 0, -6 )
 
 [node name="Sprite" parent="Container/SpriteContainer" index="0"]
 material = SubResource( 1 )
