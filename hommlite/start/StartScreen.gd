@@ -16,17 +16,17 @@ func _make_armies() -> Array:
 	var bee = load("res://assets/data/bee.tres")
 	var chicken = load("res://assets/data/chicken.tres")
 	var uchicken = load("res://assets/data/uchicken.tres")
-	var bbee = load("res://assets/data/bigbee.tres")
+	var cow = load("res://assets/data/cow.tres")
 	var template = load("res://assets/data/template.tres")
 	
 	var left_army = ArmyData.new([
 		StackData.new(bee, 14),
-		StackData.new(uchicken, 9),
+		StackData.new(cow, 9),
 	])
 	
 	var right_army = ArmyData.new([
 		StackData.new(chicken, 27),
-		StackData.new(chicken, 28),
+		StackData.new(uchicken, 6),
 		StackData.new(chicken, 27),
 	])
 	

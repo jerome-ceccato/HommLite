@@ -19,6 +19,7 @@ func setup(data: BattleData, grid: BattleGrid, events: BattleEvents, queue: Batt
 
 
 func run():
+	_select_unit_turn_state()
 	_data.emit_signal("_battle_data_state_changed")
 	_logger.log_round_started(_queue.turn_count)
 
@@ -41,6 +42,9 @@ func _update_state():
 func _queue_next():
 	if _queue.next():
 		_logger.log_round_started(_queue.turn_count)
+	_select_unit_turn_state()
+
+func _select_unit_turn_state():
 	if _queue.get_active_stack().side == BattleStack.Side.LEFT:
 		_data.update_state(_data.State.PLAYER_TURN)
 	else:

@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/combat/unit.shader" type="Shader" id=1]
-[ext_resource path="res://assets/combat/units/bigbee2.png" type="Texture" id=2]
+[ext_resource path="res://assets/combat/units/cow.png" type="Texture" id=2]
 [ext_resource path="res://combat/ui/stacks/units/_stack.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/combat/units/bigbee1.png" type="Texture" id=4]
 
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
@@ -14,13 +13,13 @@ shader_param/white_progress = 0.0
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ ExtResource( 4 ), ExtResource( 2 ) ],
+"frames": [ ExtResource( 2 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
 } ]
 
-[node name="BigBee" type="Node"]
+[node name="Cow" type="Node"]
 
 [node name="Container" parent="." instance=ExtResource( 3 )]
 

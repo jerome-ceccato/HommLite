@@ -7,6 +7,7 @@ script = ExtResource( 1 )
 id = "uchicken"
 display_name = "blue chicken"
 display_name_plural = "blue chickens"
+large = false
 speed = 5
 initiative = 8
 flying = false
