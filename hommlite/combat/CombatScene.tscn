@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://combat/ui/CombatArea.gd" type="Script" id=1]
 [ext_resource path="res://assets/combat/bg.png" type="Texture" id=2]
@@ -35,9 +35,10 @@
 [ext_resource path="res://assets/ui/button-skip-pressed.png" type="Texture" id=33]
 [ext_resource path="res://combat/ui/BottomPanel.gd" type="Script" id=34]
 [ext_resource path="res://combat/ui/grid/PathfindingOverlay.gd" type="Script" id=35]
-[ext_resource path="res://assets/ui/return-to-title-button.png" type="Texture" id=36]
+[ext_resource path="res://assets/fonts/m3x6.ttf" type="DynamicFontData" id=36]
 [ext_resource path="res://combat/ui/dialogs/EndScreen.gd" type="Script" id=37]
 [ext_resource path="res://combat/logic/AIController.gd" type="Script" id=38]
+[ext_resource path="res://ui/buttons/DefaultButton.tscn" type="PackedScene" id=39]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 22 )
@@ -50,6 +51,11 @@ font_data = ExtResource( 18 )
 [sub_resource type="DynamicFont" id=3]
 size = 128
 font_data = ExtResource( 22 )
+
+[sub_resource type="DynamicFont" id=4]
+extra_spacing_top = -8
+extra_spacing_bottom = -4
+font_data = ExtResource( 36 )
 
 [node name="CombatScene" type="Node2D"]
 script = ExtResource( 6 )
@@ -169,7 +175,7 @@ margin_top = 16.0
 margin_right = 1060.0
 margin_bottom = 89.0
 custom_fonts/normal_font = SubResource( 2 )
-custom_colors/default_color = Color( 0.752941, 0.796078, 0.862745, 1 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
 scroll_following = true
 script = ExtResource( 29 )
 __meta__ = {
@@ -244,14 +250,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureButton" type="TextureButton" parent="UI/Dialogs/EndScreen"]
-margin_left = 509.688
-margin_top = 246.826
-margin_right = 569.688
-margin_bottom = 261.826
-rect_scale = Vector2( 4, 4 )
-texture_normal = ExtResource( 36 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-[connection signal="pressed" from="UI/Dialogs/EndScreen/TextureButton" to="UI/Dialogs/EndScreen" method="_on_Titlescreen_pressed"]
+[node name="BackButton" parent="UI/Dialogs/EndScreen" instance=ExtResource( 39 )]
+margin_left = 512.0
+margin_top = 256.0
+margin_right = 575.0
+margin_bottom = 271.0
+custom_fonts/font = SubResource( 4 )
+text = "Back to title"
+[connection signal="pressed" from="UI/Dialogs/EndScreen/BackButton" to="UI/Dialogs/EndScreen" method="_on_Titlescreen_pressed"]
