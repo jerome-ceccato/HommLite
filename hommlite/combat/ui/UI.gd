@@ -16,3 +16,8 @@ func setup(_battle: Battle, map: MapData):
 	$BottomPanel/CombatLogs.setup(log_helper)
 	$BottomPanel/CurrentActionLabel.setup(battle, log_helper)
 	$LeftPanel.setup(events)
+	
+	$BottomPanel/CurrentActionLabel.observed_buttons = [
+		$LeftPanel/WaitButton,
+		$LeftPanel/DefButton,
+	]

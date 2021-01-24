@@ -174,12 +174,14 @@ script = ExtResource( 27 )
 
 [node name="WaitButton" parent="UI/LeftPanel" instance=ExtResource( 40 )]
 position = Vector2( 8, 552 )
+display_name = "Wait"
 
 [node name="Sprite" parent="UI/LeftPanel/WaitButton/TextureButton" index="0"]
 texture = ExtResource( 41 )
 
 [node name="DefButton" parent="UI/LeftPanel" instance=ExtResource( 40 )]
 position = Vector2( 84, 552 )
+display_name = "Defend"
 
 [node name="Sprite" parent="UI/LeftPanel/DefButton/TextureButton" index="0"]
 texture = ExtResource( 42 )

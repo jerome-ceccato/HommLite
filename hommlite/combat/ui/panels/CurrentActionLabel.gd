@@ -1,6 +1,7 @@
 extends RichTextLabel
 
 var battle: Battle
+var observed_buttons: Array # [AnyActionButton]
 var _log_helper: LogHelper
 var _last_state: CursorState
 
@@ -61,7 +62,9 @@ func _read_cursor_state(state: CursorState):
 	
 	if battle.get_state() == BattleData.State.PLAYER_TURN:
 		match state.action:
-			CursorState.Action.NONE, CursorState.Action.UNREACHABLE_CELL:
+			CursorState.Action.NONE:
+				_find_mouse_over()
+			CursorState.Action.UNREACHABLE_CELL:
 				clear()
 			CursorState.Action.UNREACHABLE_STACK:
 				_unreachable_stack(state.target_stack)
@@ -71,6 +74,17 @@ func _read_cursor_state(state: CursorState):
 				_reachable_stack(state.target_stack, state.active_stack, false)
 			CursorState.Action.RANGED_REACHABLE_STACK:
 				_reachable_stack(state.target_stack, state.active_stack, true)
+
+
+func _find_mouse_over():
+	if observed_buttons:
+		for container in observed_buttons:
+			if container is AnyActionButton:
+				var button := container as AnyActionButton
+				if button.button.is_hovered():
+					_set_content(button.display_name)
+					return
+	clear()
 
 
 func _on_UI_mouse_moved(state: CursorState):

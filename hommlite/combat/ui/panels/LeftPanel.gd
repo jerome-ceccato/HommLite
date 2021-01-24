@@ -9,6 +9,7 @@ var events: UIEvents
 func setup(_events: UIEvents):
 	events = _events
 
+
 func _on_Wait_pressed():
 	events.emit_signal("action_wait")
 

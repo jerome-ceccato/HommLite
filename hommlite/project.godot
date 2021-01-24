@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://combat/logic/AIController.gd"
 }, {
+"base": "Node2D",
+"class": "AnyActionButton",
+"language": "GDScript",
+"path": "res://combat/ui/actions/AnyActionButton.gd"
+}, {
 "base": "Reference",
 "class": "ArmyData",
 "language": "GDScript",
@@ -146,6 +151,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "AIController": "",
+"AnyActionButton": "",
 "ArmyData": "",
 "Battle": "",
 "BattleCoords": "",
