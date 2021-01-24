@@ -81,7 +81,7 @@ func _find_mouse_over():
 		for container in observed_buttons:
 			if container is AnyActionButton:
 				var button := container as AnyActionButton
-				if button.button.is_hovered():
+				if button.is_hovered():
 					_set_content(button.display_name)
 					return
 	clear()

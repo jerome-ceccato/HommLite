@@ -44,14 +44,14 @@
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 22 )
 
-[sub_resource type="DynamicFont" id=2]
-size = 32
-extra_spacing_top = -3
-font_data = ExtResource( 18 )
-
 [sub_resource type="DynamicFont" id=3]
 size = 32
 extra_spacing_top = -5
+font_data = ExtResource( 18 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 32
+extra_spacing_top = -3
 font_data = ExtResource( 18 )
 
 [sub_resource type="DynamicFont" id=4]
@@ -196,29 +196,27 @@ scale = Vector2( 4, 4 )
 texture = ExtResource( 26 )
 centered = false
 
-[node name="CombatLogs" type="RichTextLabel" parent="UI/BottomPanel"]
-visible = false
-margin_left = 218.0
-margin_top = 16.0
-margin_right = 1060.0
-margin_bottom = 89.0
-custom_fonts/normal_font = SubResource( 2 )
-custom_colors/default_color = Color( 1, 1, 1, 1 )
-scroll_following = true
-script = ExtResource( 29 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="CurrentActionLabel" type="RichTextLabel" parent="UI/BottomPanel"]
 margin_left = 196.0
 margin_top = 71.4703
 margin_right = 1083.0
 margin_bottom = 94.4703
 custom_fonts/normal_font = SubResource( 3 )
-text = "		Lorem ipsum dolor sit amet, consectetur adipiscing elit"
 scroll_active = false
 script = ExtResource( 30 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CombatLogs" type="RichTextLabel" parent="UI"]
+margin_left = 216.0
+margin_right = 1058.0
+margin_bottom = 60.0
+custom_fonts/normal_font = SubResource( 2 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+scroll_active = false
+scroll_following = true
+script = ExtResource( 29 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

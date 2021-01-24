@@ -13,7 +13,7 @@ func setup(_battle: Battle, map: MapData):
 	$CombatArea.setup_battle(battle, events)
 	$Cursor.setup(battle, $CombatArea/HexGrid)
 	$BottomPanel.setup(events)
-	$BottomPanel/CombatLogs.setup(log_helper)
+	$CombatLogs.setup(log_helper)
 	$BottomPanel/CurrentActionLabel.setup(battle, log_helper)
 	$LeftPanel.setup(events)
 	
