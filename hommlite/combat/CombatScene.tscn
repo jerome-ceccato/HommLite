@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://combat/ui/CombatArea.gd" type="Script" id=1]
 [ext_resource path="res://assets/combat/bg.png" type="Texture" id=2]
@@ -26,14 +26,12 @@
 [ext_resource path="res://combat/logic/BattleQueue.gd" type="Script" id=24]
 [ext_resource path="res://combat/ui/Keyboard.gd" type="Script" id=25]
 [ext_resource path="res://assets/ui/bottom-bg.png" type="Texture" id=26]
-[ext_resource path="res://combat/ui/BottomButton.tscn" type="PackedScene" id=27]
+[ext_resource path="res://combat/ui/panels/LeftPanel.gd" type="Script" id=27]
 [ext_resource path="res://combat/logic/BattleLogger.gd" type="Script" id=28]
-[ext_resource path="res://combat/ui/CombatLogs.gd" type="Script" id=29]
-[ext_resource path="res://assets/ui/button-wait-pressed.png" type="Texture" id=30]
-[ext_resource path="res://assets/ui/button-wait-normal.png" type="Texture" id=31]
-[ext_resource path="res://assets/ui/button-skip-normal.png" type="Texture" id=32]
-[ext_resource path="res://assets/ui/button-skip-pressed.png" type="Texture" id=33]
-[ext_resource path="res://combat/ui/BottomPanel.gd" type="Script" id=34]
+[ext_resource path="res://combat/ui/panels/CombatLogs.gd" type="Script" id=29]
+[ext_resource path="res://combat/ui/panels/CurrentActionLabel.gd" type="Script" id=30]
+[ext_resource path="res://combat/ui/panels/LogHelper.gd" type="Script" id=31]
+[ext_resource path="res://combat/ui/panels/BottomPanel.gd" type="Script" id=34]
 [ext_resource path="res://combat/ui/grid/PathfindingOverlay.gd" type="Script" id=35]
 [ext_resource path="res://assets/fonts/m3x6.ttf" type="DynamicFontData" id=36]
 [ext_resource path="res://combat/ui/dialogs/EndScreen.gd" type="Script" id=37]
@@ -51,16 +49,16 @@ size = 32
 extra_spacing_top = -3
 font_data = ExtResource( 18 )
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=3]
 size = 32
 extra_spacing_top = -5
 font_data = ExtResource( 18 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=4]
 size = 128
 font_data = ExtResource( 22 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=5]
 extra_spacing_top = -8
 extra_spacing_bottom = -4
 font_data = ExtResource( 36 )
@@ -159,7 +157,6 @@ visible = false
 z_index = 7
 script = ExtResource( 23 )
 font = SubResource( 1 )
-color = Color( 0.96, 0.96, 0.86, 1 )
 
 [node name="Obstacles" type="Node2D" parent="UI/CombatArea"]
 
@@ -167,7 +164,13 @@ color = Color( 0.96, 0.96, 0.86, 1 )
 z_index = 10
 script = ExtResource( 4 )
 
+[node name="LogHelper" type="Node" parent="UI"]
+script = ExtResource( 31 )
+player_color = Color( 0.631373, 1, 0.6, 1 )
+enemy_color = Color( 1, 0.6, 0.6, 1 )
+
 [node name="LeftPanel" type="Node2D" parent="UI"]
+script = ExtResource( 27 )
 
 [node name="WaitButton" parent="UI/LeftPanel" instance=ExtResource( 40 )]
 position = Vector2( 8, 552 )
@@ -192,6 +195,7 @@ texture = ExtResource( 26 )
 centered = false
 
 [node name="CombatLogs" type="RichTextLabel" parent="UI/BottomPanel"]
+visible = false
 margin_left = 218.0
 margin_top = 16.0
 margin_right = 1060.0
@@ -203,37 +207,16 @@ script = ExtResource( 29 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-left_color = Color( 0.633333, 1, 0.6, 1 )
-right_color = Color( 1, 0.6, 0.6, 1 )
 
-[node name="WaitButton" parent="UI/BottomPanel" instance=ExtResource( 27 )]
-visible = false
-margin_left = 20.0
-margin_top = 12.0
-margin_right = 108.0
-margin_bottom = 92.0
-texture_normal = ExtResource( 31 )
-texture_pressed = ExtResource( 30 )
-expand = true
-
-[node name="SkipButton" parent="UI/BottomPanel" instance=ExtResource( 27 )]
-visible = false
-margin_left = 112.0
-margin_top = 12.0
-margin_right = 200.0
-margin_bottom = 92.0
-texture_normal = ExtResource( 32 )
-texture_pressed = ExtResource( 33 )
-expand = true
-
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/BottomPanel"]
+[node name="CurrentActionLabel" type="RichTextLabel" parent="UI/BottomPanel"]
 margin_left = 196.0
 margin_top = 71.4703
 margin_right = 1083.0
 margin_bottom = 94.4703
-custom_fonts/normal_font = SubResource( 5 )
+custom_fonts/normal_font = SubResource( 3 )
 text = "		Lorem ipsum dolor sit amet, consectetur adipiscing elit"
 scroll_active = false
+script = ExtResource( 30 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -276,7 +259,7 @@ margin_left = 340.0
 margin_top = 60.0
 margin_right = 936.0
 margin_bottom = 226.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "Victory!"
 align = 1
 valign = 1
@@ -289,8 +272,10 @@ margin_left = 512.0
 margin_top = 256.0
 margin_right = 575.0
 margin_bottom = 271.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 5 )
 text = "Back to title"
+[connection signal="pressed" from="UI/LeftPanel/WaitButton/TextureButton" to="UI/LeftPanel" method="_on_Wait_pressed"]
+[connection signal="pressed" from="UI/LeftPanel/DefButton/TextureButton" to="UI/LeftPanel" method="_on_Def_pressed"]
 [connection signal="pressed" from="UI/Dialogs/EndScreen/BackButton" to="UI/Dialogs/EndScreen" method="_on_Titlescreen_pressed"]
 
 [editable path="UI/LeftPanel/WaitButton"]

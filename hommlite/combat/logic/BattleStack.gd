@@ -49,7 +49,40 @@ func damage_roll(target: BattleStack, ranged: bool) -> int:
 		base_roll = dmin + (randi() % (dmax - dmin + 1))
 	
 	# Attack - Defence multiplier
-	var roll: int = base_roll
+	var roll := _apply_atk_def(target, base_roll)
+	
+	# Melee penalty multiplier
+	if !ranged and stack.unit.ranged:
+		roll /= 2
+	
+	return int(max(1, roll))
+
+
+func damage_range(target: BattleStack, ranged: bool) -> Array:
+	var dmin = stack.unit.dmg_low * amount
+	var dmax = stack.unit.dmg_high * amount
+	
+	# Attack - Defence multiplier
+	var min_roll := _apply_atk_def(target, dmin)
+	var max_roll := _apply_atk_def(target, dmax)
+	
+	# Melee penalty multiplier
+	if !ranged and stack.unit.ranged:
+		min_roll /= 2
+		max_roll /= 2
+	
+	return [int(max(1, min_roll)), int(max(1, max_roll))]
+
+
+func amount_killed(dmg: int) -> int:
+	if top_unit_hp > dmg:
+		return 0
+	else:
+		dmg -= top_unit_hp
+		return int(min(amount, 1 + dmg / stack.unit.hp))
+
+
+func _apply_atk_def(target: BattleStack, roll: int) -> int:
 	var atk_bonus = stack.unit.atk - target.stack.unit.def
 	if atk_bonus > 0:
 		var multiplier = min(1 + 0.05 * atk_bonus, 3)
@@ -57,12 +90,7 @@ func damage_roll(target: BattleStack, ranged: bool) -> int:
 	elif atk_bonus < 0:
 		var multiplier = max(1 + 0.025 * atk_bonus, 0.3)
 		roll = floor(float(roll) * multiplier)
-	
-	# Melee penalty multiplier
-	if !ranged and stack.unit.ranged:
-		roll /= 2
-	
-	return int(max(1, roll))
+	return roll
 
 
 func apply_damage(dmg: int):

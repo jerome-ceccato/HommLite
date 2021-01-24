@@ -26,6 +26,7 @@ func _setup_bindings():
 		$UI/CombatArea/Grid/PathfindingOverlay,
 		$UI/CombatArea/Grid/UnitHoverMovementOverlay,
 		$UI/Cursor,
+		$UI/BottomPanel/CurrentActionLabel,
 		]:
 		ui_events.connect("mouse_moved", listener, "_on_UI_mouse_moved")
 	
@@ -51,6 +52,7 @@ func _setup_bindings():
 		$UI/CombatArea/Grid/ActionGridHover,
 		$UI/CombatArea/Grid/ActiveStackMovementOverlay,
 		$UI/CombatArea/Grid/PathfindingOverlay,
+		$UI/BottomPanel/CurrentActionLabel,
 		]:
 		battle_events.connect("game_state_changed", listener, "_on_Battle_game_state_changed")
 	
