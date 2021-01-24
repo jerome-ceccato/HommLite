@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=48 format=2]
 
 [ext_resource path="res://combat/ui/CombatArea.gd" type="Script" id=1]
 [ext_resource path="res://assets/combat/bg.png" type="Texture" id=2]
@@ -39,6 +39,9 @@
 [ext_resource path="res://combat/ui/dialogs/EndScreen.gd" type="Script" id=37]
 [ext_resource path="res://combat/logic/AIController.gd" type="Script" id=38]
 [ext_resource path="res://ui/buttons/DefaultButton.tscn" type="PackedScene" id=39]
+[ext_resource path="res://combat/ui/actions/ui/ActionButton.tscn" type="PackedScene" id=40]
+[ext_resource path="res://assets/ui/action-wait.png" type="Texture" id=41]
+[ext_resource path="res://assets/ui/action-def.png" type="Texture" id=42]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 22 )
@@ -46,6 +49,11 @@ font_data = ExtResource( 22 )
 [sub_resource type="DynamicFont" id=2]
 size = 32
 extra_spacing_top = -3
+font_data = ExtResource( 18 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 32
+extra_spacing_top = -5
 font_data = ExtResource( 18 )
 
 [sub_resource type="DynamicFont" id=3]
@@ -159,6 +167,20 @@ color = Color( 0.96, 0.96, 0.86, 1 )
 z_index = 10
 script = ExtResource( 4 )
 
+[node name="LeftPanel" type="Node2D" parent="UI"]
+
+[node name="WaitButton" parent="UI/LeftPanel" instance=ExtResource( 40 )]
+position = Vector2( 8, 552 )
+
+[node name="Sprite" parent="UI/LeftPanel/WaitButton/TextureButton" index="0"]
+texture = ExtResource( 41 )
+
+[node name="DefButton" parent="UI/LeftPanel" instance=ExtResource( 40 )]
+position = Vector2( 84, 552 )
+
+[node name="Sprite" parent="UI/LeftPanel/DefButton/TextureButton" index="0"]
+texture = ExtResource( 42 )
+
 [node name="BottomPanel" type="Node2D" parent="UI"]
 position = Vector2( 0, 624 )
 z_index = 100
@@ -203,6 +225,18 @@ margin_bottom = 92.0
 texture_normal = ExtResource( 32 )
 texture_pressed = ExtResource( 33 )
 expand = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/BottomPanel"]
+margin_left = 196.0
+margin_top = 71.4703
+margin_right = 1083.0
+margin_bottom = 94.4703
+custom_fonts/normal_font = SubResource( 5 )
+text = "		Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Dialogs" type="Node2D" parent="UI"]
 z_index = 1000
@@ -258,3 +292,7 @@ margin_bottom = 271.0
 custom_fonts/font = SubResource( 4 )
 text = "Back to title"
 [connection signal="pressed" from="UI/Dialogs/EndScreen/BackButton" to="UI/Dialogs/EndScreen" method="_on_Titlescreen_pressed"]
+
+[editable path="UI/LeftPanel/WaitButton"]
+
+[editable path="UI/LeftPanel/DefButton"]
