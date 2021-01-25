@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=51 format=2]
 
 [ext_resource path="res://combat/ui/CombatArea.gd" type="Script" id=1]
 [ext_resource path="res://assets/combat/bg.png" type="Texture" id=2]
@@ -31,6 +31,8 @@
 [ext_resource path="res://combat/ui/panels/CombatLogs.gd" type="Script" id=29]
 [ext_resource path="res://combat/ui/panels/CurrentActionLabel.gd" type="Script" id=30]
 [ext_resource path="res://combat/ui/panels/LogHelper.gd" type="Script" id=31]
+[ext_resource path="res://combat/ui/panels/queue/QueueItem.tscn" type="PackedScene" id=32]
+[ext_resource path="res://assets/combat/units/uchicken.png" type="Texture" id=33]
 [ext_resource path="res://combat/ui/panels/BottomPanel.gd" type="Script" id=34]
 [ext_resource path="res://combat/ui/grid/PathfindingOverlay.gd" type="Script" id=35]
 [ext_resource path="res://assets/fonts/m3x6.ttf" type="DynamicFontData" id=36]
@@ -40,16 +42,19 @@
 [ext_resource path="res://combat/ui/actions/ui/ActionButton.tscn" type="PackedScene" id=40]
 [ext_resource path="res://assets/ui/action-wait.png" type="Texture" id=41]
 [ext_resource path="res://assets/ui/action-def.png" type="Texture" id=42]
+[ext_resource path="res://assets/combat/units/bee.png" type="Texture" id=43]
+[ext_resource path="res://assets/combat/units/cow.png" type="Texture" id=44]
+[ext_resource path="res://assets/combat/units/turtle.png" type="Texture" id=45]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 22 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=2]
 size = 32
 extra_spacing_top = -5
 font_data = ExtResource( 18 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=3]
 size = 32
 extra_spacing_top = -3
 font_data = ExtResource( 18 )
@@ -196,12 +201,55 @@ scale = Vector2( 4, 4 )
 texture = ExtResource( 26 )
 centered = false
 
+[node name="Queue" type="Node2D" parent="UI/BottomPanel"]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/BottomPanel/Queue"]
+margin_left = 196.0
+margin_top = 8.0
+margin_right = 1086.0
+margin_bottom = 64.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="QueueItem" parent="UI/BottomPanel/Queue/HBoxContainer" instance=ExtResource( 32 )]
+margin_right = 56.0
+margin_bottom = 56.0
+
+[node name="TextureRect" parent="UI/BottomPanel/Queue/HBoxContainer/QueueItem" index="0"]
+texture = ExtResource( 43 )
+
+[node name="QueueItem2" parent="UI/BottomPanel/Queue/HBoxContainer" instance=ExtResource( 32 )]
+margin_left = 60.0
+margin_right = 116.0
+margin_bottom = 56.0
+
+[node name="TextureRect" parent="UI/BottomPanel/Queue/HBoxContainer/QueueItem2" index="0"]
+texture = ExtResource( 33 )
+
+[node name="QueueItem3" parent="UI/BottomPanel/Queue/HBoxContainer" instance=ExtResource( 32 )]
+margin_left = 120.0
+margin_right = 176.0
+margin_bottom = 56.0
+
+[node name="TextureRect" parent="UI/BottomPanel/Queue/HBoxContainer/QueueItem3" index="0"]
+texture = ExtResource( 44 )
+
+[node name="QueueItem" parent="UI/BottomPanel/Queue" instance=ExtResource( 32 )]
+margin_left = 104.0
+margin_top = 8.0
+margin_right = 192.0
+margin_bottom = 96.0
+
+[node name="TextureRect" parent="UI/BottomPanel/Queue/QueueItem" index="0"]
+texture = ExtResource( 45 )
+
 [node name="CurrentActionLabel" type="RichTextLabel" parent="UI/BottomPanel"]
 margin_left = 196.0
 margin_top = 71.4703
 margin_right = 1083.0
 margin_bottom = 94.4703
-custom_fonts/normal_font = SubResource( 3 )
+custom_fonts/normal_font = SubResource( 2 )
 scroll_active = false
 script = ExtResource( 30 )
 __meta__ = {
@@ -212,7 +260,7 @@ __meta__ = {
 margin_left = 216.0
 margin_right = 1058.0
 margin_bottom = 60.0
-custom_fonts/normal_font = SubResource( 2 )
+custom_fonts/normal_font = SubResource( 3 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 scroll_active = false
 scroll_following = true
@@ -281,3 +329,11 @@ text = "Back to title"
 [editable path="UI/LeftPanel/WaitButton"]
 
 [editable path="UI/LeftPanel/DefButton"]
+
+[editable path="UI/BottomPanel/Queue/HBoxContainer/QueueItem"]
+
+[editable path="UI/BottomPanel/Queue/HBoxContainer/QueueItem2"]
+
+[editable path="UI/BottomPanel/Queue/HBoxContainer/QueueItem3"]
+
+[editable path="UI/BottomPanel/Queue/QueueItem"]
