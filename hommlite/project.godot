@@ -129,6 +129,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://combat/ui/projectiles/Projectile.gd"
 }, {
+"base": "Control",
+"class": "QueueItem",
+"language": "GDScript",
+"path": "res://combat/ui/panels/queue/QueueItem.gd"
+}, {
 "base": "Node2D",
 "class": "StackContainer",
 "language": "GDScript",
@@ -174,6 +179,7 @@ _global_script_class_icons={
 "MapData": "",
 "ObstacleData": "",
 "Projectile": "",
+"QueueItem": "",
 "StackContainer": "",
 "StackData": "",
 "UIEvents": "",

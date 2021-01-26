@@ -53,6 +53,7 @@ func _setup_bindings():
 		$UI/CombatArea/Grid/ActiveStackMovementOverlay,
 		$UI/CombatArea/Grid/PathfindingOverlay,
 		$UI/BottomPanel/CurrentActionLabel,
+		$UI/BottomPanel/Queue,
 		]:
 		battle_events.connect("game_state_changed", listener, "_on_Battle_game_state_changed")
 	
