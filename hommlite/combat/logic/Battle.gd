@@ -46,6 +46,9 @@ func get_winner() -> int: # BattleStack.Side
 func all_stacks() -> Array: #[BattleStack]
 	return _data.all_stacks()
 
+func get_queue_prediction(size: int) -> Array: #[[BattleStack]]
+	return _queue.get_queue_prediction(size)
+
 func all_obstacles() -> Array:
 	return _data.all_obstacles()
 

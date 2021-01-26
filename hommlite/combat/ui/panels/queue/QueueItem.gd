@@ -16,9 +16,9 @@ func update_with_stack(stack: BattleStack):
 		
 		label.text = str(stack.amount)
 		if stack.side == BattleStack.Side.LEFT:
-			add_color_override("font_color", _log_helper.player_color)
+			label.add_color_override("font_color", _log_helper.player_color)
 		else:
-			add_color_override("font_color", _log_helper.enemy_color)
+			label.add_color_override("font_color", _log_helper.enemy_color)
 	else:
 		sprite.texture = null
 		label.text = ""

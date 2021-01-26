@@ -12,8 +12,16 @@ func setup(log_helper: LogHelper):
 
 func _on_Battle_game_state_changed(battle: Battle):
 	var items = container.get_children()
-	var battle_queue: Array = battle.all_stacks() #TODO: actual queue
-	for i in range(items.size()):
-		var queue_item = items[i] as QueueItem
-		var stack = battle_queue[i] if i < battle_queue.size() else null
-		queue_item.update_with_stack(stack)
+	var battle_queue_rounds: Array = battle.get_queue_prediction(items.size())
+	
+	var progress = 0
+	for battle_round in battle_queue_rounds:
+		if progress > 0:
+			# Round number
+			var queue_item = items[progress] as QueueItem
+			queue_item.update_with_stack(null)
+			progress += 1
+		for stack in battle_round:
+			var queue_item = items[progress] as QueueItem
+			queue_item.update_with_stack(stack)
+			progress += 1

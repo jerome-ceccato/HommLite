@@ -52,6 +52,35 @@ func remove_stack_from_queue(stack: BattleStack):
 		_first_pass_length -= 1
 
 
+func get_queue_prediction(size: int) -> Array:
+	var prediction = []
+	var current_round = []
+	var progress = 0
+	
+	var index = _q_index
+	while index < _queue.size() and progress < size:
+		current_round.append(_queue[index])
+		index += 1
+		progress += 1
+	prediction.append(current_round)
+	
+	if progress < size:
+		var next_round_queue = _data.all_stacks()
+		next_round_queue.sort_custom(self, "sort_stacks")
+		while progress < size:
+			index = 0
+			progress += 1
+			current_round = []
+			while index < next_round_queue.size() and progress < size:
+				current_round.append(next_round_queue[index])
+				index += 1
+				progress += 1
+			prediction.append(current_round)
+		
+	
+	return prediction
+
+
 func _rebuild_queue():
 	_queue = _data.all_stacks()
 	_queue.sort_custom(self, "sort_stacks")
