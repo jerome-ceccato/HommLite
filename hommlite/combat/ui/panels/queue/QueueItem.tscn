@@ -1,10 +1,15 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/combat/units/placeholder.png" type="Texture" id=1]
 [ext_resource path="res://assets/fonts/m5x7.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://combat/ui/panels/queue/QueueItem.gd" type="Script" id=3]
+[ext_resource path="res://assets/ui/queue-round-bg.png" type="Texture" id=4]
 
 [sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 48
 font_data = ExtResource( 2 )
 
 [node name="QueueItem" type="Control"]
@@ -35,6 +40,39 @@ margin_bottom = -3.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "1234"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NextRound" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="NextRound"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 4 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="NextRound"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1.25
+margin_top = -1.75
+margin_right = 1.25
+margin_bottom = -1.75
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.764706, 0.803922, 0.858824, 1 )
+text = "99"
 align = 1
 valign = 1
 __meta__ = {

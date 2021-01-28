@@ -4,6 +4,9 @@ extends Control
 onready var sprite: TextureRect = $TextureRect
 onready var label: Label = $Label
 
+onready var round_container: Control = $NextRound
+onready var round_number: Label = $NextRound/Label
+
 var _log_helper: LogHelper
 
 func setup(log_helper: LogHelper):
@@ -11,6 +14,7 @@ func setup(log_helper: LogHelper):
 
 
 func update_with_stack(stack: BattleStack):
+	round_container.visible = false
 	if stack:
 		sprite.texture = _get_texture(stack)
 		
@@ -22,6 +26,13 @@ func update_with_stack(stack: BattleStack):
 	else:
 		sprite.texture = null
 		label.text = ""
+
+
+func update_with_round_number(n: int):
+	round_container.visible = true
+	sprite.texture = null
+	label.text = ""
+	round_number.text = str(n)
 
 
 func _get_texture(stack: BattleStack) -> Texture:

@@ -49,6 +49,10 @@ func all_stacks() -> Array: #[BattleStack]
 func get_queue_prediction(size: int) -> Array: #[[BattleStack]]
 	return _queue.get_queue_prediction(size)
 
+func get_current_round_number() -> int:
+	return _queue.turn_count
+
+
 func all_obstacles() -> Array:
 	return _data.all_obstacles()
 
