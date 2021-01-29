@@ -74,3 +74,11 @@ func can_attack(source: BattleStack, target: BattleStack) -> bool:
 
 func can_attack_ranged(stack: BattleStack) -> bool:
 	return _data.can_attack_ranged(stack)
+	
+
+func get_final_player_army() -> ArmyData:
+	var stacks = []
+	for bstack in all_stacks():
+		if bstack.amount > 0 and bstack.side == BattleStack.Side.LEFT:
+			stacks.append(StackData.new(bstack.stack.unit, bstack.amount))
+	return ArmyData.new(stacks)

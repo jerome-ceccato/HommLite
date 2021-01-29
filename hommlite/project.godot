@@ -15,6 +15,11 @@ _global_script_classes=[ {
 "path": "res://src/combat/logic/AIController.gd"
 }, {
 "base": "Reference",
+"class": "AllBattles",
+"language": "GDScript",
+"path": "res://src/global/AllBattles.gd"
+}, {
+"base": "Node2D",
 "class": "AnyActionButton",
 "language": "GDScript",
 "path": "res://src/combat/ui/actions/AnyActionButton.gd"
@@ -79,7 +84,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/combat/logic/BattleStack.gd"
 }, {
-"base": "Reference",
+"base": "Node",
 "class": "CursorActionResolver",
 "language": "GDScript",
 "path": "res://src/combat/ui/actions/CursorActionResolver.gd"
@@ -89,7 +94,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/combat/ui/actions/CursorState.gd"
 }, {
-"base": "Reference",
+"base": "Node2D",
 "class": "GridOverlayBase",
 "language": "GDScript",
 "path": "res://src/combat/ui/grid/GridOverlayBase.gd"
@@ -99,7 +104,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/combat/ui/grid/HexCell.gd"
 }, {
-"base": "Reference",
+"base": "Node",
 "class": "HexGrid",
 "language": "GDScript",
 "path": "res://src/combat/ui/grid/HexGrid.gd"
@@ -109,7 +114,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/combat/logic/HexUtils.gd"
 }, {
-"base": "Reference",
+"base": "Node",
 "class": "LogHelper",
 "language": "GDScript",
 "path": "res://src/combat/ui/panels/LogHelper.gd"
@@ -125,16 +130,21 @@ _global_script_classes=[ {
 "path": "res://src/combat/data/ObstacleData.gd"
 }, {
 "base": "Reference",
+"class": "PlayerArmy",
+"language": "GDScript",
+"path": "res://src/save/PlayerArmy.gd"
+}, {
+"base": "Node2D",
 "class": "Projectile",
 "language": "GDScript",
 "path": "res://src/combat/ui/projectiles/Projectile.gd"
 }, {
-"base": "Reference",
+"base": "Control",
 "class": "QueueItem",
 "language": "GDScript",
 "path": "res://src/combat/ui/panels/queue/QueueItem.gd"
 }, {
-"base": "Reference",
+"base": "Node2D",
 "class": "StackContainer",
 "language": "GDScript",
 "path": "res://src/combat/ui/stacks/StackContainer.gd"
@@ -144,7 +154,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/combat/data/StackData.gd"
 }, {
-"base": "Reference",
+"base": "Node",
 "class": "UIEvents",
 "language": "GDScript",
 "path": "res://src/combat/ui/UIEvents.gd"
@@ -156,6 +166,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "AIController": "",
+"AllBattles": "",
 "AnyActionButton": "",
 "ArmyData": "",
 "Battle": "",
@@ -178,6 +189,7 @@ _global_script_class_icons={
 "LogHelper": "",
 "MapData": "",
 "ObstacleData": "",
+"PlayerArmy": "",
 "Projectile": "",
 "QueueItem": "",
 "StackContainer": "",
