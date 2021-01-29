@@ -1,9 +1,10 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://ui/buttons/DefaultButton.gd" type="Script" id=1]
+[ext_resource path="res://src/ui/buttons/DefaultButton.gd" type="Script" id=1]
 [ext_resource path="res://assets/ui/button-normal.png" type="Texture" id=2]
 [ext_resource path="res://assets/ui/button-pressed.png" type="Texture" id=3]
 [ext_resource path="res://assets/fonts/m5x7.ttf" type="DynamicFontData" id=4]
+
 
 [sub_resource type="StyleBoxTexture" id=1]
 texture = ExtResource( 2 )

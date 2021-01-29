@@ -2,7 +2,7 @@ extends Node2D
 
 func _on_Start_pressed():
 	_setup_combat()
-	var combat_scene_path = "res://combat/CombatScene.tscn"
+	var combat_scene_path = "res://src/combat/CombatScene.tscn"
 	get_tree().change_scene(combat_scene_path)
 
 

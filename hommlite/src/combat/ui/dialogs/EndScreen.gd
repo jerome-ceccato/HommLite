@@ -18,5 +18,5 @@ func _on_Battle_game_state_changed(battle: Battle):
 
 
 func _on_Titlescreen_pressed():
-	var title_scene_path = "res://start/StartScreen.tscn"
+	var title_scene_path = "res://src/start/StartScreen.tscn"
 	get_tree().change_scene(title_scene_path)

@@ -54,7 +54,7 @@ func animate_handle_attack(_grid: HexGrid, source: BattleStack, target: BattleSt
 
 
 func _animate_projectile(source: StackContainer, target: StackContainer):
-	var projectile: Projectile = load("res://combat/ui/projectiles/Projectile.tscn").instance()
+	var projectile: Projectile = load("res://src/combat/ui/projectiles/Projectile.tscn").instance()
 	add_child(projectile)
 	
 	var from = hexgrid.get_cell_at_coords(source.stack.coordinates).center
@@ -116,7 +116,7 @@ func _points_for_path(coords: Array, grid: HexGrid) -> Array:
 
 
 func _scene_for_unit(unit: UnitData) -> PackedScene:
-	var scene_id = "res://combat/ui/stacks/units/%s.tscn" % unit.id
+	var scene_id = "res://src/combat/ui/stacks/units/%s.tscn" % unit.id
 	return load(scene_id) as PackedScene
 
 
