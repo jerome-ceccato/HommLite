@@ -32,3 +32,6 @@ func load_save():
 
 func save():
 	_persistence.save_current_context()
+
+func delete_save():
+	_persistence.delete_save()

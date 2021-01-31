@@ -76,9 +76,6 @@ func can_attack_ranged(stack: BattleStack) -> bool:
 	return _data.can_attack_ranged(stack)
 	
 
-func get_final_player_army() -> Army:
-	return _manager.get_final_player_army()
-
 
 func active_stack_can_wait() -> bool:
 	return _queue.active_stack_can_wait()

@@ -26,6 +26,11 @@ func save_current_context():
 	save_game.close()
 
 
+func delete_save():
+	var dir = Directory.new()
+	dir.remove(SAVE_PATH)
+
+
 func _deserialize_context(data: Dictionary):
 	Context.battle_progress = data["battle_progress"]
 	Context.player_army = Army.new([]).deserialize(data["player_army"])

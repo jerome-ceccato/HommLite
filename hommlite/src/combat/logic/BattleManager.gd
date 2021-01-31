@@ -31,30 +31,29 @@ func get_winner() -> int:
 		return BattleStack.Side.UNKNOWN
 
 
-func get_final_player_army() -> Army:
-	var player_bstack = []
-	for bstack in _data.all_stacks():
-		if bstack.amount > 0 and bstack.side == BattleStack.Side.LEFT:
-			player_bstack.append(bstack)
-	player_bstack.sort_custom(self, "_sort_bstack_id")
-	var stacks = []
-	for bstack in player_bstack:
-		stacks.append(Stack.new(bstack.unit.id, bstack.amount))
-	return Army.new(stacks)
-
-
 func _update_state():
 	if _game_should_end():
 		_data.update_state(_data.State.COMBAT_ENDED)
+		_update_context()
 		_logger.log_game_ended(get_winner())
 	else:
 		_queue_next()
+
+
+func _update_context():
+	if get_winner() == BattleStack.Side.LEFT:
+		Context.player_army = _get_final_player_army()
+		Context.battle_progress += 1
+		Context.save()
+	else:
+		Context.delete_save()
 
 
 func _queue_next():
 	if _queue.next():
 		_logger.log_round_started(_queue.turn_count)
 	_select_unit_turn_state()
+
 
 func _select_unit_turn_state():
 	if _queue.get_active_stack().side == BattleStack.Side.LEFT:
@@ -168,6 +167,18 @@ func _on_UI_action_wait():
 		_logger.log_wait(current_stack)
 		_queue_next()
 		_data.force_state_update()
+
+
+func _get_final_player_army() -> Army:
+	var player_bstack = []
+	for bstack in _data.all_stacks():
+		if bstack.amount > 0 and bstack.side == BattleStack.Side.LEFT:
+			player_bstack.append(bstack)
+	player_bstack.sort_custom(self, "_sort_bstack_id")
+	var stacks = []
+	for bstack in player_bstack:
+		stacks.append(Stack.new(bstack.unit.id, bstack.amount))
+	return Army.new(stacks)
 
 
 func _sort_bstack_id(a: BattleStack, b: BattleStack) -> bool:
