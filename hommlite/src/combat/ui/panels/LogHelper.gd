@@ -45,14 +45,14 @@ func _game_ended_representation(entry: BattleLogger.Entry) -> String:
 
 func _wait_representation(entry: BattleLogger.Entry) -> String:
 	return "The %s %s." % [
-		side_color(pluralized_name(entry.source.stack.unit, entry.source.amount), entry.source.side),
+		side_color(pluralized_name(entry.source.unit, entry.source.amount), entry.source.side),
 		pluralize(entry.source.amount, "waits", "wait"),
 	]
 
 
 func _skip_representation(entry: BattleLogger.Entry) -> String:
 	return "The %s %s their turn." % [
-		side_color(pluralized_name(entry.source.stack.unit, entry.source.amount), entry.source.side),
+		side_color(pluralized_name(entry.source.unit, entry.source.amount), entry.source.side),
 		pluralize(entry.source.amount, "skips", "skip"),
 	]
 
@@ -69,7 +69,7 @@ func _attack_representation(entry: BattleLogger.Entry) -> String:
 
 func _damage_text(entry: BattleLogger.Entry) -> String:
 	return "The %s %s %s damage." % [
-		side_color(pluralized_name(entry.source.stack.unit, entry.source.amount), entry.source.side),
+		side_color(pluralized_name(entry.source.unit, entry.source.amount), entry.source.side),
 		pluralize(entry.source.amount, "does", "do"),
 		entry.damage,
 	]
@@ -78,7 +78,7 @@ func _death_text(entry: BattleLogger.Entry) -> String:
 	if entry.death > 0:
 		return " %s %s %s." % [
 			entry.death,
-			side_color(pluralized_name(entry.target.stack.unit, entry.death), entry.target.side),
+			side_color(pluralized_name(entry.target.unit, entry.death), entry.target.side),
 			pluralize(entry.death, "dies", "die"),
 		]
 	else:

@@ -3,35 +3,30 @@ extends Reference
 
 var n_battles := 3
 
-var _bee = preload("res://assets/data/bee.tres")
-var _chicken = preload("res://assets/data/chicken.tres")
-var _uchicken = preload("res://assets/data/uchicken.tres")
-var _cow = preload("res://assets/data/cow.tres")
 
-
-func get_battle_setup(index: int, player_army: ArmyData):
+func get_battle_setup(index: int, player_army: Army):
 	return BattleSetup.new([player_army, _make_army(index)], _get_map(index))
 
 
-func _make_army(battle_index: int) -> ArmyData:
+func _make_army(battle_index: int) -> Army:
 	match battle_index:
 		0:
-			return ArmyData.new([
-				StackData.new(_chicken, 36),
+			return Army.new([
+				Stack.new("chicken", 36),
 			])
 		1:
-			return ArmyData.new([
-				StackData.new(_chicken, 27),
-				StackData.new(_uchicken, 6),
-				StackData.new(_chicken, 27),
+			return Army.new([
+				Stack.new("chicken", 27),
+				Stack.new("uchicken", 6),
+				Stack.new("chicken", 27),
 			])
 		2:
-			return ArmyData.new([
-				StackData.new(_bee, 6),
-				StackData.new(_cow, 3),
-				StackData.new(_bee, 6),
-				StackData.new(_cow, 3),
-				StackData.new(_bee, 6),
+			return Army.new([
+				Stack.new("bee", 6),
+				Stack.new("cow", 3),
+				Stack.new("bee", 6),
+				Stack.new("cow", 3),
+				Stack.new("bee", 6),
 			])
 		_:
 			return null

@@ -21,6 +21,7 @@ func setup(data: BattleData, grid: BattleGrid, events: BattleEvents, queue: Batt
 func run():
 	_select_unit_turn_state()
 	_data.emit_signal("_battle_data_state_changed")
+	_logger.log_round_started(1)
 
 
 func get_winner() -> int:
@@ -53,7 +54,7 @@ func _select_unit_turn_state():
 func perform_move(coords: BattleCoords):
 	var active_stack = _queue.get_active_stack()
 	var path = _data.path_find(active_stack, coords)
-	var movement = BattleMovement.new(path, active_stack.stack.unit.flying)
+	var movement = BattleMovement.new(path, active_stack.unit.flying)
 	
 	_data.move_stack(active_stack, coords)
 	
@@ -70,7 +71,7 @@ func perform_attack(target: BattleStack, from: BattleCoords):
 	
 	if previous_pos.index != from.index:
 		var path = _data.path_find(active_stack, from)
-		var movement = BattleMovement.new(path, active_stack.stack.unit.flying)
+		var movement = BattleMovement.new(path, active_stack.unit.flying)
 		
 		_data.move_stack(active_stack, from)
 		

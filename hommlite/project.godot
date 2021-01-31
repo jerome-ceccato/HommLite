@@ -25,9 +25,9 @@ _global_script_classes=[ {
 "path": "res://src/combat/ui/actions/AnyActionButton.gd"
 }, {
 "base": "Reference",
-"class": "ArmyData",
+"class": "Army",
 "language": "GDScript",
-"path": "res://src/combat/data/ArmyData.gd"
+"path": "res://src/combat/data/Army.gd"
 }, {
 "base": "Node",
 "class": "Battle",
@@ -144,15 +144,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/combat/ui/panels/queue/QueueItem.gd"
 }, {
+"base": "Reference",
+"class": "Stack",
+"language": "GDScript",
+"path": "res://src/combat/data/Stack.gd"
+}, {
 "base": "Node2D",
 "class": "StackContainer",
 "language": "GDScript",
 "path": "res://src/combat/ui/stacks/StackContainer.gd"
-}, {
-"base": "Reference",
-"class": "StackData",
-"language": "GDScript",
-"path": "res://src/combat/data/StackData.gd"
 }, {
 "base": "Node",
 "class": "UIEvents",
@@ -168,7 +168,7 @@ _global_script_class_icons={
 "AIController": "",
 "AllBattles": "",
 "AnyActionButton": "",
-"ArmyData": "",
+"Army": "",
 "Battle": "",
 "BattleCoords": "",
 "BattleData": "",
@@ -192,8 +192,8 @@ _global_script_class_icons={
 "PlayerArmy": "",
 "Projectile": "",
 "QueueItem": "",
+"Stack": "",
 "StackContainer": "",
-"StackData": "",
 "UIEvents": "",
 "UnitData": ""
 }

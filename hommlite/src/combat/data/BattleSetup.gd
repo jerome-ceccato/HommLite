@@ -1,8 +1,8 @@
 class_name BattleSetup
 extends Reference
 
-var left_army: ArmyData
-var right_army: ArmyData
+var left_army: Army
+var right_army: Army
 
 var map: MapData
 

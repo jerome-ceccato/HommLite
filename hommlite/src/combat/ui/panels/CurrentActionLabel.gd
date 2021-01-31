@@ -20,7 +20,7 @@ func _set_content(content: String):
 
 
 func _stack_name(stack: BattleStack):
-	return _log_helper.side_color(_log_helper.pluralized_name(stack.stack.unit, stack.amount), stack.side)
+	return _log_helper.side_color(_log_helper.pluralized_name(stack.unit, stack.amount), stack.side)
 
 
 func _unreachable_stack(target: BattleStack):

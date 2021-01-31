@@ -48,7 +48,7 @@ func get_stack_at(coords: BattleCoords) -> BattleStack:
 		return _stacks.get(coords.index)
 	elif _stacks.has(coords.index - 1):
 		var possible_target = _stacks.get(coords.index - 1)
-		if possible_target and possible_target.stack.unit.large:
+		if possible_target and possible_target.unit.large:
 			return possible_target
 	return null
 
@@ -105,7 +105,7 @@ func can_attack(source: BattleStack, target: BattleStack) -> bool:
 
 
 func can_attack_ranged(stack: BattleStack) -> bool:
-	if stack.stack.unit.ranged:
+	if stack.unit.ranged:
 		var neighbors = stack_valid_neighbors(stack)
 		for coords in neighbors:
 			var target = get_stack_at(coords)
@@ -117,7 +117,7 @@ func can_attack_ranged(stack: BattleStack) -> bool:
 
 
 func reachable_coords(stack: BattleStack) -> Array: # [BattleCoords]
-	return _reachability(stack, stack.stack.unit.speed, stack.all_taken_coordinates())
+	return _reachability(stack, stack.unit.speed, stack.all_taken_coordinates())
 
 
 func get_state():
@@ -136,8 +136,8 @@ func force_state_update():
 func path_find(source: BattleStack, target: BattleCoords) -> Array: # [BattleCoords]
 	var excluded = source.all_taken_coordinates()
 	excluded.append(target)
-	var all_coords = _reachability(source, source.stack.unit.speed + 1, excluded)
-	if source.stack.unit.large:
+	var all_coords = _reachability(source, source.unit.speed + 1, excluded)
+	if source.unit.large:
 		all_coords = _large_adjusted_path_finding(all_coords)
 	return _grid.path_find(source, target, all_coords)
 
@@ -146,7 +146,7 @@ func path_find_ignoring_speed(source: BattleStack, target: BattleCoords) -> Arra
 	excluded.append(target)
 	# TODO: this is horrible
 	var all_coords = _reachability(source, 100, excluded)
-	if source.stack.unit.large:
+	if source.unit.large:
 		all_coords = _large_adjusted_path_finding(all_coords)
 	return _grid.path_find(source, target, all_coords)
 
@@ -168,11 +168,11 @@ func _large_adjusted_path_finding(reachable: Array) -> Array:
 
 
 func _reachability(source: BattleStack, distance: int, excluded: Array) -> Array:
-	var flying = source.stack.unit.flying
+	var flying = source.unit.flying
 	var blocked_index = _blocked_coords_indexed()
 	for excluded_coord in excluded:
 		blocked_index.erase(excluded_coord.index)
-	if !flying and source.stack.unit.large:
+	if !flying and source.unit.large:
 		blocked_index = _add_single_spaces_to_blocked(blocked_index)
 	var blocked_coords = blocked_index.values() if !flying else []
 	
@@ -180,18 +180,18 @@ func _reachability(source: BattleStack, distance: int, excluded: Array) -> Array
 	
 	if flying:
 		coords = _remove_blocked_coords(coords, blocked_index)
-	if source.stack.unit.large:
+	if source.unit.large:
 		coords = _remove_single_spaces(coords)
 	return coords
 
 
 func _merged_reachable_valid_coords(source: BattleStack, distance: int, blocked_coords: Array) -> Array:
 	if source.all_taken_coordinates().size() == 1:
-		return _grid.reachable_valid_coords(source.coordinates, distance, blocked_coords, source.stack.unit.large)
+		return _grid.reachable_valid_coords(source.coordinates, distance, blocked_coords, source.unit.large)
 	else:
 		var index_coords = {}
 		for stack_coord in source.all_taken_coordinates():
-			for coord in _grid.reachable_valid_coords(stack_coord, distance, blocked_coords, source.stack.unit.large):
+			for coord in _grid.reachable_valid_coords(stack_coord, distance, blocked_coords, source.unit.large):
 				index_coords[coord.index] = coord
 		return index_coords.values()
 
@@ -243,13 +243,15 @@ func _array_contains_coords(array: Array, coords: BattleCoords) -> bool:
 	return false
 
 
-func _setup_stacks(army: ArmyData, side: int, stack_id: int) -> int:
+func _setup_stacks(army: Army, side: int, stack_id: int) -> int:
 	var army_size = army.stacks.size()
 	for i in range(army_size):
 		var stack = army.stacks[i]
-		var coords = _stack_coordinates(army_size, i, side, stack.unit)
+		var new_stack = BattleStack.new(stack_id, stack, null, side)
+		var coords = _stack_coordinates(army_size, i, side, new_stack.unit)
 		
-		_stacks[coords.index] = BattleStack.new(stack_id, stack, coords, side)
+		new_stack.coordinates = coords
+		_stacks[coords.index] = new_stack
 		stack_id += 1
 	return stack_id
 

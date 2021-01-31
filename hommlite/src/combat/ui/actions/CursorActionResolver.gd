@@ -70,12 +70,12 @@ func _move_is_identity(stack: BattleStack, hover_cells: Array) -> bool:
 
 func _target_is_large_self(active: BattleStack, target: BattleStack, cursor: BattleCoords) -> bool:
 	if active.id == target.id:
-		return active.stack.unit.large and cursor.index != active.coordinates.index
+		return active.unit.large and cursor.index != active.coordinates.index
 	return false
 
 
 func _hover_cells(active: BattleStack, cursor_coords: BattleCoords, available_coords: Array) -> Array:
-	if active.stack.unit.large:
+	if active.unit.large:
 		var coords = [hexgrid.get_cell_at_coords(cursor_coords)]
 		var available_index = {}
 		for coord in available_coords:
@@ -101,7 +101,7 @@ func _closest_reachable_cells(_target: BattleStack, target_coords: BattleCoords,
 	for coords in neighbors:
 		if _coords_in_stack(coords, active_stack) or battle.can_reach(active_stack, coords):
 			var cells = [hexgrid.get_cell_at_coords(coords)]
-			if active_stack.stack.unit.large:
+			if active_stack.unit.large:
 				var distance = hexgrid.get_cell_at_coords(target_coords).center.x - mouse.x
 				var offset = -1
 				if coords.y != target_coords.y:

@@ -52,7 +52,7 @@ func path_find(origin: BattleStack, target: BattleCoords, allowed_points: Array)
 		lookup[point.index] = point
 	
 	for coords in _valid_coords.values():
-		var enabled = lookup.has(coords.index) or origin.stack.unit.flying
+		var enabled = lookup.has(coords.index) or origin.unit.flying
 		_pathfinder.set_point_disabled(coords.index, !enabled)
 	
 	var path = []

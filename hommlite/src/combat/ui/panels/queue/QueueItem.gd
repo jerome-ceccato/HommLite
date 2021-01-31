@@ -36,4 +36,4 @@ func update_with_round_number(n: int):
 
 
 func _get_texture(stack: BattleStack) -> Texture:
-	return load("res://assets/combat/units/%s.png" % [stack.stack.unit.id]) as Texture
+	return load("res://assets/combat/units/%s.png" % [stack.unit.id]) as Texture

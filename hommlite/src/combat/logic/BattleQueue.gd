@@ -94,6 +94,6 @@ func _reset_stacks():
 
 
 func sort_stacks(a: BattleStack, b: BattleStack) -> bool:
-	if a.stack.unit.initiative != b.stack.unit.initiative:
-		return a.stack.unit.initiative > b.stack.unit.initiative
+	if a.unit.initiative != b.unit.initiative:
+		return a.unit.initiative > b.unit.initiative
 	return a.id < b.id

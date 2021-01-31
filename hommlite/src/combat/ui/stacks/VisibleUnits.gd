@@ -88,7 +88,7 @@ func _update_active_stack(battle_stack: BattleStack):
 
 
 func _load_sprite(battle_stack: BattleStack) -> StackContainer:
-	var scene = _scene_for_unit(battle_stack.stack.unit)
+	var scene = _scene_for_unit(battle_stack.unit)
 	var main_node = scene.instance()
 	
 	var container: StackContainer = main_node.get_child(0)

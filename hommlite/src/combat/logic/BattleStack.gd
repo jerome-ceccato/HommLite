@@ -4,7 +4,7 @@ extends Reference
 # A stack during a battle
 
 var id: int # unique id to track the stack throughout the battle
-var stack: StackData
+var unit: UnitData
 var coordinates: BattleCoords
 var side: int
 
@@ -17,18 +17,18 @@ var top_unit_hp: int
 var can_retaliate: bool = true
 
 
-func _init(_id: int, s: StackData, c: BattleCoords, si: int):
+func _init(_id: int, s: Stack, c: BattleCoords, si: int):
 	id = _id
-	stack = s
 	coordinates = c
 	side = si
 	
 	amount = s.amount
-	top_unit_hp = s.unit.hp
+	unit = s.load_unit()
+	top_unit_hp = unit.hp
 
 
 func all_taken_coordinates() -> Array:
-	if stack.unit.large:
+	if unit.large:
 		return [coordinates, BattleCoords.new(coordinates.x + 1, coordinates.y)]
 	else:
 		return [coordinates]
@@ -38,8 +38,8 @@ func damage_roll(target: BattleStack, ranged: bool) -> int:
 	if amount == 0:
 		return 0
 	
-	var dmin = stack.unit.dmg_low * amount
-	var dmax = stack.unit.dmg_high * amount
+	var dmin = unit.dmg_low * amount
+	var dmax = unit.dmg_high * amount
 	
 	# Base damage roll (dmg * stack)
 	var base_roll: int
@@ -52,22 +52,22 @@ func damage_roll(target: BattleStack, ranged: bool) -> int:
 	var roll := _apply_atk_def(target, base_roll)
 	
 	# Melee penalty multiplier
-	if !ranged and stack.unit.ranged:
+	if !ranged and unit.ranged:
 		roll /= 2
 	
 	return int(max(1, roll))
 
 
 func damage_range(target: BattleStack, ranged: bool) -> Array:
-	var dmin = stack.unit.dmg_low * amount
-	var dmax = stack.unit.dmg_high * amount
+	var dmin = unit.dmg_low * amount
+	var dmax = unit.dmg_high * amount
 	
 	# Attack - Defence multiplier
 	var min_roll := _apply_atk_def(target, dmin)
 	var max_roll := _apply_atk_def(target, dmax)
 	
 	# Melee penalty multiplier
-	if !ranged and stack.unit.ranged:
+	if !ranged and unit.ranged:
 		min_roll /= 2
 		max_roll /= 2
 	
@@ -79,11 +79,11 @@ func amount_killed(dmg: int) -> int:
 		return 0
 	else:
 		dmg -= top_unit_hp
-		return int(min(amount, 1 + dmg / stack.unit.hp))
+		return int(min(amount, 1 + dmg / unit.hp))
 
 
 func _apply_atk_def(target: BattleStack, roll: int) -> int:
-	var atk_bonus = stack.unit.atk - target.stack.unit.def
+	var atk_bonus = unit.atk - target.unit.def
 	if atk_bonus > 0:
 		var multiplier = min(1 + 0.05 * atk_bonus, 3)
 		roll = floor(float(roll) * multiplier)
@@ -99,8 +99,8 @@ func apply_damage(dmg: int):
 	else:
 		dmg -= top_unit_hp
 		
-		var dmg_stacks = 1 + dmg / stack.unit.hp
-		var dmg_remaining = dmg % stack.unit.hp
+		var dmg_stacks = 1 + dmg / unit.hp
+		var dmg_remaining = dmg % unit.hp
 		
 		amount = max(0, amount - dmg_stacks)
-		top_unit_hp = dmg_remaining if dmg_remaining > 0 else stack.unit.hp
+		top_unit_hp = dmg_remaining if dmg_remaining > 0 else unit.hp

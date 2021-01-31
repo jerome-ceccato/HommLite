@@ -1,6 +1,6 @@
 extends Node
 
-var player_army: ArmyData
+var player_army: Army
 
 var all_battles: AllBattles
 var battle_progress: int

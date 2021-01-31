@@ -34,7 +34,7 @@ func _play(active: BattleStack):
 # Actions
 
 func _try_ranged_attack(active: BattleStack) -> bool:
-	if active.stack.unit.ranged and _data.can_attack_ranged(active):
+	if active.unit.ranged and _data.can_attack_ranged(active):
 		var targets = _best_targets(active)
 		if !targets.empty():
 			_manager.perform_ranged_attack(targets[0])
