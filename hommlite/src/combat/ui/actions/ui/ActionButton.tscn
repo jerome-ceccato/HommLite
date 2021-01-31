@@ -5,7 +5,6 @@
 [ext_resource path="res://assets/ui/action-button-pressed.png" type="Texture" id=3]
 [ext_resource path="res://src/combat/ui/actions/AnyActionButton.gd" type="Script" id=4]
 
-
 [node name="ActionButton" type="Node2D"]
 scale = Vector2( 4, 4 )
 script = ExtResource( 4 )

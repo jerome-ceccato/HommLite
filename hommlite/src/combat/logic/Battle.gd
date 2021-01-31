@@ -82,3 +82,6 @@ func get_final_player_army() -> ArmyData:
 		if bstack.amount > 0 and bstack.side == BattleStack.Side.LEFT:
 			stacks.append(StackData.new(bstack.stack.unit, bstack.amount))
 	return ArmyData.new(stacks)
+
+func active_stack_can_wait() -> bool:
+	return _queue.active_stack_can_wait()
