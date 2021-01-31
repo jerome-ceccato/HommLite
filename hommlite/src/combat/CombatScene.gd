@@ -57,7 +57,7 @@ func _setup_bindings():
 		]:
 		battle_events.connect("game_state_changed", listener, "_on_Battle_game_state_changed")
 	
-	for listener in [$UI/CombatLogs]:
+	for listener in [$UI/TopPanel/CombatLogs]:
 		battle_events.connect("new_combat_log", listener, "_on_Battle_new_combat_log")
 	
 	ui_events.connect("animation_finished", self, "_on_animation_finished")
