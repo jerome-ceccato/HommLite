@@ -77,11 +77,8 @@ func can_attack_ranged(stack: BattleStack) -> bool:
 	
 
 func get_final_player_army() -> Army:
-	var stacks = []
-	for bstack in all_stacks():
-		if bstack.amount > 0 and bstack.side == BattleStack.Side.LEFT:
-			stacks.append(Stack.new(bstack.unit.id, bstack.amount))
-	return Army.new(stacks)
+	return _manager.get_final_player_army()
+
 
 func active_stack_can_wait() -> bool:
 	return _queue.active_stack_can_wait()

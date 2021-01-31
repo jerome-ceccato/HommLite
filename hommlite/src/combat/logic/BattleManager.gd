@@ -31,6 +31,18 @@ func get_winner() -> int:
 		return BattleStack.Side.UNKNOWN
 
 
+func get_final_player_army() -> Army:
+	var player_bstack = []
+	for bstack in _data.all_stacks():
+		if bstack.amount > 0 and bstack.side == BattleStack.Side.LEFT:
+			player_bstack.append(bstack)
+	player_bstack.sort_custom(self, "_sort_bstack_id")
+	var stacks = []
+	for bstack in player_bstack:
+		stacks.append(Stack.new(bstack.unit.id, bstack.amount))
+	return Army.new(stacks)
+
+
 func _update_state():
 	if _game_should_end():
 		_data.update_state(_data.State.COMBAT_ENDED)
@@ -117,8 +129,8 @@ func _game_should_end():
 	for stack in _data.all_stacks():
 		stacks_count[stack.side] += 1
 	
-	var PLAYER_TURN = stacks_count[BattleStack.Side.LEFT] > 0 and stacks_count[BattleStack.Side.RIGHT] > 0
-	return !PLAYER_TURN
+	var player_turn = stacks_count[BattleStack.Side.LEFT] > 0 and stacks_count[BattleStack.Side.RIGHT] > 0
+	return !player_turn
 
 
 func _on_UI_mouse_clicked(state: CursorState):
@@ -156,3 +168,7 @@ func _on_UI_action_wait():
 		_logger.log_wait(current_stack)
 		_queue_next()
 		_data.force_state_update()
+
+
+func _sort_bstack_id(a: BattleStack, b: BattleStack) -> bool:
+	return a.id < b.id

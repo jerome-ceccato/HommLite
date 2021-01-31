@@ -1,5 +1,7 @@
 extends Node
 
+var _persistence := Persistence.new()
+
 var player_army: Army
 
 var all_battles: AllBattles
@@ -20,3 +22,13 @@ func reset():
 func load_battle():
 	var progress = battle_progress % all_battles.n_battles
 	current_battle = all_battles.get_battle_setup(progress, player_army)
+
+
+func has_save():
+	return _persistence.has_save()
+
+func load_save():
+	_persistence.load_saved_context()
+
+func save():
+	_persistence.save_current_context()

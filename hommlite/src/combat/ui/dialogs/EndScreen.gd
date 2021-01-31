@@ -26,10 +26,12 @@ func _on_Battle_game_state_changed(battle: Battle):
 
 func _on_Titlescreen_pressed():
 	if _battle.get_winner() == BattleStack.Side.LEFT:
+		# TODO: this should be done outside of UI code when the battle ends
 		Context.player_army = _battle.get_final_player_army()
 		Context.battle_progress += 1
-		Context.load_battle()
+		Context.save()
 		
+		Context.load_battle()
 		var combat_scene_path = "res://src/combat/CombatScene.tscn"
 		get_tree().change_scene(combat_scene_path)
 	else:

@@ -130,9 +130,14 @@ _global_script_classes=[ {
 "path": "res://src/combat/data/ObstacleData.gd"
 }, {
 "base": "Reference",
+"class": "Persistence",
+"language": "GDScript",
+"path": "res://src/save/Persistence.gd"
+}, {
+"base": "Reference",
 "class": "PlayerArmy",
 "language": "GDScript",
-"path": "res://src/save/PlayerArmy.gd"
+"path": "res://src/global/PlayerArmy.gd"
 }, {
 "base": "Node2D",
 "class": "Projectile",
@@ -189,6 +194,7 @@ _global_script_class_icons={
 "LogHelper": "",
 "MapData": "",
 "ObstacleData": "",
+"Persistence": "",
 "PlayerArmy": "",
 "Projectile": "",
 "QueueItem": "",
