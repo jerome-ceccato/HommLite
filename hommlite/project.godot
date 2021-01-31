@@ -134,11 +134,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/save/Persistence.gd"
 }, {
-"base": "Reference",
-"class": "PlayerArmy",
-"language": "GDScript",
-"path": "res://src/global/PlayerArmy.gd"
-}, {
 "base": "Node2D",
 "class": "Projectile",
 "language": "GDScript",
@@ -158,6 +153,11 @@ _global_script_classes=[ {
 "class": "StackContainer",
 "language": "GDScript",
 "path": "res://src/combat/ui/stacks/StackContainer.gd"
+}, {
+"base": "Reference",
+"class": "StartData",
+"language": "GDScript",
+"path": "res://src/global/StartData.gd"
 }, {
 "base": "Node",
 "class": "UIEvents",
@@ -195,11 +195,11 @@ _global_script_class_icons={
 "MapData": "",
 "ObstacleData": "",
 "Persistence": "",
-"PlayerArmy": "",
 "Projectile": "",
 "QueueItem": "",
 "Stack": "",
 "StackContainer": "",
+"StartData": "",
 "UIEvents": "",
 "UnitData": ""
 }

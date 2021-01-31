@@ -14,7 +14,7 @@ func _ready():
 
 
 func reset():
-	player_army = PlayerArmy.get_army()
+	player_army = StartData.get_player_army()
 	all_battles = AllBattles.new()
 	battle_progress = 0
 
