@@ -45,8 +45,6 @@
 [ext_resource path="res://assets/combat/units/cow.png" type="Texture" id=44]
 [ext_resource path="res://src/combat/ui/panels/queue/Queue.gd" type="Script" id=45]
 
-
-
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 22 )
 
@@ -80,6 +78,8 @@ script = ExtResource( 16 )
 
 [node name="BattleGrid" type="Node" parent="Battle"]
 script = ExtResource( 13 )
+rows = 9
+cols = 13
 
 [node name="BattleManager" type="Node" parent="Battle"]
 script = ExtResource( 11 )
@@ -163,6 +163,7 @@ visible = false
 z_index = 7
 script = ExtResource( 23 )
 font = SubResource( 1 )
+color = Color( 0.96, 0.96, 0.86, 1 )
 
 [node name="Obstacles" type="Node2D" parent="UI/CombatArea"]
 

@@ -3,6 +3,7 @@ extends Node2D
 var _battle: Battle
 
 onready var label: Label = $Label
+onready var button: Button = $BackButton
 
 
 func _ready():
@@ -17,13 +18,22 @@ func _on_Battle_game_state_changed(battle: Battle):
 		
 		if battle.get_winner() == BattleStack.Side.LEFT:
 			label.text = "Victory!"
+			button.text = "Next battle"
 		else:
 			label.text = "Defeat!"
+			button.text = "Back to title"
 
 
 func _on_Titlescreen_pressed():
-	Context.player_army = _battle.get_final_player_army()
-	Context.battle_progress += 1
-	
-	var title_scene_path = "res://src/start/StartScreen.tscn"
-	get_tree().change_scene(title_scene_path)
+	if _battle.get_winner() == BattleStack.Side.LEFT:
+		Context.player_army = _battle.get_final_player_army()
+		Context.battle_progress += 1
+		Context.load_battle()
+		
+		var combat_scene_path = "res://src/combat/CombatScene.tscn"
+		get_tree().change_scene(combat_scene_path)
+	else:
+		Context.reset()
+		var title_scene_path = "res://src/start/StartScreen.tscn"
+		get_tree().change_scene(title_scene_path)
+

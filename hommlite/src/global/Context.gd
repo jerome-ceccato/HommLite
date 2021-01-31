@@ -8,6 +8,10 @@ var current_battle : BattleSetup
 
 
 func _ready():
+	reset()
+
+
+func reset():
 	player_army = PlayerArmy.get_army()
 	all_battles = AllBattles.new()
 	battle_progress = 0
