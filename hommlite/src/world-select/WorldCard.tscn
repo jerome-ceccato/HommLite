@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assets/ui/world-card-bg.png" type="Texture" id=1]
+
+[node name="Card" type="Control"]
+margin_right = 256.0
+margin_bottom = 336.0
+rect_min_size = Vector2( 256, 0 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_scale = Vector2( 4, 4 )
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
