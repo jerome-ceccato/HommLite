@@ -168,6 +168,16 @@ _global_script_classes=[ {
 "class": "UnitData",
 "language": "GDScript",
 "path": "res://src/combat/data/UnitData.gd"
+}, {
+"base": "Control",
+"class": "WorldCard",
+"language": "GDScript",
+"path": "res://src/world-select/WorldCard.gd"
+}, {
+"base": "Reference",
+"class": "WorldData",
+"language": "GDScript",
+"path": "res://src/world-select/WorldData.gd"
 } ]
 _global_script_class_icons={
 "AIController": "",
@@ -201,7 +211,9 @@ _global_script_class_icons={
 "StackContainer": "",
 "StartData": "",
 "UIEvents": "",
-"UnitData": ""
+"UnitData": "",
+"WorldCard": "",
+"WorldData": ""
 }
 
 [application]
