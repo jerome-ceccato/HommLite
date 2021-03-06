@@ -1,5 +1,7 @@
 extends Node2D
 
+onready var _start_button: DefaultButton = $WorldSelect/StartButton
+
 var _all_cards: Array
 
 func _ready():
@@ -9,9 +11,9 @@ func _ready():
 		$WorldSelect/Cards/RightCard
 	]
 	
-	for card in _all_cards:
-		card.connect("card_selected", self, "_on_card_selected")
 	_setup_cards()
+	_setup_army()
+	_start_button.set_active(false)
 
 
 func _setup_cards():
@@ -21,13 +23,26 @@ func _setup_cards():
 		WorldData.new("HAT-P-1b", "res://assets/ui/previews/hatp1b.png", "hard", "Reward:\n800 souls"),
 	]
 	
-	for i in range(3):
+	for card in _all_cards:
+		card.connect("card_selected", self, "_on_card_selected")
+
+	for i in range(data.size()):
 		_all_cards[i].setup(data[i])
+
+
+func _setup_army():
+	var stacks = Context.player_army.stacks
+	var stack_displays = $WorldSelect/GridContainer.get_children()
+	
+	for i in range(stack_displays.size()):
+		var stack = stacks[i] if i < stacks.size() else null
+		stack_displays[i].update_with_stack(stack)
 
 
 func _on_card_selected(selected_card):
 	for card in _all_cards:
 		card.set_selected(card == selected_card)
+	_start_button.set_active(true)
 
 
 func _on_CloseButton_pressed():
@@ -37,3 +52,13 @@ func _on_CloseButton_pressed():
 func _input(event):
 	if Input.is_action_pressed("ui_cancel"):
 		queue_free()
+
+
+func _on_StartButton_pressed():
+	Context.load_battle()
+	_start_combat()
+
+
+func _start_combat():
+	var combat_scene_path = "res://src/combat/CombatScene.tscn"
+	get_tree().change_scene(combat_scene_path)
