@@ -3,25 +3,32 @@ extends Node
 var _persistence := Persistence.new()
 
 var player_army: Army
-
-var all_battles: AllBattles
-var battle_progress: int
-var current_battle : BattleSetup
+var current_world: CurrentWorld
 
 
 func _ready():
-	reset()
-
-
-func reset():
 	player_army = StartData.get_player_army()
-	all_battles = AllBattles.new()
-	battle_progress = 0
+	current_world = null
+	load_save()
 
 
 func load_battle():
-	var progress = battle_progress % all_battles.n_battles
-	current_battle = all_battles.get_battle_setup(progress, player_army)
+	if current_world:
+		current_world.load_battle(player_army)
+
+
+func advance_to_next_battle():
+	if current_world:
+		if current_world.has_next_battle():
+			current_world.battle_progress += 1
+		else:
+			current_world = null
+
+
+func did_lose_battle():
+	delete_save()
+	player_army = StartData.get_player_army()
+	current_world = null
 
 
 func has_save():

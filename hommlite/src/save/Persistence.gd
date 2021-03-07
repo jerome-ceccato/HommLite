@@ -32,12 +32,15 @@ func delete_save():
 
 
 func _deserialize_context(data: Dictionary):
-	Context.battle_progress = data["battle_progress"]
 	Context.player_army = Army.new([]).deserialize(data["player_army"])
+	if data.has("current_world"):
+		Context.current_world = CurrentWorld.new(null).deserialize(data["current_world"])
 
 
 func _serialize_context():
-	return {
-		"player_army": Context.player_army.serialized(),
-		"battle_progress": Context.battle_progress,
+	var ctx = {
+		"player_army": Context.player_army.serialized()
 	}
+	if Context.current_world:
+		ctx["current_world"] = Context.current_world.serialized()
+	return ctx

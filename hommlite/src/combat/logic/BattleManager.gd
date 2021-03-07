@@ -43,10 +43,10 @@ func _update_state():
 func _update_context():
 	if get_winner() == BattleStack.Side.LEFT:
 		Context.player_army = _get_final_player_army()
-		Context.battle_progress += 1
+		Context.advance_to_next_battle()
 		Context.save()
 	else:
-		Context.delete_save()
+		Context.did_lose_battle()
 
 
 func _queue_next():

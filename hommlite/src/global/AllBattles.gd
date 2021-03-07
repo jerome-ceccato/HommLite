@@ -24,7 +24,7 @@ func _make_army(battle_index: int) -> Army:
 			return Army.new([
 				Stack.new("bee", 6),
 				Stack.new("cow", 3),
-				Stack.new("bee", 6),
+				Stack.new("chicken", 6),
 				Stack.new("cow", 3),
 				Stack.new("bee", 6),
 			])

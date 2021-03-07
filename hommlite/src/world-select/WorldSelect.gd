@@ -3,6 +3,7 @@ extends Node2D
 onready var _start_button: DefaultButton = $WorldSelect/StartButton
 
 var _all_cards: Array
+var _selected_world: WorldData
 
 func _ready():
 	_all_cards = [
@@ -42,6 +43,8 @@ func _setup_army():
 func _on_card_selected(selected_card):
 	for card in _all_cards:
 		card.set_selected(card == selected_card)
+		if card == selected_card:
+			_selected_world = card.world
 	_start_button.set_active(true)
 
 
@@ -55,6 +58,7 @@ func _input(event):
 
 
 func _on_StartButton_pressed():
+	Context.current_world = CurrentWorld.new(_selected_world)
 	Context.load_battle()
 	_start_combat()
 
