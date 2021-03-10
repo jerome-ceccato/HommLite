@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/ui/world-select-bg.png" type="Texture" id=1]
 [ext_resource path="res://src/world-select/WorldCard.tscn" type="PackedScene" id=2]
@@ -15,6 +15,10 @@ font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=2]
 extra_spacing_top = -4
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 32
 font_data = ExtResource( 4 )
 
 [node name="Node2D" type="Node2D"]
@@ -141,6 +145,18 @@ margin_left = 92.0
 margin_top = 184.0
 margin_right = 180.0
 margin_bottom = 272.0
+
+[node name="Souls" type="Label" parent="WorldSelect"]
+margin_left = 894.0
+margin_top = 488.392
+margin_right = 1110.0
+margin_bottom = 514.392
+custom_fonts/font = SubResource( 3 )
+text = "0 souls"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="CloseButton" type="TextureButton" parent="."]
 margin_left = 1180.0

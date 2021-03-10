@@ -4,6 +4,7 @@ var _persistence := Persistence.new()
 
 var player_army: Army
 var current_world: CurrentWorld
+var souls: int
 
 
 func _ready():
@@ -22,7 +23,12 @@ func advance_to_next_battle():
 		if current_world.has_next_battle():
 			current_world.battle_progress += 1
 		else:
+			apply_battle_rewards()
 			current_world = null
+
+
+func apply_battle_rewards():
+	souls += current_world.world_data.reward
 
 
 func did_lose_battle():

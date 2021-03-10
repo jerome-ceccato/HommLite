@@ -28,6 +28,6 @@ func serialized() -> Dictionary:
 	}
 
 func deserialize(data: Dictionary) -> CurrentWorld:
-	world_data = WorldData.new("", "", "", "").deserialize(data["world_data"])
+	world_data = WorldData.new("", "", 0, 0).deserialize(data["world_data"])
 	battle_progress = data["battle_progress"]
 	return self

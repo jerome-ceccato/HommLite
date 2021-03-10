@@ -15,8 +15,8 @@ func setup(data: WorldData):
 	world = data
 	$WorldName.text = data.name
 	$WorldPreview.texture = load(data.preview_ref)
-	$Difficulty.text = data.difficulty
-	$Reward.text = data.rewards
+	$Difficulty.text = str(data.difficulty)
+	$Reward.text = str(data.reward) + " souls"
 
 
 func set_selected(selected: bool):

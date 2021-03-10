@@ -14,14 +14,15 @@ func _ready():
 	
 	_setup_cards()
 	_setup_army()
+	_setup_souls()
 	_start_button.set_active(false)
 
 
 func _setup_cards():
 	var data = [
-		WorldData.new("Earth", "res://assets/ui/previews/earth.png", "easy", "Reward:\n100 souls"),
-		WorldData.new("Mars", "res://assets/ui/previews/mars.png", "medium", "Reward:\n300 souls"),
-		WorldData.new("HAT-P-1b", "res://assets/ui/previews/hatp1b.png", "hard", "Reward:\n800 souls"),
+		WorldData.new("Earth", "res://assets/ui/previews/earth.png", 1.0, 100),
+		WorldData.new("Mars", "res://assets/ui/previews/mars.png", 2.0, 300),
+		WorldData.new("HAT-P-1b", "res://assets/ui/previews/hatp1b.png", 3.0, 800),
 	]
 	
 	for card in _all_cards:
@@ -38,6 +39,10 @@ func _setup_army():
 	for i in range(stack_displays.size()):
 		var stack = stacks[i] if i < stacks.size() else null
 		stack_displays[i].update_with_stack(stack)
+
+
+func _setup_souls():
+	$WorldSelect/Souls.text = str(Context.souls) + " souls"
 
 
 func _on_card_selected(selected_card):
