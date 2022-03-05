@@ -1,6 +1,7 @@
 extends Node2D
 
 onready var _start_button: DefaultButton = $WorldSelect/StartButton
+onready var _currency_label: Label = $WorldSelect/Currency
 
 var _all_cards: Array
 
@@ -13,14 +14,15 @@ func _ready():
 	
 	_setup_cards()
 	_setup_army()
+	_currency_label.text = "%d souls" % Context.currency
 	_start_button.set_active(false)
 
 
 func _setup_cards():
 	var data = [
-		WorldData.new("Earth", "res://assets/ui/previews/earth.png", "easy", "Reward:\n100 souls"),
-		WorldData.new("Mars", "res://assets/ui/previews/mars.png", "medium", "Reward:\n300 souls"),
-		WorldData.new("HAT-P-1b", "res://assets/ui/previews/hatp1b.png", "hard", "Reward:\n800 souls"),
+		WorldData.new("Earth", "res://assets/ui/previews/earth.png", "easy", "Reward:\n100 souls", "easy", 100),
+		WorldData.new("Mars", "res://assets/ui/previews/mars.png", "medium", "Reward:\n300 souls", "medium", 300),
+		WorldData.new("HAT-P-1b", "res://assets/ui/previews/hatp1b.png", "hard", "Reward:\n800 souls", "hard", 800),
 	]
 	
 	for card in _all_cards:
@@ -45,6 +47,12 @@ func _on_card_selected(selected_card):
 	_start_button.set_active(true)
 
 
+func _get_selected_card():
+	for card in _all_cards:
+		if card.is_selected:
+			return card
+
+
 func _on_CloseButton_pressed():
 	queue_free()
 
@@ -55,6 +63,7 @@ func _input(event):
 
 
 func _on_StartButton_pressed():
+	Context.select_battle(_get_selected_card().data.id)
 	Context.load_battle()
 	_start_combat()
 

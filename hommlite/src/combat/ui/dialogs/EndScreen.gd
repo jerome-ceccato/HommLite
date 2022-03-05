@@ -26,9 +26,14 @@ func _on_Battle_game_state_changed(battle: Battle):
 
 func _on_Titlescreen_pressed():
 	if _battle.get_winner() == BattleStack.Side.LEFT:
-		Context.load_battle()
-		var combat_scene_path = "res://src/combat/CombatScene.tscn"
-		get_tree().change_scene(combat_scene_path)
+		if Context.load_battle():
+			Context.save()
+			var combat_scene_path = "res://src/combat/CombatScene.tscn"
+			get_tree().change_scene(combat_scene_path)
+		else:
+			Context.save()
+			var title_scene_path = "res://src/start/StartScreen.tscn"
+			get_tree().change_scene(title_scene_path)
 	else:
 		Context.reset()
 		var title_scene_path = "res://src/start/StartScreen.tscn"
