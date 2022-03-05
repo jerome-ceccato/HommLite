@@ -71,3 +71,10 @@ func _on_StartButton_pressed():
 func _start_combat():
 	var combat_scene_path = "res://src/combat/CombatScene.tscn"
 	get_tree().change_scene(combat_scene_path)
+
+
+func _on_ShopButton_pressed():
+	var scene = load("res://src/shop/Shop.tscn")
+	var node = scene.instance()
+	
+	add_child(node)
