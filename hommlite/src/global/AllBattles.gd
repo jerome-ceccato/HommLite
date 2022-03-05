@@ -1,35 +1,72 @@
 class_name AllBattles
 extends Reference
 
-var n_battles := 3
+var _battles: Array # [Army]
+
+func setup_for(id: String):
+	match id:
+		"easy":
+			_battles = [
+				Army.new([
+					Stack.new("chicken", 12),
+				]),
+				Army.new([
+					Stack.new("chicken", 20),
+					Stack.new("chicken", 25),
+					Stack.new("chicken", 20),
+				]),
+			]
+		"medium":
+			_battles = [
+				Army.new([
+					Stack.new("chicken", 36),
+				]),
+				Army.new([
+					Stack.new("chicken", 27),
+					Stack.new("uchicken", 6),
+					Stack.new("chicken", 27),
+				]),
+				Army.new([
+					Stack.new("bee", 2),
+					Stack.new("cow", 3),
+					Stack.new("bee", 2),
+					Stack.new("cow", 3),
+					Stack.new("bee", 2),
+				]),
+			]
+		"hard":
+			_battles = [
+				Army.new([
+					Stack.new("uchicken", 20),
+					Stack.new("uchicken", 20),
+					Stack.new("uchicken", 20),
+				]),
+				Army.new([
+					Stack.new("cow", 5),
+					Stack.new("uchicken", 6),
+					Stack.new("uchicken", 7),
+					Stack.new("uchicken", 6),
+					Stack.new("cow", 5),
+				]),
+				Army.new([
+					Stack.new("bee", 6),
+					Stack.new("bee", 4),
+					Stack.new("uchicken", 32),
+					Stack.new("bee", 4),
+					Stack.new("bee", 6),
+				]),
+				Army.new([
+					Stack.new("cow", 42),
+				])
+			]
+
+
+func get_battles_count():
+	return _battles.size()
 
 
 func get_battle_setup(index: int, player_army: Army):
-	return BattleSetup.new([player_army, _make_army(index)], _get_map(index))
-
-
-func _make_army(battle_index: int) -> Army:
-	match battle_index:
-		0:
-			return Army.new([
-				Stack.new("chicken", 36),
-			])
-		1:
-			return Army.new([
-				Stack.new("chicken", 27),
-				Stack.new("uchicken", 6),
-				Stack.new("chicken", 27),
-			])
-		2:
-			return Army.new([
-				Stack.new("bee", 6),
-				Stack.new("cow", 3),
-				Stack.new("chicken", 6),
-				Stack.new("cow", 3),
-				Stack.new("bee", 6),
-			])
-		_:
-			return null
+	return BattleSetup.new([player_army, _battles[index]], _get_map(index))
 
 
 func _get_map(battle_index: int) -> MapData:

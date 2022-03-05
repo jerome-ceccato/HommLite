@@ -20,9 +20,9 @@ func _ready():
 
 func _setup_cards():
 	var data = [
-		WorldData.new("Earth", "res://assets/ui/previews/earth.png", 1.0, 100),
-		WorldData.new("Mars", "res://assets/ui/previews/mars.png", 2.0, 300),
-		WorldData.new("HAT-P-1b", "res://assets/ui/previews/hatp1b.png", 3.0, 800),
+		WorldData.new("Earth", "res://assets/ui/previews/earth.png", "easy", 100),
+		WorldData.new("Mars", "res://assets/ui/previews/mars.png", "medium", 300),
+		WorldData.new("HAT-P-1b", "res://assets/ui/previews/hatp1b.png", "hard", 800),
 	]
 	
 	for card in _all_cards:

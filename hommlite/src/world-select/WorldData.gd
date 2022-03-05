@@ -3,11 +3,11 @@ extends Reference
 
 var name: String
 var preview_ref: String
-var difficulty: float
+var difficulty: String
 var reward: int
 
 
-func _init(_name: String, _preview_ref: String, _difficulty: float, _reward: int):
+func _init(_name: String, _preview_ref: String, _difficulty: String, _reward: int):
 	name = _name
 	preview_ref = _preview_ref
 	difficulty = _difficulty
