@@ -73,8 +73,8 @@ func _start_combat():
 	get_tree().change_scene(combat_scene_path)
 
 
-func _on_ShopButton_pressed():
-	var scene = load("res://src/shop/Shop.tscn")
+func _on_EditButton_pressed():
+	var scene = load("res://src/manage/Manage.tscn")
 	var node = scene.instance()
 	
 	add_child(node)
