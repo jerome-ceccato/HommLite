@@ -78,8 +78,6 @@ script = ExtResource( 16 )
 
 [node name="BattleGrid" type="Node" parent="Battle"]
 script = ExtResource( 13 )
-rows = 9
-cols = 13
 
 [node name="BattleManager" type="Node" parent="Battle"]
 script = ExtResource( 11 )
@@ -114,7 +112,7 @@ __meta__ = {
 }
 
 [node name="CombatArea" type="Node2D" parent="UI"]
-position = Vector2( 155.026, 64 )
+position = Vector2( 248, 120 )
 z_index = 1
 script = ExtResource( 1 )
 overall_offset = Vector2( 0, -16 )
@@ -151,10 +149,9 @@ hover_color = Color( 0, 0, 0, 0.392157 )
 [node name="GridBackground" type="Node2D" parent="UI/CombatArea/Grid"]
 z_index = 5
 script = ExtResource( 3 )
-color = Color( 0.823529, 0.788235, 0.647059, 0.784314 )
+color = Color( 0.823529, 0.788235, 0.647059, 0.25098 )
 
 [node name="PathfindingOverlay" type="Node2D" parent="UI/CombatArea/Grid"]
-visible = false
 script = ExtResource( 35 )
 path_color = Color( 0, 0, 0, 0.12549 )
 
@@ -163,7 +160,6 @@ visible = false
 z_index = 7
 script = ExtResource( 23 )
 font = SubResource( 1 )
-color = Color( 0.96, 0.96, 0.86, 1 )
 
 [node name="Obstacles" type="Node2D" parent="UI/CombatArea"]
 
