@@ -29,4 +29,14 @@ margin_bottom = 522.0
 custom_fonts/font = SubResource( 1 )
 text = "START"
 script = null
+
+[node name="Adventure" parent="." instance=ExtResource( 4 )]
+margin_left = 492.382
+margin_top = 336.529
+margin_right = 567.382
+margin_bottom = 363.529
+custom_fonts/font = SubResource( 1 )
+text = "Adventure"
+script = null
 [connection signal="pressed" from="Start" to="." method="_on_Start_pressed"]
+[connection signal="pressed" from="Adventure" to="." method="_on_Adventure_pressed"]

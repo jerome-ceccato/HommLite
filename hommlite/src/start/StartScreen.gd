@@ -19,3 +19,8 @@ func _start_combat():
 	Context.load_battle()
 	var combat_scene_path = "res://src/combat/CombatScene.tscn"
 	get_tree().change_scene(combat_scene_path)
+
+
+func _on_Adventure_pressed():
+	var scene_path = "res://src/adventure/Adventure.tscn"
+	get_tree().change_scene(scene_path)
