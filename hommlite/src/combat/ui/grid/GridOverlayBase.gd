@@ -1,13 +1,13 @@
 class_name GridOverlayBase
 extends Node2D
 
-var hexgrid: HexGrid
+var hexgrid: CombatHexGrid
 var battle: Battle
 
-var all_cells_overlayed: Array # [HexCell]
+var all_cells_overlayed: Array # [CombatHexCell]
 
 
-func setup(_hexgrid: HexGrid, _battle: Battle):
+func setup(_hexgrid: CombatHexGrid, _battle: Battle):
 	hexgrid = _hexgrid
 	battle = _battle
 
@@ -17,7 +17,7 @@ func _draw():
 		draw_cell(cell)
 
 
-func draw_cell(_cell: HexCell):
+func draw_cell(_cell: CombatHexCell):
 	assert(false)
 
 

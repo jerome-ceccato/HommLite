@@ -3,10 +3,10 @@ extends Node2D
 
 export(Color) var color := Color.beige
 
-var hexgrid: HexGrid
+var hexgrid: CombatHexGrid
 
 
-func setup(_hexgrid: HexGrid):
+func setup(_hexgrid: CombatHexGrid):
 	hexgrid = _hexgrid
 
 

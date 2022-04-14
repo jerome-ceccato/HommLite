@@ -3,7 +3,7 @@ extends GridOverlayBase
 export(Color) var overlayed_color
 
 
-func draw_cell(cell: HexCell):
+func draw_cell(cell: CombatHexCell):
 	draw_polygon(cell.points, [overlayed_color])
 
 

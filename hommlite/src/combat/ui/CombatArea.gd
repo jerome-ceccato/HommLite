@@ -3,7 +3,7 @@ extends Node2D
 
 export(Vector2) var overall_offset = Vector2.ZERO
 
-onready var hexgrid: HexGrid = $HexGrid
+onready var hexgrid: CombatHexGrid = $HexGrid
 onready var units = $VisibleUnits
 onready var grid = $Grid
 onready var action_resolver: CursorActionResolver = $CursorActionResolver

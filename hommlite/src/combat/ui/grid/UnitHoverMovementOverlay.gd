@@ -6,7 +6,7 @@ var _shift_pressed = false
 var _last_hovered_stack: BattleStack
 
 
-func draw_cell(cell: HexCell):
+func draw_cell(cell: CombatHexCell):
 	draw_polygon(cell.make_points_size(20), [overlayed_color])
 
 

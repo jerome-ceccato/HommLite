@@ -3,12 +3,12 @@ extends Node2D
 export(Color) var hover_color
 
 var battle: Battle
-var hexgrid: HexGrid
+var hexgrid: CombatHexGrid
 
 var _hovered_cells := []
 
 
-func setup(_battle: Battle, _hexgrid: HexGrid):
+func setup(_battle: Battle, _hexgrid: CombatHexGrid):
 	battle = _battle
 	hexgrid = _hexgrid
 

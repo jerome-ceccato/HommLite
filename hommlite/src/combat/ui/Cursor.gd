@@ -1,7 +1,7 @@
 extends Node
 
 var battle: Battle
-var hexgrid: HexGrid
+var hexgrid: CombatHexGrid
 
 onready var _attack_tl = preload("res://assets/combat/cursor/cursor-sword-tl.png")
 onready var _attack_tr = preload("res://assets/combat/cursor/cursor-sword-tr.png")
@@ -14,7 +14,7 @@ onready var _move = preload("res://assets/combat/cursor/cursor-move.png")
 onready var _forbidden = preload("res://assets/combat/cursor/cursor-forbidden.png")
 
 
-func setup(_battle: Battle, _hexgrid: HexGrid):
+func setup(_battle: Battle, _hexgrid: CombatHexGrid):
 	battle = _battle
 	hexgrid = _hexgrid
 
@@ -42,12 +42,12 @@ func _on_Battle_game_state_changed(_unused: Battle):
 		Input.set_custom_mouse_cursor(null)
 
 
-func _set_attack_cursor(target: HexCell, cells: Array):
+func _set_attack_cursor(target: CombatHexCell, cells: Array):
 	var items = _get_attack_cursor(target.center, _nearest(target, cells).center)
 	Input.set_custom_mouse_cursor(items[0], Input.CURSOR_ARROW, items[1])
 
 
-func _nearest(target: HexCell, cells: Array) -> HexCell:
+func _nearest(target: CombatHexCell, cells: Array) -> CombatHexCell:
 	if cells.empty():
 		return target
 	

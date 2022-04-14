@@ -10,13 +10,13 @@ onready var active_stack_overlay = $ActiveStackMovementOverlay
 onready var pathfinding_overlay = $PathfindingOverlay
 onready var coordinates_overlay = $GridCoords
 
-var hexgrid: HexGrid
+var hexgrid: CombatHexGrid
 var battle: Battle
 var events: UIEvents
 var action_resolver: CursorActionResolver
 
 
-func setup(_hexgrid: HexGrid, _battle: Battle, _events: UIEvents, _action_resolver: CursorActionResolver):
+func setup(_hexgrid: CombatHexGrid, _battle: Battle, _events: UIEvents, _action_resolver: CursorActionResolver):
 	hexgrid = _hexgrid
 	battle = _battle
 	events = _events

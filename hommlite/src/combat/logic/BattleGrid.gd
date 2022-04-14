@@ -34,7 +34,7 @@ func size() -> BattleCoords:
 
 
 func valid_neighbors(origin: BattleCoords) -> Array:
-	var all_coords = HexUtils.nearby_coords(origin, _valid_coords, 1)
+	var all_coords = CombatHexUtils.nearby_coords(origin, _valid_coords, 1)
 	var valid_coords = []
 	for coord in all_coords:
 		if _valid_coords.has(coord.index):
@@ -43,7 +43,7 @@ func valid_neighbors(origin: BattleCoords) -> Array:
 
 
 func reachable_valid_coords(origin: BattleCoords, distance: int, blocked: Array, large: bool) -> Array:
-	return HexUtils.reachable_coords(origin, _valid_coords, distance, blocked, large)
+	return CombatHexUtils.reachable_coords(origin, _valid_coords, distance, blocked, large)
 
 
 func path_find(origin: BattleStack, target: BattleCoords, allowed_points: Array) -> Array:
@@ -81,6 +81,6 @@ func _build_pathfinder():
 	# connect all points to each other
 	for coords in _valid_coords.values():
 		for direction in range(6):
-			var neighbor = HexUtils.oddr_offset_neighbor(coords, direction)
+			var neighbor = CombatHexUtils.oddr_offset_neighbor(coords, direction)
 			if _valid_coords.has(neighbor.index):
 				_pathfinder.connect_points(coords.index, neighbor.index, true)

@@ -3,12 +3,12 @@ extends Node2D
 export(Color) var path_color
 
 var battle: Battle
-var hexgrid: HexGrid
+var hexgrid: CombatHexGrid
 
 var _hovered_path
 
 
-func setup(_battle: Battle, _hexgrid: HexGrid):
+func setup(_battle: Battle, _hexgrid: CombatHexGrid):
 	battle = _battle
 	hexgrid = _hexgrid
 

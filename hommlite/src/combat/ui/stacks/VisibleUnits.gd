@@ -1,7 +1,7 @@
 extends Node2D
 
 var battle: Battle
-var hexgrid: HexGrid
+var hexgrid: CombatHexGrid
 
 var containers: Array # [StackContainer]
 var obstacles: Array # [Sprite]
@@ -9,7 +9,7 @@ var obstacles: Array # [Sprite]
 var active_container: StackContainer
 
 
-func setup(_hexgrid: HexGrid, _battle: Battle):
+func setup(_hexgrid: CombatHexGrid, _battle: Battle):
 	battle = _battle
 	hexgrid = _hexgrid
 	
@@ -22,7 +22,7 @@ func setup(_hexgrid: HexGrid, _battle: Battle):
 		obstacles.append(_load_obstacle(obstacle))
 
 
-func animate_move_stack(grid: HexGrid, stack: BattleStack, movement: BattleMovement):
+func animate_move_stack(grid: CombatHexGrid, stack: BattleStack, movement: BattleMovement):
 	var container = _container_for_bstack(stack)
 	if container != null:
 		var path_coords = _points_for_path(movement.path, grid)
@@ -31,7 +31,7 @@ func animate_move_stack(grid: HexGrid, stack: BattleStack, movement: BattleMovem
 			await = yield(await, "completed")
 
 
-func animate_handle_attack(_grid: HexGrid, source: BattleStack, target: BattleStack, retaliation: bool, ranged: bool):
+func animate_handle_attack(_grid: CombatHexGrid, source: BattleStack, target: BattleStack, retaliation: bool, ranged: bool):
 	var source_container = _container_for_bstack(source)
 	var target_container = _container_for_bstack(target)
 	if source_container != null and target_container != null:
@@ -107,7 +107,7 @@ func _container_for_bstack(bstack: BattleStack) -> StackContainer:
 	return null
 
 
-func _points_for_path(coords: Array, grid: HexGrid) -> Array:
+func _points_for_path(coords: Array, grid: CombatHexGrid) -> Array:
 	var items = []
 	for c in coords:
 		items.append(grid.get_cell_at_coords(c).center)

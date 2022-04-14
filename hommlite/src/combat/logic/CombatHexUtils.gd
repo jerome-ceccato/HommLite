@@ -1,5 +1,5 @@
 tool
-class_name HexUtils
+class_name CombatHexUtils
 
 # Hex operations
 # Adapted from https://www.redblobgames.com/grids/hexagons

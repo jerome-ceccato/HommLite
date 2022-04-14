@@ -1,5 +1,5 @@
 tool
-class_name HexCell
+class_name CombatHexCell
 extends Reference
 
 # Represents a single cell in a hex grid

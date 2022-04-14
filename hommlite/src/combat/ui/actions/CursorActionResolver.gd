@@ -2,10 +2,10 @@ class_name CursorActionResolver
 extends Node
 
 var battle: Battle
-var hexgrid: HexGrid
+var hexgrid: CombatHexGrid
 
 
-func setup(_battle: Battle, _hexgrid: HexGrid):
+func setup(_battle: Battle, _hexgrid: CombatHexGrid):
 	battle = _battle
 	hexgrid = _hexgrid
 
