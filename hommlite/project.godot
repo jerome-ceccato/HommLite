@@ -130,6 +130,11 @@ _global_script_classes=[ {
 "path": "res://src/combat/ui/grid/GridOverlayBase.gd"
 }, {
 "base": "Node",
+"class": "HexMap",
+"language": "GDScript",
+"path": "res://src/lib/hex/HexMap.gd"
+}, {
+"base": "Node",
 "class": "LogHelper",
 "language": "GDScript",
 "path": "res://src/combat/ui/panels/LogHelper.gd"
@@ -224,6 +229,7 @@ _global_script_class_icons={
 "CursorState": "",
 "DefaultButton": "",
 "GridOverlayBase": "",
+"HexMap": "",
 "LogHelper": "",
 "ManageArmyInterpretor": "",
 "MapData": "",
