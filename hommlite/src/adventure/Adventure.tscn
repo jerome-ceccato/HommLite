@@ -57,6 +57,7 @@
 script = ExtResource( 4 )
 
 [node name="TileMap" type="TileMap" parent="."]
+position = Vector2( -47, -27 )
 tile_set = SubResource( 1 )
 cell_size = Vector2( 47, 55 )
 cell_half_offset = 1
