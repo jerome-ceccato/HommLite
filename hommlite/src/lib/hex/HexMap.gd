@@ -157,3 +157,14 @@ func hex_length(hex: Vector3):
 	return (abs(hex.x) + abs(hex.y) + abs(hex.z)) / 2;
 func hex_distance(hex_a: Vector3, hex_b: Vector3):
 	return hex_length(hex_a - hex_b);
+
+
+func axial_to_oddq(hex: Vector3) -> Vector2:
+	var col = hex.x
+	var row = hex.y + (hex.x - (int(hex.x)&1)) / 2
+	return Vector2(col, row)
+
+func oddq_to_axial(coord: Vector2) -> Vector3:
+	var q = coord.x
+	var r = coord.y - (coord.x - (int(coord.x)&1)) / 2
+	return Vector3(q, r, -q-r)
