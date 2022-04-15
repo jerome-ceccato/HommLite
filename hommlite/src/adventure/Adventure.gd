@@ -6,27 +6,10 @@ onready var hexmap: HexMap = $TileMap/HexMap
 
 func _ready():
 	_setup_hexmap()
-	_init_from_tilemap()
-	
-	var hex = Vector3(1,1,-2)
-	print(hex)
-	var pixel_from_hex = hexmap.hex_to_pixel(hex)
-	print(pixel_from_hex)
-	var local_pixel_from_hex = tilemap.to_local(pixel_from_hex)
-	print(local_pixel_from_hex)
-	var tilemap_coords = tilemap.world_to_map(local_pixel_from_hex)
-	print(tilemap_coords)
-	var local_pixel_from_tilemap = tilemap.map_to_world(tilemap_coords)
-	print(local_pixel_from_tilemap)
-	var pixel_from_tilemap = tilemap.to_global(local_pixel_from_tilemap)
-	print(pixel_from_tilemap)
-	var new_hex = hexmap.pixel_to_hex(pixel_from_tilemap)
-	print(new_hex)
-	print("---")
-	print(hexmap.hex_to_pixel(Vector3(0,0,0)))
-	print(tilemap.to_global(tilemap.map_to_world(Vector2(0,0))))
+	_procedural_init()
 	
 	$Selector.hexmap = hexmap
+	$Debug.hexmap = hexmap
 
 
 func _setup_hexmap():
@@ -42,34 +25,40 @@ func _setup_hexmap():
 func _init_from_tilemap():
 	for cell in tilemap.get_used_cells():
 		var hex_pos = hexmap.oddq_to_axial(cell)
-		#var hex_pos = hexmap.pixel_to_hex(tilemap.map_to_world(cell))
 		hexmap.add_hex(hex_pos, {})
 
 
 func _procedural_init():
 	tilemap.clear()
 	
-	var radius = 3
+	var noise = _procedural_setup()
+	var radius = 16
 	for q in range(-radius, radius + 1):
 		var r1 = max(-radius, -q - radius)
 		var r2 = min(radius, -q + radius)
 		for r in range(r1, r2 + 1):
 			var hex = Vector3(q, r, -q-r)
 			hexmap.add_hex(hex, {})
-			#var tilemap_coords = tilemap.world_to_map(tilemap.to_local(hexmap.hex_to_pixel(hex)))
 			var tilemap_coords = hexmap.axial_to_oddq(hex)
-			tilemap.set_cell(tilemap_coords.x, tilemap_coords.y, 0)
+			tilemap.set_cell(tilemap_coords.x, tilemap_coords.y, _procedural_get_tile(hex, noise))
 
-
-func _draw():
-	for hex in hexmap.get_all_hex():
-		draw_polygon(hexmap.hex_corners(hex), [Color.red])
-
-
-func _process(delta):
-	var hex = hexmap.pixel_to_hex(get_global_mouse_position())
-	var oddq = hexmap.axial_to_oddq(hex)
-	if hexmap.get_hex(hex) != null:
-		$CanvasLayer/Position.text = "%s\n%s" % [hex, oddq]
+func _procedural_get_tile(hex: Vector3, noise):
+	var value = noise.get_noise_2d(hex.x, hex.y)
+	print(value)
+	if value < -0.3:
+		return 1
+	elif value > 0.3:
+		return 2
 	else:
-		$CanvasLayer/Position.text = ""
+		return 0
+
+func _procedural_setup():
+	var rng = RandomNumberGenerator.new()
+	var simplexNoise = OpenSimplexNoise.new()
+	rng.randomize()
+	simplexNoise.seed = rng.randi()
+	simplexNoise.octaves = 3
+	simplexNoise.period = 16.0
+	simplexNoise.persistence = 0.5
+	simplexNoise.lacunarity = 3
+	return simplexNoise
