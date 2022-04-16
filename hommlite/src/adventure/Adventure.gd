@@ -9,6 +9,7 @@ func _ready():
 	_procedural_init()
 	
 	$Selector.hexmap = hexmap
+	$Selector.tilemap = tilemap
 	$Debug.hexmap = hexmap
 
 
@@ -38,13 +39,14 @@ func _procedural_init():
 		var r2 = min(radius, -q + radius)
 		for r in range(r1, r2 + 1):
 			var hex = Vector3(q, r, -q-r)
-			hexmap.add_hex(hex, {})
 			var tilemap_coords = hexmap.axial_to_oddq(hex)
-			tilemap.set_cell(tilemap_coords.x, tilemap_coords.y, _procedural_get_tile(hex, noise))
+			var tile_id = _procedural_get_tile(hex, noise)
+			var tile = AdventureTile.new(tile_id, hexmap.hex_length(hex) < 2)
+			hexmap.add_hex(hex, tile)
+			tilemap.set_cell(tilemap_coords.x, tilemap_coords.y, tile.get_tile_id())
 
 func _procedural_get_tile(hex: Vector3, noise):
 	var value = noise.get_noise_2d(hex.x, hex.y)
-	print(value)
 	if value < -0.3:
 		return 1
 	elif value > 0.3:
