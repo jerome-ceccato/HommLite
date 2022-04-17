@@ -5,6 +5,12 @@ var _battles: Array # [Army]
 
 func setup_for(id: String):
 	match id:
+		"test":
+			_battles = [
+				Army.new([
+					Stack.new("chicken", 1),
+				]),
+			]
 		"easy":
 			_battles = [
 				Army.new([

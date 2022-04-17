@@ -23,3 +23,6 @@ func get_details_tile_id() -> int:
 
 func get_entity_tile_id() -> int:
 	return _entity_tile_id if revealed else NO_TILE_ID
+
+func delete_entity():
+	_entity_tile_id = NO_TILE_ID

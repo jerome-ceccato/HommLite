@@ -6,6 +6,7 @@ var player_army: Army
 var current_world: CurrentWorld
 var souls: int
 
+var adventure_scene
 
 func _ready():
 	player_army = StartData.get_player_army()

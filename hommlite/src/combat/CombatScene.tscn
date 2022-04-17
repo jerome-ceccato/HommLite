@@ -112,7 +112,7 @@ __meta__ = {
 }
 
 [node name="CombatArea" type="Node2D" parent="UI"]
-position = Vector2( 248, 120 )
+position = Vector2( 155.026, 64 )
 z_index = 1
 script = ExtResource( 1 )
 overall_offset = Vector2( 0, -16 )

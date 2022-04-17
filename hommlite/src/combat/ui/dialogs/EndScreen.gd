@@ -36,5 +36,9 @@ func _on_Titlescreen_pressed():
 		var combat_scene_path = "res://src/combat/CombatScene.tscn"
 		get_tree().change_scene(combat_scene_path)
 	else:
-		var title_scene_path = "res://src/start/StartScreen.tscn"
-		get_tree().change_scene(title_scene_path)
+		#var title_scene_path = "res://src/start/StartScreen.tscn"
+		get_tree().get_root().add_child(Context.adventure_scene)
+		var scene = get_parent().get_parent().get_parent()
+		get_tree().get_root().remove_child(scene)
+		scene.queue_free()
+		#get_tree().change_scene(title_scene_path)

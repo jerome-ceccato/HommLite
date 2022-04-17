@@ -14,6 +14,13 @@ func reveal(hex: Vector3):
 		_update_tile_in_tilemap(tile, hex)
 
 
+func discard_entity(hex: Vector3):
+	var tile: AdventureTile = hexmap.get_hex(hex)
+	if tile:
+		tile.delete_entity()
+		_update_tile_in_tilemap(tile, hex)
+
+
 func _ready():
 	_setup_hexmap()
 	_procedural_init()
