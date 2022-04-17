@@ -5,6 +5,7 @@ onready var baseTilemap: TileMap = $BaseTileMap
 onready var detailsTilemap: TileMap = $DetailsTileMap
 onready var hexmap: HexMap = $HexMap
 
+
 func reveal(hex: Vector3):
 	var hexdata = hexmap.get_hex(hex)
 	if hexdata:

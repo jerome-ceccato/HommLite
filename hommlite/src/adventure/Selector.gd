@@ -1,5 +1,8 @@
 extends Sprite
 
+signal adventure_tile_selected(hex)
+
+
 var map: AdventureMap
 
 
@@ -12,6 +15,5 @@ func _process(delta):
 func _input(event):
 	if event.is_action_pressed("adventure_reveal"):
 		var hex = map.hexmap.pixel_to_hex(get_global_mouse_position())
-		map.reveal(hex)
-		for direction in range(6):
-			map.reveal(map.hexmap.neighbor_hex(hex, direction))
+		if map.hexmap.get_hex(hex):
+			emit_signal("adventure_tile_selected", hex)
