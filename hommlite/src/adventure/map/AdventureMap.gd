@@ -3,16 +3,15 @@ class_name AdventureMap
 
 onready var baseTilemap: TileMap = $BaseTileMap
 onready var detailsTilemap: TileMap = $DetailsTileMap
+onready var entityTilemap: TileMap = $EntityTileMap
 onready var hexmap: HexMap = $HexMap
 
 
 func reveal(hex: Vector3):
-	var hexdata = hexmap.get_hex(hex)
-	if hexdata:
-		hexdata.revealed = true
-		var tilemap_coords = hexmap.axial_to_oddq(hex)
-		baseTilemap.set_cell(tilemap_coords.x, tilemap_coords.y, hexdata.get_base_tile_id())
-		detailsTilemap.set_cell(tilemap_coords.x, tilemap_coords.y, hexdata.get_details_tile_id())
+	var tile: AdventureTile = hexmap.get_hex(hex)
+	if tile:
+		tile.revealed = true
+		_update_tile_in_tilemap(tile, hex)
 
 
 func _ready():
@@ -37,7 +36,12 @@ func _procedural_init():
 	var all_hex = hexmap.get_all_hex()
 	for hex in all_hex:
 		var tile = all_hex[hex]
-		var tilemap_coords = hexmap.axial_to_oddq(hex)
-		 
-		baseTilemap.set_cell(tilemap_coords.x, tilemap_coords.y, tile.get_base_tile_id())
-		detailsTilemap.set_cell(tilemap_coords.x, tilemap_coords.y, tile.get_details_tile_id())
+		_update_tile_in_tilemap(tile, hex)
+
+
+func _update_tile_in_tilemap(tile: AdventureTile, hex: Vector3):
+	var tilemap_coords = hexmap.axial_to_oddq(hex)
+	
+	baseTilemap.set_cell(tilemap_coords.x, tilemap_coords.y, tile.get_base_tile_id())
+	detailsTilemap.set_cell(tilemap_coords.x, tilemap_coords.y, tile.get_details_tile_id())
+	entityTilemap.set_cell(tilemap_coords.x, tilemap_coords.y, tile.get_entity_tile_id())

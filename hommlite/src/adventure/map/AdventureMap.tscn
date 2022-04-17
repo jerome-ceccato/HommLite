@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/adventure/map/AdventureMap.gd" type="Script" id=1]
 [ext_resource path="res://assets/adventure/base/BaseTileSet.tres" type="TileSet" id=2]
-[ext_resource path="res://assets/adventure/details/DetailsTileMap.tres" type="TileSet" id=3]
+[ext_resource path="res://assets/adventure/details/DetailsTileSet.tres" type="TileSet" id=3]
 [ext_resource path="res://src/adventure/map/AdventureMapGenerator.gd" type="Script" id=4]
 [ext_resource path="res://src/lib/hex/HexMap.gd" type="Script" id=5]
+[ext_resource path="res://assets/adventure/entities/EntitiesTileSet.tres" type="TileSet" id=6]
 
 [node name="AdventureMap" type="Node2D"]
 script = ExtResource( 1 )
@@ -33,4 +34,14 @@ cell_half_offset = 1
 cell_y_sort = true
 centered_textures = true
 format = 1
-tile_data = PoolIntArray( -1, 0, 0, -65536, 0, 0 )
+tile_data = PoolIntArray( -65536, 0, 0, 65535, 0, 0 )
+
+[node name="EntityTileMap" type="TileMap" parent="."]
+position = Vector2( -47, -27 )
+tile_set = ExtResource( 6 )
+cell_size = Vector2( 47, 55 )
+cell_half_offset = 1
+cell_y_sort = true
+centered_textures = true
+format = 1
+tile_data = PoolIntArray( -1, 0, 0 )

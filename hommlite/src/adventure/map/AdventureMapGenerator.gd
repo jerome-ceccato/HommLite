@@ -27,13 +27,15 @@ func _gen_tile(hexmap: HexMap, hex: Vector3, radius: int) -> AdventureTile:
 	var distance = hexmap.hex_length(hex)
 	
 	if distance == radius:
-		return AdventureTile.new(2, -1, false)
+		return AdventureTile.new(2, -1, -1, false)
 	elif distance < 2:
-		return AdventureTile.new(0, -1, true)
+		var home = 0 if distance == 0 else -1
+		return AdventureTile.new(0, -1, home, true)
 	else:
 		return AdventureTile.new(
 			_gen_base_tile(hex, noise_value), 
 			_gen_details_tile(hex, noise_value),
+			_gen_entity_tile(hex, noise_value),
 			false
 		)
 
@@ -52,3 +54,9 @@ func _gen_details_tile(hex: Vector3, value: float) -> int:
 		return 0
 	return -1
 
+
+func _gen_entity_tile(hex: Vector3, value: float) -> int:
+	if value > -0.3 && value < 0.3:
+		if rng.randi() % 8 == 1:
+			return 1
+	return -1
