@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/hexshadow.png-6e94c3c182f821710ab02219bffc61ca.stex"
+path="res://.import/fog.png-72ee378d60cc7aac193858dc52a1bbbf.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/hexshadow.png"
-dest_files=[ "res://.import/hexshadow.png-6e94c3c182f821710ab02219bffc61ca.stex" ]
+source_file="res://assets/adventure/base/fog.png"
+dest_files=[ "res://.import/fog.png-72ee378d60cc7aac193858dc52a1bbbf.stex" ]
 
 [params]
 

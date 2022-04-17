@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/hex-select.png-e524eb947ed5a5bd888be51fd2020beb.stex"
+path="res://.import/hex-select.png-2ecbaa1d5694add72d26128c5ce347a3.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/hex-select.png"
-dest_files=[ "res://.import/hex-select.png-e524eb947ed5a5bd888be51fd2020beb.stex" ]
+source_file="res://assets/adventure/hex-select.png"
+dest_files=[ "res://.import/hex-select.png-2ecbaa1d5694add72d26128c5ce347a3.stex" ]
 
 [params]
 

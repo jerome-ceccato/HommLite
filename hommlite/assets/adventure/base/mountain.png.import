@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/hex.png-a8b96e832293ceb9f0c9fb3b9a4d8200.stex"
+path="res://.import/mountain.png-6db455db674e618cb7def0f1c5fca032.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/hex.png"
-dest_files=[ "res://.import/hex.png-a8b96e832293ceb9f0c9fb3b9a4d8200.stex" ]
+source_file="res://assets/adventure/base/mountain.png"
+dest_files=[ "res://.import/mountain.png-6db455db674e618cb7def0f1c5fca032.stex" ]
 
 [params]
 

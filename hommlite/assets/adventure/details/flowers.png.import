@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/hex3.png-1c3d5f674dbf6a2a1aeb6349f6c34fc6.stex"
+path="res://.import/flowers.png-e25cc1e0ebd0d7f29fa82f636b25243d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/hex3.png"
-dest_files=[ "res://.import/hex3.png-1c3d5f674dbf6a2a1aeb6349f6c34fc6.stex" ]
+source_file="res://assets/adventure/details/flowers.png"
+dest_files=[ "res://.import/flowers.png-e25cc1e0ebd0d7f29fa82f636b25243d.stex" ]
 
 [params]
 
