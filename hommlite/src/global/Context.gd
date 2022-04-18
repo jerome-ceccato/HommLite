@@ -6,13 +6,13 @@ var player_army: Army
 var current_world: CurrentWorld
 var souls: int
 
-var adventure_map: Dictionary #[Vector3: AdventureTile]
+var adventure_map: AdventureSaveData
 var adventure_scene
 
 func _ready():
 	player_army = StartData.get_player_army()
 	current_world = null
-	adventure_map = {}
+	adventure_map = null
 	load_save()
 
 
