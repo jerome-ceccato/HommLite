@@ -21,6 +21,10 @@ func discard_entity(hex: Vector3):
 		_update_tile_in_tilemap(tile, hex)
 
 
+func regenerate():
+	_procedural_init()
+
+
 func _ready():
 	_setup_hexmap()
 	_procedural_init()
@@ -37,9 +41,10 @@ func _setup_hexmap():
 
 
 func _procedural_init():
+	hexmap.clear()
 	baseTilemap.clear()
 	
-	$AdventureMapGenerator.gen_hexmap(hexmap, 16)
+	$AdventureMapGenerator.gen_hexmap(hexmap, 32)
 	var all_hex = hexmap.get_all_hex()
 	for hex in all_hex:
 		var tile = all_hex[hex]

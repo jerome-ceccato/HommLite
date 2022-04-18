@@ -1,25 +1,31 @@
 extends Node
 class_name AdventureMapGenerator
 
-var rng = RandomNumberGenerator.new()
-var simplexNoise = OpenSimplexNoise.new()
+var rng: RandomNumberGenerator
+var simplexNoise: OpenSimplexNoise
 
 func _ready():
+	rng = RandomNumberGenerator.new()
 	rng.randomize()
-	simplexNoise.seed = rng.randi()
-	simplexNoise.octaves = 3
-	simplexNoise.period = 16.0
-	simplexNoise.persistence = 0.5
-	simplexNoise.lacunarity = 3
 
 
 func gen_hexmap(hexmap: HexMap, radius: int):
+	_setup_noise()
 	for q in range(-radius, radius + 1):
 		var r1 = max(-radius, -q - radius)
 		var r2 = min(radius, -q + radius)
 		for r in range(r1, r2 + 1):
 			var hex = Vector3(q, r, -q-r)
 			hexmap.add_hex(hex, _gen_tile(hexmap, hex, radius))
+
+
+func _setup_noise():
+	simplexNoise = OpenSimplexNoise.new()
+	simplexNoise.seed = rng.randi()
+	simplexNoise.octaves = 3
+	simplexNoise.period = 16.0
+	simplexNoise.persistence = 0.5
+	simplexNoise.lacunarity = 3
 
 
 func _gen_tile(hexmap: HexMap, hex: Vector3, radius: int) -> AdventureTile:
@@ -42,11 +48,11 @@ func _gen_tile(hexmap: HexMap, hex: Vector3, radius: int) -> AdventureTile:
 
 func _gen_base_tile(hex: Vector3, value: float) -> int:
 	if value < -0.3:
-		return 1
+		return 6 if value > -0.5 else 1
 	elif value > 0.3:
-		return 2
+		return 2 if value < 0.5 else 5
 	else:
-		return 0
+		return 0 if value > 0 else 4
 
 
 func _gen_details_tile(hex: Vector3, value: float) -> int:

@@ -2,7 +2,7 @@ extends Camera2D
 
 const ZOOM_OFFSET = Vector2(0.1, 0.1)
 const ZOOM_MIN = Vector2(0.2, 0.2)
-const ZOOM_MAX = Vector2(2, 2)
+const ZOOM_MAX = Vector2(4, 4)
 
 var _drag_original_pos
 var _mouse_start_pos

@@ -82,6 +82,9 @@ func get_all_hex():
 		hex_list[coord] = _hex_grid[coord].data
 	return hex_list
 
+func clear():
+	_hex_grid = {}
+
 func get_wall(hex, direction):
 	if (_hex_grid.has(hex)):
 		return _hex_grid[hex].walls[direction]

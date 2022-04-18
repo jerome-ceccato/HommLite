@@ -40,3 +40,4 @@ func _do_combat():
 	
 	Context.adventure_scene = self
 	root.remove_child(self)
+

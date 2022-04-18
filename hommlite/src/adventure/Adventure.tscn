@@ -36,10 +36,44 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 20.0
-margin_top = -40.0
+margin_top = -20.0
 margin_right = -20.0
 text = "(0, 0)"
 align = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Debug/CanvasLayer"]
+margin_left = 1153.57
+margin_top = 563.379
+margin_right = 1274.57
+margin_bottom = 683.379
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Reveal" type="Button" parent="Debug/CanvasLayer/VBoxContainer"]
+margin_top = 52.0
+margin_right = 121.0
+margin_bottom = 72.0
+text = "Reveal"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Regen" type="Button" parent="Debug/CanvasLayer/VBoxContainer"]
+margin_top = 76.0
+margin_right = 121.0
+margin_bottom = 96.0
+text = "Regenerate"
+
+[node name="Screenshot" type="Button" parent="Debug/CanvasLayer/VBoxContainer"]
+margin_top = 100.0
+margin_right = 121.0
+margin_bottom = 120.0
+text = "Screenshot"
+[connection signal="pressed" from="Debug/CanvasLayer/VBoxContainer/Reveal" to="Debug" method="_on_Reveal_pressed"]
+[connection signal="pressed" from="Debug/CanvasLayer/VBoxContainer/Regen" to="Debug" method="_on_Regen_pressed"]
+[connection signal="pressed" from="Debug/CanvasLayer/VBoxContainer/Screenshot" to="Debug" method="_on_Screenshot_pressed"]
