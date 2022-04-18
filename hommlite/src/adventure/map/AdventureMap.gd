@@ -13,6 +13,7 @@ func reveal(hex: Vector3):
 	if tile:
 		tile.revealed = true
 		_update_tile_in_tilemap(tile, hex)
+		_save()
 
 
 func discard_entity(hex: Vector3):
@@ -20,15 +21,21 @@ func discard_entity(hex: Vector3):
 	if tile:
 		tile.delete_entity()
 		_update_tile_in_tilemap(tile, hex)
+		_save()
 
 
 func regenerate():
 	_procedural_init()
+	_save()
 
 
 func _ready():
 	_setup_hexmap()
-	_procedural_init()
+	if Context.adventure_map.empty():
+		_procedural_init()
+		_save()
+	else:
+		_load_save()
 	$DebugHexMapDrawer.map = hexmap
 
 
@@ -44,10 +51,19 @@ func _setup_hexmap():
 
 func _procedural_init():
 	hexmap.clear()
+	$AdventureMapGenerator.gen_hexmap(hexmap, 16)
+	_reload_tilemaps()
+
+
+func _load_save():
+	hexmap._hex_grid = Context.adventure_map
+	_reload_tilemaps()
+
+
+func _reload_tilemaps():
 	for tilemap in [baseTilemap, detailsTilemap, entityTilemap, outlineTilemap]:
 		tilemap.clear()
 	
-	$AdventureMapGenerator.gen_hexmap(hexmap, 32)
 	var all_hex = hexmap.get_all_hex()
 	for hex in all_hex:
 		var tile = all_hex[hex]
@@ -61,3 +77,8 @@ func _update_tile_in_tilemap(tile: AdventureTile, hex: Vector3):
 	detailsTilemap.set_cell(tilemap_coords.x, tilemap_coords.y, tile.get_details_tile_id())
 	entityTilemap.set_cell(tilemap_coords.x, tilemap_coords.y, tile.get_entity_tile_id())
 	outlineTilemap.set_cell(tilemap_coords.x, tilemap_coords.y, tile.get_outline_tile_id())
+
+
+func _save():
+	Context.adventure_map = hexmap.get_all_hex()
+	Context.save()

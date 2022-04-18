@@ -31,13 +31,6 @@ func get_size(): return _size
 func set_origin(origin): _origin = origin
 func get_origin(): return _origin
 
-# Initialise node, once we're ready
-
-# An inner struct to represent a hex data + wall data
-class HexData:
-	var data
-	var walls
-
 # Layout Constants for verticies.
 const layout_pointy = [sqrt(3.0), sqrt(3.0) / 2.0, 0.0, 3.0 / 2.0,
 					   sqrt(3.0) / 3.0, -1.0 / 3.0, 0.0, 2.0 / 3.0,
@@ -55,12 +48,7 @@ func ready():
 func add_hex(hex, data):
 	if (_hex_grid.has(hex)):
 		return
-	var hd = HexData.new()
-	hd.data = data
-	hd.walls = []
-	for i in range(5):
-		hd.walls.push_back(null)
-	_hex_grid[hex] = hd
+	_hex_grid[hex] = data
 
 func move_hex(hex_old, hex_new):
 	if (_hex_grid.has(hex_new) || !_hex_grid.has(hex_old)):
@@ -74,20 +62,14 @@ func remove_hex(hex):
 
 func get_hex(hex):
 	if (_hex_grid.has(hex)):
-		return _hex_grid[hex].data
+		return _hex_grid[hex]
 
 func get_all_hex():
-	var hex_list = {}
-	for coord in _hex_grid.keys():
-		hex_list[coord] = _hex_grid[coord].data
-	return hex_list
+	return _hex_grid
 
 func clear():
 	_hex_grid = {}
 
-func get_wall(hex, direction):
-	if (_hex_grid.has(hex)):
-		return _hex_grid[hex].walls[direction]
 
 # Rotation Transforms
 func rotate_hex_left(hex):

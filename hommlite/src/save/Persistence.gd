@@ -36,6 +36,8 @@ func _deserialize_context(data: Dictionary):
 	if data.has("current_world"):
 		Context.current_world = CurrentWorld.new(null).deserialize(data["current_world"])
 	Context.souls = data["souls"]
+	if data.has("adventure"):
+		Context.adventure_map = _deserialized_dict(data["adventure"])
 
 
 func _serialize_context():
@@ -45,4 +47,18 @@ func _serialize_context():
 	}
 	if Context.current_world:
 		ctx["current_world"] = Context.current_world.serialized()
+	ctx["adventure"] = _serialized_dict(Context.adventure_map)
 	return ctx
+
+
+func _serialized_dict(dict: Dictionary):
+	var serialized = {}
+	for key in dict:
+		serialized[var2str(key)] = dict[key].serialized()
+	return serialized
+
+func _deserialized_dict(dict: Dictionary):
+	var serialized = {}
+	for key in dict:
+		serialized[str2var(key)] = AdventureTile.new(0,0,0,0).deserialize(dict[key])
+	return serialized

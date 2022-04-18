@@ -50,3 +50,19 @@ func get_outline_tile_id() -> int:
 
 func delete_entity():
 	_entity_tile_id = NO_TILE
+
+
+func serialized() -> Dictionary:
+	return {
+		"revealed": revealed,
+		"_base_tile_id": _base_tile_id,
+		"_details_tile_id": _details_tile_id,
+		"_entity_tile_id": _entity_tile_id,
+	}
+
+func deserialize(data: Dictionary) -> AdventureTile:
+	revealed = data["revealed"]
+	_base_tile_id = data["_base_tile_id"]
+	_details_tile_id = data["_details_tile_id"]
+	_entity_tile_id = data["_entity_tile_id"]
+	return self

@@ -18,7 +18,6 @@ func _on_Reveal_pressed():
 
 func _on_Regen_pressed():
 	map.regenerate()
-	_on_Reveal_pressed()
 
 
 func _on_Screenshot_pressed():
