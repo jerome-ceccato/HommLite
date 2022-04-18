@@ -14,11 +14,11 @@ func _ready():
 func _on_hex_selected(hex: Vector3):
 	var hexdata: AdventureTile = map.hexmap.get_hex(hex)
 	if hexdata and hexdata.revealed:
-		if hexdata.get_entity_tile_id() == 1:
+		if hexdata.get_entity_tile_id() == AdventureTile.EntityTileID.ENEMY:
 			_do_combat()
 			_move_hero(hex)
 			map.discard_entity(hex)
-		elif hexdata.get_base_tile_id() == 0:
+		elif hexdata.get_base_tile_id() == AdventureTile.BaseTileID.GRASS or hexdata.get_base_tile_id() == AdventureTile.BaseTileID.GRASS2:
 			_move_hero(hex)
 
 

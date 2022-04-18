@@ -1,8 +1,25 @@
 extends Node
 class_name AdventureTile
 
-const NO_TILE_ID = -1
-const HIDDEN_TILE_ID = 3
+const NO_TILE = -1
+enum BaseTileID {
+	HIDDEN_TILE = 3,
+	GRASS = 4,
+	GRASS2 = 5,
+	WATER = 6,
+	WATER2 = 7,
+	MOUNTAIN = 8,
+	MOUNTAIN2 = 9,
+}
+
+enum DetailTileID {
+	FLOWER = 0,
+}
+
+enum EntityTileID {
+	HOME = 0,
+	ENEMY = 1,
+}
 
 var revealed
 var _base_tile_id
@@ -16,13 +33,13 @@ func _init(base_id: int, details_id: int, entity_id: int, revealed_: bool):
 	revealed = revealed_
 
 func get_base_tile_id() -> int:
-	return _base_tile_id if revealed else HIDDEN_TILE_ID
+	return _base_tile_id if revealed else BaseTileID.HIDDEN_TILE
 
 func get_details_tile_id() -> int:
-	return _details_tile_id if revealed else NO_TILE_ID
+	return _details_tile_id if revealed else NO_TILE
 
 func get_entity_tile_id() -> int:
-	return _entity_tile_id if revealed else NO_TILE_ID
+	return _entity_tile_id if revealed else NO_TILE
 
 func delete_entity():
-	_entity_tile_id = NO_TILE_ID
+	_entity_tile_id = NO_TILE

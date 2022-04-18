@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/water2.png-fc00d5a6d17ed917bc80c24a08e5d7d4.stex"
+path="res://.import/all.png-de91423f708338eb61be985a5bf8c23c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/adventure/base/water2.png"
-dest_files=[ "res://.import/water2.png-fc00d5a6d17ed917bc80c24a08e5d7d4.stex" ]
+source_file="res://assets/adventure/base/all.png"
+dest_files=[ "res://.import/all.png-de91423f708338eb61be985a5bf8c23c.stex" ]
 
 [params]
 
