@@ -4,6 +4,7 @@ class_name AdventureMap
 onready var baseTilemap: TileMap = $BaseTileMap
 onready var detailsTilemap: TileMap = $DetailsTileMap
 onready var entityTilemap: TileMap = $EntityTileMap
+onready var outlineTilemap: TileMap = $OutlineTileMap
 onready var hexmap: HexMap = $HexMap
 
 
@@ -28,12 +29,13 @@ func regenerate():
 func _ready():
 	_setup_hexmap()
 	_procedural_init()
+	$DebugHexMapDrawer.map = hexmap
 
 
 func _setup_hexmap():
 	var cell_size = baseTilemap.cell_size
 	hexmap.set_flat(true)
-	hexmap.set_origin(Vector2(-cell_size.x / 2 - 0.5, -0.5))
+	hexmap.set_origin(Vector2(-cell_size.x / 2 + 1, 1))
 	hexmap.set_size(Vector2(
 		cell_size.x / 1.5, 
 		cell_size.y / (2 * sin(PI/3))
@@ -42,7 +44,8 @@ func _setup_hexmap():
 
 func _procedural_init():
 	hexmap.clear()
-	baseTilemap.clear()
+	for tilemap in [baseTilemap, detailsTilemap, entityTilemap, outlineTilemap]:
+		tilemap.clear()
 	
 	$AdventureMapGenerator.gen_hexmap(hexmap, 32)
 	var all_hex = hexmap.get_all_hex()
@@ -57,3 +60,4 @@ func _update_tile_in_tilemap(tile: AdventureTile, hex: Vector3):
 	baseTilemap.set_cell(tilemap_coords.x, tilemap_coords.y, tile.get_base_tile_id())
 	detailsTilemap.set_cell(tilemap_coords.x, tilemap_coords.y, tile.get_details_tile_id())
 	entityTilemap.set_cell(tilemap_coords.x, tilemap_coords.y, tile.get_entity_tile_id())
+	outlineTilemap.set_cell(tilemap_coords.x, tilemap_coords.y, tile.get_outline_tile_id())

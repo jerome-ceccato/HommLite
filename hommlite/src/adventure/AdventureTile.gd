@@ -21,6 +21,10 @@ enum EntityTileID {
 	ENEMY = 1,
 }
 
+enum OutlineTileID {
+	BASE = 0,
+}
+
 var revealed
 var _base_tile_id
 var _details_tile_id
@@ -40,6 +44,9 @@ func get_details_tile_id() -> int:
 
 func get_entity_tile_id() -> int:
 	return _entity_tile_id if revealed else NO_TILE
+
+func get_outline_tile_id() -> int:
+	return OutlineTileID.BASE if revealed else NO_TILE
 
 func delete_entity():
 	_entity_tile_id = NO_TILE
