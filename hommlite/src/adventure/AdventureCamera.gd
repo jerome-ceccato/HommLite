@@ -16,7 +16,7 @@ func _apply_zoom(new_zoom: Vector2):
 	else:
 		zoom = new_zoom
 
-func _input(event):
+func _unhandled_input(event):
 	if event.is_action_pressed("adventure_zoom_in"):
 		_apply_zoom(zoom - ZOOM_OFFSET)
 	elif event.is_action_pressed("adventure_zoom_out"):

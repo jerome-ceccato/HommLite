@@ -48,6 +48,9 @@ func _do_combat():
 	Context.adventure_scene = self
 	root.remove_child(self)
 
+func recover_after_combat():
+	# use signals
+	$Debug.refresh()
 
 func _save():
 	var save_data = AdventureSaveData.new()

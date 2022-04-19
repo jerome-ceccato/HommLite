@@ -8,7 +8,7 @@ func setup_for(id: String):
 		"test":
 			_battles = [
 				Army.new([
-					Stack.new("chicken", 1),
+					Stack.new("chicken", 20),
 				]),
 			]
 		"easy":

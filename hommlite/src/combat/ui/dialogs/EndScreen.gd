@@ -38,6 +38,7 @@ func _on_Titlescreen_pressed():
 	else:
 		#var title_scene_path = "res://src/start/StartScreen.tscn"
 		get_tree().get_root().add_child(Context.adventure_scene)
+		Context.adventure_scene.recover_after_combat()
 		var scene = get_parent().get_parent().get_parent()
 		get_tree().get_root().remove_child(scene)
 		scene.queue_free()

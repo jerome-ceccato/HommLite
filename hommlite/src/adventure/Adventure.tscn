@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/adventure/map/AdventureMap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/adventure/hero.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://src/adventure/Adventure.gd" type="Script" id=4]
 [ext_resource path="res://src/adventure/AdventureCamera.gd" type="Script" id=5]
 [ext_resource path="res://assets/adventure/hex-select.png" type="Texture" id=6]
+[ext_resource path="res://src/world-select/ArmyStackDisplay.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/adventure/Debug.gd" type="Script" id=8]
 [ext_resource path="res://src/adventure/Selector.gd" type="Script" id=9]
 
@@ -31,49 +32,102 @@ script = ExtResource( 8 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Debug"]
 
-[node name="Position" type="Label" parent="Debug/CanvasLayer"]
-anchor_top = 1.0
+[node name="PanelContainer" type="PanelContainer" parent="Debug/CanvasLayer"]
+anchor_left = 1.0
 anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 20.0
-margin_top = -20.0
-margin_right = -20.0
+margin_left = -210.0
+margin_right = 2.0
+margin_bottom = 720.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Debug/CanvasLayer/PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 205.0
+margin_bottom = 713.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Position" type="Label" parent="Debug/CanvasLayer/PanelContainer/VBoxContainer"]
+margin_right = 198.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 0, 20 )
 text = "(0, 0)"
-align = 2
+align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Debug/CanvasLayer"]
-margin_left = 1153.57
-margin_top = 563.379
-margin_right = 1274.57
-margin_bottom = 683.379
-alignment = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Reveal" type="Button" parent="Debug/CanvasLayer/VBoxContainer"]
-margin_top = 52.0
-margin_right = 121.0
-margin_bottom = 72.0
+[node name="Reveal" type="Button" parent="Debug/CanvasLayer/PanelContainer/VBoxContainer"]
+margin_top = 24.0
+margin_right = 198.0
+margin_bottom = 44.0
 text = "Reveal"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Regen" type="Button" parent="Debug/CanvasLayer/VBoxContainer"]
-margin_top = 76.0
-margin_right = 121.0
-margin_bottom = 96.0
+[node name="Regen" type="Button" parent="Debug/CanvasLayer/PanelContainer/VBoxContainer"]
+margin_top = 48.0
+margin_right = 198.0
+margin_bottom = 68.0
 text = "Regenerate"
 
-[node name="Screenshot" type="Button" parent="Debug/CanvasLayer/VBoxContainer"]
-margin_top = 100.0
-margin_right = 121.0
-margin_bottom = 120.0
+[node name="Screenshot" type="Button" parent="Debug/CanvasLayer/PanelContainer/VBoxContainer"]
+margin_top = 72.0
+margin_right = 198.0
+margin_bottom = 92.0
 text = "Screenshot"
-[connection signal="pressed" from="Debug/CanvasLayer/VBoxContainer/Reveal" to="Debug" method="_on_Reveal_pressed"]
-[connection signal="pressed" from="Debug/CanvasLayer/VBoxContainer/Regen" to="Debug" method="_on_Regen_pressed"]
-[connection signal="pressed" from="Debug/CanvasLayer/VBoxContainer/Screenshot" to="Debug" method="_on_Screenshot_pressed"]
+
+[node name="HSeparator" type="HSeparator" parent="Debug/CanvasLayer/PanelContainer/VBoxContainer"]
+margin_top = 96.0
+margin_right = 198.0
+margin_bottom = 100.0
+
+[node name="ArmyTitle" type="Label" parent="Debug/CanvasLayer/PanelContainer/VBoxContainer"]
+margin_top = 104.0
+margin_right = 198.0
+margin_bottom = 118.0
+text = "Army:"
+align = 1
+valign = 2
+
+[node name="ArmyContainer" type="GridContainer" parent="Debug/CanvasLayer/PanelContainer/VBoxContainer"]
+margin_top = 122.0
+margin_right = 198.0
+margin_bottom = 394.0
+rect_pivot_offset = Vector2( -1226.67, 89.388 )
+columns = 2
+
+[node name="StackDisplay" parent="Debug/CanvasLayer/PanelContainer/VBoxContainer/ArmyContainer" instance=ExtResource( 7 )]
+
+[node name="StackDisplay2" parent="Debug/CanvasLayer/PanelContainer/VBoxContainer/ArmyContainer" instance=ExtResource( 7 )]
+margin_left = 92.0
+margin_right = 180.0
+
+[node name="StackDisplay3" parent="Debug/CanvasLayer/PanelContainer/VBoxContainer/ArmyContainer" instance=ExtResource( 7 )]
+margin_top = 92.0
+margin_bottom = 180.0
+
+[node name="StackDisplay4" parent="Debug/CanvasLayer/PanelContainer/VBoxContainer/ArmyContainer" instance=ExtResource( 7 )]
+margin_left = 92.0
+margin_top = 92.0
+margin_right = 180.0
+margin_bottom = 180.0
+
+[node name="StackDisplay5" parent="Debug/CanvasLayer/PanelContainer/VBoxContainer/ArmyContainer" instance=ExtResource( 7 )]
+margin_top = 184.0
+margin_bottom = 272.0
+
+[node name="StackDisplay6" parent="Debug/CanvasLayer/PanelContainer/VBoxContainer/ArmyContainer" instance=ExtResource( 7 )]
+margin_left = 92.0
+margin_top = 184.0
+margin_right = 180.0
+margin_bottom = 272.0
+[connection signal="pressed" from="Debug/CanvasLayer/PanelContainer/VBoxContainer/Reveal" to="Debug" method="_on_Reveal_pressed"]
+[connection signal="pressed" from="Debug/CanvasLayer/PanelContainer/VBoxContainer/Regen" to="Debug" method="_on_Regen_pressed"]
+[connection signal="pressed" from="Debug/CanvasLayer/PanelContainer/VBoxContainer/Screenshot" to="Debug" method="_on_Screenshot_pressed"]

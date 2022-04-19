@@ -2,13 +2,38 @@ extends Node2D
 
 var map: AdventureMap
 
-func _process(delta):
+onready var cursorPosition := $CanvasLayer/PanelContainer/VBoxContainer/Position
+onready var armyContainer := $CanvasLayer/PanelContainer/VBoxContainer/ArmyContainer
+
+func refresh():
+	_setup_army()
+	_update_cursor_pos()
+
+
+func _ready():
+	_setup_army()
+
+
+func _unhandled_input(event):
+	if event is InputEventMouseMotion:
+		_update_cursor_pos()
+
+
+func _update_cursor_pos():
 	var hex = map.hexmap.pixel_to_hex(get_global_mouse_position())
 	var oddq = map.hexmap.axial_to_oddq(hex)
 	if map.hexmap.get_hex(hex) != null:
-		$CanvasLayer/Position.text = "%s - %s" % [hex, oddq]
+		cursorPosition.text = "%s - %s" % [hex, oddq]
 	else:
-		$CanvasLayer/Position.text = ""
+		cursorPosition.text = ""
+
+func _setup_army():
+	var stacks = Context.player_army.stacks
+	var stack_displays = armyContainer.get_children()
+	
+	for i in range(stack_displays.size()):
+		var stack = stacks[i] if i < stacks.size() else null
+		stack_displays[i].update_with_stack(stack)
 
 
 func _on_Reveal_pressed():
