@@ -18,6 +18,7 @@ func _on_Reveal_pressed():
 
 func _on_Regen_pressed():
 	map.regenerate()
+	get_parent().get_node("Hero").set_position_hex(Vector3.ZERO)
 
 
 func _on_Screenshot_pressed():

@@ -28,10 +28,11 @@ func regenerate():
 
 func _ready():
 	_setup_hexmap()
-	if Context.adventure_map:
-		_load_save()
-	else:
-		_procedural_init()
+	_load_from_editor()
+#	if Context.adventure_map:
+#		_load_save()
+#	else:
+#		_procedural_init()
 	$DebugHexMapDrawer.map = hexmap
 
 
@@ -43,6 +44,19 @@ func _setup_hexmap():
 		cell_size.x / 1.5, 
 		cell_size.y / (2 * sin(PI/3))
 	))
+
+
+func _load_from_editor():
+	hexmap.clear()
+	for cell in baseTilemap.get_used_cells():
+		var hex_pos = hexmap.oddq_to_axial(cell)
+		hexmap.add_hex(hex_pos, AdventureTile.new(
+			baseTilemap.get_cellv(cell),
+			detailsTilemap.get_cellv(cell),
+			entityTilemap.get_cellv(cell),
+			hexmap.hex_length(hex_pos) < 2
+		))
+	_reload_tilemaps()
 
 
 func _procedural_init():

@@ -7,10 +7,11 @@ func _ready():
 	for child in [$Selector, $Debug, $Hero]:
 		child.map = map
 		
-	if Context.adventure_map:
-		$Hero.set_position_hex(Context.adventure_map.player_pos)
-	else:
-		$Hero.set_position_hex(Vector3.ZERO)
+#	if Context.adventure_map:
+#		$Hero.set_position_hex(Context.adventure_map.player_pos)
+#	else:
+#		$Hero.set_position_hex(Vector3.ZERO)
+	$Hero.set_position_hex(Vector3.ZERO)
 	
 	$Selector.connect("adventure_tile_selected", self, "_on_hex_selected")
 
