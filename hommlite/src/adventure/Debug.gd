@@ -7,11 +7,13 @@ onready var armyContainer := $CanvasLayer/PanelContainer/VBoxContainer/ArmyConta
 
 func refresh():
 	_setup_army()
-	_update_cursor_pos()
+	_load_souls()
+	if map:
+		_update_cursor_pos()
 
 
 func _ready():
-	_setup_army()
+	refresh()
 
 
 func _unhandled_input(event):
@@ -25,7 +27,7 @@ func _update_cursor_pos():
 	if map.hexmap.get_hex(hex) != null:
 		cursorPosition.text = "%s - %s" % [hex, oddq]
 	else:
-		cursorPosition.text = ""
+		cursorPosition.text = "empty"
 
 func _setup_army():
 	var stacks = Context.player_army.stacks
@@ -34,6 +36,9 @@ func _setup_army():
 	for i in range(stack_displays.size()):
 		var stack = stacks[i] if i < stacks.size() else null
 		stack_displays[i].update_with_stack(stack)
+
+func _load_souls():
+	$CanvasLayer/PanelContainer/VBoxContainer/Souls.text = "Souls: %d" % Context.souls
 
 
 func _on_Reveal_pressed():

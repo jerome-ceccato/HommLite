@@ -25,12 +25,22 @@ func _ready():
 func _on_hex_selected(hex: Vector3):
 	var hexdata: AdventureTile = map.hexmap.get_hex(hex)
 	if hexdata and hexdata.revealed:
-		if hexdata.get_entity_tile_id() == AdventureTile.EntityTileID.ENEMY or hexdata.get_entity_tile_id() == AdventureTile.EntityTileID.ENEMY2:
+		if hexdata.get_entity_tile_id() == AdventureTile.EntityTileID.HOME:
+			_move_hero(hex)
+			_save()
+			_open_home_window()
+		elif hexdata.get_entity_tile_id() == AdventureTile.EntityTileID.ENEMY or hexdata.get_entity_tile_id() == AdventureTile.EntityTileID.ENEMY2:
 			_combat_target_hex = hex
 			_do_combat(hexdata.get_entity_tile_id())
 		elif hexdata.get_base_tile_id() == AdventureTile.BaseTileID.GRASS or hexdata.get_base_tile_id() == AdventureTile.BaseTileID.GRASS2:
 			_move_hero(hex)
 			_save()
+
+
+func _open_home_window():
+	var scene = load("res://src/manage/Manage.tscn")
+	var node = scene.instance()
+	$Debug/CanvasLayer.add_child(node)
 
 
 func _move_hero(hex: Vector3):

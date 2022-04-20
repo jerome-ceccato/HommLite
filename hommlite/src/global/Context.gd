@@ -38,6 +38,7 @@ func did_lose_battle():
 	delete_save()
 	player_army = StartData.get_player_army()
 	current_world = null
+	souls = 0
 
 
 func has_save():
