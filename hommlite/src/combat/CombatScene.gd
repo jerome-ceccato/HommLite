@@ -7,6 +7,12 @@ onready var ui = $UI
 onready var battle_events: BattleEvents = $Battle/BattleEvents
 onready var ui_events: UIEvents = $UI/UIEvents
 
+var _scene_navigation: GameSceneNavigation setget inject_scene_navigation
+func inject_scene_navigation(nav):
+	_scene_navigation = nav
+	$UI/Dialogs/EndScreen.scene_navigation = nav
+
+
 func _ready():
 	if Engine.editor_hint:
 		_editor_specific_features()

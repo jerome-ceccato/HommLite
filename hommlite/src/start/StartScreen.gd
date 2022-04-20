@@ -22,5 +22,5 @@ func _start_combat():
 
 
 func _on_Adventure_pressed():
-	var scene_path = "res://src/adventure/Adventure.tscn"
+	var scene_path = "res://src/scene/GameSceneManager.tscn"
 	get_tree().change_scene(scene_path)

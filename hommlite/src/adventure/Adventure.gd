@@ -1,7 +1,11 @@
 extends Node2D
+class_name AdventureScene
 
 onready var map: AdventureMap = $AdventureMap
 
+var _scene_navigation: GameSceneNavigation setget inject_scene_navigation
+func inject_scene_navigation(nav):
+	_scene_navigation = nav
 
 func _ready():
 	for child in [$Selector, $Debug, $Hero]:
@@ -38,15 +42,8 @@ func _move_hero(hex: Vector3):
 func _do_combat():
 	Context.current_world = CurrentWorld.new(WorldData.new("Test", "", "test", 1))
 	Context.load_battle()
-	
-	var root = get_tree().get_root()
-	
-	var scene_path = "res://src/combat/CombatScene.tscn"
-	var next_scene = load(scene_path).instance()
-	root.add_child(next_scene)
-	
-	Context.adventure_scene = self
-	root.remove_child(self)
+	_scene_navigation.emit_signal("navigate_to_combat")
+
 
 func recover_after_combat():
 	# use signals

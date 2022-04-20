@@ -2,6 +2,7 @@ extends Node2D
 
 var _battle: Battle
 var _world_data: WorldData
+var scene_navigation: GameSceneNavigation
 
 onready var label: Label = $Label
 onready var button: Button = $BackButton
@@ -36,10 +37,11 @@ func _on_Titlescreen_pressed():
 		var combat_scene_path = "res://src/combat/CombatScene.tscn"
 		get_tree().change_scene(combat_scene_path)
 	else:
+		scene_navigation.emit_signal("navigate_to_adventure")
 		#var title_scene_path = "res://src/start/StartScreen.tscn"
-		get_tree().get_root().add_child(Context.adventure_scene)
-		Context.adventure_scene.recover_after_combat()
-		var scene = get_parent().get_parent().get_parent()
-		get_tree().get_root().remove_child(scene)
-		scene.queue_free()
+#		get_tree().get_root().add_child(Context.adventure_scene)
+#		Context.adventure_scene.recover_after_combat()
+#		var scene = get_parent().get_parent().get_parent()
+#		get_tree().get_root().remove_child(scene)
+#		scene.queue_free()
 		#get_tree().change_scene(title_scene_path)
