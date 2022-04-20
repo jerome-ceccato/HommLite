@@ -40,12 +40,10 @@ func _move_hero(hex: Vector3):
 
 
 func _do_combat():
-	Context.current_world = CurrentWorld.new(WorldData.new("Test", "", "test", 1))
-	Context.load_battle()
-	_scene_navigation.emit_signal("navigate_to_combat")
+	_scene_navigation.emit_signal("navigate_to_combat", WorldData.new("Test", "", "test", 1))
 
 
-func recover_after_combat():
+func prepare_for_combat_ended():
 	# use signals
 	$Debug.refresh()
 

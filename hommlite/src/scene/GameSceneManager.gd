@@ -31,12 +31,16 @@ func _swap_scene(scene: Node2D):
 	
 	container.add_child(scene)
 
-func _on_navigate_to_combat():
+func _on_navigate_to_combat(world_data: WorldData):
+	Context.current_world = CurrentWorld.new(world_data)
+	Context.load_battle()
+	
 	var combat_scene_path = "res://src/combat/CombatScene.tscn"
 	var next_scene = load(combat_scene_path).instance()
 	_swap_scene(next_scene)
 
 
 func _on_navigate_to_adventure():
+	_adventure_scene.prepare_for_combat_ended()
 	_swap_scene(_adventure_scene)
 
