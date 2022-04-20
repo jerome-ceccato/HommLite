@@ -11,6 +11,12 @@ func setup_for(id: String):
 					Stack.new("chicken", 20),
 				]),
 			]
+		"test_hard":
+			_battles = [
+				Army.new([
+					Stack.new("uchicken", 999),
+				]),
+			]
 		"easy":
 			_battles = [
 				Army.new([

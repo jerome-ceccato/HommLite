@@ -19,6 +19,7 @@ enum DetailTileID {
 enum EntityTileID {
 	HOME = 0,
 	ENEMY = 1,
+	ENEMY2 = 2,
 }
 
 enum OutlineTileID {

@@ -37,7 +37,8 @@ func _on_Titlescreen_pressed():
 		var combat_scene_path = "res://src/combat/CombatScene.tscn"
 		get_tree().change_scene(combat_scene_path)
 	else:
-		scene_navigation.emit_signal("navigate_to_adventure")
+		var result = _battle.get_winner() == BattleStack.Side.LEFT
+		scene_navigation.emit_signal("navigate_to_adventure", result)
 		#var title_scene_path = "res://src/start/StartScreen.tscn"
 #		get_tree().get_root().add_child(Context.adventure_scene)
 #		Context.adventure_scene.recover_after_combat()

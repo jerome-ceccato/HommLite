@@ -40,7 +40,7 @@ func _on_navigate_to_combat(world_data: WorldData):
 	_swap_scene(next_scene)
 
 
-func _on_navigate_to_adventure():
-	_adventure_scene.prepare_for_combat_ended()
+func _on_navigate_to_adventure(victory: bool):
+	_adventure_scene.prepare_for_combat_ended(victory)
 	_swap_scene(_adventure_scene)
 
