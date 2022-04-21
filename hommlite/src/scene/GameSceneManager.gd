@@ -2,6 +2,7 @@ extends Node2D
 
 onready var container := $SceneContainer
 onready var navigation := $Navigation
+onready var _transition_player := $Canvas/SceneTransition/AnimationPlayer
 
 var _adventure_scene: AdventureScene
 
@@ -21,15 +22,20 @@ func _setup_navigation_bindings():
 
 
 func _swap_scene(scene: Node2D):
-	for n in container.get_children():
-		container.remove_child(n)
-		if n != _adventure_scene:
-			n.queue_free()
+	if container.get_child_count() != 0:
+		_transition_player.play("Fade")
+		yield(_transition_player, "animation_finished")
+		
+		for n in container.get_children():
+			container.remove_child(n)
+			if n != _adventure_scene:
+				n.queue_free()
 	
 	if scene.has_method("inject_scene_navigation"):
 		scene.inject_scene_navigation(navigation)
 	
 	container.add_child(scene)
+	_transition_player.play_backwards("Fade")
 
 func _on_navigate_to_combat(world_data: WorldData):
 	Context.current_world = CurrentWorld.new(world_data)

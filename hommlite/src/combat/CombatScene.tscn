@@ -152,6 +152,7 @@ script = ExtResource( 3 )
 color = Color( 0.823529, 0.788235, 0.647059, 0.25098 )
 
 [node name="PathfindingOverlay" type="Node2D" parent="UI/CombatArea/Grid"]
+visible = false
 script = ExtResource( 35 )
 path_color = Color( 0, 0, 0, 0.12549 )
 
