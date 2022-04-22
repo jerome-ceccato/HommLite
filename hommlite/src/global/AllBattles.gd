@@ -7,69 +7,15 @@ func setup_for(id: String):
 	match id:
 		"test":
 			_battles = [
-				Army.new([
-					Stack.new("chicken", 20),
-				]),
+				Army.new({
+					0: Stack.new("chicken", 20),
+				}),
 			]
 		"test-hard":
 			_battles = [
-				Army.new([
-					Stack.new("uchicken", 999),
-				]),
-			]
-		"easy":
-			_battles = [
-				Army.new([
-					Stack.new("chicken", 12),
-				]),
-				Army.new([
-					Stack.new("chicken", 20),
-					Stack.new("chicken", 25),
-					Stack.new("chicken", 20),
-				]),
-			]
-		"medium":
-			_battles = [
-				Army.new([
-					Stack.new("chicken", 36),
-				]),
-				Army.new([
-					Stack.new("chicken", 27),
-					Stack.new("uchicken", 6),
-					Stack.new("chicken", 27),
-				]),
-				Army.new([
-					Stack.new("bee", 2),
-					Stack.new("cow", 3),
-					Stack.new("bee", 2),
-					Stack.new("cow", 3),
-					Stack.new("bee", 2),
-				]),
-			]
-		"hard":
-			_battles = [
-				Army.new([
-					Stack.new("uchicken", 20),
-					Stack.new("uchicken", 20),
-					Stack.new("uchicken", 20),
-				]),
-				Army.new([
-					Stack.new("cow", 5),
-					Stack.new("uchicken", 6),
-					Stack.new("uchicken", 7),
-					Stack.new("uchicken", 6),
-					Stack.new("cow", 5),
-				]),
-				Army.new([
-					Stack.new("bee", 6),
-					Stack.new("bee", 4),
-					Stack.new("uchicken", 32),
-					Stack.new("bee", 4),
-					Stack.new("bee", 6),
-				]),
-				Army.new([
-					Stack.new("cow", 42),
-				])
+				Army.new({
+					0: Stack.new("uchicken", 999),
+				}),
 			]
 
 

@@ -32,7 +32,7 @@ func delete_save():
 
 
 func _deserialize_context(data: Dictionary):
-	Context.player_army = Army.new([]).deserialize(data["player_army"])
+	Context.player_army = Army.new({}).deserialize(data["player_army"])
 	if data.has("current_world"):
 		Context.current_world = CurrentWorld.new(null).deserialize(data["current_world"])
 	Context.souls = data["souls"]

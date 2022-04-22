@@ -31,9 +31,8 @@ func setup(grid: BattleGrid, logger: BattleLogger, setup_data: BattleSetup):
 	_logger = logger
 	_battle_data = setup_data
 	
-	var stack_id = 1
-	stack_id = _setup_stacks(setup_data.left_army, BattleStack.Side.LEFT, stack_id)
-	stack_id = _setup_stacks(setup_data.right_army, BattleStack.Side.RIGHT, stack_id)
+	_setup_stacks(setup_data.left_army, BattleStack.Side.LEFT)
+	_setup_stacks(setup_data.right_army, BattleStack.Side.RIGHT)
 	_setup_obstacles(setup_data.map.obstacles)
 
 
@@ -243,17 +242,15 @@ func _array_contains_coords(array: Array, coords: BattleCoords) -> bool:
 	return false
 
 
-func _setup_stacks(army: Army, side: int, stack_id: int) -> int:
+func _setup_stacks(army: Army, side: int):
 	var army_size = army.stacks.size()
-	for i in range(army_size):
+	for i in army_size:
 		var stack = army.stacks[i]
-		var new_stack = BattleStack.new(stack_id, stack, null, side)
+		var new_stack = BattleStack.new(_stack_id(side, i), stack, null, side)
 		var coords = _stack_coordinates(army_size, i, side, new_stack.unit)
 		
 		new_stack.coordinates = coords
 		_stacks[coords.index] = new_stack
-		stack_id += 1
-	return stack_id
 
 
 func _stack_coordinates(army_size: int, position: int, side: int, unit: UnitData) -> BattleCoords:
@@ -270,3 +267,9 @@ func _setup_obstacles(obstacles: Array):
 	_obstacles = {}
 	for o in obstacles:
 		_obstacles[o.coordinates.index] = o
+
+func _stack_id(side: int, pos: int) -> int:
+	return side * 1000 + pos
+
+func stack_original_pos(id: int) -> int:
+	return id % 1000

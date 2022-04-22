@@ -170,16 +170,8 @@ func _on_UI_action_wait():
 
 
 func _get_final_player_army() -> Army:
-	var player_bstack = []
+	var stacks = {}
 	for bstack in _data.all_stacks():
 		if bstack.amount > 0 and bstack.side == BattleStack.Side.LEFT:
-			player_bstack.append(bstack)
-	player_bstack.sort_custom(self, "_sort_bstack_id")
-	var stacks = []
-	for bstack in player_bstack:
-		stacks.append(Stack.new(bstack.unit.id, bstack.amount))
+			stacks[_data.stack_original_pos(bstack.id)] = Stack.new(bstack.unit.id, bstack.amount)
 	return Army.new(stacks)
-
-
-func _sort_bstack_id(a: BattleStack, b: BattleStack) -> bool:
-	return a.id < b.id

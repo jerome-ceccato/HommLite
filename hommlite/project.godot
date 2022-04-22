@@ -57,7 +57,7 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "Army",
 "language": "GDScript",
-"path": "res://src/combat/data/Army.gd"
+"path": "res://src/core/army/Army.gd"
 }, {
 "base": "Control",
 "class": "ArmyStackDisplay",
@@ -207,7 +207,7 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "Stack",
 "language": "GDScript",
-"path": "res://src/combat/data/Stack.gd"
+"path": "res://src/core/army/Stack.gd"
 }, {
 "base": "Node2D",
 "class": "StackContainer",
@@ -227,7 +227,7 @@ _global_script_classes=[ {
 "base": "Resource",
 "class": "UnitData",
 "language": "GDScript",
-"path": "res://src/combat/data/UnitData.gd"
+"path": "res://src/core/army/UnitData.gd"
 }, {
 "base": "Control",
 "class": "WorldCard",
