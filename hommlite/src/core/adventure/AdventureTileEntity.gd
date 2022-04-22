@@ -17,6 +17,9 @@ func _init(type: int, data):
 func get_tile_id() -> int:
 	return _data.get_tile_id()
 
+func get_type() -> int:
+	return _type
+
 func get_data():
 	return _data
 

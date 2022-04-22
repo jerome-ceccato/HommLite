@@ -43,7 +43,7 @@ func _load_souls():
 
 func _on_Reveal_pressed():
 	for hex in map.hexmap.get_all_hex().keys():
-		map.reveal(hex)
+		map.reveal(hex, false)
 
 
 func _on_Regen_pressed():

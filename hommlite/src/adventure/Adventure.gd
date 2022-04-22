@@ -24,13 +24,13 @@ func _ready():
 
 func _on_hex_selected(hex: Vector3):
 	var hexdata: AdventureTile = map.hexmap.get_hex(hex)
-	if hexdata and hexdata.visibility == AdventureTileVisibility.VISIBLE:
+	if hexdata and hexdata.visibility != AdventureTileVisibility.HIDDEN:
 		var entity = hexdata.get_entity()
-		if entity and entity.type == AdventureTileEntity.Type.HOME:
+		if entity and entity.get_type() == AdventureTileEntity.Type.BUILDING:
 			_move_hero(hex)
 			_save()
 			_open_home_window()
-		elif entity and entity.type == AdventureTileEntity.Type.ENEMY:
+		elif entity and entity.get_type() == AdventureTileEntity.Type.ENEMY:
 			_combat_target_hex = hex
 			_do_combat(entity.get_data())
 		elif hexdata.can_traverse():
@@ -46,8 +46,7 @@ func _open_home_window():
 
 func _move_hero(hex: Vector3):
 	$Hero.set_position_hex(hex)
-	for direction in range(6):
-		map.reveal(map.hexmap.neighbor_hex(hex, direction))
+	map.reveal(hex, true)
 
 
 func _do_combat(entity: AdventureTileEnemy):

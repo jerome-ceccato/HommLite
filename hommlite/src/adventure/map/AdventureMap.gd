@@ -8,11 +8,18 @@ onready var outlineTilemap: TileMap = $OutlineTileMap
 onready var hexmap: HexMap = $HexMap
 
 
-func reveal(hex: Vector3):
+func reveal(hex: Vector3, do_neighbors: bool):
+	_reveal_hex(hex, AdventureTileVisibility.VISIBLE)
+	if do_neighbors:
+		for direction in range(6):
+			_reveal_hex(hexmap.neighbor_hex(hex, direction), AdventureTileVisibility.FOG)
+
+func _reveal_hex(hex: Vector3, visibility: int):
 	var tile: AdventureTile = hexmap.get_hex(hex)
 	if tile:
-		tile.visibility = AdventureTileVisibility.VISIBLE
-		_update_tile_in_tilemap(tile, hex)
+		if tile.visibility < visibility:
+			tile.visibility = visibility
+			_update_tile_in_tilemap(tile, hex)
 
 
 func discard_entity(hex: Vector3):
