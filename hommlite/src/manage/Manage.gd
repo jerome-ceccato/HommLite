@@ -15,7 +15,7 @@ func _update_army():
 	var stack_displays = $ManageArmy/HBoxContainer.get_children()
 	
 	for i in range(stack_displays.size()):
-		var stack = stacks[i] if i < stacks.size() else null
+		var stack = stacks[i] if stacks.has(i) else null
 		stack_displays[i].update_with_stack(stack)
 
 

@@ -244,7 +244,7 @@ func _array_contains_coords(array: Array, coords: BattleCoords) -> bool:
 
 func _setup_stacks(army: Army, side: int):
 	var army_size = army.stacks.size()
-	for i in army_size:
+	for i in army.stacks:
 		var stack = army.stacks[i]
 		var new_stack = BattleStack.new(_stack_id(side, i), stack, null, side)
 		var coords = _stack_coordinates(army_size, i, side, new_stack.unit)
