@@ -77,5 +77,7 @@ func _gen_home() -> AdventureTileEntity:
 
 func _gen_enemy(hexmap: HexMap, hex: Vector3) -> AdventureTileEntity:
 	var enemy = 1 if hexmap.hex_length(hex) < 10 else 2
-	return AdventureTileEntity.new(AdventureTileEntity.Type.ENEMY, AdventureTileEnemy.new(enemy, Army.new({})))
+	return AdventureTileEntity.new(AdventureTileEntity.Type.ENEMY, AdventureTileEnemy.new(enemy, Army.new({
+		0: Stack.new("chicken", 20)
+	})))
 

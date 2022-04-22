@@ -70,7 +70,9 @@ func _entity_from_tilemap(id: int) -> AdventureTileEntity:
 		AdventureTileBuilding.TileID.HOME:
 			return AdventureTileEntity.new(AdventureTileEntity.Type.BUILDING, AdventureTileBuilding.new())
 		AdventureTileEnemy.TileID.ENEMY, AdventureTileEnemy.TileID.ENEMY2:
-			return AdventureTileEntity.new(AdventureTileEntity.Type.ENEMY, AdventureTileEnemy.new(id, Army.new({})))
+			return AdventureTileEntity.new(AdventureTileEntity.Type.ENEMY, AdventureTileEnemy.new(id, Army.new({
+				0: Stack.new("chicken", 20)
+			})))
 	return null
 
 

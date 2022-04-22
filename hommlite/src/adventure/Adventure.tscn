@@ -6,7 +6,7 @@
 [ext_resource path="res://src/adventure/Adventure.gd" type="Script" id=4]
 [ext_resource path="res://src/adventure/AdventureCamera.gd" type="Script" id=5]
 [ext_resource path="res://assets/adventure/hex-select.png" type="Texture" id=6]
-[ext_resource path="res://src/world-select/ArmyStackDisplay.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/ui/units/ArmyStackDisplay.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/adventure/Debug.gd" type="Script" id=8]
 [ext_resource path="res://src/adventure/Selector.gd" type="Script" id=9]
 

@@ -33,8 +33,6 @@ func delete_save():
 
 func _deserialize_context(data: Dictionary):
 	Context.player_army = Army.new({}).deserialize(data["player_army"])
-	if data.has("current_world"):
-		Context.current_world = CurrentWorld.new(null).deserialize(data["current_world"])
 	Context.souls = data["souls"]
 	if data.has("adventure"):
 		Context.adventure_map = AdventureSaveData.new().deserialize(data["adventure"])
@@ -45,8 +43,6 @@ func _serialize_context():
 		"player_army": Context.player_army.serialized(),
 		"souls": Context.souls
 	}
-	if Context.current_world:
-		ctx["current_world"] = Context.current_world.serialized()
 	if Context.adventure_map:
 		ctx["adventure"] = Context.adventure_map.serialized()
 	return ctx

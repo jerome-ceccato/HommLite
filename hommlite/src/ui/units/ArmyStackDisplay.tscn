@@ -1,19 +1,19 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://assets/fonts/m5x7.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://src/ui/units/ArmyStackDisplay.gd" type="Script" id=1]
 [ext_resource path="res://assets/combat/units/placeholder.png" type="Texture" id=2]
-[ext_resource path="res://src/world-select/ArmyStackDisplay.gd" type="Script" id=3]
+[ext_resource path="res://assets/fonts/m5x7.ttf" type="DynamicFontData" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
-font_data = ExtResource( 1 )
+font_data = ExtResource( 3 )
 
 [node name="StackDisplay" type="Control"]
 margin_right = 88.0
 margin_bottom = 88.0
 rect_min_size = Vector2( 88, 88 )
 rect_pivot_offset = Vector2( -222.859, -54.6763 )
-script = ExtResource( 3 )
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

@@ -50,9 +50,7 @@ func _move_hero(hex: Vector3):
 
 
 func _do_combat(entity: AdventureTileEnemy):
-	var world = "test" if entity.get_tile_id() == AdventureTileEnemy.TileID.ENEMY else "test-hard"
-	#TODO refactor WorldData and starting combats
-	_scene_navigation.emit_signal("navigate_to_combat", WorldData.new("Test", "", world, 1))
+	_scene_navigation.emit_signal("navigate_to_combat", entity.get_army())
 
 
 func prepare_for_combat_ended(victory: bool):

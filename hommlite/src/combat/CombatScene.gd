@@ -18,7 +18,7 @@ func _ready():
 		_editor_specific_features()
 		return
 	
-	var data = Context.current_world.current_battle
+	var data = Context.current_battle
 	battle.setup_battle(data)
 	ui.setup(battle, data.map)
 	

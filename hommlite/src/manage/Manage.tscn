@@ -7,7 +7,8 @@
 [ext_resource path="res://src/manage/ManageArmyInterpretor.gd" type="Script" id=5]
 [ext_resource path="res://assets/ui/close-button.png" type="Texture" id=7]
 [ext_resource path="res://assets/ui/close-button-hl.png" type="Texture" id=8]
-[ext_resource path="res://src/world-select/ArmyStackDisplay.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/ui/units/ArmyStackDisplay.tscn" type="PackedScene" id=9]
+
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 3 )

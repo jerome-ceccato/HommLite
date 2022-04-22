@@ -37,9 +37,8 @@ func _swap_scene(scene: Node2D):
 	container.add_child(scene)
 	_transition_player.play_backwards("Fade")
 
-func _on_navigate_to_combat(world_data: WorldData):
-	Context.current_world = CurrentWorld.new(world_data)
-	Context.load_battle()
+func _on_navigate_to_combat(army: Army):
+	Context.load_battle(army)
 	
 	var combat_scene_path = "res://src/combat/CombatScene.tscn"
 	var next_scene = load(combat_scene_path).instance()
