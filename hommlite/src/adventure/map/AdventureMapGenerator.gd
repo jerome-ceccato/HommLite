@@ -9,14 +9,16 @@ func _ready():
 	rng.randomize()
 
 
-func gen_hexmap(hexmap: HexMap, radius: int):
+func gen_hexmap(hexmap: HexMap, radius: int) -> Dictionary:
+	var map = {}
 	_setup_noise()
 	for q in range(-radius, radius + 1):
 		var r1 = max(-radius, -q - radius)
 		var r2 = min(radius, -q + radius)
 		for r in range(r1, r2 + 1):
 			var hex = Vector3(q, r, -q-r)
-			hexmap.add_hex(hex, _gen_tile(hexmap, hex, radius))
+			map[hex] = _gen_tile(hexmap, hex, radius)
+	return map
 
 
 func _setup_noise():
@@ -37,17 +39,17 @@ func _gen_tile(hexmap: HexMap, hex: Vector3, radius: int) -> AdventureTile:
 			AdventureTile.BaseTileID.MOUNTAIN2, 
 			AdventureTile.NO_TILE, 
 			null, 
-			false
+			AdventureTileVisibility.HIDDEN
 		)
 	elif distance < 2:
 		var home = _gen_home() if distance == 0 else null
-		return AdventureTile.new(AdventureTile.BaseTileID.GRASS, AdventureTile.NO_TILE, home, true)
+		return AdventureTile.new(AdventureTile.BaseTileID.GRASS, AdventureTile.NO_TILE, home, AdventureTileVisibility.VISIBLE)
 	else:
 		return AdventureTile.new(
 			_gen_base_tile(hex, noise_value), 
 			_gen_details_tile(hex, noise_value),
 			_gen_entity(hexmap, hex, noise_value),
-			false
+			AdventureTileVisibility.HIDDEN
 		)
 
 

@@ -1,15 +1,15 @@
 extends Reference
 class_name BattleLoader
 
-func load_battle(player_army: Army, enemy_army: Army) -> BattleSetup:
+static func load_battle(player_army: Army, enemy_army: Army) -> BattleSetup:
 	return BattleSetup.new([player_army, enemy_army], _get_map())
 
 
-func _get_map() -> MapData:
+static func _get_map() -> MapData:
 	var bg = "res://assets/combat/bg.png"
 	return MapData.new(bg, BattleCoords.new(13, 9), _make_obstacles())
 
-func _make_obstacles() -> Array:
+static func _make_obstacles() -> Array:
 	var rock_reference = "res://assets/combat/rock.png"
 	return [
 		ObstacleData.new(BattleCoords.new(3, 5), rock_reference),

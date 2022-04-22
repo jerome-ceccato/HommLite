@@ -1,5 +1,7 @@
-extends Node
+extends Reference
 class_name AdventureTileEnemy
+
+# Represents the metadata for an enemy entity in the map, including its army
 
 enum TileID {
 	ENEMY = 1,

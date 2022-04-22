@@ -8,6 +8,21 @@ onready var outlineTilemap: TileMap = $OutlineTileMap
 onready var hexmap: HexMap = $HexMap
 
 
+func get_hex(hex: Vector3) -> AdventureTile:
+	if (Context.save_data.map.has(hex)):
+		return Context.save_data.map[hex]
+	return null
+
+func set_hex(hex: Vector3, tile: AdventureTile):
+	Context.save_data.map[hex] = tile
+
+func get_all_hex() -> Dictionary:
+	return Context.save_data.map
+
+func clear_all_hex():
+	Context.save_data.map = {}
+
+
 func reveal(hex: Vector3, do_neighbors: bool):
 	_reveal_hex(hex, AdventureTileVisibility.VISIBLE)
 	if do_neighbors:
@@ -15,7 +30,7 @@ func reveal(hex: Vector3, do_neighbors: bool):
 			_reveal_hex(hexmap.neighbor_hex(hex, direction), AdventureTileVisibility.FOG)
 
 func _reveal_hex(hex: Vector3, visibility: int):
-	var tile: AdventureTile = hexmap.get_hex(hex)
+	var tile: AdventureTile = get_hex(hex)
 	if tile:
 		if tile.visibility < visibility:
 			tile.visibility = visibility
@@ -23,7 +38,7 @@ func _reveal_hex(hex: Vector3, visibility: int):
 
 
 func discard_entity(hex: Vector3):
-	var tile: AdventureTile = hexmap.get_hex(hex)
+	var tile: AdventureTile = get_hex(hex)
 	if tile:
 		tile.delete_entity()
 		_update_tile_in_tilemap(tile, hex)
@@ -35,11 +50,10 @@ func regenerate():
 
 func _ready():
 	_setup_hexmap()
-	_load_from_editor()
-#	if Context.adventure_map:
-#		_load_save()
-#	else:
-#		_procedural_init()
+	if Context.has_save():
+		_load_save()
+	else:
+		_load_from_editor()
 	$DebugHexMapDrawer.map = hexmap
 
 
@@ -54,10 +68,10 @@ func _setup_hexmap():
 
 
 func _load_from_editor():
-	hexmap.clear()
+	clear_all_hex()
 	for cell in baseTilemap.get_used_cells():
 		var hex_pos = hexmap.oddq_to_axial(cell)
-		hexmap.add_hex(hex_pos, AdventureTile.new(
+		set_hex(hex_pos, AdventureTile.new(
 			baseTilemap.get_cellv(cell),
 			detailsTilemap.get_cellv(cell),
 			_entity_from_tilemap(entityTilemap.get_cellv(cell)),
@@ -77,13 +91,12 @@ func _entity_from_tilemap(id: int) -> AdventureTileEntity:
 
 
 func _procedural_init():
-	hexmap.clear()
-	$AdventureMapGenerator.gen_hexmap(hexmap, 16)
+	clear_all_hex()
+	Context.save_data.map = $AdventureMapGenerator.gen_hexmap(hexmap, 16)
 	_reload_tilemaps()
 
 
 func _load_save():
-	hexmap._hex_grid = Context.adventure_map.hexmap
 	_reload_tilemaps()
 
 
@@ -91,7 +104,7 @@ func _reload_tilemaps():
 	for tilemap in [baseTilemap, detailsTilemap, entityTilemap, outlineTilemap]:
 		tilemap.clear()
 	
-	var all_hex = hexmap.get_all_hex()
+	var all_hex = get_all_hex()
 	for hex in all_hex:
 		var tile = all_hex[hex]
 		_update_tile_in_tilemap(tile, hex)

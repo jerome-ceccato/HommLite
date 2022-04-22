@@ -1,5 +1,7 @@
-extends Node
+extends Reference
 class_name AdventureTile
+
+# Represents a conceptual hex tile, including all layers and metadata
 
 const NO_TILE = -1
 

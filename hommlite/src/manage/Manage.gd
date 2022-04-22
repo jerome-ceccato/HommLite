@@ -11,7 +11,7 @@ func _ready():
 
 
 func _update_army():
-	var stacks = Context.player_army.stacks
+	var stacks = Context.save_data.hero.army.stacks
 	var stack_displays = $ManageArmy/HBoxContainer.get_children()
 	
 	for i in range(stack_displays.size()):

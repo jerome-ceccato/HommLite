@@ -17,7 +17,7 @@ func _help():
 	pass
 	
 func _move(from: int, to: int, amount: int) -> bool:
-	var stacks = Context.player_army.stacks
+	var stacks = Context.save_data.hero.army.stacks
 	var hasAmount = amount >= 0
 	
 	if from >= 6 or to >= 6 or from < 0 or to < 0:

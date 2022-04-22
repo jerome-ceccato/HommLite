@@ -1,5 +1,7 @@
-extends Node
+extends Reference
 class_name AdventureTileVisibility
+
+# Describes the visibility of an adventure tile
 
 enum {
 	HIDDEN = -1,

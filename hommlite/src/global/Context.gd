@@ -1,44 +1,34 @@
 extends Node
 
-var _persistence := Persistence.new()
-var _battle_loader := BattleLoader.new()
-
-var player_army: Army
 var current_battle: BattleSetup
-var souls: int
 
-var adventure_map: AdventureSaveData
-var adventure_scene
+var save_data := SaveData.new()
+
 
 func _ready():
-	_init_globals()
 	load_save()
 
-func _init_globals():
-	player_army = StartData.get_player_army()
-	current_battle = null
-	adventure_map = null
-	souls = 0
 
 func load_battle(target: Army):
-	current_battle = _battle_loader.load_battle(player_army, target)
+	current_battle = BattleLoader.load_battle(save_data.hero.army, target)
 
 func finish_battle(victory: bool):
 	if victory:
-		souls += 1
+		save_data.resources.gold += 1
 	else:
-		delete_save()
-		_init_globals()
+		save_data.resources.gold = 0
+		save_data.hero.reset_army() 
+	save()
 
 
 func has_save():
-	return _persistence.has_save()
+	return Persistence.has_save()
 
 func load_save():
-	_persistence.load_saved_context()
+	save_data = Persistence.load_saved_context()
 
 func save():
-	_persistence.save_current_context()
+	Persistence.save_context(save_data)
 
 func delete_save():
-	_persistence.delete_save()
+	Persistence.delete_save()

@@ -1,5 +1,5 @@
-class_name Stack
 extends Reference
+class_name Stack
 
 # Represents a stack of multiple units of a single type
 

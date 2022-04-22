@@ -1,5 +1,7 @@
-extends Node
+extends Reference
 class_name AdventureTileEntity
+
+# A serializable wrapper for an entity and its metadata
 
 enum Type {
 	BUILDING,

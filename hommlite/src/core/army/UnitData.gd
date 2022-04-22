@@ -1,7 +1,7 @@
-class_name UnitData
 extends Resource
+class_name UnitData
 
-# Represents a unit type
+# Represents the immutable attributes of a unit
 
 export(String) var id: String
 export(String) var display_name: String

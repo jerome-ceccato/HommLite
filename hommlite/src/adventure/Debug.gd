@@ -24,13 +24,13 @@ func _unhandled_input(event):
 func _update_cursor_pos():
 	var hex = map.hexmap.pixel_to_hex(get_global_mouse_position())
 	var oddq = map.hexmap.axial_to_oddq(hex)
-	if map.hexmap.get_hex(hex) != null:
+	if map.get_hex(hex) != null:
 		cursorPosition.text = "%s - %s" % [hex, oddq]
 	else:
 		cursorPosition.text = "empty"
 
 func _setup_army():
-	var stacks = Context.player_army.stacks
+	var stacks = Context.save_data.hero.army.stacks
 	var stack_displays = armyContainer.get_children()
 	
 	for i in range(stack_displays.size()):
@@ -38,11 +38,11 @@ func _setup_army():
 		stack_displays[i].update_with_stack(stack)
 
 func _load_souls():
-	$CanvasLayer/PanelContainer/VBoxContainer/Souls.text = "Souls: %d" % Context.souls
+	$CanvasLayer/PanelContainer/VBoxContainer/Souls.text = "Gold: %d" % Context.save_data.resources.gold
 
 
 func _on_Reveal_pressed():
-	for hex in map.hexmap.get_all_hex().keys():
+	for hex in map.get_all_hex():
 		map.reveal(hex, false)
 
 

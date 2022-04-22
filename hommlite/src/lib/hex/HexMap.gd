@@ -3,7 +3,6 @@ extends Node
 class_name HexMap
 
 # Private properties
-var _hex_grid = {}
 var _orientation = layout_pointy
 var _size: Vector2
 var _origin: Vector2
@@ -39,36 +38,6 @@ const layout_pointy = [sqrt(3.0), sqrt(3.0) / 2.0, 0.0, 3.0 / 2.0,
 const layout_flat = [3.0 / 2.0, 0.0, sqrt(3.0) / 2.0, sqrt(3.0),
 					 2.0 / 3.0, 0.0, -1.0 / 3.0, sqrt(3.0) / 3.0,
 					 0.0]
-
-
-func ready():
-	_hex_grid = {}
-
-# Add and removal w/ HexData wrapper
-func add_hex(hex, data):
-	if (_hex_grid.has(hex)):
-		return
-	_hex_grid[hex] = data
-
-func move_hex(hex_old, hex_new):
-	if (_hex_grid.has(hex_new) || !_hex_grid.has(hex_old)):
-		return
-	_hex_grid[hex_new] = _hex_grid[hex_old]
-	_hex_grid.erase(hex_old)
-
-func remove_hex(hex):
-	if (_hex_grid.has(hex)):
-		_hex_grid.erase(hex)
-
-func get_hex(hex):
-	if (_hex_grid.has(hex)):
-		return _hex_grid[hex]
-
-func get_all_hex():
-	return _hex_grid
-
-func clear():
-	_hex_grid = {}
 
 
 # Rotation Transforms

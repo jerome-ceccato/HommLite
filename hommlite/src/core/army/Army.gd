@@ -1,7 +1,8 @@
-class_name Army
 extends Reference
+class_name Army
 
 # Represents the player army or any neutral army
+# The stacks have a position
 
 var stacks: Dictionary # [int: Stack]
 
