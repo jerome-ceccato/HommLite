@@ -11,7 +11,7 @@ onready var hexmap: HexMap = $HexMap
 func reveal(hex: Vector3):
 	var tile: AdventureTile = hexmap.get_hex(hex)
 	if tile:
-		tile.revealed = true
+		tile.visibility = AdventureTileVisibility.VISIBLE
 		_update_tile_in_tilemap(tile, hex)
 
 
@@ -53,10 +53,18 @@ func _load_from_editor():
 		hexmap.add_hex(hex_pos, AdventureTile.new(
 			baseTilemap.get_cellv(cell),
 			detailsTilemap.get_cellv(cell),
-			AdventureTileEntity.new().from_tilemap(entityTilemap.get_cellv(cell)),
-			hexmap.hex_length(hex_pos) < 2
+			_entity_from_tilemap(entityTilemap.get_cellv(cell)),
+			AdventureTileVisibility.VISIBLE if hexmap.hex_length(hex_pos) < 2 else AdventureTileVisibility.HIDDEN
 		))
 	_reload_tilemaps()
+
+func _entity_from_tilemap(id: int) -> AdventureTileEntity:
+	match id:
+		AdventureTileBuilding.TileID.HOME:
+			return AdventureTileEntity.new(AdventureTileEntity.Type.BUILDING, AdventureTileBuilding.new())
+		AdventureTileEnemy.TileID.ENEMY, AdventureTileEnemy.TileID.ENEMY2:
+			return AdventureTileEntity.new(AdventureTileEntity.Type.ENEMY, AdventureTileEnemy.new(id, Army.new({})))
+	return null
 
 
 func _procedural_init():

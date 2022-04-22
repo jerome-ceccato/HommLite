@@ -24,16 +24,16 @@ func _ready():
 
 func _on_hex_selected(hex: Vector3):
 	var hexdata: AdventureTile = map.hexmap.get_hex(hex)
-	if hexdata and hexdata.revealed:
+	if hexdata and hexdata.visibility == AdventureTileVisibility.VISIBLE:
 		var entity = hexdata.get_entity()
-		if entity and entity.is_home():
+		if entity and entity.type == AdventureTileEntity.Type.HOME:
 			_move_hero(hex)
 			_save()
 			_open_home_window()
-		elif entity and entity.is_enemy():
+		elif entity and entity.type == AdventureTileEntity.Type.ENEMY:
 			_combat_target_hex = hex
-			_do_combat(entity)
-		elif hexdata.get_base_tile_id() == AdventureTile.BaseTileID.GRASS or hexdata.get_base_tile_id() == AdventureTile.BaseTileID.GRASS2:
+			_do_combat(entity.get_data())
+		elif hexdata.can_traverse():
 			_move_hero(hex)
 			_save()
 
@@ -50,8 +50,9 @@ func _move_hero(hex: Vector3):
 		map.reveal(map.hexmap.neighbor_hex(hex, direction))
 
 
-func _do_combat(entity: AdventureTileEntity):
-	var world = entity.get_enemy_id()
+func _do_combat(entity: AdventureTileEnemy):
+	var world = "test" if entity.get_tile_id() == AdventureTileEnemy.TileID.ENEMY else "test-hard"
+	#TODO refactor WorldData and starting combats
 	_scene_navigation.emit_signal("navigate_to_combat", WorldData.new("Test", "", world, 1))
 
 

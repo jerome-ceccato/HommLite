@@ -40,7 +40,7 @@ func _gen_tile(hexmap: HexMap, hex: Vector3, radius: int) -> AdventureTile:
 			false
 		)
 	elif distance < 2:
-		var home = AdventureTileEntity.new().as_home() if distance == 0 else null
+		var home = _gen_home() if distance == 0 else null
 		return AdventureTile.new(AdventureTile.BaseTileID.GRASS, AdventureTile.NO_TILE, home, true)
 	else:
 		return AdventureTile.new(
@@ -72,8 +72,10 @@ func _gen_entity(hexmap: HexMap, hex: Vector3, value: float) -> AdventureTileEnt
 			return _gen_enemy(hexmap, hex)
 	return null
 
+func _gen_home() -> AdventureTileEntity:
+	return AdventureTileEntity.new(AdventureTileEntity.Type.BUILDING, AdventureTileBuilding.new())
 
 func _gen_enemy(hexmap: HexMap, hex: Vector3) -> AdventureTileEntity:
-	var enemy = "test" if hexmap.hex_length(hex) < 10 else "test-hard"
-	return AdventureTileEntity.new().as_enemy(enemy)
+	var enemy = 1 if hexmap.hex_length(hex) < 10 else 2
+	return AdventureTileEntity.new(AdventureTileEntity.Type.ENEMY, AdventureTileEnemy.new(enemy, Army.new({})))
 
