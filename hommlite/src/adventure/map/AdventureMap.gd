@@ -53,7 +53,7 @@ func _load_from_editor():
 		hexmap.add_hex(hex_pos, AdventureTile.new(
 			baseTilemap.get_cellv(cell),
 			detailsTilemap.get_cellv(cell),
-			entityTilemap.get_cellv(cell),
+			AdventureTileEntity.new().from_tilemap(entityTilemap.get_cellv(cell)),
 			hexmap.hex_length(hex_pos) < 2
 		))
 	_reload_tilemaps()

@@ -25,13 +25,14 @@ func _ready():
 func _on_hex_selected(hex: Vector3):
 	var hexdata: AdventureTile = map.hexmap.get_hex(hex)
 	if hexdata and hexdata.revealed:
-		if hexdata.get_entity_tile_id() == AdventureTile.EntityTileID.HOME:
+		var entity = hexdata.get_entity()
+		if entity and entity.is_home():
 			_move_hero(hex)
 			_save()
 			_open_home_window()
-		elif hexdata.get_entity_tile_id() == AdventureTile.EntityTileID.ENEMY or hexdata.get_entity_tile_id() == AdventureTile.EntityTileID.ENEMY2:
+		elif entity and entity.is_enemy():
 			_combat_target_hex = hex
-			_do_combat(hexdata.get_entity_tile_id())
+			_do_combat(entity)
 		elif hexdata.get_base_tile_id() == AdventureTile.BaseTileID.GRASS or hexdata.get_base_tile_id() == AdventureTile.BaseTileID.GRASS2:
 			_move_hero(hex)
 			_save()
@@ -49,8 +50,8 @@ func _move_hero(hex: Vector3):
 		map.reveal(map.hexmap.neighbor_hex(hex, direction))
 
 
-func _do_combat(id: int):
-	var world = "test" if id == AdventureTile.EntityTileID.ENEMY else "test_hard"
+func _do_combat(entity: AdventureTileEntity):
+	var world = entity.get_enemy_id()
 	_scene_navigation.emit_signal("navigate_to_combat", WorldData.new("Test", "", world, 1))
 
 

@@ -27,5 +27,5 @@ func _serialized_hexmap(dict: Dictionary):
 func _deserialized_dict(dict: Dictionary):
 	var serialized = {}
 	for key in dict:
-		serialized[str2var(key)] = AdventureTile.new(0,0,0,0).deserialize(dict[key])
+		serialized[str2var(key)] = AdventureTile.new(0,0,null,false).deserialize(dict[key])
 	return serialized
