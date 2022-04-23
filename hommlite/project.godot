@@ -19,15 +19,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/adventure/map/AdventureMap.gd"
 }, {
+"base": "Resource",
+"class": "AdventureMapData",
+"language": "GDScript",
+"path": "res://src/core/adventure/AdventureMapData.gd"
+}, {
 "base": "Node",
 "class": "AdventureMapGenerator",
 "language": "GDScript",
 "path": "res://src/adventure/map/AdventureMapGenerator.gd"
-}, {
-"base": "Node",
-"class": "AdventureSaveData",
-"language": "GDScript",
-"path": "res://src/adventure/AdventureSaveData.gd"
 }, {
 "base": "Node2D",
 "class": "AdventureScene",
@@ -252,8 +252,8 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "AIController": "",
 "AdventureMap": "",
+"AdventureMapData": "",
 "AdventureMapGenerator": "",
-"AdventureSaveData": "",
 "AdventureScene": "",
 "AdventureTile": "",
 "AdventureTileBuilding": "",

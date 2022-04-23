@@ -24,7 +24,7 @@ func _unhandled_input(event):
 func _update_cursor_pos():
 	var hex = map.hexmap.pixel_to_hex(get_global_mouse_position())
 	var oddq = map.hexmap.axial_to_oddq(hex)
-	if map.get_hex(hex) != null:
+	if map.get_data().get_hex(hex) != null:
 		cursorPosition.text = "%s - %s" % [hex, oddq]
 	else:
 		cursorPosition.text = "empty"
@@ -42,7 +42,7 @@ func _load_souls():
 
 
 func _on_Reveal_pressed():
-	for hex in map.get_all_hex():
+	for hex in map.get_data().get_all_hex():
 		map.reveal(hex, false)
 
 

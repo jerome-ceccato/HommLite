@@ -29,4 +29,15 @@ margin_bottom = 560.529
 custom_fonts/font = SubResource( 1 )
 text = "Adventure"
 script = null
+
+[node name="Reset" parent="." instance=ExtResource( 4 )]
+margin_left = 567.794
+margin_top = 38.4832
+margin_right = 631.794
+margin_bottom = 65.4832
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = SubResource( 1 )
+text = "Reset"
+script = null
 [connection signal="pressed" from="Adventure" to="." method="_on_Adventure_pressed"]
+[connection signal="pressed" from="Reset" to="." method="_on_Reset_pressed"]

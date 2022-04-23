@@ -13,13 +13,13 @@ func _ready():
 	for child in [$Selector, $Debug, $Hero]:
 		child.map = map
 		
-	$Hero.set_position_hex(Context.save_data.player_pos)
+	$Hero.set_position_hex(Context.save_data.map.player_pos)
 	
 	$Selector.connect("adventure_tile_selected", self, "_on_hex_selected")
 
 
 func _on_hex_selected(hex: Vector3):
-	var hexdata: AdventureTile = map.get_hex(hex)
+	var hexdata: AdventureTile = map.get_data().get_hex(hex)
 	if hexdata and hexdata.visibility != AdventureTileVisibility.HIDDEN:
 		var entity = hexdata.get_entity()
 		if entity and entity.get_type() == AdventureTileEntity.Type.BUILDING:
@@ -41,7 +41,7 @@ func _open_home_window():
 
 
 func _move_hero(hex: Vector3):
-	Context.save_data.player_pos = hex
+	Context.save_data.map.player_pos = hex
 	$Hero.set_position_hex(hex)
 	map.reveal(hex, true)
 
