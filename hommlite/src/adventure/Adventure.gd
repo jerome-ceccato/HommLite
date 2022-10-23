@@ -1,7 +1,7 @@
 extends Node2D
 class_name AdventureScene
 
-var _scene_navigation: GameSceneNavigation setget inject_scene_navigation
+var _scene_navigation: GameSceneNavigation
 func inject_scene_navigation(nav):
 	_scene_navigation = nav
 
@@ -12,7 +12,7 @@ func _ready():
 
 func _open_home_window():
 	var scene = load("res://src/manage/Manage.tscn")
-	var node = scene.instance()
+	var node = scene.instantiate()
 	$Debug/CanvasLayer.add_child(node)
 
 

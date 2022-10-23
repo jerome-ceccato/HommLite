@@ -1,7 +1,7 @@
 class_name CursorState
 extends Node
 
-# Pre-calculates the action to be represented depending on the cursor position
+# Pre-calculates the action to be represented depending checked the cursor position
 # to be used throughout the UI and passed down to the logic if needed
 # This only applies the the combat area
 

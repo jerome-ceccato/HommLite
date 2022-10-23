@@ -1,7 +1,7 @@
 extends Node
 
-onready var events = $UIEvents
-onready var log_helper = $LogHelper
+@onready var events = $UIEvents
+@onready var log_helper = $LogHelper
 
 var battle: Battle
 

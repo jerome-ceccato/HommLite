@@ -13,7 +13,7 @@ func _on_Battle_new_combat_log(entry: BattleLogger.Entry):
 			content = _apply_style(content)
 			if get_total_character_count() > 0:
 				content = "\n" + content
-			append_bbcode(content)
+			append_text(content)
 
 
 func _is_entry_allowed(entry: BattleLogger.Entry) -> bool:

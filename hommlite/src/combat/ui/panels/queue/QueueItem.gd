@@ -1,11 +1,11 @@
 class_name QueueItem
 extends Control
 
-onready var sprite: TextureRect = $TextureRect
-onready var label: Label = $Label
+@onready var sprite: TextureRect = $TextureRect
+@onready var label: Label = $Label
 
-onready var round_container: Control = $NextRound
-onready var round_number: Label = $NextRound/Label
+@onready var round_container: Control = $NextRound
+@onready var round_number: Label = $NextRound/Label
 
 var _log_helper: LogHelper
 
@@ -20,9 +20,9 @@ func update_with_stack(stack: BattleStack):
 		
 		label.text = str(stack.amount)
 		if stack.side == BattleStack.Side.LEFT:
-			label.add_color_override("font_color", _log_helper.player_color)
+			label.add_theme_color_override("font_color", _log_helper.player_color)
 		else:
-			label.add_color_override("font_color", _log_helper.enemy_color)
+			label.add_theme_color_override("font_color", _log_helper.enemy_color)
 	else:
 		sprite.texture = null
 		label.text = ""
@@ -35,5 +35,5 @@ func update_with_round_number(n: int):
 	round_number.text = str(n)
 
 
-func _get_texture(stack: BattleStack) -> Texture:
-	return load("res://assets/combat/units/%s.png" % [stack.unit.id]) as Texture
+func _get_texture(stack: BattleStack) -> Texture2D:
+	return load("res://assets/combat/units/%s.png" % [stack.unit.id]) as Texture2D

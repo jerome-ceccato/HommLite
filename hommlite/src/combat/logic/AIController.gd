@@ -19,14 +19,14 @@ func _on_Battle_game_state_changed(battle):
 
 func _play(active: BattleStack):
 	var options = [
-		funcref(self, "_try_ranged_attack"),
-		funcref(self, "_try_melee_attack"),
-		funcref(self, "_try_move_attack"),
-		funcref(self, "_try_move"),
+		self._try_ranged_attack,
+		self._try_melee_attack,
+		self._try_move_attack,
+		self._try_move,
 	]
 	
 	for option in options:
-		if option.call_func(active):
+		if option.call(active):
 			return
 	_manager.perform_skip()
 
@@ -36,7 +36,7 @@ func _play(active: BattleStack):
 func _try_ranged_attack(active: BattleStack) -> bool:
 	if active.unit.ranged and _data.can_attack_ranged(active):
 		var targets = _best_targets(active)
-		if !targets.empty():
+		if !targets.is_empty():
 			_manager.perform_ranged_attack(targets[0])
 			return true
 	return false
@@ -52,7 +52,7 @@ func _try_melee_attack(active: BattleStack) -> bool:
 
 
 func _try_move_attack(active: BattleStack) -> bool:
-	var reachable = _data.reachable_coords(active)
+	var reachable = _data.reachable_coords(active) #TODO unused??
 	for stack in _data.all_stacks():
 		if stack.side == BattleStack.Side.LEFT and _data.can_attack(active, stack):
 			var target_coords = _closest_free_space_next_to(stack, active)

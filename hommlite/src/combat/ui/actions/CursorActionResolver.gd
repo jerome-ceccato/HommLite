@@ -96,7 +96,7 @@ func _closest_reachable_cells(_target: BattleStack, target_coords: BattleCoords,
 	
 	# TODO: this is wasteful
 	_sort_mouse_pos = mouse
-	neighbors.sort_custom(self, "_sort_closest")
+	neighbors.sort_custom(Callable(self,"_sort_closest"))
 	for coords in neighbors:
 		if _coords_in_stack(coords, active_stack) or battle.can_reach(active_stack, coords):
 			var cells = [hexgrid.get_cell_at_coords(coords)]

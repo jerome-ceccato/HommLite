@@ -6,209 +6,204 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=4
+config_version=5
 
-_global_script_classes=[ {
+_global_script_classes=[{
 "base": "Node",
-"class": "AIController",
-"language": "GDScript",
+"class": &"AIController",
+"language": &"GDScript",
 "path": "res://src/combat/logic/AIController.gd"
 }, {
 "base": "Node2D",
-"class": "AdventureScene",
-"language": "GDScript",
+"class": &"AdventureScene",
+"language": &"GDScript",
 "path": "res://src/adventure/Adventure.gd"
 }, {
 "base": "Node2D",
-"class": "AnyActionButton",
-"language": "GDScript",
+"class": &"AnyActionButton",
+"language": &"GDScript",
 "path": "res://src/combat/ui/actions/AnyActionButton.gd"
 }, {
-"base": "Reference",
-"class": "Army",
-"language": "GDScript",
+"base": "RefCounted",
+"class": &"Army",
+"language": &"GDScript",
 "path": "res://src/core/army/Army.gd"
 }, {
 "base": "Control",
-"class": "ArmyStackDisplay",
-"language": "GDScript",
+"class": &"ArmyStackDisplay",
+"language": &"GDScript",
 "path": "res://src/ui/units/ArmyStackDisplay.gd"
 }, {
 "base": "Node",
-"class": "Battle",
-"language": "GDScript",
+"class": &"Battle",
+"language": &"GDScript",
 "path": "res://src/combat/logic/Battle.gd"
 }, {
-"base": "Reference",
-"class": "BattleCoords",
-"language": "GDScript",
+"base": "RefCounted",
+"class": &"BattleCoords",
+"language": &"GDScript",
 "path": "res://src/combat/logic/BattleCoords.gd"
 }, {
 "base": "Node",
-"class": "BattleData",
-"language": "GDScript",
+"class": &"BattleData",
+"language": &"GDScript",
 "path": "res://src/combat/logic/BattleData.gd"
 }, {
 "base": "Node",
-"class": "BattleEvents",
-"language": "GDScript",
+"class": &"BattleEvents",
+"language": &"GDScript",
 "path": "res://src/combat/logic/BattleEvents.gd"
 }, {
 "base": "Node",
-"class": "BattleGrid",
-"language": "GDScript",
+"class": &"BattleGrid",
+"language": &"GDScript",
 "path": "res://src/combat/logic/BattleGrid.gd"
 }, {
-"base": "Reference",
-"class": "BattleLoader",
-"language": "GDScript",
+"base": "RefCounted",
+"class": &"BattleLoader",
+"language": &"GDScript",
 "path": "res://src/global/BattleLoader.gd"
 }, {
 "base": "Node",
-"class": "BattleLogger",
-"language": "GDScript",
+"class": &"BattleLogger",
+"language": &"GDScript",
 "path": "res://src/combat/logic/BattleLogger.gd"
 }, {
 "base": "Node",
-"class": "BattleManager",
-"language": "GDScript",
+"class": &"BattleManager",
+"language": &"GDScript",
 "path": "res://src/combat/logic/BattleManager.gd"
 }, {
-"base": "Reference",
-"class": "BattleMovement",
-"language": "GDScript",
+"base": "RefCounted",
+"class": &"BattleMovement",
+"language": &"GDScript",
 "path": "res://src/combat/logic/BattleMovement.gd"
 }, {
 "base": "Node",
-"class": "BattleQueue",
-"language": "GDScript",
+"class": &"BattleQueue",
+"language": &"GDScript",
 "path": "res://src/combat/logic/BattleQueue.gd"
 }, {
-"base": "Reference",
-"class": "BattleSetup",
-"language": "GDScript",
+"base": "RefCounted",
+"class": &"BattleSetup",
+"language": &"GDScript",
 "path": "res://src/combat/data/BattleSetup.gd"
 }, {
-"base": "Reference",
-"class": "BattleStack",
-"language": "GDScript",
+"base": "RefCounted",
+"class": &"BattleStack",
+"language": &"GDScript",
 "path": "res://src/combat/logic/BattleStack.gd"
 }, {
-"base": "Reference",
-"class": "CombatHexCell",
-"language": "GDScript",
+"base": "RefCounted",
+"class": &"CombatHexCell",
+"language": &"GDScript",
 "path": "res://src/combat/ui/grid/CombatHexCell.gd"
 }, {
 "base": "Node",
-"class": "CombatHexGrid",
-"language": "GDScript",
+"class": &"CombatHexGrid",
+"language": &"GDScript",
 "path": "res://src/combat/ui/grid/CombatHexGrid.gd"
 }, {
-"base": "Reference",
-"class": "CombatHexUtils",
-"language": "GDScript",
+"base": "RefCounted",
+"class": &"CombatHexUtils",
+"language": &"GDScript",
 "path": "res://src/combat/logic/CombatHexUtils.gd"
 }, {
 "base": "Node",
-"class": "CursorActionResolver",
-"language": "GDScript",
+"class": &"CursorActionResolver",
+"language": &"GDScript",
 "path": "res://src/combat/ui/actions/CursorActionResolver.gd"
 }, {
 "base": "Node",
-"class": "CursorState",
-"language": "GDScript",
+"class": &"CursorState",
+"language": &"GDScript",
 "path": "res://src/combat/ui/actions/CursorState.gd"
 }, {
 "base": "Button",
-"class": "DefaultButton",
-"language": "GDScript",
+"class": &"DefaultButton",
+"language": &"GDScript",
 "path": "res://src/ui/buttons/DefaultButton.gd"
 }, {
 "base": "Node",
-"class": "GameSceneNavigation",
-"language": "GDScript",
+"class": &"GameSceneNavigation",
+"language": &"GDScript",
 "path": "res://src/scene/GameSceneNavigation.gd"
 }, {
 "base": "Node2D",
-"class": "GridOverlayBase",
-"language": "GDScript",
+"class": &"GridOverlayBase",
+"language": &"GDScript",
 "path": "res://src/combat/ui/grid/GridOverlayBase.gd"
 }, {
-"base": "Reference",
-"class": "Hero",
-"language": "GDScript",
+"base": "RefCounted",
+"class": &"Hero",
+"language": &"GDScript",
 "path": "res://src/core/player/Hero.gd"
 }, {
 "base": "Node",
-"class": "HexMap",
-"language": "GDScript",
-"path": "res://src/lib/hex/HexMap.gd"
-}, {
-"base": "Node",
-"class": "LogHelper",
-"language": "GDScript",
+"class": &"LogHelper",
+"language": &"GDScript",
 "path": "res://src/combat/ui/panels/LogHelper.gd"
 }, {
 "base": "Node",
-"class": "ManageArmyInterpretor",
-"language": "GDScript",
+"class": &"ManageArmyInterpretor",
+"language": &"GDScript",
 "path": "res://src/manage/ManageArmyInterpretor.gd"
 }, {
-"base": "Reference",
-"class": "MapData",
-"language": "GDScript",
+"base": "RefCounted",
+"class": &"MapData",
+"language": &"GDScript",
 "path": "res://src/combat/data/MapData.gd"
 }, {
-"base": "Reference",
-"class": "ObstacleData",
-"language": "GDScript",
+"base": "RefCounted",
+"class": &"ObstacleData",
+"language": &"GDScript",
 "path": "res://src/combat/data/ObstacleData.gd"
 }, {
-"base": "Reference",
-"class": "Persistence",
-"language": "GDScript",
+"base": "RefCounted",
+"class": &"Persistence",
+"language": &"GDScript",
 "path": "res://src/global/Persistence.gd"
 }, {
 "base": "Node2D",
-"class": "Projectile",
-"language": "GDScript",
+"class": &"Projectile",
+"language": &"GDScript",
 "path": "res://src/combat/ui/projectiles/Projectile.gd"
 }, {
 "base": "Control",
-"class": "QueueItem",
-"language": "GDScript",
+"class": &"QueueItem",
+"language": &"GDScript",
 "path": "res://src/combat/ui/panels/queue/QueueItem.gd"
 }, {
-"base": "Reference",
-"class": "Resources",
-"language": "GDScript",
+"base": "RefCounted",
+"class": &"Resources",
+"language": &"GDScript",
 "path": "res://src/core/player/Resources.gd"
 }, {
-"base": "Reference",
-"class": "SaveData",
-"language": "GDScript",
+"base": "RefCounted",
+"class": &"SaveData",
+"language": &"GDScript",
 "path": "res://src/core/SaveData.gd"
 }, {
-"base": "Reference",
-"class": "Stack",
-"language": "GDScript",
+"base": "RefCounted",
+"class": &"Stack",
+"language": &"GDScript",
 "path": "res://src/core/army/Stack.gd"
 }, {
 "base": "Node2D",
-"class": "StackContainer",
-"language": "GDScript",
+"class": &"StackContainer",
+"language": &"GDScript",
 "path": "res://src/combat/ui/stacks/StackContainer.gd"
 }, {
 "base": "Node",
-"class": "UIEvents",
-"language": "GDScript",
+"class": &"UIEvents",
+"language": &"GDScript",
 "path": "res://src/combat/ui/UIEvents.gd"
 }, {
 "base": "Resource",
-"class": "UnitData",
-"language": "GDScript",
+"class": &"UnitData",
+"language": &"GDScript",
 "path": "res://src/core/army/UnitData.gd"
-} ]
+}]
 _global_script_class_icons={
 "AIController": "",
 "AdventureScene": "",
@@ -236,7 +231,6 @@ _global_script_class_icons={
 "GameSceneNavigation": "",
 "GridOverlayBase": "",
 "Hero": "",
-"HexMap": "",
 "LogHelper": "",
 "ManageArmyInterpretor": "",
 "MapData": "",
@@ -256,6 +250,7 @@ _global_script_class_icons={
 
 config/name="hommlite"
 run/main_scene="res://src/start/StartScreen.tscn"
+config/features=PackedStringArray("4.0")
 
 [autoload]
 
@@ -270,11 +265,10 @@ gdscript/warnings/integer_division=false
 
 [display]
 
-window/size/width=1280
-window/size/height=720
 window/size/always_on_top=true
 window/stretch/mode="2d"
-window/stretch/aspect="keep"
+window/size/width=1280
+window/size/height=720
 
 [importer_defaults]
 
@@ -303,33 +297,33 @@ texture={
 
 combat_wait={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":87,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":0,"unicode":0,"echo":false,"script":null)
+]
 }
 combat_skip={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":0,"unicode":0,"echo":false,"script":null)
+]
 }
 adventure_zoom_in={
 "deadzone": 0.5,
-"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":4,"pressed":false,"doubleclick":false,"script":null)
- ]
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":4,"pressed":false,"double_click":false,"script":null)
+]
 }
 adventure_zoom_out={
 "deadzone": 0.5,
-"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":5,"pressed":false,"doubleclick":false,"script":null)
- ]
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":5,"pressed":false,"double_click":false,"script":null)
+]
 }
 adventure_drag={
 "deadzone": 0.5,
-"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":2,"pressed":false,"doubleclick":false,"script":null)
- ]
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":2,"pressed":false,"double_click":false,"script":null)
+]
 }
 adventure_reveal={
 "deadzone": 0.5,
-"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
- ]
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":1,"pressed":false,"double_click":false,"script":null)
+]
 }
 
 [rendering]

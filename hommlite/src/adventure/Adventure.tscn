@@ -15,82 +15,82 @@ script = ExtResource( 8 )
 [node name="PanelContainer" type="PanelContainer" parent="Debug/CanvasLayer"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -210.0
-margin_right = 2.0
-margin_bottom = 720.0
+offset_left = -210.0
+offset_right = 2.0
+offset_bottom = 720.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Debug/CanvasLayer/PanelContainer"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 205.0
-margin_bottom = 713.0
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 205.0
+offset_bottom = 713.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Combat" type="Button" parent="Debug/CanvasLayer/PanelContainer/VBoxContainer"]
-margin_right = 198.0
-margin_bottom = 20.0
+offset_right = 198.0
+offset_bottom = 20.0
 text = "Combat"
 
 [node name="HSeparator" type="HSeparator" parent="Debug/CanvasLayer/PanelContainer/VBoxContainer"]
-margin_top = 24.0
-margin_right = 198.0
-margin_bottom = 28.0
+offset_top = 24.0
+offset_right = 198.0
+offset_bottom = 28.0
 
 [node name="ArmyTitle" type="Label" parent="Debug/CanvasLayer/PanelContainer/VBoxContainer"]
-margin_top = 32.0
-margin_right = 198.0
-margin_bottom = 46.0
+offset_top = 32.0
+offset_right = 198.0
+offset_bottom = 46.0
 text = "Army:"
 align = 1
 valign = 2
 
 [node name="ArmyContainer" type="GridContainer" parent="Debug/CanvasLayer/PanelContainer/VBoxContainer"]
-margin_top = 50.0
-margin_right = 198.0
-margin_bottom = 322.0
-rect_pivot_offset = Vector2( -1226.67, 89.388 )
+offset_top = 50.0
+offset_right = 198.0
+offset_bottom = 322.0
+pivot_offset = Vector2( -1226.67, 89.388 )
 columns = 2
 
 [node name="StackDisplay" parent="Debug/CanvasLayer/PanelContainer/VBoxContainer/ArmyContainer" instance=ExtResource( 7 )]
 
 [node name="StackDisplay2" parent="Debug/CanvasLayer/PanelContainer/VBoxContainer/ArmyContainer" instance=ExtResource( 7 )]
-margin_left = 92.0
-margin_right = 180.0
+offset_left = 92.0
+offset_right = 180.0
 
 [node name="StackDisplay3" parent="Debug/CanvasLayer/PanelContainer/VBoxContainer/ArmyContainer" instance=ExtResource( 7 )]
-margin_top = 92.0
-margin_bottom = 180.0
+offset_top = 92.0
+offset_bottom = 180.0
 
 [node name="StackDisplay4" parent="Debug/CanvasLayer/PanelContainer/VBoxContainer/ArmyContainer" instance=ExtResource( 7 )]
-margin_left = 92.0
-margin_top = 92.0
-margin_right = 180.0
-margin_bottom = 180.0
+offset_left = 92.0
+offset_top = 92.0
+offset_right = 180.0
+offset_bottom = 180.0
 
 [node name="StackDisplay5" parent="Debug/CanvasLayer/PanelContainer/VBoxContainer/ArmyContainer" instance=ExtResource( 7 )]
-margin_top = 184.0
-margin_bottom = 272.0
+offset_top = 184.0
+offset_bottom = 272.0
 
 [node name="StackDisplay6" parent="Debug/CanvasLayer/PanelContainer/VBoxContainer/ArmyContainer" instance=ExtResource( 7 )]
-margin_left = 92.0
-margin_top = 184.0
-margin_right = 180.0
-margin_bottom = 272.0
+offset_left = 92.0
+offset_top = 184.0
+offset_right = 180.0
+offset_bottom = 272.0
 
 [node name="HSeparator2" type="HSeparator" parent="Debug/CanvasLayer/PanelContainer/VBoxContainer"]
-margin_top = 326.0
-margin_right = 198.0
-margin_bottom = 330.0
+offset_top = 326.0
+offset_right = 198.0
+offset_bottom = 330.0
 
 [node name="Souls" type="Label" parent="Debug/CanvasLayer/PanelContainer/VBoxContainer"]
-margin_top = 334.0
-margin_right = 198.0
-margin_bottom = 348.0
+offset_top = 334.0
+offset_right = 198.0
+offset_bottom = 348.0
 text = "Souls: 0"
 align = 1
 valign = 1

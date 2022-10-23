@@ -1,6 +1,6 @@
 extends Node2D
 
-export(Color) var path_color
+@export var path_color: Color
 
 var battle: Battle
 var hexgrid: CombatHexGrid
@@ -29,8 +29,8 @@ func _on_UI_mouse_moved(state: CursorState):
 				_hovered_path = battle._data.path_find(state.active_stack, cells[0].coords)
 			else:
 				_hovered_path = []
-	update()
+	queue_redraw()
 
 
 func _on_Battle_game_state_changed(_unused: Battle):
-	update()
+	queue_redraw()

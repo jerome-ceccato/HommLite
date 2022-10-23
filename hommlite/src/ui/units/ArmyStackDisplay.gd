@@ -1,8 +1,8 @@
 class_name ArmyStackDisplay
 extends Control
 
-onready var sprite: TextureRect = $TextureRect
-onready var label: Label = $Label
+@onready var sprite: TextureRect = $TextureRect
+@onready var label: Label = $Label
 
 
 func update_with_stack(stack: Stack):
@@ -14,5 +14,5 @@ func update_with_stack(stack: Stack):
 		label.text = ""
 
 
-func _get_texture(stack: Stack) -> Texture:
-	return load("res://assets/combat/units/%s.png" % [stack.load_unit().id]) as Texture
+func _get_texture(stack: Stack) -> Texture2D:
+	return load("res://assets/combat/units/%s.png" % [stack.load_unit().id]) as Texture2D

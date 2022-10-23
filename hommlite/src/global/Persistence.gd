@@ -1,33 +1,29 @@
 class_name Persistence
-extends Reference
+extends RefCounted
 
 const SAVE_PATH := "user://player.save"
 
 static func has_save() -> bool:
-	return File.new().file_exists(SAVE_PATH)
+	return FileAccess.file_exists(SAVE_PATH)
 
 
 static func load_saved_context() -> SaveData:
-	var save_game = File.new()
-	if not save_game.file_exists(SAVE_PATH):
+	if not FileAccess.file_exists(SAVE_PATH):
 		return SaveData.new()
 
-	save_game.open(SAVE_PATH, File.READ)
-	var data = parse_json(save_game.get_as_text())
+	var save_game = FileAccess.open(SAVE_PATH, FileAccess.READ)
+	var test_json_conv = JSON.new()
+	test_json_conv.parse(save_game.get_as_text())
+	var data = test_json_conv.get_data()
 	var ret = SaveData.new().deserialize(data)
-	save_game.close()
 	return ret
 
 
 static func save_context(data: SaveData):
-	var save_game = File.new()
-	
-	save_game.open(SAVE_PATH, File.WRITE)
-	save_game.store_string(to_json(data.serialized()))
-	save_game.close()
+	var save_game = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
+	save_game.store_string(JSON.new().stringify(data.serialized()))
 
 
 static func delete_save():
-	var dir = Directory.new()
-	dir.remove(SAVE_PATH)
+	DirAccess.open("user://").remove("player.save")
 

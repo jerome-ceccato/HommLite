@@ -1,19 +1,19 @@
 [gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://assets/ui/manage-bg.png" type="Texture" id=1]
+[ext_resource path="res://assets/ui/manage-panel.png" type="Texture2D" id=1]
 [ext_resource path="res://src/manage/Manage.gd" type="Script" id=2]
-[ext_resource path="res://assets/fonts/m6x11.ttf" type="DynamicFontData" id=3]
-[ext_resource path="res://assets/fonts/m5x7.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://assets/fonts/m6x11.ttf" type="FontFile" id=3]
+[ext_resource path="res://assets/fonts/m5x7.ttf" type="FontFile" id=4]
 [ext_resource path="res://src/manage/ManageArmyInterpretor.gd" type="Script" id=5]
-[ext_resource path="res://assets/ui/close-button.png" type="Texture" id=7]
-[ext_resource path="res://assets/ui/close-button-hl.png" type="Texture" id=8]
+[ext_resource path="res://assets/ui/close-button.png" type="Texture2D" id=7]
+[ext_resource path="res://assets/ui/close-button-hl.png" type="Texture2D" id=8]
 [ext_resource path="res://src/ui/units/ArmyStackDisplay.tscn" type="PackedScene" id=9]
 
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="FontFile" id=1]
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="FontFile" id=2]
 size = 32
 font_data = ExtResource( 4 )
 
@@ -21,10 +21,10 @@ font_data = ExtResource( 4 )
 content_margin_left = 8.0
 content_margin_right = 8.0
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="FontFile" id=4]
 size = 32
-extra_spacing_top = -2
-extra_spacing_bottom = 2
+spacing_top = -2
+spacing_bottom = 2
 font_data = ExtResource( 4 )
 
 [node name="Node2D" type="Node2D"]
@@ -36,9 +36,9 @@ script = ExtResource( 5 )
 [node name="Overlay" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -1.12246
-margin_right = 1280.0
-margin_bottom = 718.878
+offset_top = -1.12246
+offset_right = 1280.0
+offset_bottom = 718.878
 color = Color( 0, 0, 0, 0.392157 )
 __meta__ = {
 "_edit_lock_": true,
@@ -46,19 +46,19 @@ __meta__ = {
 }
 
 [node name="ManageArmy" type="Control" parent="."]
-margin_left = 322.0
-margin_top = 64.0
-margin_right = 958.0
-margin_bottom = 656.0
+offset_left = 322.0
+offset_top = 64.0
+offset_right = 958.0
+offset_bottom = 656.0
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
 [node name="Background" type="TextureRect" parent="ManageArmy"]
-margin_right = 210.0
-margin_bottom = 114.0
-rect_scale = Vector2( 4, 4 )
+offset_right = 210.0
+offset_bottom = 114.0
+scale = Vector2( 4, 4 )
 texture = ExtResource( 1 )
 __meta__ = {
 "_edit_lock_": true,
@@ -66,11 +66,11 @@ __meta__ = {
 }
 
 [node name="Title" type="Label" parent="ManageArmy"]
-margin_left = 44.0
-margin_top = 26.0
-margin_right = 182.0
-margin_bottom = 40.0
-rect_scale = Vector2( 4, 4 )
+offset_left = 44.0
+offset_top = 26.0
+offset_right = 182.0
+offset_bottom = 40.0
+scale = Vector2( 4, 4 )
 custom_fonts/font = SubResource( 1 )
 text = "Manage troops"
 align = 1
@@ -79,10 +79,10 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ManageArmy"]
-margin_left = 44.0
-margin_top = 100.0
-margin_right = 592.0
-margin_bottom = 188.0
+offset_left = 44.0
+offset_top = 100.0
+offset_right = 592.0
+offset_bottom = 188.0
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
@@ -91,30 +91,30 @@ __meta__ = {
 [node name="StackDisplay1" parent="ManageArmy/HBoxContainer" instance=ExtResource( 9 )]
 
 [node name="StackDisplay2" parent="ManageArmy/HBoxContainer" instance=ExtResource( 9 )]
-margin_left = 92.0
-margin_right = 180.0
+offset_left = 92.0
+offset_right = 180.0
 
 [node name="StackDisplay3" parent="ManageArmy/HBoxContainer" instance=ExtResource( 9 )]
-margin_left = 184.0
-margin_right = 272.0
+offset_left = 184.0
+offset_right = 272.0
 
 [node name="StackDisplay4" parent="ManageArmy/HBoxContainer" instance=ExtResource( 9 )]
-margin_left = 276.0
-margin_right = 364.0
+offset_left = 276.0
+offset_right = 364.0
 
 [node name="StackDisplay5" parent="ManageArmy/HBoxContainer" instance=ExtResource( 9 )]
-margin_left = 368.0
-margin_right = 456.0
+offset_left = 368.0
+offset_right = 456.0
 
 [node name="StackDisplay6" parent="ManageArmy/HBoxContainer" instance=ExtResource( 9 )]
-margin_left = 460.0
-margin_right = 548.0
+offset_left = 460.0
+offset_right = 548.0
 
 [node name="RichTextLabel" type="RichTextLabel" parent="ManageArmy"]
-margin_left = 52.0
-margin_top = 216.0
-margin_right = 584.0
-margin_bottom = 494.0
+offset_left = 52.0
+offset_top = 216.0
+offset_right = 584.0
+offset_bottom = 494.0
 custom_fonts/normal_font = SubResource( 2 )
 text = "Abcd
 efgh
@@ -125,10 +125,10 @@ __meta__ = {
 }
 
 [node name="LineEdit" type="LineEdit" parent="ManageArmy"]
-margin_left = 44.0
-margin_top = 520.0
-margin_right = 592.0
-margin_bottom = 564.0
+offset_left = 44.0
+offset_top = 520.0
+offset_right = 592.0
+offset_bottom = 564.0
 custom_styles/normal = SubResource( 3 )
 custom_fonts/font = SubResource( 4 )
 placeholder_text = "Type here"
@@ -137,15 +137,15 @@ __meta__ = {
 }
 
 [node name="CloseButton" type="TextureButton" parent="."]
-margin_left = 940.0
-margin_top = 56.0
-margin_right = 947.0
-margin_bottom = 63.0
-rect_scale = Vector2( 4, 4 )
+offset_left = 940.0
+offset_top = 56.0
+offset_right = 947.0
+offset_bottom = 63.0
+scale = Vector2( 4, 4 )
 texture_normal = ExtResource( 7 )
 texture_pressed = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="text_entered" from="ManageArmy/LineEdit" to="." method="_on_LineEdit_text_entered"]
+[connection signal="text_submitted" from="ManageArmy/LineEdit" to="." method="_on_LineEdit_text_entered"]
 [connection signal="pressed" from="CloseButton" to="." method="_on_CloseButton_pressed"]

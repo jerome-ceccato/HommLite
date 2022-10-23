@@ -1,8 +1,8 @@
 extends Node2D
 
-onready var _textbox: RichTextLabel = $ManageArmy/RichTextLabel
-onready var _input: LineEdit = $ManageArmy/LineEdit
-onready var _interpretor: ManageArmyInterpretor = $ManageArmyInterpretor
+@onready var _textbox: RichTextLabel = $ManageArmy/RichTextLabel
+@onready var _input: LineEdit = $ManageArmy/LineEdit
+@onready var _interpretor: ManageArmyInterpretor = $ManageArmyInterpretor
 
 
 func _ready():

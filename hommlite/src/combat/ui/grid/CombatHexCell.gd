@@ -1,6 +1,6 @@
-tool
+@tool
 class_name CombatHexCell
-extends Reference
+extends RefCounted
 
 # Represents a single cell in a hex grid
 
@@ -11,7 +11,7 @@ var center: Vector2
 var points: Array
 
 
-func _init(_coords: BattleCoords, _size: Vector2, _center: Vector2):
+func _init(_coords: BattleCoords,_size: Vector2,_center: Vector2):
 	coords = _coords
 	center = _center
 	size = _size

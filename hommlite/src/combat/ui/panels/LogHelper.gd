@@ -1,8 +1,8 @@
 class_name LogHelper
 extends Node
 
-export(Color) var player_color: Color
-export(Color) var enemy_color: Color
+@export var player_color: Color
+@export var enemy_color: Color
 
 
 func pluralized_name(unit: UnitData, amount: int):

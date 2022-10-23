@@ -1,13 +1,13 @@
-tool
+@tool
 extends Node2D
 
-export(Vector2) var overall_offset = Vector2.ZERO
+@export var overall_offset: Vector2 = Vector2.ZERO
 
-onready var hexgrid: CombatHexGrid = $HexGrid
-onready var units = $VisibleUnits
-onready var grid = $Grid
-onready var action_resolver: CursorActionResolver = $CursorActionResolver
-onready var keyboard = $Keyboard
+@onready var hexgrid: CombatHexGrid = $HexGrid
+@onready var units = $VisibleUnits
+@onready var grid = $Grid
+@onready var action_resolver: CursorActionResolver = $CursorActionResolver
+@onready var keyboard = $Keyboard
 
 var _battle: Battle
 var _events: UIEvents
@@ -33,18 +33,14 @@ func _center_self():
 	var y = ((win_h - grid_size.y) / 2) + overall_offset.y
 
 	set_position(Vector2(x, y))
-	update()
+	queue_redraw()
 
 
 func _on_Battle_stack_moved(stack: BattleStack, movement: BattleMovement):
-	var await = units.animate_move_stack(hexgrid, stack, movement)
-	if await is GDScriptFunctionState:
-		await = yield(await, "completed")
+	await units.animate_move_stack(hexgrid, stack, movement)
 	_events.emit_signal("animation_finished")
 
 
 func _on_Battle_stack_attacked(source: BattleStack, target: BattleStack, retaliation: bool, ranged: bool):
-	var await = units.animate_handle_attack(hexgrid, source, target, retaliation, ranged)
-	if await is GDScriptFunctionState:
-		await = yield(await, "completed")
+	await units.animate_handle_attack(hexgrid, source, target, retaliation, ranged)
 	_events.emit_signal("animation_finished")

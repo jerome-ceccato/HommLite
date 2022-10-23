@@ -1,12 +1,12 @@
-tool
+@tool
 class_name BattleGrid
 extends Node
 
 # Represents the hex battle grid and its coordinates
 
 # Editor only
-export(int, 7, 11) var rows := 9
-export(int, 7, 15) var cols := 13
+@export var rows := 9 # (int, 7, 11)
+@export var cols := 13 # (int, 7, 15)
 
 # All the hex valid coords
 var _valid_coords: Dictionary # [BattleCoords.index: BattleCoords]
@@ -14,7 +14,7 @@ var _valid_coords: Dictionary # [BattleCoords.index: BattleCoords]
 var _pathfinder: AStar2D
 
 func _ready():
-	if Engine.editor_hint:
+	if Engine.is_editor_hint():
 		setup(BattleCoords.new(cols, rows))
 
 

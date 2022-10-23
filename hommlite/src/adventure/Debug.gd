@@ -1,6 +1,6 @@
 extends Node2D
 
-onready var armyContainer := $CanvasLayer/PanelContainer/VBoxContainer/ArmyContainer
+@onready var armyContainer := $CanvasLayer/PanelContainer/VBoxContainer/ArmyContainer
 
 func refresh():
 	_setup_army()

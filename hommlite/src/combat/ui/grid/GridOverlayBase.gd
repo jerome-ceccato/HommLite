@@ -23,7 +23,7 @@ func draw_cell(_cell: CombatHexCell):
 
 func update_overlay(stack: BattleStack):
 	all_cells_overlayed = _cells_for_stack(stack)
-	update()
+	queue_redraw()
 
 
 func _cells_for_stack(stack: BattleStack) -> Array:

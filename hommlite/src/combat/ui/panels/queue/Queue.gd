@@ -1,6 +1,6 @@
 extends Node2D
 
-onready var container: HBoxContainer = $HBoxContainer
+@onready var container: HBoxContainer = $HBoxContainer
 
 
 func setup(log_helper: LogHelper):

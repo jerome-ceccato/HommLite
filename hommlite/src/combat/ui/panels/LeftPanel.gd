@@ -1,7 +1,7 @@
 extends Node2D
 
-onready var wait_button: AnyActionButton = $WaitButton
-onready var def_button: AnyActionButton = $DefButton
+@onready var wait_button: AnyActionButton = $WaitButton
+@onready var def_button: AnyActionButton = $DefButton
 
 var events: UIEvents
 

@@ -1,391 +1,412 @@
-[gd_scene load_steps=51 format=2]
+[gd_scene load_steps=45 format=3 uid="uid://cu4xe61e2ml1k"]
 
-[ext_resource path="res://src/combat/ui/CombatArea.gd" type="Script" id=1]
-[ext_resource path="res://assets/combat/bg.png" type="Texture" id=2]
-[ext_resource path="res://src/combat/ui/grid/GridBackground.gd" type="Script" id=3]
-[ext_resource path="res://src/combat/ui/stacks/VisibleUnits.gd" type="Script" id=4]
-[ext_resource path="res://src/combat/ui/UI.gd" type="Script" id=5]
-[ext_resource path="res://src/combat/CombatScene.gd" type="Script" id=6]
-[ext_resource path="res://src/combat/logic/Battle.gd" type="Script" id=7]
-[ext_resource path="res://src/combat/ui/grid/ActionGridHover.gd" type="Script" id=8]
-[ext_resource path="res://src/combat/ui/grid/UnitHoverMovementOverlay.gd" type="Script" id=9]
-[ext_resource path="res://src/combat/ui/grid/Grid.gd" type="Script" id=10]
-[ext_resource path="res://src/combat/logic/BattleManager.gd" type="Script" id=11]
-[ext_resource path="res://src/combat/ui/grid/ActiveStackMovementOverlay.gd" type="Script" id=12]
-[ext_resource path="res://src/combat/logic/BattleGrid.gd" type="Script" id=13]
-[ext_resource path="res://src/combat/ui/grid/CombatHexGrid.gd" type="Script" id=14]
-[ext_resource path="res://src/combat/logic/BattleData.gd" type="Script" id=15]
-[ext_resource path="res://src/combat/logic/BattleEvents.gd" type="Script" id=16]
-[ext_resource path="res://src/combat/ui/UIEvents.gd" type="Script" id=17]
-[ext_resource path="res://assets/fonts/m5x7.ttf" type="DynamicFontData" id=18]
-[ext_resource path="res://src/combat/ui/Cursor.gd" type="Script" id=19]
-[ext_resource path="res://src/combat/ui/actions/CursorActionResolver.gd" type="Script" id=20]
-[ext_resource path="res://assets/ui/dialog-bg.png" type="Texture" id=21]
-[ext_resource path="res://assets/fonts/m6x11.ttf" type="DynamicFontData" id=22]
-[ext_resource path="res://src/combat/ui/grid/GridCoords.gd" type="Script" id=23]
-[ext_resource path="res://src/combat/logic/BattleQueue.gd" type="Script" id=24]
-[ext_resource path="res://src/combat/ui/Keyboard.gd" type="Script" id=25]
-[ext_resource path="res://assets/ui/bottom-bg.png" type="Texture" id=26]
-[ext_resource path="res://src/combat/ui/panels/LeftPanel.gd" type="Script" id=27]
-[ext_resource path="res://src/combat/logic/BattleLogger.gd" type="Script" id=28]
-[ext_resource path="res://src/combat/ui/panels/CombatLogs.gd" type="Script" id=29]
-[ext_resource path="res://src/combat/ui/panels/CurrentActionLabel.gd" type="Script" id=30]
-[ext_resource path="res://src/combat/ui/panels/LogHelper.gd" type="Script" id=31]
-[ext_resource path="res://src/combat/ui/panels/queue/QueueItem.tscn" type="PackedScene" id=32]
-[ext_resource path="res://assets/combat/units/uchicken.png" type="Texture" id=33]
-[ext_resource path="res://src/combat/ui/panels/BottomPanel.gd" type="Script" id=34]
-[ext_resource path="res://src/combat/ui/grid/PathfindingOverlay.gd" type="Script" id=35]
-[ext_resource path="res://assets/fonts/m3x6.ttf" type="DynamicFontData" id=36]
-[ext_resource path="res://src/combat/ui/dialogs/EndScreen.gd" type="Script" id=37]
-[ext_resource path="res://src/combat/logic/AIController.gd" type="Script" id=38]
-[ext_resource path="res://src/ui/buttons/DefaultButton.tscn" type="PackedScene" id=39]
-[ext_resource path="res://src/combat/ui/actions/ui/ActionButton.tscn" type="PackedScene" id=40]
-[ext_resource path="res://assets/ui/action-wait.png" type="Texture" id=41]
-[ext_resource path="res://assets/ui/action-def.png" type="Texture" id=42]
-[ext_resource path="res://assets/ui/top-bg.png" type="Texture" id=43]
-[ext_resource path="res://assets/combat/units/cow.png" type="Texture" id=44]
-[ext_resource path="res://src/combat/ui/panels/queue/Queue.gd" type="Script" id=45]
+[ext_resource type="Script" path="res://src/combat/ui/CombatArea.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://c14e3vafoca0v" path="res://assets/combat/bg.png" id="2"]
+[ext_resource type="Script" path="res://src/combat/ui/grid/GridBackground.gd" id="3"]
+[ext_resource type="Script" path="res://src/combat/ui/stacks/VisibleUnits.gd" id="4"]
+[ext_resource type="Script" path="res://src/combat/ui/UI.gd" id="5"]
+[ext_resource type="Script" path="res://src/combat/CombatScene.gd" id="6"]
+[ext_resource type="Script" path="res://src/combat/logic/Battle.gd" id="7"]
+[ext_resource type="Script" path="res://src/combat/ui/grid/ActionGridHover.gd" id="8"]
+[ext_resource type="Script" path="res://src/combat/ui/grid/UnitHoverMovementOverlay.gd" id="9"]
+[ext_resource type="Script" path="res://src/combat/ui/grid/Grid.gd" id="10"]
+[ext_resource type="Script" path="res://src/combat/logic/BattleManager.gd" id="11"]
+[ext_resource type="Script" path="res://src/combat/ui/grid/ActiveStackMovementOverlay.gd" id="12"]
+[ext_resource type="Script" path="res://src/combat/logic/BattleGrid.gd" id="13"]
+[ext_resource type="Script" path="res://src/combat/ui/grid/CombatHexGrid.gd" id="14"]
+[ext_resource type="Script" path="res://src/combat/logic/BattleData.gd" id="15"]
+[ext_resource type="Script" path="res://src/combat/logic/BattleEvents.gd" id="16"]
+[ext_resource type="Script" path="res://src/combat/ui/UIEvents.gd" id="17"]
+[ext_resource type="Script" path="res://src/combat/ui/Cursor.gd" id="19"]
+[ext_resource type="Script" path="res://src/combat/ui/actions/CursorActionResolver.gd" id="20"]
+[ext_resource type="Texture2D" uid="uid://cq7n6pcbbd71b" path="res://assets/ui/dialog-bg.png" id="21"]
+[ext_resource type="FontFile" uid="uid://5pbpg5r41ocx" path="res://assets/fonts/m6x11.ttf" id="22"]
+[ext_resource type="Script" path="res://src/combat/ui/grid/GridCoords.gd" id="23"]
+[ext_resource type="Script" path="res://src/combat/logic/BattleQueue.gd" id="24"]
+[ext_resource type="Script" path="res://src/combat/ui/Keyboard.gd" id="25"]
+[ext_resource type="Texture2D" uid="uid://b5vdvelvu8k0a" path="res://assets/ui/bottom-bg.png" id="26"]
+[ext_resource type="Script" path="res://src/combat/ui/panels/LeftPanel.gd" id="27"]
+[ext_resource type="Script" path="res://src/combat/logic/BattleLogger.gd" id="28"]
+[ext_resource type="Script" path="res://src/combat/ui/panels/CombatLogs.gd" id="29"]
+[ext_resource type="Script" path="res://src/combat/ui/panels/CurrentActionLabel.gd" id="30"]
+[ext_resource type="Script" path="res://src/combat/ui/panels/LogHelper.gd" id="31"]
+[ext_resource type="PackedScene" uid="uid://db2skdrgc4hy" path="res://src/combat/ui/panels/queue/QueueItem.tscn" id="32"]
+[ext_resource type="Texture2D" uid="uid://dlsxbnta465du" path="res://assets/combat/units/uchicken.png" id="33"]
+[ext_resource type="Script" path="res://src/combat/ui/panels/BottomPanel.gd" id="34"]
+[ext_resource type="Script" path="res://src/combat/ui/grid/PathfindingOverlay.gd" id="35"]
+[ext_resource type="Script" path="res://src/combat/ui/dialogs/EndScreen.gd" id="37"]
+[ext_resource type="Script" path="res://src/combat/logic/AIController.gd" id="38"]
+[ext_resource type="PackedScene" uid="uid://cdw2b0gy6ohub" path="res://src/ui/buttons/DefaultButton.tscn" id="39"]
+[ext_resource type="PackedScene" path="res://src/combat/ui/actions/ui/ActionButton.tscn" id="40"]
+[ext_resource type="Texture2D" uid="uid://derao08mdcvxw" path="res://assets/ui/action-wait.png" id="41"]
+[ext_resource type="Texture2D" uid="uid://dyo40pxsbhpie" path="res://assets/ui/action-def.png" id="42"]
+[ext_resource type="Texture2D" uid="uid://bjf0gssmsftla" path="res://assets/ui/top-bg.png" id="43"]
+[ext_resource type="Texture2D" uid="uid://dci7nc68pfw1k" path="res://assets/combat/units/cow.png" id="44"]
+[ext_resource type="Script" path="res://src/combat/ui/panels/queue/Queue.gd" id="45"]
 
-[sub_resource type="DynamicFont" id=1]
-font_data = ExtResource( 22 )
-
-[sub_resource type="DynamicFont" id=2]
-size = 32
-extra_spacing_top = -2
-font_data = ExtResource( 18 )
-
-[sub_resource type="DynamicFont" id=3]
-size = 32
-font_data = ExtResource( 18 )
-
-[sub_resource type="DynamicFont" id=4]
-size = 128
-font_data = ExtResource( 22 )
-
-[sub_resource type="DynamicFont" id=5]
-extra_spacing_top = -8
-extra_spacing_bottom = -4
-font_data = ExtResource( 36 )
+[sub_resource type="FontFile" id="1"]
+fallbacks = [ExtResource("22")]
+face_index = null
+embolden = null
+transform = null
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
 
 [node name="CombatScene" type="Node2D"]
-script = ExtResource( 6 )
+script = ExtResource("6")
 
 [node name="Battle" type="Node" parent="."]
-script = ExtResource( 7 )
+script = ExtResource("7")
 
 [node name="BattleEvents" type="Node" parent="Battle"]
-script = ExtResource( 16 )
+script = ExtResource("16")
 
 [node name="BattleGrid" type="Node" parent="Battle"]
-script = ExtResource( 13 )
+script = ExtResource("13")
 
 [node name="BattleManager" type="Node" parent="Battle"]
-script = ExtResource( 11 )
+script = ExtResource("11")
 
 [node name="BattleData" type="Node" parent="Battle"]
-script = ExtResource( 15 )
+script = ExtResource("15")
 
 [node name="BattleQueue" type="Node" parent="Battle"]
-script = ExtResource( 24 )
+script = ExtResource("24")
 
 [node name="BattleLogger" type="Node" parent="Battle"]
-script = ExtResource( 28 )
+script = ExtResource("28")
 
 [node name="AIController" type="Node" parent="Battle"]
-script = ExtResource( 38 )
+script = ExtResource("38")
 
 [node name="UI" type="Node" parent="."]
-script = ExtResource( 5 )
+script = ExtResource("5")
 
 [node name="UIEvents" type="Node" parent="UI"]
-script = ExtResource( 17 )
+script = ExtResource("17")
 
 [node name="Cursor" type="Node" parent="UI"]
-script = ExtResource( 19 )
+script = ExtResource("19")
 
-[node name="Background" type="Sprite" parent="UI"]
-scale = Vector2( 4, 4 )
-texture = ExtResource( 2 )
+[node name="Background" type="Sprite2D" parent="UI"]
+scale = Vector2(4, 4)
+texture = ExtResource("2")
 centered = false
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="CombatArea" type="Node2D" parent="UI"]
-position = Vector2( 155.026, 64 )
+position = Vector2(155.026, 64)
 z_index = 1
-script = ExtResource( 1 )
-overall_offset = Vector2( 0, -16 )
+script = ExtResource("1")
+overall_offset = Vector2(0, -16)
 
 [node name="Keyboard" type="Node" parent="UI/CombatArea"]
-script = ExtResource( 25 )
+script = ExtResource("25")
 
 [node name="CursorActionResolver" type="Node" parent="UI/CombatArea"]
-script = ExtResource( 20 )
+script = ExtResource("20")
 
 [node name="HexGrid" type="Node" parent="UI/CombatArea"]
-script = ExtResource( 14 )
+script = ExtResource("14")
 cell_size = 40
 
 [node name="Grid" type="Node2D" parent="UI/CombatArea"]
 z_index = 1
-script = ExtResource( 10 )
+script = ExtResource("10")
 
 [node name="ActiveStackMovementOverlay" type="Node2D" parent="UI/CombatArea/Grid"]
 z_index = 1
-script = ExtResource( 12 )
-overlayed_color = Color( 0, 0, 0, 0.137255 )
+script = ExtResource("12")
+overlayed_color = Color(0, 0, 0, 0.137255)
 
 [node name="UnitHoverMovementOverlay" type="Node2D" parent="UI/CombatArea/Grid"]
 z_index = 2
-script = ExtResource( 9 )
-overlayed_color = Color( 0, 0, 0, 0.235294 )
+script = ExtResource("9")
+overlayed_color = Color(0, 0, 0, 0.235294)
 
 [node name="ActionGridHover" type="Node2D" parent="UI/CombatArea/Grid"]
 z_index = 3
-script = ExtResource( 8 )
-hover_color = Color( 0, 0, 0, 0.392157 )
+script = ExtResource("8")
+hover_color = Color(0, 0, 0, 0.392157)
 
 [node name="GridBackground" type="Node2D" parent="UI/CombatArea/Grid"]
 z_index = 5
-script = ExtResource( 3 )
-color = Color( 0.823529, 0.788235, 0.647059, 0.25098 )
+script = ExtResource("3")
+color = Color(0.823529, 0.788235, 0.647059, 0.25098)
 
 [node name="PathfindingOverlay" type="Node2D" parent="UI/CombatArea/Grid"]
 visible = false
-script = ExtResource( 35 )
-path_color = Color( 0, 0, 0, 0.12549 )
+script = ExtResource("35")
+path_color = Color(0, 0, 0, 0.12549)
 
 [node name="GridCoords" type="Node2D" parent="UI/CombatArea/Grid"]
 visible = false
 z_index = 7
-script = ExtResource( 23 )
-font = SubResource( 1 )
+script = ExtResource("23")
+font = SubResource("1")
 
 [node name="Obstacles" type="Node2D" parent="UI/CombatArea"]
 
-[node name="VisibleUnits" type="YSort" parent="UI/CombatArea"]
+[node name="VisibleUnits" type="Node2D" parent="UI/CombatArea"]
 z_index = 10
-script = ExtResource( 4 )
+script = ExtResource("4")
 
 [node name="LogHelper" type="Node" parent="UI"]
-script = ExtResource( 31 )
-player_color = Color( 0.631373, 1, 0.6, 1 )
-enemy_color = Color( 1, 0.6, 0.6, 1 )
+script = ExtResource("31")
+player_color = Color(0.631373, 1, 0.6, 1)
+enemy_color = Color(1, 0.6, 0.6, 1)
 
 [node name="LeftPanel" type="Node2D" parent="UI"]
-script = ExtResource( 27 )
+script = ExtResource("27")
 
-[node name="WaitButton" parent="UI/LeftPanel" instance=ExtResource( 40 )]
-position = Vector2( 16, 640 )
+[node name="WaitButton" parent="UI/LeftPanel" instance=ExtResource("40")]
+position = Vector2(16, 640)
 display_name = "Wait"
 
-[node name="Sprite" parent="UI/LeftPanel/WaitButton/TextureButton" index="0"]
-texture = ExtResource( 41 )
+[node name="Sprite2D" parent="UI/LeftPanel/WaitButton/TextureButton" index="0"]
+texture = ExtResource("41")
 
-[node name="DefButton" parent="UI/LeftPanel" instance=ExtResource( 40 )]
-position = Vector2( 96, 640 )
+[node name="DefButton" parent="UI/LeftPanel" instance=ExtResource("40")]
+position = Vector2(96, 640)
 display_name = "Defend"
 
-[node name="Sprite" parent="UI/LeftPanel/DefButton/TextureButton" index="0"]
-texture = ExtResource( 42 )
+[node name="Sprite2D" parent="UI/LeftPanel/DefButton/TextureButton" index="0"]
+texture = ExtResource("42")
 
 [node name="BottomPanel" type="Node2D" parent="UI"]
-position = Vector2( 0, 624 )
+position = Vector2(0, 624)
 z_index = 100
-script = ExtResource( 34 )
+script = ExtResource("34")
 
-[node name="Background" type="Sprite" parent="UI/BottomPanel"]
-scale = Vector2( 4, 4 )
-texture = ExtResource( 26 )
+[node name="Background" type="Sprite2D" parent="UI/BottomPanel"]
+scale = Vector2(4, 4)
+texture = ExtResource("26")
 centered = false
 
 [node name="Queue" type="Node2D" parent="UI/BottomPanel"]
-script = ExtResource( 45 )
+script = ExtResource("45")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/BottomPanel/Queue"]
-margin_left = 192.0
-margin_top = 8.0
-margin_right = 1088.0
-margin_bottom = 64.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+offset_left = 192.0
+offset_top = 8.0
+offset_right = 1088.0
+offset_bottom = 64.0
 
-[node name="QueueItem1" parent="UI/BottomPanel/Queue/HBoxContainer" instance=ExtResource( 32 )]
-margin_right = 56.0
-margin_bottom = 56.0
+[node name="QueueItem1" parent="UI/BottomPanel/Queue/HBoxContainer" instance=ExtResource("32")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 0.0
+offset_bottom = 56.0
 
-[node name="QueueItem2" parent="UI/BottomPanel/Queue/HBoxContainer" instance=ExtResource( 32 )]
-margin_left = 60.0
-margin_right = 116.0
-margin_bottom = 56.0
+[node name="QueueItem2" parent="UI/BottomPanel/Queue/HBoxContainer" instance=ExtResource("32")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 4.0
+offset_right = 4.0
+offset_bottom = 56.0
 
 [node name="TextureRect" parent="UI/BottomPanel/Queue/HBoxContainer/QueueItem2" index="0"]
-texture = ExtResource( 33 )
+anchors_preset = 15
+texture = ExtResource("33")
 
-[node name="QueueItem3" parent="UI/BottomPanel/Queue/HBoxContainer" instance=ExtResource( 32 )]
-margin_left = 120.0
-margin_right = 176.0
-margin_bottom = 56.0
+[node name="Label" parent="UI/BottomPanel/Queue/HBoxContainer/QueueItem2" index="1"]
+anchors_preset = 12
+
+[node name="NextRound" parent="UI/BottomPanel/Queue/HBoxContainer/QueueItem2" index="2"]
+layout_mode = 3
+anchors_preset = 15
+
+[node name="TextureRect" parent="UI/BottomPanel/Queue/HBoxContainer/QueueItem2/NextRound" index="0"]
+anchors_preset = 15
+
+[node name="Label" parent="UI/BottomPanel/Queue/HBoxContainer/QueueItem2/NextRound" index="1"]
+anchors_preset = 15
+
+[node name="QueueItem3" parent="UI/BottomPanel/Queue/HBoxContainer" instance=ExtResource("32")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 8.0
+offset_right = 8.0
+offset_bottom = 56.0
 
 [node name="TextureRect" parent="UI/BottomPanel/Queue/HBoxContainer/QueueItem3" index="0"]
-texture = ExtResource( 44 )
+anchors_preset = 15
+texture = ExtResource("44")
 
-[node name="QueueItem4" parent="UI/BottomPanel/Queue/HBoxContainer" instance=ExtResource( 32 )]
-margin_left = 180.0
-margin_right = 236.0
-margin_bottom = 56.0
+[node name="Label" parent="UI/BottomPanel/Queue/HBoxContainer/QueueItem3" index="1"]
+anchors_preset = 12
 
-[node name="QueueItem5" parent="UI/BottomPanel/Queue/HBoxContainer" instance=ExtResource( 32 )]
-margin_left = 240.0
-margin_right = 296.0
-margin_bottom = 56.0
+[node name="NextRound" parent="UI/BottomPanel/Queue/HBoxContainer/QueueItem3" index="2"]
+layout_mode = 3
+anchors_preset = 15
 
-[node name="QueueItem6" parent="UI/BottomPanel/Queue/HBoxContainer" instance=ExtResource( 32 )]
-margin_left = 300.0
-margin_right = 356.0
-margin_bottom = 56.0
+[node name="TextureRect" parent="UI/BottomPanel/Queue/HBoxContainer/QueueItem3/NextRound" index="0"]
+anchors_preset = 15
 
-[node name="QueueItem7" parent="UI/BottomPanel/Queue/HBoxContainer" instance=ExtResource( 32 )]
-margin_left = 360.0
-margin_right = 416.0
-margin_bottom = 56.0
+[node name="Label" parent="UI/BottomPanel/Queue/HBoxContainer/QueueItem3/NextRound" index="1"]
+anchors_preset = 15
 
-[node name="QueueItem8" parent="UI/BottomPanel/Queue/HBoxContainer" instance=ExtResource( 32 )]
-margin_left = 420.0
-margin_right = 476.0
-margin_bottom = 56.0
+[node name="QueueItem4" parent="UI/BottomPanel/Queue/HBoxContainer" instance=ExtResource("32")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 12.0
+offset_right = 12.0
+offset_bottom = 56.0
 
-[node name="QueueItem9" parent="UI/BottomPanel/Queue/HBoxContainer" instance=ExtResource( 32 )]
-margin_left = 480.0
-margin_right = 536.0
-margin_bottom = 56.0
+[node name="QueueItem5" parent="UI/BottomPanel/Queue/HBoxContainer" instance=ExtResource("32")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 16.0
+offset_bottom = 56.0
 
-[node name="QueueItem10" parent="UI/BottomPanel/Queue/HBoxContainer" instance=ExtResource( 32 )]
-margin_left = 540.0
-margin_right = 596.0
-margin_bottom = 56.0
+[node name="QueueItem6" parent="UI/BottomPanel/Queue/HBoxContainer" instance=ExtResource("32")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 20.0
+offset_right = 20.0
+offset_bottom = 56.0
 
-[node name="QueueItem11" parent="UI/BottomPanel/Queue/HBoxContainer" instance=ExtResource( 32 )]
-margin_left = 600.0
-margin_right = 656.0
-margin_bottom = 56.0
+[node name="QueueItem7" parent="UI/BottomPanel/Queue/HBoxContainer" instance=ExtResource("32")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 24.0
+offset_right = 24.0
+offset_bottom = 56.0
 
-[node name="QueueItem12" parent="UI/BottomPanel/Queue/HBoxContainer" instance=ExtResource( 32 )]
-margin_left = 660.0
-margin_right = 716.0
-margin_bottom = 56.0
+[node name="QueueItem8" parent="UI/BottomPanel/Queue/HBoxContainer" instance=ExtResource("32")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 28.0
+offset_right = 28.0
+offset_bottom = 56.0
 
-[node name="QueueItem13" parent="UI/BottomPanel/Queue/HBoxContainer" instance=ExtResource( 32 )]
-margin_left = 720.0
-margin_right = 776.0
-margin_bottom = 56.0
+[node name="QueueItem9" parent="UI/BottomPanel/Queue/HBoxContainer" instance=ExtResource("32")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 32.0
+offset_right = 32.0
+offset_bottom = 56.0
 
-[node name="QueueItem14" parent="UI/BottomPanel/Queue/HBoxContainer" instance=ExtResource( 32 )]
-margin_left = 780.0
-margin_right = 836.0
-margin_bottom = 56.0
+[node name="QueueItem10" parent="UI/BottomPanel/Queue/HBoxContainer" instance=ExtResource("32")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 36.0
+offset_right = 36.0
+offset_bottom = 56.0
 
-[node name="QueueItem15" parent="UI/BottomPanel/Queue/HBoxContainer" instance=ExtResource( 32 )]
-margin_left = 840.0
-margin_right = 896.0
-margin_bottom = 56.0
+[node name="QueueItem11" parent="UI/BottomPanel/Queue/HBoxContainer" instance=ExtResource("32")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 40.0
+offset_right = 40.0
+offset_bottom = 56.0
+
+[node name="QueueItem12" parent="UI/BottomPanel/Queue/HBoxContainer" instance=ExtResource("32")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 44.0
+offset_right = 44.0
+offset_bottom = 56.0
+
+[node name="QueueItem13" parent="UI/BottomPanel/Queue/HBoxContainer" instance=ExtResource("32")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 48.0
+offset_right = 48.0
+offset_bottom = 56.0
+
+[node name="QueueItem14" parent="UI/BottomPanel/Queue/HBoxContainer" instance=ExtResource("32")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 52.0
+offset_right = 52.0
+offset_bottom = 56.0
+
+[node name="QueueItem15" parent="UI/BottomPanel/Queue/HBoxContainer" instance=ExtResource("32")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 56.0
+offset_right = 56.0
+offset_bottom = 56.0
 
 [node name="CurrentActionLabel" type="RichTextLabel" parent="UI/BottomPanel"]
-margin_left = 196.0
-margin_top = 68.0
-margin_right = 1084.0
-margin_bottom = 96.0
-custom_fonts/normal_font = SubResource( 2 )
+offset_left = 196.0
+offset_top = 68.0
+offset_right = 1084.0
+offset_bottom = 96.0
 scroll_active = false
-script = ExtResource( 30 )
+script = ExtResource("30")
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="TopPanel" type="Node2D" parent="UI"]
 
-[node name="Sprite" type="Sprite" parent="UI/TopPanel"]
-position = Vector2( 256, 0 )
-scale = Vector2( 4, 4 )
-texture = ExtResource( 43 )
+[node name="Sprite2D" type="Sprite2D" parent="UI/TopPanel"]
+position = Vector2(256, 0)
+scale = Vector2(4, 4)
+texture = ExtResource("43")
 centered = false
 
 [node name="CombatLogs" type="RichTextLabel" parent="UI/TopPanel"]
-margin_left = 269.0
-margin_right = 1004.0
-margin_bottom = 23.0
-custom_fonts/normal_font = SubResource( 3 )
-custom_colors/default_color = Color( 1, 1, 1, 1 )
+offset_left = 269.0
+offset_right = 1004.0
+offset_bottom = 23.0
 scroll_active = false
 scroll_following = true
-script = ExtResource( 29 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+script = ExtResource("29")
 
 [node name="Dialogs" type="Node2D" parent="UI"]
 z_index = 1000
 
 [node name="EndScreen" type="Node2D" parent="UI/Dialogs"]
 visible = false
-script = ExtResource( 37 )
+script = ExtResource("37")
 
 [node name="ColorRect" type="ColorRect" parent="UI/Dialogs/EndScreen"]
-margin_right = 1280.0
-margin_bottom = 720.0
-color = Color( 0, 0, 0, 0.392157 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0, 0, 0, 0.392157)
 
 [node name="Background" type="NinePatchRect" parent="UI/Dialogs/EndScreen"]
+anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = 340.0
-margin_top = 60.0
-margin_right = 490.0
-margin_bottom = 130.0
-rect_scale = Vector2( 4, 4 )
-texture = ExtResource( 21 )
+offset_left = 340.0
+offset_top = 60.0
+offset_right = 490.0
+offset_bottom = 130.0
+scale = Vector2(4, 4)
+texture = ExtResource("21")
 patch_margin_left = 4
 patch_margin_top = 4
 patch_margin_right = 4
 patch_margin_bottom = 4
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Label" type="Label" parent="UI/Dialogs/EndScreen"]
+anchors_preset = 10
 anchor_right = 1.0
-margin_left = 340.0
-margin_top = 60.0
-margin_right = 936.0
-margin_bottom = 226.0
-custom_fonts/font = SubResource( 4 )
+offset_left = 340.0
+offset_top = 60.0
+offset_right = 936.0
+offset_bottom = 226.0
 text = "Victory!"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="BackButton" parent="UI/Dialogs/EndScreen" instance=ExtResource( 39 )]
-margin_left = 512.0
-margin_top = 256.0
-margin_right = 575.0
-margin_bottom = 271.0
-custom_fonts/font = SubResource( 5 )
+[node name="BackButton" parent="UI/Dialogs/EndScreen" instance=ExtResource("39")]
+offset_left = 512.0
+offset_top = 256.0
+offset_right = 575.0
+offset_bottom = 271.0
 text = "Back to title"
+
 [connection signal="pressed" from="UI/LeftPanel/WaitButton/TextureButton" to="UI/LeftPanel" method="_on_Wait_pressed"]
 [connection signal="pressed" from="UI/LeftPanel/DefButton/TextureButton" to="UI/LeftPanel" method="_on_Def_pressed"]
 [connection signal="pressed" from="UI/Dialogs/EndScreen/BackButton" to="UI/Dialogs/EndScreen" method="_on_Titlescreen_pressed"]
 
 [editable path="UI/LeftPanel/WaitButton"]
-
 [editable path="UI/LeftPanel/DefButton"]
-
 [editable path="UI/BottomPanel/Queue/HBoxContainer/QueueItem2"]
-
 [editable path="UI/BottomPanel/Queue/HBoxContainer/QueueItem3"]

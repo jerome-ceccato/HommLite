@@ -1,4 +1,4 @@
-extends Reference
+extends RefCounted
 class_name SaveData
 
 # A serializable container for all data to be persisted

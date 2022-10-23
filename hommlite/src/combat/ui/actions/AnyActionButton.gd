@@ -1,9 +1,9 @@
 class_name AnyActionButton
 extends Node2D
 
-export(String) var display_name
+@export var display_name: String
 
-onready var _button: TextureButton = $TextureButton
+@onready var _button: TextureButton = $TextureButton
 var _active := true
 
 func is_hovered() -> bool:
@@ -13,4 +13,4 @@ func is_hovered() -> bool:
 func set_active(active: bool):
 	_active = active
 	_button.disabled = !active
-	modulate.a = 1 if active else 0.5
+	modulate.a = 1.0 if active else 0.5

@@ -4,7 +4,7 @@ var battle: Battle
 var hexgrid: CombatHexGrid
 
 var containers: Array # [StackContainer]
-var obstacles: Array # [Sprite]
+var obstacles: Array # [Sprite2D]
 
 var active_container: StackContainer
 
@@ -26,9 +26,7 @@ func animate_move_stack(grid: CombatHexGrid, stack: BattleStack, movement: Battl
 	var container = _container_for_bstack(stack)
 	if container != null:
 		var path_coords = _points_for_path(movement.path, grid)
-		var await = container.animate_through_points(path_coords, movement.flying)
-		if await is GDScriptFunctionState:
-			await = yield(await, "completed")
+		await container.animate_through_points(path_coords, movement.flying)
 
 
 func animate_handle_attack(_grid: CombatHexGrid, source: BattleStack, target: BattleStack, retaliation: bool, ranged: bool):
@@ -36,32 +34,24 @@ func animate_handle_attack(_grid: CombatHexGrid, source: BattleStack, target: Ba
 	var target_container = _container_for_bstack(target)
 	if source_container != null and target_container != null:
 		if retaliation:
-			yield(get_tree().create_timer(0.2), "timeout")
-			
-		var await = null
-		if ranged:
-			await = _animate_projectile(source_container, target_container)
-		if await is GDScriptFunctionState:
-			await = yield(await, "completed")
+			await get_tree().create_timer(0.2).timeout
 		
-		await = null
+		if ranged:
+			await _animate_projectile(source_container, target_container)
+		
 		if target.amount > 0:
-			await = target_container.animate_damaged(source_container)
+			await target_container.animate_damaged(source_container)
 		else:
-			await = target_container.animate_death(source_container)
-		if await is GDScriptFunctionState:
-			await = yield(await, "completed")
+			await target_container.animate_death(source_container)
 
 
 func _animate_projectile(source: StackContainer, target: StackContainer):
-	var projectile: Projectile = load("res://src/combat/ui/projectiles/Projectile.tscn").instance()
+	var projectile: Projectile = load("res://src/combat/ui/projectiles/Projectile.tscn").instantiate()
 	add_child(projectile)
 	
 	var from = hexgrid.get_cell_at_coords(source.stack.coordinates).center
 	var to = hexgrid.get_cell_at_coords(target.stack.coordinates).center
-	var await = projectile.animate(from, to)
-	if await is GDScriptFunctionState:
-			await = yield(await, "completed")
+	await projectile.animate(from, to)
 
 
 func _on_Battle_game_state_changed(_unused: Battle):
@@ -89,7 +79,7 @@ func _update_active_stack(battle_stack: BattleStack):
 
 func _load_sprite(battle_stack: BattleStack) -> StackContainer:
 	var scene = _scene_for_unit(battle_stack.unit)
-	var main_node = scene.instance()
+	var main_node = scene.instantiate()
 	
 	var container: StackContainer = main_node.get_child(0)
 	main_node.remove_child(container)
@@ -111,7 +101,7 @@ func _points_for_path(coords: Array, grid: CombatHexGrid) -> Array:
 	var items = []
 	for c in coords:
 		items.append(grid.get_cell_at_coords(c).center)
-	items.remove(0) # first coord is always the current one
+	items.remove_at(0) # first coord is always the current one
 	return items
 
 
@@ -120,8 +110,8 @@ func _scene_for_unit(unit: UnitData) -> PackedScene:
 	return load(scene_id) as PackedScene
 
 
-func _load_obstacle(obstacle: ObstacleData) -> Sprite:
-	var sprite = Sprite.new()
+func _load_obstacle(obstacle: ObstacleData) -> Sprite2D:
+	var sprite = Sprite2D.new()
 	sprite.texture = load(obstacle.texture_reference)
 	sprite.scale = Vector2(4, 4)
 	sprite.position = hexgrid.get_cell_at_coords(obstacle.coordinates).center

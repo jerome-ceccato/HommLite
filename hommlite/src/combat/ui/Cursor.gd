@@ -3,15 +3,15 @@ extends Node
 var battle: Battle
 var hexgrid: CombatHexGrid
 
-onready var _attack_tl = preload("res://assets/combat/cursor/cursor-sword-tl.png")
-onready var _attack_tr = preload("res://assets/combat/cursor/cursor-sword-tr.png")
-onready var _attack_br = preload("res://assets/combat/cursor/cursor-sword-br.png")
-onready var _attack_bl = preload("res://assets/combat/cursor/cursor-sword-bl.png")
-onready var _attack_r = preload("res://assets/combat/cursor/cursor-sword-r.png")
-onready var _attack_l = preload("res://assets/combat/cursor/cursor-sword-l.png")
-onready var _range_attack = preload("res://assets/combat/cursor/cursor-ranged-attack.png")
-onready var _move = preload("res://assets/combat/cursor/cursor-move.png")
-onready var _forbidden = preload("res://assets/combat/cursor/cursor-forbidden.png")
+@onready var _attack_tl = preload("res://assets/combat/cursor/cursor-sword-tl.png")
+@onready var _attack_tr = preload("res://assets/combat/cursor/cursor-sword-tr.png")
+@onready var _attack_br = preload("res://assets/combat/cursor/cursor-sword-br.png")
+@onready var _attack_bl = preload("res://assets/combat/cursor/cursor-sword-bl.png")
+@onready var _attack_r = preload("res://assets/combat/cursor/cursor-sword-r.png")
+@onready var _attack_l = preload("res://assets/combat/cursor/cursor-sword-l.png")
+@onready var _range_attack = preload("res://assets/combat/cursor/cursor-ranged-attack.png")
+@onready var _move = preload("res://assets/combat/cursor/cursor-move.png")
+@onready var _forbidden = preload("res://assets/combat/cursor/cursor-forbidden.png")
 
 
 func setup(_battle: Battle, _hexgrid: CombatHexGrid):
@@ -48,7 +48,7 @@ func _set_attack_cursor(target: CombatHexCell, cells: Array):
 
 
 func _nearest(target: CombatHexCell, cells: Array) -> CombatHexCell:
-	if cells.empty():
+	if cells.is_empty():
 		return target
 	
 	var nearest = null

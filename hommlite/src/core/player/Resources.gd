@@ -1,4 +1,4 @@
-extends Reference
+extends RefCounted
 class_name Resources
 
 var gold := 0

@@ -1,6 +1,6 @@
 extends GridOverlayBase
 
-export(Color) var overlayed_color
+@export var overlayed_color: Color
 
 var _shift_pressed = false
 var _last_hovered_stack: BattleStack

@@ -1,4 +1,4 @@
-extends Reference
+extends RefCounted
 class_name BattleLoader
 
 static func load_battle(player_army: Army, enemy_army: Army) -> BattleSetup:
@@ -6,8 +6,8 @@ static func load_battle(player_army: Army, enemy_army: Army) -> BattleSetup:
 
 
 static func _get_map() -> MapData:
-	var bg = "res://assets/combat/bg.png"
-	return MapData.new(bg, BattleCoords.new(13, 9), _make_obstacles())
+	var panel = "res://assets/combat/bg.png"
+	return MapData.new(panel, BattleCoords.new(13, 9), _make_obstacles())
 
 static func _make_obstacles() -> Array:
 	var rock_reference = "res://assets/combat/rock.png"

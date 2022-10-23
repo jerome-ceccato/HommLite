@@ -1,6 +1,6 @@
-tool
+@tool
 class_name BattleCoords
-extends Reference
+extends RefCounted
 
 # Represents the 2D coordinates of a unit in the battlefield
 
@@ -11,7 +11,7 @@ var y: int
 var index: int 
 
 
-func _init(_x: int, _y: int):
+func _init(_x: int,_y: int):
 	x = _x
 	y = _y
 	

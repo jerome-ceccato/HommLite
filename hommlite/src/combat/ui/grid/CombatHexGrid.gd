@@ -1,10 +1,10 @@
-tool
+@tool
 class_name CombatHexGrid
 extends Node
 
 # Represents the hex battle grid and its coordinates
 
-export(int) var cell_size := 36 
+@export var cell_size: int = 36 
 
 # all the cells
 var _cells: Dictionary # [BattleCoords.index: CombatHexCell]

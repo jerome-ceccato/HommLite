@@ -1,5 +1,5 @@
 class_name BattleStack
-extends Reference
+extends RefCounted
 
 # A stack during a battle
 
@@ -17,7 +17,7 @@ var top_unit_hp: int
 var can_retaliate: bool = true
 
 
-func _init(_id: int, s: Stack, c: BattleCoords, si: int):
+func _init(_id: int,s: Stack,c: BattleCoords,si: int):
 	id = _id
 	coordinates = c
 	side = si

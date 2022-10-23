@@ -1,4 +1,4 @@
-extends Reference
+extends RefCounted
 class_name Army
 
 # Represents the player army or any neutral army
@@ -21,6 +21,6 @@ func deserialize(data: Dictionary) -> Army:
 	var all = {}
 	for pos in data:
 		var stack = Stack.new("", 0).deserialize(data[pos])
-		all[int(pos)] = stack
+		all[pos] = stack
 	stacks = all
 	return self

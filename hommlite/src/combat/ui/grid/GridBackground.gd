@@ -1,7 +1,7 @@
-tool
+@tool
 extends Node2D
 
-export(Color) var color := Color.beige
+@export var color: Color = Color.BEIGE
 
 var hexgrid: CombatHexGrid
 

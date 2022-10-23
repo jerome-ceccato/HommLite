@@ -3,8 +3,8 @@ extends Node2D
 var _battle: Battle
 var scene_navigation: GameSceneNavigation
 
-onready var label: Label = $Label
-onready var button: Button = $BackButton
+@onready var label: Label = $Label
+@onready var button: Button = $BackButton
 
 
 func _ready():

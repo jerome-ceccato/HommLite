@@ -23,8 +23,7 @@ enum State {
 	WAITING_FOR_UI,
 	COMBAT_ENDED
 }
-var _state: int = State.COMBAT_NOT_STARTED setget update_state, get_state
-
+var _state: int = State.COMBAT_NOT_STARTED
 
 func setup(grid: BattleGrid, logger: BattleLogger, setup_data: BattleSetup):
 	_grid = grid

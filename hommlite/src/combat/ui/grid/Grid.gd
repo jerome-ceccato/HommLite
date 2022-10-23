@@ -3,12 +3,12 @@ extends Node2D
 signal hex_grid_hovered(coords, cell)
 signal hex_cell_clicked(coords)
 
-onready var background = $GridBackground
-onready var hover = $ActionGridHover
-onready var movement_overlay = $UnitHoverMovementOverlay
-onready var active_stack_overlay = $ActiveStackMovementOverlay
-onready var pathfinding_overlay = $PathfindingOverlay
-onready var coordinates_overlay = $GridCoords
+@onready var background = $GridBackground
+@onready var hover = $ActionGridHover
+@onready var movement_overlay = $UnitHoverMovementOverlay
+@onready var active_stack_overlay = $ActiveStackMovementOverlay
+@onready var pathfinding_overlay = $PathfindingOverlay
+@onready var coordinates_overlay = $GridCoords
 
 var hexgrid: CombatHexGrid
 var battle: Battle
@@ -42,7 +42,7 @@ func _on_Battle_game_state_changed(_unused: Battle):
 
 func _input(event):
 	if event is InputEventMouseButton:
-		if event.pressed and event.button_index == BUTTON_LEFT:
+		if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 			events.emit_signal("mouse_clicked", _get_current_state())
 	elif event is InputEventMouseMotion:
 		events.emit_signal("mouse_moved", _get_current_state())

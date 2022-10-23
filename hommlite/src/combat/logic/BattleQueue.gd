@@ -48,7 +48,7 @@ func move_stack_to_second_pass(stack: BattleStack):
 func remove_stack_from_queue(stack: BattleStack):
 	var index = _queue.find(stack)
 	if index > _q_index:
-		_queue.remove(index)
+		_queue.remove_at(index)
 		_first_pass_length -= 1
 
 
@@ -66,7 +66,7 @@ func get_queue_prediction(size: int) -> Array:
 	
 	if progress < size:
 		var next_round_queue = _data.all_stacks()
-		next_round_queue.sort_custom(self, "sort_stacks")
+		next_round_queue.sort_custom(Callable(self,"sort_stacks"))
 		while progress < size:
 			index = 0
 			progress += 1
@@ -83,7 +83,7 @@ func get_queue_prediction(size: int) -> Array:
 
 func _rebuild_queue():
 	_queue = _data.all_stacks()
-	_queue.sort_custom(self, "sort_stacks")
+	_queue.sort_custom(Callable(self,"sort_stacks"))
 	_first_pass_length = _queue.size()
 	_reset_stacks()
 

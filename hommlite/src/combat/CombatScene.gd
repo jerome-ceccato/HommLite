@@ -1,20 +1,20 @@
-tool
+@tool
 extends Node2D
 
-onready var battle: Battle = $Battle
-onready var ui = $UI
+@onready var battle: Battle = $Battle
+@onready var ui = $UI
 
-onready var battle_events: BattleEvents = $Battle/BattleEvents
-onready var ui_events: UIEvents = $UI/UIEvents
+@onready var battle_events: BattleEvents = $Battle/BattleEvents
+@onready var ui_events: UIEvents = $UI/UIEvents
 
-var _scene_navigation: GameSceneNavigation setget inject_scene_navigation
+var _scene_navigation: GameSceneNavigation
 func inject_scene_navigation(nav):
 	_scene_navigation = nav
 	$UI/Dialogs/EndScreen.scene_navigation = nav
 
 
 func _ready():
-	if Engine.editor_hint:
+	if Engine.is_editor_hint():
 		_editor_specific_features()
 		return
 	
@@ -34,20 +34,20 @@ func _setup_bindings():
 		$UI/Cursor,
 		$UI/BottomPanel/CurrentActionLabel,
 		]:
-		ui_events.connect("mouse_moved", listener, "_on_UI_mouse_moved")
+		ui_events.connect("mouse_moved",Callable(listener,"_on_UI_mouse_moved"))
 	
 	for listener in [$Battle/BattleManager]:
-		ui_events.connect("mouse_clicked", listener, "_on_UI_mouse_clicked")
+		ui_events.connect("mouse_clicked",Callable(listener,"_on_UI_mouse_clicked"))
 	
 	for listener in [$Battle/BattleManager]:
-		ui_events.connect("action_skip", listener, "_on_UI_action_skip")
+		ui_events.connect("action_skip",Callable(listener,"_on_UI_action_skip"))
 	
 	for listener in [$Battle/BattleManager]:
-		ui_events.connect("action_wait", listener, "_on_UI_action_wait")
+		ui_events.connect("action_wait",Callable(listener,"_on_UI_action_wait"))
 	
 	for listener in [$UI/CombatArea]:
-		battle_events.connect("stack_moved", listener, "_on_Battle_stack_moved")
-		battle_events.connect("stack_attacked", listener, "_on_Battle_stack_attacked")
+		battle_events.connect("stack_moved",Callable(listener,"_on_Battle_stack_moved"))
+		battle_events.connect("stack_attacked",Callable(listener,"_on_Battle_stack_attacked"))
 	
 	for listener in [
 		$Battle/AIController,
@@ -62,12 +62,12 @@ func _setup_bindings():
 		$UI/BottomPanel/Queue,
 		$UI/LeftPanel,
 		]:
-		battle_events.connect("game_state_changed", listener, "_on_Battle_game_state_changed")
+		battle_events.connect("game_state_changed",Callable(listener,"_on_Battle_game_state_changed"))
 	
 	for listener in [$UI/TopPanel/CombatLogs]:
-		battle_events.connect("new_combat_log", listener, "_on_Battle_new_combat_log")
+		battle_events.connect("new_combat_log",Callable(listener,"_on_Battle_new_combat_log"))
 	
-	ui_events.connect("animation_finished", self, "_on_animation_finished")
+	ui_events.connect("animation_finished",Callable(self,"_on_animation_finished"))
 
 
 func _run():

@@ -1,47 +1,37 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://cyujgvimgsplj"]
 
-[ext_resource path="res://src/ui/units/ArmyStackDisplay.gd" type="Script" id=1]
-[ext_resource path="res://assets/combat/units/placeholder.png" type="Texture" id=2]
-[ext_resource path="res://assets/fonts/m5x7.ttf" type="DynamicFontData" id=3]
-
-[sub_resource type="DynamicFont" id=1]
-size = 32
-font_data = ExtResource( 3 )
+[ext_resource type="Script" path="res://src/ui/units/ArmyStackDisplay.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://d0woww4isvuc7" path="res://assets/combat/units/placeholder.png" id="2"]
 
 [node name="StackDisplay" type="Control"]
-margin_right = 88.0
-margin_bottom = 88.0
-rect_min_size = Vector2( 88, 88 )
-rect_pivot_offset = Vector2( -222.859, -54.6763 )
-script = ExtResource( 1 )
+layout_mode = 3
+anchors_preset = 0
+offset_right = 88.0
+offset_bottom = 88.0
+pivot_offset = Vector2(-222.859, -54.6763)
+script = ExtResource("1")
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_right = -4.00001
-margin_bottom = -18.0
-texture = ExtResource( 2 )
+offset_left = 4.0
+offset_right = -4.00001
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2")
 stretch_mode = 6
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Label" type="Label" parent="."]
+anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -26.0
-margin_right = -7.62939e-06
-margin_bottom = -7.62939e-06
-custom_fonts/font = SubResource( 1 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
+offset_top = -26.0
+grow_horizontal = 2
+grow_vertical = 0
 text = "1234"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}

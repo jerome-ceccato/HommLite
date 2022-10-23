@@ -1,4 +1,4 @@
-extends Reference
+extends RefCounted
 class_name Stack
 
 # Represents a stack of multiple units of a single type
@@ -7,7 +7,7 @@ var unit_reference: String
 var amount: int
 
 
-func _init(u: String, n: int):
+func _init(u: String,n: int):
 	unit_reference = u
 	amount = n
 
