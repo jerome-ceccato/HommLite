@@ -1,33 +1,15 @@
 extends Node2D
 
-var map: AdventureMap
-
-onready var cursorPosition := $CanvasLayer/PanelContainer/VBoxContainer/Position
 onready var armyContainer := $CanvasLayer/PanelContainer/VBoxContainer/ArmyContainer
 
 func refresh():
 	_setup_army()
 	_load_souls()
-	if map:
-		_update_cursor_pos()
 
 
 func _ready():
 	refresh()
 
-
-func _unhandled_input(event):
-	if event is InputEventMouseMotion:
-		_update_cursor_pos()
-
-
-func _update_cursor_pos():
-	var hex = map.hexmap.pixel_to_hex(get_global_mouse_position())
-	var oddq = map.hexmap.axial_to_oddq(hex)
-	if map.get_data().get_hex(hex) != null:
-		cursorPosition.text = "%s - %s" % [hex, oddq]
-	else:
-		cursorPosition.text = "empty"
 
 func _setup_army():
 	var stacks = Context.save_data.hero.army.stacks
@@ -40,20 +22,3 @@ func _setup_army():
 func _load_souls():
 	$CanvasLayer/PanelContainer/VBoxContainer/Souls.text = "Gold: %d" % Context.save_data.resources.gold
 
-
-func _on_Reveal_pressed():
-	for hex in map.get_data().get_all_hex():
-		map.reveal(hex, false)
-
-
-func _on_Regen_pressed():
-	map.regenerate()
-	get_parent().get_node("Hero").set_position_hex(Vector3.ZERO)
-
-
-func _on_Screenshot_pressed():
-	var now = OS.get_datetime()
-	var now_str = "%d-%d-%d_%d.%d.%d" % [now["year"], now["month"], now["day"], now["hour"], now["minute"], now["second"]]
-	var ss = get_viewport().get_texture().get_data()
-	ss.flip_y()
-	ss.save_png("user://ss-%s.png" % now_str)

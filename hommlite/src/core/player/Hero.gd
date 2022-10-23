@@ -10,6 +10,7 @@ func reset_army():
 	army = Army.new({
 		0: Stack.new("cow", 9),
 		1: Stack.new("uchicken", 9),
+		2: Stack.new("bee", 3),
 	})
 
 func serialized() -> Dictionary:

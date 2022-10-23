@@ -1,31 +1,11 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://src/adventure/map/AdventureMap.tscn" type="PackedScene" id=1]
-[ext_resource path="res://assets/adventure/hero.png" type="Texture" id=2]
-[ext_resource path="res://src/adventure/AdventureHero.gd" type="Script" id=3]
 [ext_resource path="res://src/adventure/Adventure.gd" type="Script" id=4]
-[ext_resource path="res://src/adventure/AdventureCamera.gd" type="Script" id=5]
-[ext_resource path="res://assets/adventure/hex-select.png" type="Texture" id=6]
 [ext_resource path="res://src/ui/units/ArmyStackDisplay.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/adventure/Debug.gd" type="Script" id=8]
-[ext_resource path="res://src/adventure/Selector.gd" type="Script" id=9]
 
 [node name="Adventure" type="Node2D"]
 script = ExtResource( 4 )
-
-[node name="AdventureMap" parent="." instance=ExtResource( 1 )]
-
-[node name="Camera2D" type="Camera2D" parent="."]
-current = true
-script = ExtResource( 5 )
-
-[node name="Selector" type="Sprite" parent="."]
-texture = ExtResource( 6 )
-script = ExtResource( 9 )
-
-[node name="Hero" type="Sprite" parent="."]
-texture = ExtResource( 2 )
-script = ExtResource( 3 )
 
 [node name="Debug" type="Node2D" parent="."]
 script = ExtResource( 8 )
@@ -51,55 +31,28 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Position" type="Label" parent="Debug/CanvasLayer/PanelContainer/VBoxContainer"]
+[node name="Combat" type="Button" parent="Debug/CanvasLayer/PanelContainer/VBoxContainer"]
 margin_right = 198.0
 margin_bottom = 20.0
-rect_min_size = Vector2( 0, 20 )
-text = "(0, 0)"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Reveal" type="Button" parent="Debug/CanvasLayer/PanelContainer/VBoxContainer"]
-margin_top = 24.0
-margin_right = 198.0
-margin_bottom = 44.0
-text = "Reveal"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Regen" type="Button" parent="Debug/CanvasLayer/PanelContainer/VBoxContainer"]
-margin_top = 48.0
-margin_right = 198.0
-margin_bottom = 68.0
-text = "Regenerate"
-
-[node name="Screenshot" type="Button" parent="Debug/CanvasLayer/PanelContainer/VBoxContainer"]
-margin_top = 72.0
-margin_right = 198.0
-margin_bottom = 92.0
-text = "Screenshot"
+text = "Combat"
 
 [node name="HSeparator" type="HSeparator" parent="Debug/CanvasLayer/PanelContainer/VBoxContainer"]
-margin_top = 96.0
+margin_top = 24.0
 margin_right = 198.0
-margin_bottom = 100.0
+margin_bottom = 28.0
 
 [node name="ArmyTitle" type="Label" parent="Debug/CanvasLayer/PanelContainer/VBoxContainer"]
-margin_top = 104.0
+margin_top = 32.0
 margin_right = 198.0
-margin_bottom = 118.0
+margin_bottom = 46.0
 text = "Army:"
 align = 1
 valign = 2
 
 [node name="ArmyContainer" type="GridContainer" parent="Debug/CanvasLayer/PanelContainer/VBoxContainer"]
-margin_top = 122.0
+margin_top = 50.0
 margin_right = 198.0
-margin_bottom = 394.0
+margin_bottom = 322.0
 rect_pivot_offset = Vector2( -1226.67, 89.388 )
 columns = 2
 
@@ -130,17 +83,15 @@ margin_right = 180.0
 margin_bottom = 272.0
 
 [node name="HSeparator2" type="HSeparator" parent="Debug/CanvasLayer/PanelContainer/VBoxContainer"]
-margin_top = 398.0
+margin_top = 326.0
 margin_right = 198.0
-margin_bottom = 402.0
+margin_bottom = 330.0
 
 [node name="Souls" type="Label" parent="Debug/CanvasLayer/PanelContainer/VBoxContainer"]
-margin_top = 406.0
+margin_top = 334.0
 margin_right = 198.0
-margin_bottom = 420.0
+margin_bottom = 348.0
 text = "Souls: 0"
 align = 1
 valign = 1
-[connection signal="pressed" from="Debug/CanvasLayer/PanelContainer/VBoxContainer/Reveal" to="Debug" method="_on_Reveal_pressed"]
-[connection signal="pressed" from="Debug/CanvasLayer/PanelContainer/VBoxContainer/Regen" to="Debug" method="_on_Regen_pressed"]
-[connection signal="pressed" from="Debug/CanvasLayer/PanelContainer/VBoxContainer/Screenshot" to="Debug" method="_on_Screenshot_pressed"]
+[connection signal="pressed" from="Debug/CanvasLayer/PanelContainer/VBoxContainer/Combat" to="." method="_on_Combat_pressed"]
